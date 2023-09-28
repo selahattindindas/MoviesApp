@@ -50,6 +50,7 @@ export class MoviesService {
       controller: "Movie",
       action: id
     }, movie).subscribe(
+      
       () => {
         this.sweetalertService.showAlert(MessageTitle.Success, MessageText.UpdateSuccess, icon.Success ,false, ConfirmButtonText.Okey, 3);
         this.router.navigate(['/Admin', 'Movies-List']);
