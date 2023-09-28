@@ -49,7 +49,6 @@ export class MoviesService {
     this.httpClientService.put({
       controller: "Movie",
       action: id
-      
     }, movie).subscribe(
       () => {
         this.sweetalertService.showAlert(MessageTitle.Success, MessageText.UpdateSuccess, icon.Success ,false, ConfirmButtonText.Okey, 3);
