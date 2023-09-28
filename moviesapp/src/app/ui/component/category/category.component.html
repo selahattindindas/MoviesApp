@@ -1,0 +1,7 @@
+<div>
+  <label for="categorySelect">Kategori Filtresi:</label>
+  <select [(ngModel)]="selectedCategory" (change)="onCategorySelected()">
+    <option name="selected"*ngFor="let category of categoryEnum" [value]="category" >{{ categoryDescriptions[category] }}
+    </option>
+  </select>
+</div>

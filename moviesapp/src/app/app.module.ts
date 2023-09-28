@@ -1,0 +1,36 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { UiRoutingModule } from './ui/ui-routing.module';
+import { UiModule } from './ui/component/component.module';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { AdminModule } from './admin/component/component.module';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { Admin_Routing } from './admin/admin_routing.module';
+import { environment } from './environments/environment';
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    UiRoutingModule,
+    UiModule,
+    AdminModule,
+    Admin_Routing,
+    HttpClientModule,
+    RouterModule,
+    FormsModule,
+    SweetAlert2Module,
+  ],
+  providers: [
+    { provide: 'baseUrl', useValue: environment.baseurl, multi: true },
+  ],
+  bootstrap: [AppComponent],
+
+})
+export class AppModule { }

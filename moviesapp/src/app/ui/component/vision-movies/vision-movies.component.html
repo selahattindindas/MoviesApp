@@ -1,0 +1,42 @@
+<section class="movie">
+  <div class="movies-search">
+    <h2 class="tag-name">Vizyondaki Filmler</h2>
+    <div>
+      <input type="text" id="search" placeholder="Vizyondaki Filmleri Arayın" />
+      <button class="button-with-image">
+        <i
+          class="fa-solid fa-magnifying-glass fa-lg"
+          style="color: #000000"
+        ></i>
+      </button>
+    </div>
+  </div>
+    <div class="movie-list-card">
+      <div class="movie-box" *ngFor="let movie of movie">
+        <figure>
+          <a class="movie-details"></a>
+          <img src="assets/img/oppen_kucuk.jpg" />
+        </figure>
+        <div class="movie-box-text">
+          <div class="movie-box-contents">
+            <h2>{{ movie.movieName }}</h2>
+            <h3>Yönetmenler: Atatürk</h3>
+            <p>Mevlana</p>
+          </div>
+          <div class="movie-box-time">
+            <ul>
+              <li>
+                <span>2saat aga</span>
+              </li>
+              <li>
+                <span >{{ movie.categoryName}}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="movie-box-link">
+            <button>Detay Sayfası</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>

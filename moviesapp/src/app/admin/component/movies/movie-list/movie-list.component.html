@@ -1,0 +1,50 @@
+<section>
+  <div class="movie">
+    <div class="movie-contents">
+      <div class="header-name">
+        <h1>Film Listesi</h1>
+      </div>
+      <div class="column">
+        <div class="movie-search-button-container">
+          <div class="movie-search">
+            <input placeholder="Film Arayın" [(ngModel)]="filterText" />
+          </div>
+          <div class="movie-create-button">
+            <button [routerLink]="['Create-Movie']">+ Film Ekle</button>
+          </div>
+        </div>
+      </div>
+      <div class="table-container">
+        <table class="container"  *ngIf="(movie | filter: filterText:'movieName').length > 0; else noResults">
+          <thead>
+            <tr>
+              <th class="movie-name"><h1>Film Adı</h1></th>
+              <th><h1>Film Kategorisi</h1></th>
+              <th><h1>Film Platformu</h1></th>
+              <th><h1>Vizyon Tarihi</h1></th>
+              <th><h1>Film İşlemleri</h1></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="movie-details" *ngFor="let movie of movie | filter: filterText: filterName">
+
+              <td>{{ movie.movieName }}</td>
+              <td>{{ movie.categoryName }}</td>
+              <td>{{ movie.platformName }}</td>
+              <td>{{ movie.releaseDate}}</td>
+              <td>
+                <i style="cursor: pointer" class="fa-solid fa-pen-to-square fa-lg" [routerLink]="['Edit', movie.id]"></i>
+                <i class="fa-solid fa-trash fa-lg" style="cursor: pointer" (click)="deleteMovie(movie.id)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #noResults>
+  <div class="error">
+    <p>Aranılan Film Bulunamadı: "{{filterText}}".</p>
+  </div>
+</ng-template>

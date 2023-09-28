@@ -1,0 +1,153 @@
+.create {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.card {
+  width: 120%; /* Card'ın genişliğini 100% yaparak parent elementin genişliğine doldurmasını sağlar */
+  max-width: 1200px; /* İstediğiniz maksimum genişliği ayarlayabilirsiniz */
+  margin: 0 auto; /* Card'ı yatayda ortalamak için */
+  padding: 2rem;
+}
+input::placeholder {
+  color: #ccc;
+  font-weight: 600;
+}
+
+.create-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.create-header h2 {
+  font-size: 40px;
+  font-weight: 800;
+  color: #333;
+}
+.create-contents {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.label-input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.label-input label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #2ea57d;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background-color: transparent;
+  transition: border-color 0.3s;
+  outline: none;
+  font-weight: 600;
+  color: #000;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+textarea:focus,
+select:focus {
+  border-bottom: 2px solid #000;
+}
+
+.time-input {
+  display: flex;
+  align-items: center;
+}
+
+.time-input input[type="number"] {
+  width: 45%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.time-input span {
+  margin: 0 5px;
+}
+.create-button {
+  display: flex;
+  justify-content: flex-end;
+}
+.create-button button {
+  display: block;
+  padding: 15px;
+  font-size: 16px;
+  background-color: #2ea57d;
+  color: #ffffff;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.create-button button:hover {
+  background-color: #1d5e48;
+}
+.actors-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* Resetleme */
+    display: flex;
+    flex-wrap: wrap; /* Daha fazla oyuncu eklemek için satırlara sığdırma */
+  }
+  
+  .actors-list li {
+    border-radius: 20px;
+    border: 2px solid #ccc;
+    margin: 5px;
+    font-size: 12px;
+    padding: 5px;
+    white-space: nowrap;
+    color: #000;
+  }
+  
+  /* inputun altındaki ul'ü tam genişlikte yapmak için */
+  .label-input ul {
+    width: 100%;
+  }
+ li i{
+    padding-right: 5px;
+  }
+  .close{
+    display: flex;
+    justify-content: flex-end;
+  }
+  .close button{
+    width:40px;
+    height:40px;
+    background:transparent;
+    border: 4px solid #1d5e48;
+    border-radius: 10px;
+    position:relative;
+    cursor:pointer;
+    display:inline-block;
+    margin:10px 20px;
+    font-size:20px;
+    font-weight: 800;
+    color:#1d5e48
+  }
