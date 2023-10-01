@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AdminModule } from './admin/component/component.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { Admin_Routing } from './admin/admin_routing.module';
+import { AdminRouting } from './admin/admin-routing.module';
 import { environment } from './environments/environment';
 @NgModule({
   declarations: [
@@ -21,11 +21,12 @@ import { environment } from './environments/environment';
     UiRoutingModule,
     UiModule,
     AdminModule,
-    Admin_Routing,
+    AdminRouting,
     HttpClientModule,
     RouterModule,
     FormsModule,
     SweetAlert2Module,
+    
   ],
   providers: [
     { provide: 'baseUrl', useValue: environment.baseurl, multi: true },

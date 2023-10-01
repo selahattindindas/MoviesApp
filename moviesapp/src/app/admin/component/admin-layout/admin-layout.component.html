@@ -1,0 +1,56 @@
+<body>
+  <main>
+    <aside class="side-menu" >
+      <div class="menu-toggle" (click)="toggleMenu()">
+        <i class="fa-solid fa-bars fa-xl"></i>
+      </div>
+      <div class="left-menu">
+        <div class="left-header" >
+          <div class="user-img">
+            <img src="assets/img/man-user.png" alt="User Image" />
+          <h2 class="name">Selahattin DİNDAŞ</h2>
+          <p class="rank">Admin Manager</p>
+        </div>
+        </div>
+        <div class="left-main" [ngClass]="{'close': isMenuOpen}">
+          <ul class="main-contents">
+            <div class="line"></div>
+            <li [routerLinkActive]="'active'">
+              <a [routerLink]="['Movies-List']">
+                <i class="fa-solid fa-video fa-lg"></i>
+                <span>Film İşlemleri</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="'active'">
+              <a [routerLink]="['Platforms']">
+                <i class="fa-solid fa-video fa-lg"></i>
+                <span>Sınıf İşlemleri</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="'active'">
+              <a [routerLink]="['News']">
+                <i class="fa-regular fa-newspaper fa-lg"></i>
+                <span>Haber İşlemleri</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="'active'">
+              <a [routerLink]="['Users']">
+                <i class="fa-solid fa-user fa-lg"></i>
+                <span>Kullanıcı İşlemleri</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="'active'">
+              <a [routerLink]="['/Anasayfa']">
+                <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+                <span>Çıkış</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+    <div class="details">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</body>

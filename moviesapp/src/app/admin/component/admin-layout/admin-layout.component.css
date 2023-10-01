@@ -1,0 +1,173 @@
+/* Base styles for the body */
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  background-color: #1a1818;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Main styles */
+main {
+  display: flex;
+  align-items: stretch;
+  min-height: 100vh; /* Make main at least 100% viewport height */
+  backdrop-filter: blur(30px);
+}
+
+.menu-toggle {
+  position: absolute;
+  top: 30px;
+  right: 5px; /* Sağ üst köşe */
+  z-index: 1; /* Diğer öğelerin üzerinde olduğundan emin olun */
+  display: none; /* Başlangıçta gizli yapın */
+}
+
+.side-menu {
+  width: 350px;
+  flex: 0 0 auto;
+}
+.details{
+  background-color: #1a1818;
+  flex: 1;
+}
+.left-menu {
+  height: 100vh;
+  background-color: #1a1818;
+  backdrop-filter: blur(5px);
+  box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.2);
+}
+.left-header {
+  text-align: center;
+}
+.user-img {
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
+}
+.user-img img {
+  width: 150px;
+  height: 150px;
+}
+.name {
+  margin-top: 20px;
+  color: #ccc;
+  font-weight: 600;
+}
+.left-header p {
+  color: #ccc;
+  font-size: 18px;
+}
+ul {
+  margin-top: 50px;
+  list-style: none;
+  padding: 0;
+}
+.main-contents {
+  color: #ccc;
+}
+.line {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+}
+li {
+  border-bottom: 1px solid #ccc;
+  padding: 20px 0 20px 80px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+li:hover {
+  color: #2ea57d;
+}
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit; 
+}
+i {
+  margin-right: 20px;
+}
+.left-bottom {
+  position: fixed;
+  bottom: 20px;
+  right: 0;
+}
+.active{
+  border-right: 15px solid rgba(46, 165, 125, 0.5);
+}
+.active-link{
+  border-right: 15px solid rgba(46, 165, 125, 0.5);
+}
+.fa-lg, .fa-xl{
+  color: #ccc
+}
+@media screen and (max-width: 1024px) {
+  /* Ekran boyutu 768px veya daha küçükse yapılacaklar */
+  main {
+    flex-direction: column; /* Yan yana değil üst üste sırala */
+  }
+  .menu-toggle {
+    display: block; /* Göster */
+}
+  .side-menu {
+    width: 100%;
+  }
+  .details {
+    flex: 1; /* İçerik alanını genişlet */
+  }
+  .left-menu .close {
+    display: none;
+    
+  }
+  .left-menu {
+    width: 100%;
+    height: 100%;
+  }
+  .left-header{
+    padding-bottom: 20px;
+  }
+  .user-img {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    margin-left: 20px;
+  }
+  .user-img img {
+    width: 50px;
+    height: 50px;
+  }
+  .name {
+    position: absolute;
+    right: 10px; /* Sağdan 10 piksel mesafe */
+    top: 80px; /* Üstten sıfır piksel mesafe */
+    margin: 0; /* Dönüşmeyi sıfırla */
+}
+
+.rank {
+    font-size: 14px;
+    position: absolute;
+    right: 10px; /* Sağdan 10 piksel mesafe */
+    top: 110px; 
+    margin: 0; /* Dönüşmeyi sıfırla */
+}
+  ul {
+    margin-top: 30px;
+  }
+
+  .main-contents {
+    font-size: 14px;
+  }
+
+  li {
+    padding: 10px 0;
+  }
+}
+

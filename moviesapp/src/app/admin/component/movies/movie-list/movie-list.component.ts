@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { List_Movie } from 'src/app/contracts/movie/list_movie';
+import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
 
 @Component({
@@ -9,8 +9,8 @@ import { MoviesService } from 'src/app/services/common/models/movies.service';
 })
 export class MovieListComponent implements OnInit {
   constructor(private movieService: MoviesService) {}
-  movie: List_Movie[] = [];
-  filterText: string = '';
+  movie: List_Movie[];
+  filterText: string;
   filterName: keyof List_Movie = 'movieName';
   ngOnInit(): void {
     this.getMovie();
@@ -22,7 +22,6 @@ export class MovieListComponent implements OnInit {
   }
   async getMovie() {
     const movieData: Partial<List_Movie[]> = await this.movieService.get();
-      this.movie = movieData as List_Movie[];
+    this.movie = movieData as List_Movie[];
+  }
 }
-} 
-

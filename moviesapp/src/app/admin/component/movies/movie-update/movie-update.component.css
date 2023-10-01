@@ -1,0 +1,237 @@
+/* Base styles */
+.update {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  width: 120%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+input::placeholder {
+  color: #ccc;
+  font-weight: 600;
+}
+
+.update-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.update-header h2 {
+  font-size: 40px;
+  font-weight: 800;
+  color: #333;
+}
+
+.update-contents {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.label-input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.label-input label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #2ea57d;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background-color: transparent;
+  transition: border-color 0.3s;
+  outline: none;
+  font-weight: 600;
+  color: #000;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+textarea:focus,
+select:focus {
+  border-bottom: 2px solid #000;
+}
+
+.time-input {
+  display: flex;
+  align-items: center;
+}
+
+.time-input input[type="number"] {
+  width: 45%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.time-input span {
+  margin: 0 5px;
+}
+
+.update-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.update-button button {
+  display: block;
+  padding: 15px;
+  font-size: 16px;
+  background-color: #2ea57d;
+  color: #ffffff;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.update-button button:hover {
+  background-color: #1d5e48;
+}
+
+.actors-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.actors-list li {
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  margin: 5px;
+  font-size: 12px;
+  padding: 5px;
+  white-space: nowrap;
+  color: #000;
+}
+
+.label-input ul {
+  width: 100%;
+}
+
+li i {
+  padding-right: 5px;
+}
+
+.close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close button {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 4px solid #1d5e48;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  margin: 10px 20px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #1d5e48;
+}
+
+/* Media Queries for responsiveness */
+
+/* For screens smaller than 768px (Mobile) */
+@media screen and (max-width: 768px) {
+  .update {
+    padding: 10px; /* Örnek: Yatay moda uygun bir padding değeri */
+  }
+
+  .card {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .update-header h2 {
+    font-size: 30px;
+  }
+
+  .update-contents {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .label-input {
+    margin-right: 0;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
+  textarea,
+  select {
+    padding: 5px;
+    font-size: 12px;
+  }
+
+  .time-input input[type="number"] {
+    width: 100%;
+  }
+
+  .update-button {
+    justify-content: center;
+  }
+
+  .update-button button {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .actors-list li {
+    font-size: 10px;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .update {
+    padding-top: 31rem; /* Örnek: Yatay moda uygun bir padding değeri */
+  }
+  .card {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .update-header h2 {
+    font-size: 30px;
+  }
+
+  .update-contents {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+}
+

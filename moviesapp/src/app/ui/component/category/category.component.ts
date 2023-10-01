@@ -1,13 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { CategoryEnum } from 'src/app/enums/Category';
-import { AdminService } from 'src/app/services/admin/admin.service';
+import { CategoryEnum } from 'src/app/enums/category-enum';
 import { CategoryService } from 'src/app/services/common/models/category.service';
 import { PlatformService } from 'src/app/services/common/models/platform.service';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit {
   categoryEnum: CategoryEnum[] = [];
@@ -16,7 +15,10 @@ export class CategoryComponent implements OnInit {
 
   @Output() categorySelected = new EventEmitter<CategoryEnum>();
 
-  constructor(private categoryService:CategoryService, private platformService:PlatformService) {}
+  constructor(
+    private categoryService: CategoryService,
+    private platformService: PlatformService
+  ) {}
   ngOnInit(): void {
     this.getCategory();
   }
@@ -28,10 +30,8 @@ export class CategoryComponent implements OnInit {
   private emitCategorySelection(): void {
     this.categorySelected.emit(this.selectedCategory);
   }
-  getCategory(){
+  getCategory() {
     this.categoryEnum = this.categoryService.getCategoryEnumValues();
     this.categoryDescriptions = this.categoryService.getCategoryDescriptions();
   }
-
-
 }
