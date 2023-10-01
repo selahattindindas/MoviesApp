@@ -1,12 +1,15 @@
 /* Base styles for the section */
-section {
-  padding: 20px;
+section{
+  display: flex; /* Flexbox kullanarak öğeleri hizala */
+  flex-direction: column; /* Öğeleri sütun şeklinde hizala */
+  align-items: center; 
+  justify-content: center;
 }
 
 /* Styles for the movie list container */
 .movie {
   border-radius: 5px;
-  padding: 20px;
+  padding-top: 4rem;
 }
 
 /* Header styles */
@@ -15,7 +18,7 @@ section {
   color: #ffffff;
   font-size: 50px;
   letter-spacing: 2px;
-  margin-bottom: 20px;
+  margin-bottom: 4rem;
 }
 
 .movie-search-button-container {

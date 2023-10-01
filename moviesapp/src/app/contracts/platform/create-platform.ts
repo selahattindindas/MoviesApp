@@ -1,8 +1,6 @@
 export class Create_Platform{
-    id:number;
-    name:string;
-    constructor(id:number, name:string){
-        this.id= id,
-        this.name = name
+    platformName:string;
+    constructor( platformName:string){
+        this.platformName = platformName
     }
 }

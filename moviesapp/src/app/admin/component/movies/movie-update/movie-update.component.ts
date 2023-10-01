@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Create_Movie } from 'src/app/contracts/movie/create-movie';
 import { Update_Movie } from 'src/app/contracts/movie/update-movie';
 import { CategoryEnum } from 'src/app/enums/category-enum';
@@ -26,8 +26,6 @@ export class UpdateComponent implements OnInit {
   categoryDescriptions: { [key in number]: string } = {};
   platformEnum: PlatformEnum[] = [];
   platformDescriptions: { [key in number]: string } = {};
-  releaseDateFormatted: string = '';
-  movieTimeFormatted: string = '';
   movie: Update_Movie;
   constructor(
     private fb: FormBuilder,
@@ -69,7 +67,7 @@ export class UpdateComponent implements OnInit {
     );
   }
   getMovieById() {
-    this.activatedRoute.params.subscribe(async (params) => {
+    this.activatedRoute.params.subscribe(async (params: Params) => {
       const movieData: Partial<Update_Movie> =
         await this.movieService.getMovieId(params['id']);
       if (movieData && movieData.name) this.movie = movieData as Update_Movie;
@@ -96,9 +94,7 @@ export class UpdateComponent implements OnInit {
       await this.movieService.updateMovie(movie, movieId);
     }
   }
-  updateReleaseDate(event: any) {
-    this.movie.releaseDate = event;
-  }
+
   //  directorsCreate(directorValue: string) {
   //    if (directorValue !== '') {
   //     const director: Director = {

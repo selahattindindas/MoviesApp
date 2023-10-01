@@ -1,0 +1,233 @@
+/* Base styles for the section */
+section{
+    display: flex; /* Flexbox kullanarak öğeleri hizala */
+    flex-direction: column; /* Öğeleri sütun şeklinde hizala */
+    align-items: center; 
+    justify-content: center;
+  }
+  
+  /* Styles for the category list container */
+  .category {
+    border-radius: 5px;
+    padding-top: 4rem;
+  }
+  
+  /* Header styles */
+  .header-name h1 {
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 50px;
+    letter-spacing: 2px;
+    margin-bottom: 4rem;
+  }
+  
+  .category-search-button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .category-search input {
+    color: #fff;
+    width: 250px;
+    height: 50px;
+    line-height: 50px; 
+    border: 1px solid #a7a3a3;
+    padding: 0 0 0 20px;
+    background: transparent;
+    outline: none;
+    border-radius: 5px;
+  }
+  
+  /* Create button styles */
+  .category-create-button button {
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px solid #949292;
+    padding: 0 20px; /* Adjust padding here */
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 50px; /* Add this line */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+      
+  .category-create-button button:hover {
+    background-color: #ccc; 
+    color: #fff; 
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .container {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  
+  .container th h1 {
+    font-weight: bold;
+    font-size: 1em;
+    text-align: left;
+    color: #ffffff;
+  }
+  
+  .container th, .container td {
+    padding-bottom: 2%;
+    padding-top: 2%;
+    padding-left: 2%;
+    overflow: hidden; 
+  }
+  
+  /* Add space between rows and make them semi-transparent */
+  .container tr {
+    color: #fff;
+    background-color: rgba(94, 94, 94, 0.4);
+    backdrop-filter: blur(5px); /* Apply a blur effect to the background */
+    border-bottom: 3px solid transparent;
+    transition: background-color 0.3s ease;
+  }
+  .container tr:last-child {
+    border-bottom: none;
+  }
+  /* Remove the border from the last row */
+  .container tr:last-child {
+    border-bottom: none;
+  }
+  
+  /* Hover effect for rows */
+  .container .category-details:hover {
+    background-color: rgba(46, 165, 125, 0.8); /* Semi-transparent green background on hover */
+    box-shadow: 0 6px 6px -6px #0e1119;
+  }
+  .container tr {
+    background-color: rgba(94, 94, 94, 0.4);
+    backdrop-filter: blur(5px);
+    border-bottom: 3px solid transparent;
+  }
+  .container tr:last-child {
+    border-bottom: none;
+  }
+  .container th {
+    background-color: rgba(1, 19, 9, 0.8);
+  }
+  .error p {
+    margin-top: 6rem;
+    color: #fff; 
+    font-size: 50px; 
+    background-color: transparent; 
+  }
+  i{
+    padding-left: 20px;
+  }
+  /* Responsive styles */
+  /* Tüm stiller için tek bir @media sorgusu */
+  @media screen and (max-width: 768px) {
+    section {
+      padding: 10px;
+    }
+  
+    .category {
+      border-radius: 3px;
+      padding: 10px;
+    }
+  
+    .header-name h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+  
+    .category-search-button-container {
+      margin-bottom: 10px;
+    }
+  
+    .category-search input {
+      width: 150px;
+      height: 30px;
+      line-height: 30px;
+      padding: 0 10px;
+    }
+  
+    .category-create-button button {
+      padding: 0 10px;
+      font-size: 14px;
+      line-height: 30px;
+    }
+  
+    .table-container {
+      overflow-x: auto;
+    }
+  
+    .container th h1 {
+      font-size: 14px;
+    }
+  
+    .container th, .container td {
+      padding-bottom: 1%;
+      padding-top: 1%;
+      padding-left: 1%;
+    }
+  
+    .container tr {
+      background-color: rgba(94, 94, 94, 0.4);
+    }
+  
+    .container .category-details:hover {
+      background-color: rgba(46, 165, 125, 0.8);
+    }
+  
+    .error p {
+      margin-top: 3rem;
+      font-size: 30px;
+    }
+    .category-icon i.fa-pen-to-square {
+      padding-left: 20px;
+    }
+  
+    /* İkinci <i> etiketi için stil kuralları */
+    .category-icon i.fa-trash {
+      padding-left: 20px;
+    }
+  }
+  @media screen and (min-width: 576px) and (max-width: 768px) {
+    /* Diğer stiller burada */
+  
+    /* İlk <i> etiketi için stil kuralları */
+    .category-icon i.fa-pen-to-square {
+      padding-left: 10px;
+    }
+  
+    /* İkinci <i> etiketi için stil kuralları */
+    .category-icon i.fa-trash {
+      padding-left: 10px;
+    }
+  }
+  
+  @media screen and (max-width: 575px) {
+    .category-icon i.fa-pen-to-square {
+      padding-left: 5px;
+    }
+    .category-icon i.fa-trash {
+      padding-left: 5px;
+    }
+  }
+  @media screen and (min-width: 576px) and (max-width: 768px) {
+    /* Diğer stiller burada */
+  
+    /* İlk <i> etiketi için stil kuralları */
+    .category-icon i.fa-pen-to-square,
+    .category-icon i.fa-trash {
+      padding-left: 10px; /* Adjust the padding as needed for landscape mobile */
+    }
+  }
+  @media screen and (min-width: 769px) and (max-width: 917px) {
+    .category-icon i.fa-pen-to-square,
+    .category-icon i.fa-trash {
+      padding-left: 15px; /* Adjust the padding as needed to prevent overlap */
+    }
+  }

@@ -10,6 +10,9 @@ export class MessageText {
     static readonly PlatformCreate = "Platform Başarıyla Eklendi."
     static readonly PlatformDelete = "Platform Başarıyla Kaldırıldı."
     static readonly PlatformUpdate = "Platform Başarıyla Güncellendi."
+    static readonly CategoryCreate = "Category Başarıyla Eklendi."
+    static readonly CategoryDelete = "Category Başarıyla Kaldırıldı."
+    static readonly CategoryUpdate = "Category Başarıyla Güncellendi."
 }
 export class ConfirmButtonText{
     static readonly Okey = "Tamam"

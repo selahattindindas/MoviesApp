@@ -1,1 +1,37 @@
-<p>category-list works!</p>
+<section>
+    <div class="category">
+      <div class="category-contents">
+        <div class="header-name">
+          <h1>Kategori Listesi</h1>
+        </div>
+        <div class="column">
+          <div class="category-search-button-container">
+            <div class="category-create-button">
+              <button [routerLink]="['Create-Category']">+ Kategori Ekle</button>
+            </div>
+          </div>
+        </div>
+        <div class="table-container">
+          <table class="container">
+            <thead>
+              <tr>
+                <th class="category-name"><h1>Kategori Adı</h1></th>
+                <th><h1>Kategori İşlemleri</h1></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="category-details" *ngFor="let category of category">
+                <td>{{ category.name }}</td>
+                  <td class="category-icon">
+                      <i style="cursor: pointer" class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Category-Edit', category.id]"></i>
+                      <i class="fa-solid fa-trash fa-lg delete" style="cursor: pointer" (click)="deleteCategory(category.id)"></i>          
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  

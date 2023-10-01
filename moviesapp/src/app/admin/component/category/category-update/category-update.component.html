@@ -1,1 +1,26 @@
-<p>category-update works!</p>
+<section>
+    <form [formGroup]="updateForm" (ngSubmit)="update(categoryId)">
+      <div class="update">
+        <div class="card">
+          <div class="close">
+            <button routerLink="/Admin/Class-List">X</button>
+          </div>
+          <div class="update-header">
+            <h2>Kategori Güncelleme</h2>
+          </div>
+          <div class="update-main" *ngIf="categorys">
+            <div class="update-contents">
+              <div class="label-input">
+                <label for="platformName">Kategori Adı</label>
+                <input type="text" placeholder="Platform adını yazınız" [(ngModel)]="categorys.name" formControlName="Name" />
+              </div>
+            </div>
+            <div class="update-button">
+              <button type="submit">Kategori Güncelle</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+  

@@ -1,7 +1,6 @@
 /* Base styles */
-
-.update {
-  max-width: 650px;
+.create {
+  max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   display: flex;
@@ -23,18 +22,19 @@ input::placeholder {
   font-weight: 600;
 }
 
-.update-header {
+.create-header {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.update-header h2 {
+.create-header h2 {
   font-size: 40px;
   font-weight: 800;
   color: #333;
+  padding: 2rem 0;
 }
 
-.update-contents {
+.create-contents {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
@@ -53,11 +53,7 @@ input::placeholder {
   color: #2ea57d;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="time"],
-textarea,
-select {
+input[type="text"] {
   width: 100%;
   padding: 10px;
   font-size: 14px;
@@ -70,37 +66,18 @@ select {
   color: #000;
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="time"]:focus,
-textarea:focus,
-select:focus {
+input[type="text"]:focus {
   border-bottom: 2px solid #000;
 }
 
-.time-input {
-  display: flex;
-  align-items: center;
-}
 
-.time-input input[type="number"] {
-  width: 45%;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.time-input span {
-  margin: 0 5px;
-}
-
-.update-button {
+.create-button {
   display: flex;
   justify-content: flex-end;
+  padding: 2rem 0;
 }
 
-.update-button button {
+.create-button button {
   display: block;
   padding: 15px;
   font-size: 16px;
@@ -112,7 +89,7 @@ select:focus {
   font-weight: 600;
 }
 
-.update-button button:hover {
+.create-button button:hover {
   background-color: #1d5e48;
 }
 
@@ -166,7 +143,7 @@ li i {
 
 /* For screens smaller than 768px (Mobile) */
 @media screen and (max-width: 768px) {
-  .update {
+  .create {
     padding: 10px; /* Örnek: Yatay moda uygun bir padding değeri */
   }
 
@@ -176,11 +153,11 @@ li i {
     padding: 1rem;
   }
 
-  .update-header h2 {
+  .create-header h2 {
     font-size: 30px;
   }
 
-  .update-contents {
+  .create-contents {
     flex-direction: column;
     margin-bottom: 10px;
   }
@@ -189,24 +166,16 @@ li i {
     margin-right: 0;
   }
 
-  input[type="text"],
-  input[type="date"],
-  input[type="time"],
-  textarea,
-  select {
+  input[type="text"]{
     padding: 5px;
     font-size: 12px;
   }
 
-  .time-input input[type="number"] {
-    width: 100%;
-  }
-
-  .update-button {
+  .create-button {
     justify-content: center;
   }
 
-  .update-button button {
+  .create-button button {
     padding: 10px;
     font-size: 14px;
   }
@@ -216,7 +185,7 @@ li i {
   }
 }
 @media screen and (min-width: 769px) and (max-width: 1024px) {
-  .update {
+  .create {
     padding-top: 31rem; /* Örnek: Yatay moda uygun bir padding değeri */
   }
   .card {
@@ -225,11 +194,11 @@ li i {
     padding: 1rem;
   }
 
-  .update-header h2 {
+  .create-header h2 {
     font-size: 30px;
   }
 
-  .update-contents {
+  .create-contents {
     flex-direction: column;
     margin-bottom: 10px;
   }

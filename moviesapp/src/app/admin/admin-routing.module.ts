@@ -7,6 +7,11 @@ import { MovieListComponent } from './component/movies/movie-list/movie-list.com
 import { UpdateComponent } from './component/movies/movie-update/movie-update.component';
 import { UserComponent } from './component/user/user.component';
 import { PlatformListComponent } from './component/platform/platform-list/platform-list.component';
+import { PlatformUpdateComponent } from './component/platform/platform-update/platform-update.component';
+import { PlatformCreateComponent } from './component/platform/platform-create/platform-create.component';
+import { CategoryUpdateComponent } from './component/category/category-update/category-update.component';
+import { CategoryCreateComponent } from './component/category/category-create/category-create.component';
+import { ClassListComponent } from './component/class-list/class-list.component';
 const route: Route[] = [
   {
     path: 'Admin',
@@ -21,7 +26,16 @@ const route: Route[] = [
           { path: '', component: MovieListComponent },
         ],
       },
-      { path: 'Platforms', component: PlatformListComponent },
+      {
+        path: 'Class-List',
+        children: [
+          { path: 'Category-Edit/:id', component: CategoryUpdateComponent},
+          {path: 'Create-Category', component: CategoryCreateComponent},
+          { path: 'Platform-Edit/:id', component: PlatformUpdateComponent },
+          { path: 'Create-Platform', component: PlatformCreateComponent },
+          { path: '', component: ClassListComponent },
+        ],
+      },
       { path: 'Users', component: UserComponent },
     ],
   },

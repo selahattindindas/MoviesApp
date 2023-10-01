@@ -6,22 +6,12 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { Update_Movie } from 'src/app/contracts/movie/update-movie';
 import { Router } from '@angular/router';
-import {
-  CancelButtonText,
-  ConfirmButtonText,
-  MessageText,
-  MessageTitle,
-} from 'src/app/internal/message-title';
+import {CancelButtonText,ConfirmButtonText,MessageText,MessageTitle} from 'src/app/internal/message-title';
 @Injectable({
   providedIn: 'root',
 })
 export class MoviesService {
-  constructor(
-    
-    private httpClientService: HttpClientService,
-    private sweetalertService: SweetalertService,
-    private router: Router
-  ) {}
+  constructor(private httpClientService: HttpClientService,private sweetalertService: SweetalertService,private router: Router) {}
   async create(movie: Create_Movie) {
     this.httpClientService
       .post({ controller: 'Movie' }, movie)

@@ -9,12 +9,13 @@ import { UpdateComponent } from './movies/movie-update/movie-update.component';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieCreateComponent } from './movies/movie-create/movie-create.component';
 import { TextFilterPipe } from 'src/app/shared/filter-pipe';
-import { CreateComponent } from './platform/create/create.component';
+import { PlatformCreateComponent } from './platform/platform-create/platform-create.component';
 import { PlatformListComponent } from './platform/platform-list/platform-list.component';
 import { PlatformUpdateComponent } from './platform/platform-update/platform-update.component';
 import { CategoryCreateComponent } from './category/category-create/category-create.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryUpdateComponent } from './category/category-update/category-update.component';
+import { ClassListComponent } from './class-list/class-list.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +26,13 @@ import { CategoryUpdateComponent } from './category/category-update/category-upd
     MovieListComponent,
     MovieCreateComponent,
     TextFilterPipe,
-    CreateComponent,
+    PlatformCreateComponent,
     PlatformListComponent,
     PlatformUpdateComponent,
     CategoryCreateComponent,
     CategoryListComponent,
     CategoryUpdateComponent,
+    ClassListComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   providers: [AdminlayoutComponent],

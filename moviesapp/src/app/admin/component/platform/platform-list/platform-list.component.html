@@ -1,86 +1,36 @@
-<h2>Table</h2>
-<div class="table-wrapper">
-    <table class="fl-table">
-        <thead>
-        <tr>
-            <th>Header 1</th>
-            <th>Header 2</th>
-            <th>Header 3</th>
-            <th>Header 4</th>
-            <th>Header 5</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Content 1</td>
-            <td>Content 1</td>
-            <td>Content 1</td>
-            <td>Content 1</td>
-            <td>Content 1</td>
-        </tr>
-        <tr>
-            <td>Content 2</td>
-            <td>Content 2</td>
-            <td>Content 2</td>
-            <td>Content 2</td>
-            <td>Content 2</td>
-        </tr>
-        <tr>
-            <td>Content 3</td>
-            <td>Content 3</td>
-            <td>Content 3</td>
-            <td>Content 3</td>
-            <td>Content 3</td>
-        </tr>
-        <tr>
-            <td>Content 4</td>
-            <td>Content 4</td>
-            <td>Content 4</td>
-            <td>Content 4</td>
-            <td>Content 4</td>
-        </tr>
-        <tr>
-            <td>Content 5</td>
-            <td>Content 5</td>
-            <td>Content 5</td>
-            <td>Content 5</td>
-            <td>Content 5</td>
-        </tr>
-        <tr>
-            <td>Content 6</td>
-            <td>Content 6</td>
-            <td>Content 6</td>
-            <td>Content 6</td>
-            <td>Content 6</td>
-        </tr>
-        <tr>
-            <td>Content 7</td>
-            <td>Content 7</td>
-            <td>Content 7</td>
-            <td>Content 7</td>
-            <td>Content 7</td>
-        </tr>
-        <tr>
-            <td>Content 8</td>
-            <td>Content 8</td>
-            <td>Content 8</td>
-            <td>Content 8</td>
-            <td>Content 8</td>
-        </tr>
-        <tr>
-            <td>Content 9</td>
-            <td>Content 9</td>
-            <td>Content 9</td>
-            <td>Content 9</td>
-            <td>Content 9</td>
-        </tr>
-        <tr>
-            <td>Content 10</td>
-            <td>Content 10</td>
-            <td>Content 10</td>
-            <td>Content 10</td>
-            <td>Content 10</td>
-        </tr>
-        <tbody>
-    </table>
-</div>
+<section>
+    <div class="platform">
+      <div class="platform-contents">
+        <div class="header-name">
+          <h1>Platform Listesi</h1>
+        </div>
+        <div class="column">
+          <div class="platform-search-button-container">
+            <div class="platform-create-button">
+              <button [routerLink]="['Create-Platform']">+ Platform Ekle</button>
+            </div>
+          </div>
+        </div>
+        <div class="table-container">
+          <table class="container" >
+            <thead>
+              <tr>
+                <th class="platform-name"><h1>Platform Adı</h1></th>
+                <th><h1>Platform İşlemleri</h1></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="platform-details" *ngFor="let platform of platform | filter: filterText: filterName">
+                <td>{{ platform.name }}</td>
+                  <td class="platform-icon">
+                      <i style="cursor: pointer" class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Platform-Edit', platform.id]"></i>
+                      <i class="fa-solid fa-trash fa-lg delete" style="cursor: pointer" (click)="deletePlatform(platform.id)"></i>          
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  

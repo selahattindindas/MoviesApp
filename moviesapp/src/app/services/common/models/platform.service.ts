@@ -43,12 +43,16 @@ export class PlatformService {
     const data = await firstValueFrom(observable);
     return data;
   }
-  async getPlatformId(id: string):Promise<Partial<List_Platform>> {
-    const observable :Observable<List_Platform> = this.httpClientService.get
-    <List_Platform>({
-      controller: 'Platform'
-    }, id);
+  async getPlatformId(id: string): Promise<Partial<List_Platform>> {
+    const observable: Observable<List_Platform> =
+      this.httpClientService.get<List_Platform>(
+        {
+          controller: 'Platform',
+        },
+        id
+      );
     const data = await firstValueFrom(observable);
+    console.log(data);
     return data;
   }
   async delete(id:string){
