@@ -11,7 +11,7 @@ export class MovieListComponent implements OnInit {
   constructor(private movieService: MoviesService) {}
   movie: List_Movie[];
   filterText: string;
-  filterName: keyof List_Movie = 'movieName';
+  filterName: keyof List_Movie = 'name';
   ngOnInit(): void {
     this.getMovie();
   }

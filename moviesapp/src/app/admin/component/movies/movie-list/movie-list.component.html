@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="table-container">
-        <table class="container"  *ngIf="(movie | filter: filterText:'movieName').length > 0; else noResults">
+        <table class="container"  *ngIf="(movie | filter: filterText:'name').length > 0; else noResults">
           <thead>
             <tr>
               <th class="movie-name"><h1>Film Adı</h1></th>
@@ -27,7 +27,7 @@
           </thead>
           <tbody>
             <tr class="movie-details" *ngFor="let movie of movie | filter: filterText: filterName">
-              <td>{{ movie.movieName }}</td>
+              <td>{{ movie.name }}</td>
               <td>{{ movie.categoryName }}</td>
               <td>{{ movie.platformName }}</td>
               <td>{{ movie.releaseDate }}</td>

@@ -14,7 +14,7 @@ export class MoviesService {
   constructor(private httpClientService: HttpClientService,private sweetalertService: SweetalertService,private router: Router) {}
   async create(movie: Create_Movie) {
     this.httpClientService
-      .post({ controller: 'Movie' }, movie)
+      .post({ controller: 'Movie', action:'CreateMovie' }, movie)
       .subscribe(() => {
         this.sweetalertService.showAlert(
           MessageTitle.Success,
@@ -25,6 +25,9 @@ export class MoviesService {
           3
         );
         this.router.navigate(['/Admin', 'Movies-List']);
+      },
+      (error) => {
+        console.error("Hata oluştu:", error); // Hata konsola yazdırılıyor
       });
   }
   async delete(id: string) {
@@ -56,6 +59,7 @@ export class MoviesService {
       List_Movie[]
     >({
       controller: 'Movie',
+      action:'GetAll'
     });
     const data = await firstValueFrom(observable);
     return data;

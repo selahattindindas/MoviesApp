@@ -1,26 +1,22 @@
 export class Create_Movie {
-  movieName: string;
+  name: string;
   description: string;
   releaseDate: Date;
-  director: string;
   categoryId: number;
   platformId: number;
-  movieTime: Date;
+  movieTime: string;
 
   constructor(
-    movieName: string,
+    name: string,
     description: string,
     releaseDate: Date,
-    director: string,
     categoryId: number,
     platformId: number,
-    movieTime: Date
+    movieTime: string
   ) {
-
-    this.movieName = movieName;
+    this.name = name;
     this.description = description;
     this.releaseDate = releaseDate;
-    this.director = director;
     this.categoryId = categoryId;
     this.platformId = platformId;
     this.movieTime = movieTime;

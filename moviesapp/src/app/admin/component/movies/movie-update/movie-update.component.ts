@@ -38,7 +38,6 @@ export class UpdateComponent implements OnInit {
       Name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       categoryId: new FormControl('0'),
       platformId: new FormControl('0'),
-      director: new FormControl(''),
       actor: new FormControl(''),
       date: new FormControl(''),
       time: new FormControl(''),
@@ -83,12 +82,11 @@ export class UpdateComponent implements OnInit {
     if (this.updateForm.valid) {
       const formData = this.updateForm.value;
       const movie: Create_Movie = {
-        movieName: formData.Name,
+        name: formData.Name,
         categoryId: formData.categoryId,
         platformId: formData.platformId,
-        director: formData.director,
         releaseDate: new Date(formData.date),
-        movieTime: new Date(formData.time),
+        movieTime: formData.movieTime,
         description: formData.details,
       };
       await this.movieService.updateMovie(movie, movieId);

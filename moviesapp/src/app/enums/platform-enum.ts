@@ -1,8 +1,8 @@
 export enum PlatformEnum {
     Seciniz = 0,
-    Sinema = 11,
-    Netflix = 12,
-    Disney = 13
+    Sinema = 1,
+    Netflix = 2,
+    Disney = 4
 }
 
 export const PlatformDescription: { [key in number]: string } = {
