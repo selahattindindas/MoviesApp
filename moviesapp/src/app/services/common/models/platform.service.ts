@@ -31,17 +31,27 @@ export class PlatformService {
         this.router.navigate(['/Admin', 'Class-List']);
         return data;
     }
-  async get():Promise<Partial<List_Platform[]>> {
-    const observable :Observable<List_Platform[]> = this.httpClientService.get<List_Platform[]>(
+  async get():Promise<List_Platform[]> {
+    const observable :Observable<any> = this.httpClientService.get(
       {controller: 'Platform', action:'GetAllPlatforms'});
-    const data = await firstValueFrom(observable);
-    return data;
+    const response = await firstValueFrom(observable);
+    if(response.statusCode === 200){
+      console.log(response.statusMessage);
+      return response.result;
+    }else {
+      throw new Error(`${response.statusCode}`);
+    }
   }
-  async getPlatformId(id: string): Promise<Partial<List_Platform>> {
-    const observable: Observable<List_Platform> = this.httpClientService.get<List_Platform>(
+  async getPlatformId(id: string): Promise<List_Platform> {
+    const observable: Observable<any> = this.httpClientService.get(
         {controller: 'Platform',action:'GetByPlatformId'},id);
-    const data = await firstValueFrom(observable);
-    return data;
+    const response = await firstValueFrom(observable);
+    if(response.statusCode === 200){
+      console.log(response.statusMessage);
+      return response.result;
+    }else {
+      throw new Error(`${response.statusCode}`);
+    }
   }
   async delete(id:string){
     const  sweetalert = await this.sweetalertService.showAlert(

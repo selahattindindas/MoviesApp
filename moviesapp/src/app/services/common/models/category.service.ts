@@ -31,18 +31,27 @@ export class CategoryService {
       this.router.navigate(['/Admin', 'Class-List']);
       return data;
     }
-  async get():Promise<Partial<List_Category[]>> {
-    const observable :Observable<List_Category[]> = this.httpClientService.get
-    <List_Category[]>({controller: 'Category', action:'GetAllCategories'});
-    const data = await firstValueFrom(observable);
-    return data;
+  async get():Promise<List_Category[]> {
+    const observable :Observable<any> = this.httpClientService.get(
+      {controller: 'Category', action:'GetAllCategories'});
+    const response = await firstValueFrom(observable);
+    if(response.statusCode === 200){
+      console.log(response.statusMessage);
+      return response.result;
+    }else {
+      throw new Error(`${response.statusCode}`);
+    }
   }
-  async getCategoryId(id: string): Promise<Partial<List_Category>> {
-    const observable: Observable<List_Category> =
-      this.httpClientService.get<List_Category>({controller: 'Category',action:'GetByCategoryId'},id);
-    const data = await firstValueFrom(observable);
-    console.log(data);
-    return data;
+  async getCategoryId(id: string): Promise<List_Category> {
+    const observable: Observable<any> =
+      this.httpClientService.get({controller: 'Category',action:'GetByCategoryId'},id);
+    const response = await firstValueFrom(observable);
+    if(response.statusCode === 200){
+      console.log(response.statusMessage);
+      return response.result;
+    }else {
+      throw new Error(`${response.statusCode}`);
+    }
   }
   async delete(id:string){
     const  sweetalert = await this.sweetalertService.showAlert(

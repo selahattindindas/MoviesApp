@@ -27,6 +27,7 @@ section{
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+
 }
 
 .movie-search input {
@@ -51,6 +52,7 @@ section{
   color: #ffffff;
   cursor: pointer;
   font-weight: 600;
+  margin-left: 20px;
   line-height: 50px; /* Add this line */
   transition: background-color 0.3s ease, color 0.3s ease;
 }

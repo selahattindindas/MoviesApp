@@ -12,6 +12,7 @@ import { PlatformCreateComponent } from './component/platform/platform-create/pl
 import { CategoryUpdateComponent } from './component/category/category-update/category-update.component';
 import { CategoryCreateComponent } from './component/category/category-create/category-create.component';
 import { ClassListComponent } from './component/class-list/class-list.component';
+import { DirectorCreateComponent } from './component/director/director-create/director-create.component';
 const route: Route[] = [
   {
     path: 'Admin',
@@ -24,6 +25,7 @@ const route: Route[] = [
           { path: 'Edit/:id', component: UpdateComponent },
           { path: 'Create-Movie', component: MovieCreateComponent },
           { path: '', component: MovieListComponent },
+          { path: 'Create-Director', component: DirectorCreateComponent},
         ],
       },
       {

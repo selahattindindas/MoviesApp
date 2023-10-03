@@ -16,6 +16,8 @@ import { CategoryCreateComponent } from './category/category-create/category-cre
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryUpdateComponent } from './category/category-update/category-update.component';
 import { ClassListComponent } from './class-list/class-list.component';
+import { DirectorCreateComponent } from './director/director-create/director-create.component';
+import { DirectorUpdateComponent } from './director/director-update/director-update.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { ClassListComponent } from './class-list/class-list.component';
     CategoryListComponent,
     CategoryUpdateComponent,
     ClassListComponent,
+    DirectorCreateComponent,
+    DirectorUpdateComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   providers: [AdminlayoutComponent],
