@@ -1,5 +1,5 @@
 <section>
-  <form [formGroup]="updateForm" (ngSubmit)="update(movieId)">
+  <form [formGroup]="updateForm" (ngSubmit)="update()">
     <div class="update">
       <div class="card">
         <div class="close">
@@ -8,19 +8,19 @@
         <div class="update-header">
           <h2>Film Güncelleme</h2>
         </div>
-        <div class="update-main" *ngIf="movie">
+        <div class="update-main" *ngIf="movies">
           <div class="update-contents">
             <div class="label-input">
               <label for="filmAdi">Film Adı</label>
-              <input type="text"placeholder="Filmin adını yazınız"[(ngModel)]="movie.name"formControlName="Name"/>
+              <input type="text"placeholder="Filmin adını yazınız"[(ngModel)]="movies.name"formControlName="Name"/>
             </div>
           </div>
           <div class="update-contents">
             <div class="label-input">
               <label for="movie-category">Film Kategorisi</label>
               <div class="custom-select">
-                <select class="form-control" [(ngModel)]="movie.categoryId" formControlName="categoryId">
-                  <option *ngFor="let category of categoryEnum" [value]="category">
+                <select class="form-control" [(ngModel)]="movies.categoryName" formControlName="categoryId">
+                  <option *ngFor="let category of categoryEnum" >
                     {{ categoryDescriptions[category] }}
                   </option>
                 </select>
@@ -29,9 +29,8 @@
             <div class="label-input">
               <label for="movie-platform">Film Platformu</label>
               <div class="custom-select">
-                <select class="form-control" [(ngModel)]="movie.platformId" formControlName="platformId">
-                  <option *ngFor="let platform of platformEnum" [value]="platform">
-                    {{ platformDescriptions[platform] }}
+                <select class="form-control" [(ngModel)]="movies.platformName" formControlName="platformId">
+                  <option *ngFor="let platform of platformEnum" >{{ platformDescriptions[platform] }}
                   </option>
                 </select>
               </div>
@@ -39,49 +38,18 @@
           </div>
           <div class="update-contents">
             <div class="label-input">
-              <label for="yil">Film Yönetmeni</label>
-              <!-- <input type="text" [(ngModel)]="movie.director" formControlName="director" placeholder="Yönetmenin adını yazınız"/> -->
-              <!-- <div  class="actors-list">
-                <ul>
-                  <li  id="director-length" *ngFor="let director of model.movieDirectors; let i = index">
-                    {{director.name }} <i class="fa-solid fa-xmark fa-lg" (click)="removeDirector(i)"></i>
-                  </li>
-                </ul>
-              </div> -->
-            </div>
-            <!-- <div class="label-input">
-              <label for="yil">Film Oyuncuları</label>
-              <input
-                type="text"
-                [(ngModel)]="actorValue"
-                #yourInput
-                placeholder="Oyuncuların adını yazınız"
-                (keyup.enter)="actorsupdate(actorValue)"
-                formControlName="actor"
-              />
-              <div class="actors-list">
-                <ul>
-                  <li id="actor-length" *ngFor="let actor of model.movieActors; let i = index">
-                    <span>{{ actor.name}}</span> <i class="fa-solid fa-xmark fa-lg" (click)="removeActor(i)"></i>
-                  </li>
-                </ul>
-              </div>
-            </div> -->
-          </div>
-          <div class="update-contents">
-            <div class="label-input">
               <label for="date">Film Vizyon Tarihi</label>
-              <input  type="date" formControlName="date" [ngModel]="movie.releaseDate | date:'yyyy-MM-dd'"/>
+              <input type="date" formControlName="date" [(ngModel)]="movies.releaseDate "/>
             </div>
             <div class="label-input">
               <label for="time">Film Süresi</label>
-              <input type="time" formControlName="time" />
+              <input type="text" formControlName="time" [ngModel]="movies.movieTime" />
             </div>
           </div>
           <div class="update-contents">
             <div class="label-input">
               <label for="yil">Film Açıklaması</label>
-              <textarea placeholder="Film açıklamasını yazınız" formControlName="details" [(ngModel)]="movie.description" tabindex="5"></textarea>
+              <textarea placeholder="Film açıklamasını yazınız" formControlName="details" [(ngModel)]="movies.description" tabindex="5"></textarea>
             </div>
           </div>
           <div class="update-button">

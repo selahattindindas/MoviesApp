@@ -12,9 +12,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class PlatformUpdateComponent implements OnInit {
   id : string;
-  platform:Update_Platform;
-  platforms:List_Platform;
-  updateForm: FormGroup
+  platform:List_Platform;
+  updateForm: FormGroup;
+  platformId: string;
   constructor(private fb:FormBuilder, private platformService: PlatformService, private activatedRoute:ActivatedRoute){
     this.updateForm = this.fb.group({
       Name: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -22,28 +22,23 @@ export class PlatformUpdateComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getPlatformById();
-    this.updateId();
   }
-   getPlatformById() {
+  getPlatformById() {
     this.activatedRoute.params.subscribe(async (params) => {
-      const platformData: Partial<List_Platform> =
-        await this.platformService.getPlatformId(params['id']);
-      if (platformData && platformData.name) this.platforms = platformData as List_Platform;
+      const platformData: Partial<List_Platform> = await this.platformService.getPlatformId(params['id']);
+      if (platformData) {
+        this.platform = platformData as List_Platform;
+        this.platformId = params['id']; 
+      }
     });
   }
-  updateId() {
-    this.activatedRoute.paramMap.subscribe((params) => {
-      const idParam = params.get('id');
-      this.id = idParam !== null ? idParam : '';
-    });
-  }
-  update(id:string){
+  update(){
     if (this.updateForm.valid) {
       const formData = this.updateForm.value;
       const platform: Update_Platform = {
-        name: formData.Name
+        platformName: formData.Name
       };
-      this.platformService.put(platform, id);
+      this.platformService.put(platform, this.platformId, formData.Name);
     }
   }
   }

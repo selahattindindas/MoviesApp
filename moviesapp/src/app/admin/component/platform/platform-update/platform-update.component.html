@@ -1,5 +1,5 @@
 <section>
-    <form [formGroup]="updateForm" (ngSubmit)="update(id)">
+    <form [formGroup]="updateForm" (ngSubmit)="update()">
       <div class="update">
         <div class="card">
           <div class="close">
@@ -8,11 +8,11 @@
           <div class="update-header">
             <h2>Platform Güncelleme</h2>
           </div>
-          <div class="update-main" *ngIf="platforms">
+          <div class="update-main" *ngIf="platform">
             <div class="update-contents">
               <div class="label-input">
                 <label for="platformName">Platform Adı</label>
-                <input type="text" placeholder="Platform adını yazınız" [(ngModel)]="platforms.name" formControlName="Name" />
+                <input type="text" placeholder="Platform adını yazınız" [(ngModel)]="platform.name" formControlName="Name" />
               </div>
             </div>
             <div class="update-button">

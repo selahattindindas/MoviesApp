@@ -24,7 +24,7 @@ export class PlatformCreateComponent implements OnInit {
       const platform: Create_Platform = {
         platformName: formData.name
       };
-      this.platformService.post(platform);
+      this.platformService.post(platform, formData.name);
     }
   }
 }

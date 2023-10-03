@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Create_Movie } from 'src/app/contracts/movie/create-movie';
+import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { Update_Movie } from 'src/app/contracts/movie/update-movie';
 import { CategoryEnum } from 'src/app/enums/category-enum';
 import { PlatformEnum } from 'src/app/enums/platform-enum';
@@ -26,99 +26,54 @@ export class UpdateComponent implements OnInit {
   categoryDescriptions: { [key in number]: string } = {};
   platformEnum: PlatformEnum[] = [];
   platformDescriptions: { [key in number]: string } = {};
-  movie: Update_Movie;
-  constructor(
-    private fb: FormBuilder,
-    private categoryService: CategoryService,
-    private platformService: PlatformService,
-    private movieService: MoviesService,
-    private activatedRoute: ActivatedRoute
-  ) {
+  movies:List_Movie
+  constructor( private fb: FormBuilder,private categoryService: CategoryService,private platformService: PlatformService,private movieService: MoviesService, private activatedRoute: ActivatedRoute) {
     this.updateForm = this.fb.group({
+      id: new FormControl(''),
       Name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       categoryId: new FormControl('0'),
       platformId: new FormControl('0'),
-      actor: new FormControl(''),
       date: new FormControl(''),
       time: new FormControl(''),
       details: new FormControl('', Validators.required),
     });
   }
   ngOnInit(): void {
-    this.getCategory();
-    this.getPlatform();
+    this.getCategory(); 
+    this.getPlatform(); 
     this.getMovieById();
-    this.updateId();
   }
-
   getCategory() {
     this.categoryEnum = this.categoryService.getCategoryEnumValues();
     this.categoryDescriptions = this.categoryService.getCategoryDescriptions();
-    this.categoryEnum = this.categoryEnum.filter(
-      (item) => item !== CategoryEnum.Seciniz
-    );
+    this.categoryEnum = this.categoryEnum.filter((item) => item !== CategoryEnum.Seciniz);
   }
   getPlatform() {
     this.platformEnum = this.platformService.getPlatformEnumValues();
     this.platformDescriptions = this.platformService.getPlatformDescriptions();
-    this.platformEnum = this.platformEnum.filter(
-      (item) => item !== PlatformEnum.Seciniz
-    );
+    this.platformEnum = this.platformEnum.filter((item) => item !== PlatformEnum.Seciniz);
   }
   getMovieById() {
     this.activatedRoute.params.subscribe(async (params: Params) => {
-      const movieData: Partial<Update_Movie> =
-        await this.movieService.getMovieId(params['id']);
-      if (movieData && movieData.name) this.movie = movieData as Update_Movie;
+      const movieData: Partial<List_Movie> = await this.movieService.getMovieId(params['id']);
+      if (movieData) 
+      this.movies = movieData as List_Movie;
+      this.movieId = params['id'];
     });
   }
-  updateId() {
-    this.activatedRoute.paramMap.subscribe((params) => {
-      const idParam = params.get('id');
-      this.movieId = idParam !== null ? idParam : '';
-    });
-  }
-  async update(movieId: string) {
+  update() {
     if (this.updateForm.valid) {
       const formData = this.updateForm.value;
-      const movie: Create_Movie = {
+      const movie: Update_Movie = {
+        id: formData.id,
         name: formData.Name,
         categoryId: formData.categoryId,
         platformId: formData.platformId,
         releaseDate: new Date(formData.date),
-        movieTime: formData.movieTime,
+        movieTime: formData.time,
         description: formData.details,
       };
-      await this.movieService.updateMovie(movie, movieId);
+       this.movieService.updateMovie(movie, this.movieId);
     }
   }
-
-  //  directorsCreate(directorValue: string) {
-  //    if (directorValue !== '') {
-  //     const director: Director = {
-  //       id: ++this.lastDirectorId,
-  //        movieId: ++this.lastDirectorId,
-  //       name: directorValue,
-  //      };
-  //  //    this.model.director.push(director);
-  //      this.directorValue = '';
-  //   }
-  //  }
-  //  actorsCreate(actorValue: string) {
-  //    if (actorValue !== '') {
-  //      const actor: Actor = {
-  //      id: ++this.lastDirectorId,
-  //      movieId: ++this.lastDirectorId,
-  //       name: actorValue,
-  //     };
-  //     this.model.actor.push(actor);
-  //      this.actorValue = '';
-  //    }
-  //  }
-  //  removeActor(index: number) {
-  //    this.model.actor.splice(index, 1);
-  //  }
-  // removeDirector(index: number) {
-  //   this.model.director.splice(index, 1);
-  // }
 }

@@ -12,7 +12,7 @@
           <div class="create-contents">
             <div class="label-input">
               <label for="filmAdi">Film Adı</label>
-              <input type="text" id="filmAdi" placeholder="Filmin adını yazınız" formControlName="Name"/>
+              <input type="text" placeholder="Filmin adını yazınız" formControlName="Name"/>
             </div>
           </div>
           <div class="create-contents">
@@ -35,30 +35,6 @@
               </div>
             </div> 
           </div>
-          <!-- <div class="create-contents">
-            <div class="label-input">
-              <label for="yil">Film Yönetmeni</label>
-              <input type="text" placeholder="Yönetmenin adını yazınız" formControlName="director"/>
-
-            </div>
-             <div class="label-input">
-              <label for="yil">Film Oyuncuları</label>
-              <input
-              [(ngModel)]="actorValue"
-              type="text"
-              placeholder="Oyuncuların adını yazınız"
-              (keyup.enter)="actorsCreate(actorValue)"
-                formControlName="actor"
-              />
-              <div  class="actors-list">
-                <ul>
-                  <li  id="actor-length" *ngFor="let actor of model.actor let i = index">
-                    {{actor.name }} <i class="fa-solid fa-xmark fa-lg" (click)="removeActor(i)"></i>
-                  </li>
-                </ul>
-              </div>
-          </div>  
-          </div>-->
           <div class="create-contents">
             <div class="label-input">
               <label for="date">Film Vizyon Tarihi</label>
@@ -66,7 +42,7 @@
             </div>
             <div class="label-input">
               <label for="time">Film Süresi</label>
-              <input type="number" formControlName="time"/>
+              <input type="text" formControlName="time"/>
             </div>
           </div>
           <div class="create-contents">

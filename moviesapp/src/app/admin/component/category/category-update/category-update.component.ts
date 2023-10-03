@@ -12,38 +12,35 @@ import { CategoryService } from 'src/app/services/common/models/category.service
 })
 export class CategoryUpdateComponent implements OnInit {
   updateForm:FormGroup;
-  category: Update_Category;
   categorys: List_Category;
   categoryId: string;
 constructor(private fb:FormBuilder, private categoryService:CategoryService, private activatedRoute:ActivatedRoute){
   this.updateForm = this.fb.group({
+    id: new FormControl(''),
     Name: new FormControl('',[Validators.required, Validators.minLength(5)])
   })
 }
 ngOnInit(): void {
     this.getCategoryById();
-    this.updateId();
+
 }
 getCategoryById() {
   this.activatedRoute.params.subscribe(async (params) => {
-    const categoryData: Partial<List_Category> =
-      await this.categoryService.getCategoryId(params['id']);
-    if (categoryData && categoryData.name) this.categorys = categoryData as List_Category;
+    const categoryData: Partial<List_Category> = await this.categoryService.getCategoryId(params['id']);
+    if (categoryData) {
+      this.categorys = categoryData as List_Category;
+      this.categoryId = params['id']; 
+    }
   });
 }
-updateId() {
-  this.activatedRoute.paramMap.subscribe((params) => {
-    const idParam = params.get('id');
-    this.categoryId = idParam !== null ? idParam : '';
-  });
-}
-update(categoryId:string){
+
+update(){
   if (this.updateForm.valid) {
     const formData = this.updateForm.value;
     const category: Update_Category = {
-      name: formData.Name
+      categoryName: formData.Name
     };
-    this.categoryService.put(category, categoryId);
+    this.categoryService.put(category, this.categoryId, formData.Name);
   }
 }
 }

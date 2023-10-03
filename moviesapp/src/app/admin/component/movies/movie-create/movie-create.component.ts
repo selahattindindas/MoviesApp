@@ -59,38 +59,10 @@ export class MovieCreateComponent implements OnInit {
         categoryId: formData.categoryId,
         platformId: formData.platformId,
         releaseDate: new Date(formData.date),
-        movieTime: formData.movieTime,
+        movieTime: formData.time,
         description: formData.detail,
       };
       this.movieService.create(movie);
     }
   }
-  //  directorsCreate(directorValue: string) {
-  //    if (directorValue !== '') {
-  //     const director: Director = {
-  //       id: ++this.lastDirectorId,
-  //        movieId: ++this.lastDirectorId,
-  //       name: directorValue,
-  //      };
-  //  //    this.model.director.push(director);
-  //      this.directorValue = '';
-  //   }
-  //  }
-  //  actorsCreate(actorValue: string) {
-  //    if (actorValue !== '') {
-  //      const actor: Actor = {
-  //      id: ++this.lastDirectorId,
-  //      movieId: ++this.lastDirectorId,
-  //       name: actorValue,
-  //     };
-  //     this.model.actor.push(actor);
-  //      this.actorValue = '';
-  //    }
-  //  }
-  //  removeActor(index: number) {
-  //    this.model.actor.splice(index, 1);
-  //  }
-  // removeDirector(index: number) {
-  //   this.model.director.splice(index, 1);
-  // }
 }
