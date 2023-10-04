@@ -13,6 +13,7 @@ constructor(id:string, name:string, categoryName:string, platformName:string, re
     this.id = id;
     this.name = name,
     this.categoryName = categoryName,
+    
     this.platformName = platformName,
     this.releaseDate = releaseDate,
     this.movieTime = movieTime,
