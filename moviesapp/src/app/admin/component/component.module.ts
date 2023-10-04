@@ -18,6 +18,8 @@ import { CategoryUpdateComponent } from './category/category-update/category-upd
 import { ClassListComponent } from './class-list/class-list.component';
 import { DirectorCreateComponent } from './director/director-create/director-create.component';
 import { DirectorUpdateComponent } from './director/director-update/director-update.component';
+import { CreatePlayersComponent } from './players/create-players/create-players.component';
+import { UpdatePlayersComponent } from './players/update-players/update-players.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { DirectorUpdateComponent } from './director/director-update/director-upd
     ClassListComponent,
     DirectorCreateComponent,
     DirectorUpdateComponent,
+    CreatePlayersComponent,
+    UpdatePlayersComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   providers: [AdminlayoutComponent],
