@@ -126,6 +126,7 @@ section{
 }
 i{
   padding-left: 20px;
+  cursor: pointer;
 }
 /* Responsive styles */
 /* Tüm stiller için tek bir @media sorgusu */
@@ -187,12 +188,12 @@ i{
     margin-top: 3rem;
     font-size: 30px;
   }
-  .movie-icon i.fa-pen-to-square {
+  .movie-icon i.update {
     padding-left: 20px;
   }
 
   /* İkinci <i> etiketi için stil kuralları */
-  .movie-icon i.fa-trash {
+  .movie-icon i.delete {
     padding-left: 20px;
   }
 }
@@ -200,36 +201,37 @@ i{
   /* Diğer stiller burada */
 
   /* İlk <i> etiketi için stil kuralları */
-  .movie-icon i.fa-pen-to-square {
+  .movie-icon i.update {
     padding-left: 10px;
   }
 
   /* İkinci <i> etiketi için stil kuralları */
-  .movie-icon i.fa-trash {
+  .movie-icon i.delete {
     padding-left: 10px;
   }
 }
 
 @media screen and (max-width: 575px) {
-  .movie-icon i.fa-pen-to-square {
+  .movie-icon i.update, .movie-icon i.delete {
     padding-left: 5px;
   }
-  .movie-icon i.fa-trash {
+  .movie-player i.actor, .movie-player i.director {
     padding-left: 5px;
   }
 }
 @media screen and (min-width: 576px) and (max-width: 768px) {
-  /* Diğer stiller burada */
-
-  /* İlk <i> etiketi için stil kuralları */
-  .movie-icon i.fa-pen-to-square,
-  .movie-icon i.fa-trash {
-    padding-left: 10px; /* Adjust the padding as needed for landscape mobile */
+  .movie-icon i.update, .movie-icon i.delete {
+    padding-left: 10px;
+  }
+  .movie-player i.actor, .movie-player i.director {
+    padding-left: 10px;
   }
 }
 @media screen and (min-width: 769px) and (max-width: 917px) {
-  .movie-icon i.fa-pen-to-square,
-  .movie-icon i.fa-trash {
-    padding-left: 15px; /* Adjust the padding as needed to prevent overlap */
+  .movie-icon i.update, .movie-icon i.delete {
+    padding-left: 15px;
+  }
+  .movie-player i.actor, .movie-player i.director {
+    padding-left: 15px;
   }
 }

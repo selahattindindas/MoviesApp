@@ -1,5 +1,5 @@
 <section>
-    <form [formGroup]="createForm" (ngSubmit)="create()">
+    <form [formGroup]="createForm" >
       <div class="create">
         <div class="card">
           <div class="close">
@@ -10,31 +10,20 @@
           </div>
           <div class="create-main">
             <div class="create-contents">
-                <div class="label-input">
-                  <label for="movie-category">Film Seç</label>
-                  <div class="custom-select">
-                    <select class="form-control" formControlName="id">
-                    <option *ngFor="let movie of movies" [value]="movie.id">{{ movie.name }}
-                    </option>
-                  </select>
-                  </div>
-                </div>
-            </div>
-            <div class="create-contents">
               <div class="label-input">
                 <label for="directorNames">Yönetmen Adı</label>
-                <input type="text" placeholder="Yönetmen adını yazınız" formControlName="Name" (keydown.enter)="directorsCreate(directorValue)"/>
+                <input type="text" [(ngModel)]="directorValue" placeholder="Yönetmen adını yazınız" formControlName="Name" (keydown.enter)="addDirector($event)" />
               </div>
             </div>
             <div  class="actors-list">
                 <ul>
-                  <li  id="director-length" *ngFor="let director of model.directorNames; let i = index">
-                    {{director }} <i class="fa-solid fa-xmark fa-lg" (click)="removeDirector(i)"></i>
+                  <li *ngFor="let director of directorNames; let i = index">
+                    {{director}} <i class="fa-solid fa-xmark fa-lg" (click)="removeDirector(i)"></i>
                   </li>
                 </ul>
               </div> 
             <div class="create-button">
-              <button type="submit">Yönetmen Ekle</button>
+                <button type="submit" (click)="create()">Ekle</button>
             </div>
           </div>
         </div>

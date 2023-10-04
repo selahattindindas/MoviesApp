@@ -23,6 +23,7 @@
               <th><h1>Film Kategorisi</h1></th>
               <th><h1>Film Platformu</h1></th>
               <th><h1>Vizyon Tarihi</h1></th>
+              <th><h1>Oyuncu ve Yönetmen İşlemleri</h1></th>
               <th><h1>Film İşlemleri</h1></th>
             </tr>
           </thead>
@@ -32,10 +33,14 @@
               <td>{{ movie.categoryName }}</td>
               <td>{{ movie.platformName }}</td>
               <td>{{ movie.releaseDate }}</td>
-                <td class="movie-icon">
-                    <i style="cursor: pointer" class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Edit', movie.id]"></i>
-                    <i class="fa-solid fa-trash fa-lg delete" style="cursor: pointer" (click)="deleteMovie(movie.id)"></i>          
+              <td class="movie-player">
+                <i class="fa-solid fa-circle-plus fa-lg actor" ></i>
+                <i class="fa-solid fa-square-plus fa-lg director" [routerLink]="['Create-Director', movie.id]"></i>
               </td>
+              <td class="movie-icon">
+                <i class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Edit', movie.id]"></i>
+                <i class="fa-solid fa-trash fa-lg delete" (click)="deleteMovie(movie.id)"></i>          
+          </td>
             </tr>
           </tbody>
         </table>

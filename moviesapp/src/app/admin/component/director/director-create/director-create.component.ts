@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Create_Director } from 'src/app/contracts/director/create-director';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
@@ -14,9 +14,11 @@ import { MoviesService } from 'src/app/services/common/models/movies.service';
 export class DirectorCreateComponent implements OnInit {
   createForm: FormGroup;
   model: Create_Director = {} as Create_Director;
-  movies: List_Movie[];
+  movie: List_Movie;
   movieId: string;
   directorValue: string = '';
+  directorNames: string[] = []; 
+
   constructor(
     private directorService: DirectorService,
     private fb: FormBuilder,
@@ -24,46 +26,45 @@ export class DirectorCreateComponent implements OnInit {
     private movieService: MoviesService
   ) {
     this.createForm = this.fb.group({
-      id: new FormControl('', Validators.required),
+      id: new FormControl(''),
       Name: new FormControl(''),
     });
-    this.model.directorNames = [];
   }
   
   ngOnInit(): void {
-    this.getMovie();
+    this.getMoviesId();
   }
-
-  async getMovie() {
-    const movieData: Partial<List_Movie[]> = await this.movieService.get();
-    if (movieData) {
-      this.movies = movieData as List_Movie[];
-    }
-    this.activatedRoute.paramMap.subscribe((params) => {
-      const idParam = params.get('id');
-      if (idParam) {
-        this.movieId = idParam;
+  
+  getMoviesId() {
+    this.activatedRoute.params.subscribe(async (params) => {
+      const movieData: Partial<List_Movie> = await this.movieService.getMovieId(params['id']);
+      if (movieData) {
+        this.movie = movieData as List_Movie;
+        this.movieId = params['id']; 
       }
     });
   }
-  create() {
-    if (this.createForm.valid) { 
-      const formData = this.createForm.value;
-      this.model.directorNames.push(formData.Name);
-      const director: Create_Director = {
-        id: formData.id,
-        directorNames: this.model.directorNames 
-      };
-      this.directorService.post(director, formData.id, formData.Name);
-    }
-  }
-  directorsCreate(directorValue: string) {
-    if (directorValue !== '') {
-      this.model.directorNames.push(directorValue);
+  
+  addDirector(event: any) {
+    event.preventDefault();
+    if (this.directorValue.trim() !== '') {
+      this.directorNames.push(this.directorValue.trim()); 
       this.directorValue = '';
     }
   }
-  removeDirector(index: number) {
-    this.model.directorNames.splice(index, 1);
+  create() {
+    if (this.createForm.valid) {
+      const formData = this.createForm.value;
+      const directors: Create_Director[] = this.directorNames.map(name => ({
+        movieId: formData.movieId,
+        directorNames: name
+      }));
+      for (const director of directors) {
+        this.directorService.post(director, this.movieId,director.directorNames );
+      }
+    }
   }
+  removeDirector(index: number) {
+       this.directorNames.splice(index, 1);
+     }
 }

@@ -1,9 +1,10 @@
-export class Create_Director{
-    id:string;
-    directorNames:string[]
-    
-    constructor(id:string,directorNames:string[]){
-        this.id = id;
-        this.directorNames = directorNames;
+export class Create_Director {
+    movieId: string;
+    directorNames: string;
+  
+    constructor(movieId: string, directorNames: string) { 
+      this.movieId = movieId;
+      this.directorNames = directorNames;
     }
-}
+  }
+  

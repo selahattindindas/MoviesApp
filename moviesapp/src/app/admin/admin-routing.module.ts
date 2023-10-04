@@ -25,7 +25,7 @@ const route: Route[] = [
           { path: 'Edit/:id', component: UpdateComponent },
           { path: 'Create-Movie', component: MovieCreateComponent },
           { path: '', component: MovieListComponent },
-          { path: 'Create-Director', component: DirectorCreateComponent},
+          { path: 'Create-Director/:id', component: DirectorCreateComponent},
         ],
       },
       {
