@@ -3,7 +3,7 @@
       <div class="create">
         <div class="card">
           <div class="close">
-           
+            <button routerLink="/Admin/Movies-List">X</button>
           </div>
           <div class="create-header">
             <h2>Yönetmen Ekleme</h2>
@@ -17,8 +17,11 @@
             </div>
             <div  class="actors-list">
                 <ul>
+                  <li *ngFor="let director of director">
+                    {{director.name}} <i class="fa-solid fa-xmark fa-lg" (click)="removeDirector(director.id)"></i>
+                  </li>
                   <li *ngFor="let director of directorNames; let i = index">
-                    {{director}} <i class="fa-solid fa-xmark fa-lg" (click)="removeDirector(i)"></i>
+                    {{director}} <i class="fa-solid fa-xmark fa-lg" (click)="removeCreate(i)"></i>
                   </li>
                 </ul>
               </div> 

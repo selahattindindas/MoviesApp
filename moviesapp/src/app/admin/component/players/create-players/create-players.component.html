@@ -1,1 +1,36 @@
-<p>create-players works!</p>
+<section>
+    <form [formGroup]="createForm" >
+      <div class="create">
+        <div class="card">
+          <div class="close">
+            <button routerLink="/Admin/Movies-List">X</button>
+          </div>
+          <div class="create-header">
+            <h2>Oyuncu Ekleme</h2>
+          </div>
+          <div class="create-main">
+            <div class="create-contents">
+              <div class="label-input">
+                <label for="actorNames">Oyuncu Adı</label>
+                <input type="text" [(ngModel)]="playerValue" placeholder="Oyuncu adını yazınız" formControlName="name" (keydown.enter)="addPlayer($event)" />
+              </div>
+            </div>
+            <div class="actors-list">
+                <ul>
+                  <li *ngFor="let player of player">
+                    {{player.name}} <i class="fa-solid fa-xmark fa-lg" (click)="removePlayer(player.id)"></i>
+                  </li>
+                  <li *ngFor="let player of playerNames; let i=index">
+                    {{player}} <i class="fa-solid fa-xmark fa-lg" (click)="removeCreate(i)"></i>
+                  </li>
+                </ul>
+              </div> 
+            <div class="create-button">
+                <button type="submit" (click)="create()">Ekle</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+  

@@ -10,7 +10,6 @@
             <input placeholder="Film Arayın" [(ngModel)]="filterText" />
           </div>
           <div class="movie-create-button">
-            <button [routerLink]="['Create-Director']">+ Oyuncu ve Yönetmen Ekle</button>
             <button [routerLink]="['Create-Movie']">+ Film Ekle</button>
           </div>
         </div>
@@ -34,8 +33,8 @@
               <td>{{ movie.platformName }}</td>
               <td>{{ movie.releaseDate }}</td>
               <td class="movie-player">
-                <i class="fa-solid fa-circle-plus fa-lg actor" ></i>
-                <i class="fa-solid fa-square-plus fa-lg director" [routerLink]="['Create-Director', movie.id]"></i>
+                <i class="fa-solid fa-square-minus fa-lg actor" [routerLink]="['Create-Players', movie.id]" ></i>
+                <i class="fa-solid fa-square-minus fa-lg director" [routerLink]="['Create-Director', movie.id]"></i>
               </td>
               <td class="movie-icon">
                 <i class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Edit', movie.id]"></i>

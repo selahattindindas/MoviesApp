@@ -128,8 +128,7 @@ i{
   padding-left: 20px;
   cursor: pointer;
 }
-/* Responsive styles */
-/* Tüm stiller için tek bir @media sorgusu */
+
 @media screen and (max-width: 768px) {
   section {
     padding: 10px;
@@ -162,10 +161,6 @@ i{
     line-height: 30px;
   }
 
-  .table-container {
-    overflow-x: auto;
-  }
-
   .container th h1 {
     font-size: 14px;
   }
@@ -191,24 +186,18 @@ i{
   .movie-icon i.update {
     padding-left: 20px;
   }
-
-  /* İkinci <i> etiketi için stil kuralları */
   .movie-icon i.delete {
     padding-left: 20px;
   }
 }
 @media screen and (min-width: 576px) and (max-width: 768px) {
-  /* Diğer stiller burada */
-
-  /* İlk <i> etiketi için stil kuralları */
   .movie-icon i.update {
     padding-left: 10px;
   }
-
-  /* İkinci <i> etiketi için stil kuralları */
   .movie-icon i.delete {
     padding-left: 10px;
   }
+  
 }
 
 @media screen and (max-width: 575px) {
