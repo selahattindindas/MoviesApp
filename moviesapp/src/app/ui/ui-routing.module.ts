@@ -13,7 +13,7 @@ const routes: Route[] = [
     path: '',
     component: UiLayoutComponentComponent,
     children: [
-      { path: 'Anasayfa', component: IndexComponent },
+      { path: '', component: IndexComponent },
       { path: 'Vizyondakiler', component: VisionMoviesComponent },
       { path: 'Platformdakiler', component: PlatformMoviesComponent },
       { path: 'Yaklasanlar', component: UpcomingComponent },
