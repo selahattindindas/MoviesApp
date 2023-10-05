@@ -13,6 +13,8 @@ export class MessageText {
     static readonly CategoryCreate = "Category Başarıyla Eklendi."
     static readonly CategoryDelete = "Category Başarıyla Kaldırıldı."
     static readonly CategoryUpdate = "Category Başarıyla Güncellendi."
+    static readonly PlayerCreate = "Oyuncular Başarıyla Eklendi."
+    static readonly DirectorCreate = 'Yönetmenler Başarıyla Eklendi'
 }
 export class ConfirmButtonText{
     static readonly Okey = "Tamam"

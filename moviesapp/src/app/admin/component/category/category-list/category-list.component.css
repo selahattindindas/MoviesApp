@@ -87,6 +87,9 @@ i{
   cursor: pointer;
 }
 @media (max-width: 767px) {
+  .category-list{
+    margin:0 2rem;
+  }
   .lg-table {
       display: block;
       width: 100%;

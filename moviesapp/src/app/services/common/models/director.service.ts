@@ -18,7 +18,7 @@ export class DirectorService {
       {controller:'Director', action:`CreateDirectors/${id}`, queryString:`directorNames=${name}`},director);
     const data = await firstValueFrom(observable)
       this.sweetAlertService.showAlert(
-        MessageTitle.Success,MessageText.PlatformCreate,icon.Success,false,ConfirmButtonText.Okey,3 );
+        MessageTitle.Success,MessageText.DirectorCreate,icon.Success,false,ConfirmButtonText.Okey,3 );
         this.router.navigate(['/Admin', 'Movies-List']);
         return data;
     }
