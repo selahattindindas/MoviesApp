@@ -1,3 +1,45 @@
-<aside>
- <h1>Selahattin Dindaş</h1>
-</aside>
+<section>
+    <form [formGroup]="categoryForm">
+      <div class="category-list">
+        <h1>Kategori Listesi</h1>
+        <div class="category-button-container">
+          <div class="category-create-button">
+            <button (click)="showCreateForm()">+ Kategori Ekle</button>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table class="lg-table">
+            <thead>
+              <tr>
+                <th>Kategori Adı</th>
+                <th>Kategori İşlemleri</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let category of categories; let i = index">
+                    <td>
+                      <input [formControlName]="'name' + i" [(ngModel)]="category.name">
+                    </td>
+                    <td class="movie-icon">
+                      <i class="fa-solid fa-pen-to-square fa-lg" (click)="update(category.id)" *ngIf="category.id !== editCategoryId"></i>
+                      <i class="fa-solid fa-trash fa-lg" (click)="deleteCategory(category.id)" *ngIf="category.id !== editCategoryId"></i>
+                      <i class="fa-solid fa-check fa-lg" (click)="saveChanges(category.id)" *ngIf="category.id === editCategoryId"></i>
+                      <i class="fa-solid fa-xmark fa-lg" (click)="cancelEdit()" *ngIf="category.id === editCategoryId"></i>
+                    </td>
+                  </tr>
+              <tr *ngIf="showCreateFormFlag">
+                <td>
+                  <input [(ngModel)]="newCategoryName" formControlName="name" placeholder="Kategori Adı">
+                </td>
+                <td>
+                  <i class="fa-solid fa-check fa-lg" (click)="create()"></i>
+                  <i class="fa-solid fa-xmark fa-lg" (click)="cancelCreateForm()"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+  </section>
+  

@@ -1,27 +1,91 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Create_Category } from 'src/app/contracts/category/create-category';
 import { List_Category } from 'src/app/contracts/category/list-category';
+import { Update_Category } from 'src/app/contracts/category/update-category';
 import { CategoryService } from 'src/app/services/common/models/category.service';
 
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.css']
+  styleUrls: ['./category-list.component.css'],
 })
 export class CategoryListComponent implements OnInit {
-  category : List_Category[];
-  filterText: string;
-  filterName: keyof List_Category = 'name';
-  constructor(private categoryService: CategoryService){}
+  categories: List_Category[] = [];
+  showCreateFormFlag = false;
+  newCategoryName = '';
+  categoryForm: FormGroup;
+  isCategoryNameReadOnly: boolean = true;
+  editCategoryId: string | null = null;
+
+  constructor(private categoryService: CategoryService,private fb: FormBuilder) {
+    this.categoryForm = this.fb.group({
+      name: new FormControl('', [Validators.required, Validators.minLength(5)])
+    });
+  }
   ngOnInit(): void {
-      this.getCategory();
+    this.getCategory();
   }
-  async getCategory(){
-    const platformData: Partial<List_Category[]> = await this.categoryService.get();
-    this.category = platformData as List_Category[];
+  
+//////////////////GetAll/////////////////////////////
+  async getCategory() {
+    const categoryData: Partial<List_Category[]> = await this.categoryService.get();
+    this.categories = categoryData as List_Category[];
   }
+//////////////////Delete/////////////////////////////
   deleteCategory(categoryId: string) {
     this.categoryService.delete(categoryId).then(() => {
       this.getCategory();
     });
+  }
+//////////////////Create/////////////////////////////
+  showCreateForm() {
+    this.showCreateFormFlag = true;
+  }
+
+  cancelCreateForm() {
+    this.showCreateFormFlag = false;
+    this.newCategoryName = '';
+  }
+
+  create() {
+    if (this.categoryForm.valid) {
+      const formData = this.categoryForm.value;
+      const category: Create_Category = {
+        categoryName: formData.name
+      };
+      this.categoryService.post(category, formData.name).then(() => {
+        this.getCategory();
+        this.cancelCreateForm();
+      });
+    }
+  }
+//////////////////UPDATE/////////////////////////////
+update(categoryId: string) {
+  const categoryItem = this.categories.find(item => item.id === categoryId);
+  if (categoryItem) {
+    this.isCategoryNameReadOnly = false;
+    this.editCategoryId = categoryId;
+    this.categoryForm.patchValue({ name: categoryItem.name });
+  }
+}
+saveChanges() {
+  if (this.categoryForm.valid && this.editCategoryId) {
+    const formData = this.categoryForm.value;
+    const category: Update_Category = {
+      categoryName: formData.name,
+    };
+    this.categoryService.put(category, this.editCategoryId, formData.name).then(() => {
+      this.getCategory();
+      this.cancelEdit();
+    });
+  }
+}
+  cancelEdit() {
+    this.isCategoryNameReadOnly = true;
+    this.editCategoryId = null;
+    this.categoryForm.reset();
+    this.getCategory();
   }
 }
