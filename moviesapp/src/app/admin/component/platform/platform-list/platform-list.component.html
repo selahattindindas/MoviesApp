@@ -1,36 +1,30 @@
 <section>
-    <div class="platform">
-      <div class="platform-contents">
-        <div class="header-name">
-          <h1>Platform Listesi</h1>
-        </div>
-        <div class="column">
-          <div class="platform-search-button-container">
-            <div class="platform-create-button">
-              <button [routerLink]="['Create-Platform']">+ Platform Ekle</button>
-            </div>
-          </div>
-        </div>
-        <div class="table-container">
-          <table class="container" >
-            <thead>
-              <tr>
-                <th class="platform-name"><h1>Platform Adı</h1></th>
-                <th><h1>Platform İşlemleri</h1></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="platform-details" *ngFor="let platform of platform | filter: filterText: filterName">
-                <td>{{ platform.name }}</td>
-                  <td class="platform-icon">
-                      <i style="cursor: pointer" class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Platform-Edit', platform.id]"></i>
-                      <i class="fa-solid fa-trash fa-lg delete" style="cursor: pointer" (click)="deletePlatform(platform.id)"></i>          
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  <div class="platform-list">
+    <h1>Platform Listesi</h1>
+    <div class="platform-button-container">
+      <div class="platform-create-button">
+        <button [routerLink]="['Create-Platform']">+ Platform Ekle</button>
       </div>
     </div>
-  </section>
-  
+    <div class="table-wrapper">
+        <table class="lg-table">
+            <thead>
+            <tr>
+                <th>Platform Adı</th>
+                <th>Platform İşlemleri</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let platform of platform">
+              <td>{{ platform.name }}</td>
+              <td class="movie-icon">
+                <i class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Platform-Edit', platform.id]"></i>
+                <i class="fa-solid fa-trash fa-lg delete" (click)="deletePlatform(platform.id)"></i>          
+          </td>
+            </tr>
+            <tbody>
+        </table>
+    </div>
+  </div>
+</section>
+

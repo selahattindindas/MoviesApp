@@ -1,32 +1,22 @@
-/* Base styles for the section */
-section{
-  display: flex; /* Flexbox kullanarak öğeleri hizala */
-  flex-direction: column; /* Öğeleri sütun şeklinde hizala */
-  align-items: center; 
-  justify-content: center;
-}
 
-/* Styles for the platform list container */
-.platform {
-  border-radius: 5px;
-  padding-top: 4rem;
-}
-
-/* Header styles */
-.header-name h1 {
+.platform-list h1 {
   font-weight: 800;
   color: #ffffff;
   font-size: 50px;
   letter-spacing: 2px;
   margin-bottom: 4rem;
+  width: 100%; /* Genişliği tam genişlik yaparak hizalamayı sağlar */
 }
-
-.platform-search-button-container {
+.table-wrapper{
+  box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+.platform-button-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+
 }
 
 .platform-search input {
@@ -41,17 +31,16 @@ section{
   border-radius: 5px;
 }
 
-/* Create button styles */
 .platform-create-button button {
   background-color: transparent;
   border-radius: 5px;
   border: 1px solid #949292;
-  padding: 0 20px; /* Adjust padding here */
+  padding: 0 20px; 
   font-size: 16px;
   color: #ffffff;
   cursor: pointer;
   font-weight: 600;
-  line-height: 50px; /* Add this line */
+  line-height: 50px; 
   transition: background-color 0.3s ease, color 0.3s ease;
 }
     
@@ -59,175 +48,110 @@ section{
   background-color: #ccc; 
   color: #fff; 
 }
-
-.table-container {
-  overflow-x: auto;
-}
-
-.container {
+.lg-table {
+  border-radius: 5px;
+  font-size: 16px;
   width: 100%;
-  border-collapse: collapse;
+  max-width: 100%;
+  white-space: nowrap;
+  color: #fff;
   table-layout: fixed;
+  border-collapse: collapse;
 }
-
-.container th h1 {
-  font-weight: bold;
-  font-size: 1em;
-  text-align: left;
-  color: #ffffff;
-}
-
-.container th, .container td {
+.lg-table td, .lg-table th {
+  text-align: center;
+  padding: 8px;
   padding-bottom: 2%;
   padding-top: 2%;
   padding-left: 2%;
-  overflow: hidden; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Add space between rows and make them semi-transparent */
-.container tr {
-  color: #fff;
+
+.lg-table thead th {
+  background-color: rgba(1, 19, 9, 0.8);
+  white-space: normal;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.lg-table tr{
   background-color: rgba(94, 94, 94, 0.4);
-  backdrop-filter: blur(5px); /* Apply a blur effect to the background */
   border-bottom: 3px solid transparent;
   transition: background-color 0.3s ease;
 }
-.container tr:last-child {
-  border-bottom: none;
-}
-/* Remove the border from the last row */
-.container tr:last-child {
-  border-bottom: none;
-}
-
-/* Hover effect for rows */
-.container .platform-details:hover {
-  background-color: rgba(46, 165, 125, 0.8); /* Semi-transparent green background on hover */
-  box-shadow: 0 6px 6px -6px #0e1119;
-}
-.container tr {
-  background-color: rgba(94, 94, 94, 0.4);
-  backdrop-filter: blur(5px);
-  border-bottom: 3px solid transparent;
-}
-.container tr:last-child {
-  border-bottom: none;
-}
-.container th {
-  background-color: rgba(1, 19, 9, 0.8);
-}
-.error p {
-  margin-top: 6rem;
-  color: #fff; 
-  font-size: 50px; 
-  background-color: transparent; 
-}
 i{
-  padding-left: 20px;
+  margin: 0 10px;
+  cursor: pointer;
 }
-/* Responsive styles */
-/* Tüm stiller için tek bir @media sorgusu */
-@media screen and (max-width: 768px) {
-  section {
-    padding: 10px;
+@media (max-width: 767px) {
+  .lg-table {
+      display: block;
+      width: 100%;
+      font-size: 14px;
+      border: 1px solid #f7f7f9;
   }
-
-  .platform {
-    border-radius: 3px;
-    padding: 10px;
+  .platform-list h1 {
+    margin-top: 5rem;
+    margin-bottom: 3rem;
   }
-
-  .header-name h1 {
-    font-size: 30px;
-    margin-bottom: 10px;
-  }
-
-  .platform-search-button-container {
-    margin-bottom: 10px;
-  }
-
-  .platform-search input {
-    width: 150px;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 10px;
-  }
-
   .platform-create-button button {
     padding: 0 10px;
     font-size: 14px;
-    line-height: 30px;
+    line-height: 40px;
   }
-
-  .table-container {
-    overflow-x: auto;
+  .lg-table thead, .lg-table tbody, .lg-table thead th {
+      display: block;
   }
-
-  .container th h1 {
-    font-size: 14px;
+  .lg-table thead th:last-child{
+      border-bottom: none;
   }
-
-  .container th, .container td {
-    padding-bottom: 1%;
-    padding-top: 1%;
-    padding-left: 1%;
+  .lg-table thead {
+      float: left;
   }
-
-  .container tr {
-    background-color: rgba(94, 94, 94, 0.4);
+  .lg-table tbody {
+      width: auto;
+      position: relative;
+      overflow-x: auto;
   }
-
-  .container .platform-details:hover {
-    background-color: rgba(46, 165, 125, 0.8);
+  .lg-table td, .lg-table th {
+      padding: 20px .625em .625em .625em;
+      height: 60px;
+      vertical-align: middle;
+      box-sizing: border-box;
+      overflow-x: hidden;
+      overflow-y: auto;
+      width: 120px;
+      font-size: 13px;
+      text-overflow: ellipsis;
+      
   }
-
-  .error p {
-    margin-top: 3rem;
-    font-size: 30px;
+  .lg-table thead th {
+      text-align: left;
   }
-  .platform-icon i.fa-pen-to-square {
-    padding-left: 20px;
+  .lg-table tbody tr {
+      display: table-cell;
   }
-
-  /* İkinci <i> etiketi için stil kuralları */
-  .platform-icon i.fa-trash {
-    padding-left: 20px;
+  .lg-table tbody tr:nth-child(odd) {
+      background: none;
   }
+  .lg-table tr:nth-child(even) {
+      background: transparent;
+  }
+  .lg-table tr td{
+    border-right: 1px solid #f7f7f9;
+    border-bottom: 1px solid #f7f7f9;
 }
-@media screen and (min-width: 576px) and (max-width: 768px) {
-  /* Diğer stiller burada */
-
-  /* İlk <i> etiketi için stil kuralları */
-  .platform-icon i.fa-pen-to-square {
-    padding-left: 10px;
-  }
-
-  /* İkinci <i> etiketi için stil kuralları */
-  .platform-icon i.fa-trash {
-    padding-left: 10px;
-  }
+.lg-table tr td:last-child {
+  border-bottom: none;
 }
-
-@media screen and (max-width: 575px) {
-  .platform-icon i.fa-pen-to-square {
-    padding-left: 5px;
+  .lg-table tbody td {
+      display: block;
+      text-align: center;
   }
-  .platform-icon i.fa-trash {
-    padding-left: 5px;
-  }
-}
-@media screen and (min-width: 576px) and (max-width: 768px) {
-  /* Diğer stiller burada */
-
-  /* İlk <i> etiketi için stil kuralları */
-  .platform-icon i.fa-pen-to-square,
-  .platform-icon i.fa-trash {
-    padding-left: 10px; /* Adjust the padding as needed for landscape mobile */
-  }
-}
-@media screen and (min-width: 769px) and (max-width: 917px) {
-  .platform-icon i.fa-pen-to-square,
-  .platform-icon i.fa-trash {
-    padding-left: 15px; /* Adjust the padding as needed to prevent overlap */
+  i{
+    padding-top: 10px;
   }
 }

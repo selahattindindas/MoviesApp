@@ -1,33 +1,29 @@
-/* Base styles for the section */
 section{
   display: flex; /* Flexbox kullanarak öğeleri hizala */
   flex-direction: column; /* Öğeleri sütun şeklinde hizala */
   align-items: center; 
   justify-content: center;
 }
-
-/* Styles for the movie list container */
-.movie {
-  border-radius: 5px;
-  padding-top: 4rem;
+.movie-list {
+  margin: 3rem 8rem;
 }
-
-/* Header styles */
-.header-name h1 {
+.movie-list h1 {
   font-weight: 800;
   color: #ffffff;
   font-size: 50px;
   letter-spacing: 2px;
   margin-bottom: 4rem;
+  width: 100%; /* Genişliği tam genişlik yaparak hizalamayı sağlar */
 }
-
+.table-wrapper{
+  box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
 .movie-search-button-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-
 }
 
 .movie-search input {
@@ -42,115 +38,77 @@ section{
   border-radius: 5px;
 }
 
-/* Create button styles */
 .movie-create-button button {
   background-color: transparent;
   border-radius: 5px;
   border: 1px solid #949292;
-  padding: 0 20px; /* Adjust padding here */
+  padding: 0 20px; 
   font-size: 16px;
   color: #ffffff;
   cursor: pointer;
   font-weight: 600;
-  margin-left: 20px;
-  line-height: 50px; /* Add this line */
+  line-height: 50px; 
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-    
 .movie-create-button button:hover {
   background-color: #ccc; 
   color: #fff; 
 }
-
-.table-container {
-  overflow-x: auto;
-}
-
-.container {
+.lg-table {
+  border-radius: 5px;
+  font-size: 16px;
   width: 100%;
-  border-collapse: collapse;
+  max-width: 100%;
+  white-space: nowrap;
+  color: #fff;
   table-layout: fixed;
+  border-collapse: collapse;
 }
-
-.container th h1 {
-  font-weight: bold;
-  font-size: 1em;
-  text-align: left;
-  color: #ffffff;
-}
-
-.container th, .container td {
+.lg-table td, .lg-table th {
+  text-align: center;
+  padding: 8px;
   padding-bottom: 2%;
   padding-top: 2%;
   padding-left: 2%;
-  overflow: hidden; 
+  white-space: nowrap;
+  overflow: hidden;
+
 }
 
-/* Add space between rows and make them semi-transparent */
-.container tr {
-  color: #fff;
+
+.lg-table thead th {
+  background-color: rgba(1, 19, 9, 0.8);
+  white-space: normal;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.lg-table tr{
   background-color: rgba(94, 94, 94, 0.4);
-  backdrop-filter: blur(5px); /* Apply a blur effect to the background */
   border-bottom: 3px solid transparent;
   transition: background-color 0.3s ease;
 }
-.container tr:last-child {
-  border-bottom: none;
-}
-/* Remove the border from the last row */
-.container tr:last-child {
-  border-bottom: none;
-}
-
-/* Hover effect for rows */
-.container .movie-details:hover {
-  background-color: rgba(46, 165, 125, 0.8); /* Semi-transparent green background on hover */
-  box-shadow: 0 6px 6px -6px #0e1119;
-}
-.container tr {
-  background-color: rgba(94, 94, 94, 0.4);
-  backdrop-filter: blur(5px);
-  border-bottom: 3px solid transparent;
-}
-.container tr:last-child {
-  border-bottom: none;
-}
-.container th {
-  background-color: rgba(1, 19, 9, 0.8);
-}
-.error p {
-  margin-top: 6rem;
-  color: #fff; 
-  font-size: 50px; 
-  background-color: transparent; 
-}
 i{
-  padding-left: 20px;
+  margin: 0 10px;
   cursor: pointer;
 }
-
-@media screen and (max-width: 768px) {
-  section {
-    padding: 10px;
+@media (max-width: 767px) {
+  .movie-list{
+    margin: 0 2rem;
   }
-
-  .movie {
-    border-radius: 3px;
-    padding: 10px;
+  .lg-table {
+      display: block;
+      width: 100%;
+      font-size: 14px;
+      border: 1px solid #f7f7f9;
   }
-
-  .header-name h1 {
-    font-size: 30px;
-    margin-bottom: 10px;
+  .movie-list h1 {
+    margin-top: 5rem;
+    margin-bottom: 3rem;
   }
-
-  .movie-search-button-container {
-    margin-bottom: 10px;
-  }
-
   .movie-search input {
     width: 150px;
-    height: 30px;
+    height: 40px;
     line-height: 30px;
     padding: 0 10px;
   }
@@ -158,69 +116,58 @@ i{
   .movie-create-button button {
     padding: 0 10px;
     font-size: 14px;
-    line-height: 30px;
+    line-height: 40px;
   }
-
-  .container th h1 {
-    font-size: 14px;
+  .lg-table thead, .lg-table tbody, .lg-table thead th {
+      display: block;
   }
-
-  .container th, .container td {
-    padding-bottom: 1%;
-    padding-top: 1%;
-    padding-left: 1%;
+  .lg-table thead th:last-child{
+      border-bottom: none;
   }
-
-  .container tr {
-    background-color: rgba(94, 94, 94, 0.4);
+  .lg-table thead {
+      float: left;
   }
-
-  .container .movie-details:hover {
-    background-color: rgba(46, 165, 125, 0.8);
+  .lg-table tbody {
+      width: auto;
+      position: relative;
+      overflow-x: auto;
   }
-
-  .error p {
-    margin-top: 3rem;
-    font-size: 30px;
+  .lg-table td, .lg-table th {
+      padding: 20px .625em .625em .625em;
+      height: 60px;
+      vertical-align: middle;
+      box-sizing: border-box;
+      overflow-x: hidden;
+      overflow-y: auto;
+      width: 120px;
+      font-size: 13px;
+      text-overflow: ellipsis;
+      
   }
-  .movie-icon i.update {
-    padding-left: 20px;
+  .lg-table thead th {
+      text-align: left;
   }
-  .movie-icon i.delete {
-    padding-left: 20px;
+  .lg-table tbody tr {
+      display: table-cell;
   }
-}
-@media screen and (min-width: 576px) and (max-width: 768px) {
-  .movie-icon i.update {
-    padding-left: 10px;
+  .lg-table tbody tr:nth-child(odd) {
+      background: none;
   }
-  .movie-icon i.delete {
-    padding-left: 10px;
+  .lg-table tr:nth-child(even) {
+      background: transparent;
   }
-  
-}
-
-@media screen and (max-width: 575px) {
-  .movie-icon i.update, .movie-icon i.delete {
-    padding-left: 5px;
+  .lg-table tr td{
+      border-right: 1px solid #f7f7f9;
+      border-bottom: 1px solid #f7f7f9;
   }
-  .movie-player i.actor, .movie-player i.director {
-    padding-left: 5px;
+  .lg-table tr td:last-child {
+    border-bottom: none;
   }
-}
-@media screen and (min-width: 576px) and (max-width: 768px) {
-  .movie-icon i.update, .movie-icon i.delete {
-    padding-left: 10px;
+  .lg-table tbody td {
+      display: block;
+      text-align: center;
   }
-  .movie-player i.actor, .movie-player i.director {
-    padding-left: 10px;
-  }
-}
-@media screen and (min-width: 769px) and (max-width: 917px) {
-  .movie-icon i.update, .movie-icon i.delete {
-    padding-left: 15px;
-  }
-  .movie-player i.actor, .movie-player i.director {
-    padding-left: 15px;
+  i{
+    padding-top: 10px;
   }
 }

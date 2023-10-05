@@ -20,6 +20,7 @@ import { DirectorCreateComponent } from './director/director-create/director-cre
 import { DirectorUpdateComponent } from './director/director-update/director-update.component';
 import { CreatePlayersComponent } from './players/create-players/create-players.component';
 import { UpdatePlayersComponent } from './players/update-players/update-players.component';
+import { LimitPipe } from 'src/app/shared/limit-pipe';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { UpdatePlayersComponent } from './players/update-players/update-players.
     DirectorUpdateComponent,
     CreatePlayersComponent,
     UpdatePlayersComponent,
+    LimitPipe,
   ],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   providers: [AdminlayoutComponent],

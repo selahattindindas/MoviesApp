@@ -1,54 +1,51 @@
 <section>
-  <div class="movie">
-    <div class="movie-contents">
-      <div class="header-name">
-        <h1>Film Listesi</h1>
+  <div class="movie-list">
+    <h1>Film Listesi</h1>
+    <div class="movie-search-button-container">
+      <div class="movie-search">
+        <input placeholder="Film Arayın" [(ngModel)]="filterText" />
       </div>
-      <div class="column">
-        <div class="movie-search-button-container">
-          <div class="movie-search">
-            <input placeholder="Film Arayın" [(ngModel)]="filterText" />
-          </div>
-          <div class="movie-create-button">
-            <button [routerLink]="['Create-Movie']">+ Film Ekle</button>
-          </div>
-        </div>
+      <div class="movie-create-button">
+        <button [routerLink]="['Create-Movie']">+ Film Ekle</button>
       </div>
-      <div class="table-container">
-        <table class="container"  *ngIf="(movie | filter: filterText:'name').length > 0; else noResults">
-          <thead>
+    </div>
+    <div class="table-wrapper">
+        <table class="lg-table" *ngIf="(movie | filter: filterText:'name').length > 0; else noResults">
+            <thead>
             <tr>
-              <th class="movie-name"><h1>Film Adı</h1></th>
-              <th><h1>Film Kategorisi</h1></th>
-              <th><h1>Film Platformu</h1></th>
-              <th><h1>Vizyon Tarihi</h1></th>
-              <th><h1>Oyuncu ve Yönetmen İşlemleri</h1></th>
-              <th><h1>Film İşlemleri</h1></th>
+                <th>Film Adı</th>
+                <th>Film Kategori</th>
+                <th>Film Platform</th>
+                <th>Vizyon Tarihi</th>
+                <th>Oyuncu ve Yönetmen İşlemleri</th>
+                <th>Film İşlemleri</th>
+                <th>Fotoğraf İşlemleri</th>
             </tr>
-          </thead>
-          <tbody>
-            <tr class="movie-details" *ngFor="let movie of movie | filter: filterText: filterName">
-              <td>{{ movie.name }}</td>
+            </thead>
+            <tbody>
+            <tr *ngFor="let movie of movie | filter: filterText: filterName">
+              <td>{{ movie.name | limitTo:20}}</td>
               <td>{{ movie.categoryName }}</td>
               <td>{{ movie.platformName }}</td>
               <td>{{ movie.releaseDate }}</td>
-              <td class="movie-player">
+              <td>
                 <i class="fa-solid fa-square-minus fa-lg actor" [routerLink]="['Create-Players', movie.id]" ></i>
                 <i class="fa-solid fa-square-minus fa-lg director" [routerLink]="['Create-Director', movie.id]"></i>
               </td>
-              <td class="movie-icon">
+              <td>
                 <i class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Edit', movie.id]"></i>
                 <i class="fa-solid fa-trash fa-lg delete" (click)="deleteMovie(movie.id)"></i>          
           </td>
+          <td><i class="fa-solid fa-image fa-lg"></i></td>
             </tr>
-          </tbody>
+            <tbody>
         </table>
-      </div>
+        <ng-template #noResults>
+          <div class="error">
+            <p>Aranılan Film Bulunamadı: "{{filterText}}".</p>
+          </div>
+        </ng-template>
     </div>
   </div>
 </section>
-<ng-template #noResults>
-  <div class="error">
-    <p>Aranılan Film Bulunamadı: "{{filterText}}".</p>
-  </div>
-</ng-template>
+
