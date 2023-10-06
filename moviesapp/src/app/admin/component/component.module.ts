@@ -9,11 +9,8 @@ import { UpdateComponent } from './movies/movie-update/movie-update.component';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieCreateComponent } from './movies/movie-create/movie-create.component';
 import { TextFilterPipe } from 'src/app/shared/filter-pipe';
-import { PlatformCreateComponent } from './platform/platform-create/platform-create.component';
-import { PlatformListComponent } from './platform/platform-list/platform-list.component';
-import { PlatformUpdateComponent } from './platform/platform-update/platform-update.component';
-import { CategoryListComponent } from './category/category-list/category-list.component';
-import { CategoryUpdateComponent } from './category/category-update/category-update.component';
+import { AdminPlatform } from './platform/platform.component';
+import { AdminCategory } from './category/category.component';
 import { ClassListComponent } from './class-list/class-list.component';
 import { DirectorCreateComponent } from './director/director-create/director-create.component';
 import { DirectorUpdateComponent } from './director/director-update/director-update.component';
@@ -30,11 +27,8 @@ import { LimitPipe } from 'src/app/shared/limit-pipe';
     MovieListComponent,
     MovieCreateComponent,
     TextFilterPipe,
-    PlatformCreateComponent,
-    PlatformListComponent,
-    PlatformUpdateComponent,
-    CategoryListComponent,
-    CategoryUpdateComponent,
+    AdminPlatform,
+    AdminCategory,
     ClassListComponent,
     DirectorCreateComponent,
     DirectorUpdateComponent,

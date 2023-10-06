@@ -7,18 +7,17 @@ import { Update_Category } from 'src/app/contracts/category/update-category';
 import { CategoryService } from 'src/app/services/common/models/category.service';
 
 @Component({
-  selector: 'app-category-list',
-  templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.css'],
+  selector: 'admin-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.css'],
 })
-export class CategoryListComponent implements OnInit {
+export class AdminCategory implements OnInit {
   categories: List_Category[] = [];
   showCreateFormFlag = false;
   newCategoryName = '';
   categoryForm: FormGroup;
   isCategoryNameReadOnly: boolean = true;
   editCategoryId: string | null = null;
-
   constructor(private categoryService: CategoryService,private fb: FormBuilder) {
     this.categoryForm = this.fb.group({
       name: new FormControl('', [Validators.required, Validators.minLength(5)])
@@ -27,7 +26,6 @@ export class CategoryListComponent implements OnInit {
   ngOnInit(): void {
     this.getCategory();
   }
-  
 //////////////////GetAll/////////////////////////////
   async getCategory() {
     const categoryData: Partial<List_Category[]> = await this.categoryService.get();
@@ -42,13 +40,12 @@ export class CategoryListComponent implements OnInit {
 //////////////////Create/////////////////////////////
   showCreateForm() {
     this.showCreateFormFlag = true;
+    this.editCategoryId = null;
   }
-
   cancelCreateForm() {
     this.showCreateFormFlag = false;
     this.newCategoryName = '';
   }
-
   create() {
     if (this.categoryForm.valid) {
       const formData = this.categoryForm.value;
@@ -67,7 +64,8 @@ update(categoryId: string) {
   if (categoryItem) {
     this.isCategoryNameReadOnly = false;
     this.editCategoryId = categoryId;
-    this.categoryForm.patchValue({ name: categoryItem.name });
+    this.categoryForm.patchValue({ name: '' });
+    this.showCreateFormFlag = false;
   }
 }
 saveChanges() {
@@ -85,7 +83,6 @@ saveChanges() {
   cancelEdit() {
     this.isCategoryNameReadOnly = true;
     this.editCategoryId = null;
-    this.categoryForm.reset();
     this.getCategory();
   }
 }

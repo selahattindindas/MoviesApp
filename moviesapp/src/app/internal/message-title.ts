@@ -10,11 +10,13 @@ export class MessageText {
     static readonly PlatformCreate = "Platform Başarıyla Eklendi."
     static readonly PlatformDelete = "Platform Başarıyla Kaldırıldı."
     static readonly PlatformUpdate = "Platform Başarıyla Güncellendi."
-    static readonly CategoryCreate = "Category Başarıyla Eklendi."
-    static readonly CategoryDelete = "Category Başarıyla Kaldırıldı."
-    static readonly CategoryUpdate = "Category Başarıyla Güncellendi."
+    static readonly CategoryCreate = "Kategori Başarıyla Eklendi."
+    static readonly CategoryDelete = "Kategori Başarıyla Kaldırıldı."
+    static readonly CategoryUpdate = "Kategori Başarıyla Güncellendi."
     static readonly PlayerCreate = "Oyuncular Başarıyla Eklendi."
     static readonly DirectorCreate = 'Yönetmenler Başarıyla Eklendi'
+    static readonly PlayerDelete = "Oyuncu Başarıyla Kaldırıldı"
+    static readonly DirectorDelete = "Yönetmen Başarıyla Kaldırıldı"
 }
 export class ConfirmButtonText{
     static readonly Okey = "Tamam"

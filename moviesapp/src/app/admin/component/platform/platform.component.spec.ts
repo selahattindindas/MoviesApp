@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateComponent } from './platform-create.component';
+import { AdminPlatform } from './platform.component';
 
-describe('CreateComponent', () => {
-  let component: CreateComponent;
-  let fixture: ComponentFixture<CreateComponent>;
+describe('AdminPlatform', () => {
+  let component: AdminPlatform;
+  let fixture: ComponentFixture<AdminPlatform>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CreateComponent],
+      declarations: [AdminPlatform]
     });
-    fixture = TestBed.createComponent(CreateComponent);
+    fixture = TestBed.createComponent(AdminPlatform);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

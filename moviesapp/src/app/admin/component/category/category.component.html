@@ -22,12 +22,7 @@
                     {{ category.name }}
                   </ng-container>
                   <ng-template #editMode>
-                    <input
-                    formControlName="name"
-                      type="text"
-                      [value]="category.name"
-                      [readonly]="isCategoryNameReadOnly"
-                    />
+                    <input formControlName="name" type="text"[value]="category.name" [readonly]="isCategoryNameReadOnly"/>
                   </ng-template>
                 </td>
                   <td class="movie-icon">
