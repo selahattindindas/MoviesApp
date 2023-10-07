@@ -5,10 +5,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './photo.component.html',
   styleUrls: ['./photo.component.css']
 })
-export class PhotoComponent {
-  @Input() imageUrl: string | ArrayBuffer | null = null;
-  @Output() fileSelected = new EventEmitter<File>();
-
+export class PhotoComponent { 
+  imageUrl: string | ArrayBuffer | null = null;
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {

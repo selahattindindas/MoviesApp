@@ -7,7 +7,6 @@ import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { Update_Movie } from 'src/app/contracts/movie/update-movie';
 import { Router } from '@angular/router';
 import {CancelButtonText,ConfirmButtonText,MessageText,MessageTitle} from 'src/app/internal/message-title';
-import { HttpResponse } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })

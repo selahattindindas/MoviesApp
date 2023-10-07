@@ -18,9 +18,6 @@ import { CreatePlayersComponent } from './players/create-players/create-players.
 import { UpdatePlayersComponent } from './players/update-players/update-players.component';
 import { LimitPipe } from 'src/app/shared/limit-pipe';
 import { PhotoComponent } from './photo/photo.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -46,9 +43,7 @@ import { MatInputModule } from '@angular/material/input';
     RouterModule, 
     FormsModule, 
     ReactiveFormsModule, 
-    MatCardModule,
-    MatButtonModule,
-    MatInputModule
+
   ],
   providers: [AdminlayoutComponent],
 })
