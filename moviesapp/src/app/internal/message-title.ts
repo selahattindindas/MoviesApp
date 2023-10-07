@@ -2,8 +2,10 @@ export class MessageTitle {
     static readonly Success = "Başarılı."
     static readonly Deleted = "Silmek istiyor musunuz?"
 }
+//Deleted DeletedQuestion olacak.
 export class MessageText {
     static readonly DeleteWarning = "Bu İşlem Geri Alınamaz."
+    //İsimlendirme yanlış
     static readonly MovieCreate = "Film Başarıyla Eklendi."
     static readonly MovieDelete = "Film Başarıyla Kaldırıldı."
     static readonly MovieUpdate = "Film Başarıyla Güncellendi."

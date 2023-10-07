@@ -2,8 +2,9 @@ export enum CategoryEnum {
   Seciniz = 0,
   Aksiyon = 1,
   Macera = 2,
-  BilimKurgu = 4,
-  Romantik = 5,
+  //Burası 3 olacak
+  BilimKurgu = 3,
+  Romantik = 4,
 }
 
 export const CategoryDescription: { [key in CategoryEnum]: string } = {
@@ -13,3 +14,4 @@ export const CategoryDescription: { [key in CategoryEnum]: string } = {
   [CategoryEnum.Romantik]: 'Romantik',
   [CategoryEnum.Macera]: 'Macera',
 };
+

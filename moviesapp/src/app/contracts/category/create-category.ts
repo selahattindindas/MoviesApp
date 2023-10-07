@@ -1,6 +1,6 @@
 export class Create_Category{
-    categoryName: string;
-    constructor(categoryName:string){
-        this.categoryName = categoryName
+    name: string;
+    constructor(name:string){
+        this.name = name
     }
 }

@@ -14,6 +14,7 @@ export class DirectorService {
 
   constructor(private httpClientService:HttpClientService, private router:Router, private sweetAlertService:SweetalertService) { }
   async post(director: Create_Director,id:string, name:string){
+    //categorydeki bütün yorumlar burada uygulanacak
     const observable: Observable<Create_Director> = this.httpClientService.post<Create_Director>(
       {controller:'Director', action:`CreateDirectors/${id}`, queryString:`directorNames=${name}`},director);
     const data = await firstValueFrom(observable)
@@ -27,7 +28,6 @@ export class DirectorService {
         this.httpClientService.get({controller: 'Director', action:'GetDirectorsByMovieId'},id);
       const response = await firstValueFrom(observable);
       if(response.statusCode === 200){
-        console.log(response.statusMessage);
         return response.result;
       }else {
         throw new Error(`${response.statusCode}`);

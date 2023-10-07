@@ -12,7 +12,7 @@
           <div class="update-contents">
             <div class="label-input">
               <label for="filmAdi">Film Adı</label>
-              <input type="text"placeholder="Filmin adını yazınız"[(ngModel)]="movies.name"formControlName="Name"/>
+              <input type="text" placeholder="Filmin adını yazınız" [(ngModel)]="movies.name" formControlName="Name" />
             </div>
           </div>
           <div class="update-contents">
@@ -20,7 +20,7 @@
               <label for="movie-category">Film Kategorisi</label>
               <div class="custom-select">
                 <select class="form-control" [(ngModel)]="movies.categoryName" formControlName="categoryId">
-                  <option *ngFor="let category of categoryEnum" >
+                  <option *ngFor="let category of categoryEnum">
                     {{ categoryDescriptions[category] }}
                   </option>
                 </select>
@@ -30,7 +30,7 @@
               <label for="movie-platform">Film Platformu</label>
               <div class="custom-select">
                 <select class="form-control" [(ngModel)]="movies.platformName" formControlName="platformId">
-                  <option *ngFor="let platform of platformEnum" >{{ platformDescriptions[platform] }}
+                  <option *ngFor="let platform of platformEnum">{{ platformDescriptions[platform] }}
                   </option>
                 </select>
               </div>
@@ -39,7 +39,7 @@
           <div class="update-contents">
             <div class="label-input">
               <label for="date">Film Vizyon Tarihi</label>
-              <input type="date" formControlName="date" [(ngModel)]="movies.releaseDate "/>
+              <input type="date" formControlName="date" [ngModel]="movies.releaseDate " />
             </div>
             <div class="label-input">
               <label for="time">Film Süresi</label>
@@ -49,7 +49,8 @@
           <div class="update-contents">
             <div class="label-input">
               <label for="yil">Film Açıklaması</label>
-              <textarea placeholder="Film açıklamasını yazınız" formControlName="details" [(ngModel)]="movies.description" tabindex="5"></textarea>
+              <textarea placeholder="Film açıklamasını yazınız" formControlName="details"
+                [(ngModel)]="movies.description" tabindex="5"></textarea>
             </div>
           </div>
           <div class="update-button">

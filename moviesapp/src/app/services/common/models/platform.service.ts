@@ -56,7 +56,7 @@ export class PlatformService {
   async delete(id:string){
     const  sweetalert = await this.sweetalertService.showAlert(
       MessageTitle.Deleted,MessageText.DeleteWarning,icon.Warning,true,ConfirmButtonText.Okey,undefined,CancelButtonText.Cancel);
-    if(sweetalert && sweetalert.isConfirmed){
+    if( sweetalert.isConfirmed){
       await firstValueFrom(this.httpClientService.delete<any>({controller:'Platform', action:'DeletePlatform'},id));
       this.sweetalertService.showAlert(MessageTitle.Success,
         MessageText.PlatformDelete,icon.Success,false,ConfirmButtonText.Okey,3)

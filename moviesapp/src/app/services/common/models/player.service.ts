@@ -12,38 +12,37 @@ import { List_Player } from 'src/app/contracts/player/list-player';
 })
 export class PlayerService {
 
-  constructor(private httpClientService: HttpClientService, private router:Router,  private sweetAlertService:SweetalertService) { }
-  async post(director: Create_Player,id:string, name:string){
+  constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
+  async post(director: Create_Player, id: string, name: string) {
     const observable: Observable<Create_Player> = this.httpClientService.post<Create_Player>(
-      {controller:'Players', action:`CreatePlayers/${id}`, queryString:`playerNames=${name}`},director);
+      { controller: 'Players', action: `CreatePlayers/${id}`, queryString: `playerNames=${name}` }, director);
     const data = await firstValueFrom(observable)
-      this.sweetAlertService.showAlert(
-        MessageTitle.Success,MessageText.PlayerCreate,icon.Success,false,ConfirmButtonText.Okey,3 );
-        this.router.navigate(['/Admin', 'Movies-List']);
-        return data;
+    this.sweetAlertService.showAlert(
+      MessageTitle.Success, MessageText.PlayerCreate, icon.Success, false, ConfirmButtonText.Okey, 3);
+    this.router.navigate(['/Admin', 'Movies-List']);
+    return data;
+  }
+  async getPlayerId(id: string): Promise<List_Player> {
+    const observable: Observable<any> =
+      this.httpClientService.get({ controller: 'Players', action: 'GetPlayersByMovieId' }, id);
+    const response = await firstValueFrom(observable);
+    if (response.statusCode === 200) {
+      return response.result;
+    } else {
+      throw new Error(`${response.statusCode}`);
     }
-    async getPlayerId(id: string): Promise<List_Player> {
-      const observable: Observable<any> =
-        this.httpClientService.get({controller: 'Players', action:'GetPlayersByMovieId'},id);
-      const response = await firstValueFrom(observable);
-      if(response.statusCode === 200){
-        console.log(response.statusMessage);
-        return response.result;
-      }else {
-        throw new Error(`${response.statusCode}`);
-      }
+  }
+  async delete(id: string) {
+    const observable: Observable<any> = this.httpClientService.delete<any>(
+      { controller: 'Players', action: 'DeletePlayer' }, id);
+    const response = await firstValueFrom(observable);
+    if (response.statusCode === 200) {
+      console.log(response.statusMessage);
+      this.sweetAlertService.showAlert(MessageTitle.Success,
+        MessageText.PlayerDelete, icon.Success, false, ConfirmButtonText.Okey, 3);
+      return response.result;
+    } else {
+      throw new Error(`${response.statusCode}`);
     }
-    async delete(id: string) {
-      const observable: Observable<any> = this.httpClientService.delete<any>(
-        { controller: 'Players', action:'DeletePlayer' }, id);
-        const response = await firstValueFrom(observable);
-        if(response.statusCode === 200){
-          console.log(response.statusMessage);
-          this.sweetAlertService.showAlert(MessageTitle.Success,
-            MessageText.PlayerDelete,icon.Success,false,ConfirmButtonText.Okey,3);
-          return response.result;
-        }else {
-          throw new Error(`${response.statusCode}`);
-        }
-    }
+  }
 }

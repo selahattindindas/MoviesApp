@@ -13,5 +13,4 @@ export class TextFilterPipe implements PipeTransform {
       String(item[filterProperty]).toLowerCase().includes(searchText)
     );
   }
-  
 }

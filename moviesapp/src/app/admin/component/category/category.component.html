@@ -16,25 +16,25 @@
             </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let category of categories">
-                <td>
-                  <ng-container *ngIf="editCategoryId !== category.id; else editMode">
-                    {{ category.name }}
-                  </ng-container>
-                  <ng-template #editMode>
-                    <input formControlName="name" type="text"[value]="category.name" [readonly]="isCategoryNameReadOnly"/>
-                  </ng-template>
-                </td>
-                  <td class="movie-icon">
-                    <i class="fa-solid fa-pen-to-square fa-lg" (click)="update(category.id)" *ngIf="category.id !== editCategoryId"></i>
-                    <i class="fa-solid fa-trash fa-lg" (click)="deleteCategory(category.id)" *ngIf="category.id !== editCategoryId"></i>
-                    <i class="fa-solid fa-check fa-lg" (click)="saveChanges()" *ngIf="category.id === editCategoryId"></i>
-                    <i class="fa-solid fa-xmark fa-lg" (click)="cancelEdit()" *ngIf="category.id === editCategoryId"></i>
-                  </td>
-                </tr>
+            <tr *ngFor="let category of categories">
+              <td>
+                <ng-container *ngIf="editCategoryId !== category.id; else editMode">
+                  {{ category.name }}
+                </ng-container>
+                <ng-template #editMode>
+                  <input formControlName="name" type="text" [value]="category.name"/>
+                </ng-template>
+              </td>
+              <td class="movie-icon">
+                <i class="fa-solid fa-pen-to-square fa-lg" (click)="update(category.id)" *ngIf="category.id !== editCategoryId"></i>
+                <i class="fa-solid fa-trash fa-lg" (click)="deleteCategory(category.id)" *ngIf="category.id !== editCategoryId"></i>
+                <i class="fa-solid fa-check fa-lg" (click)="saveChanges()" *ngIf="category.id === editCategoryId"></i>
+                <i class="fa-solid fa-xmark fa-lg" (click)="cancelEdit()" *ngIf="category.id === editCategoryId"></i>
+              </td>
+            </tr>
             <tr *ngIf="showCreateFormFlag">
               <td>
-                <input [(ngModel)]="newCategoryName" [formControlName]="'name'"  placeholder="Kategori Adı">
+                <input [(ngModel)]="newCategoryName" [formControlName]="'name'" placeholder="Kategori Adı">
               </td>
               <td>
                 <i class="fa-solid fa-check fa-lg" (click)="create()"></i>
@@ -47,4 +47,3 @@
     </div>
   </form>
 </section>
-
