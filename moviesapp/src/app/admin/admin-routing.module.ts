@@ -9,12 +9,18 @@ import { UserComponent } from './component/user/user.component';
 import { ClassListComponent } from './component/class-list/class-list.component';
 import { DirectorCreateComponent } from './component/director/director-create/director-create.component';
 import { CreatePlayersComponent } from './component/players/create-players/create-players.component';
+import { PhotoComponent } from './component/photo/photo.component';
 const route: Route[] = [
+  {
+    path: 'Admin',
+    redirectTo: 'Admin/Anasayfa',
+    pathMatch: 'full'
+  },
   {
     path: 'Admin',
     component: AdminlayoutComponent,
     children: [
-      { path: '', component: AdminHomeComponent },
+      { path: 'Anasayfa', component: AdminHomeComponent },
       {
         path: 'Movies-List',
         children: [
@@ -22,14 +28,15 @@ const route: Route[] = [
           { path: 'Create-Movie', component: MovieCreateComponent },
           { path: '', component: MovieListComponent },
           { path: 'Create-Director/:id', component: DirectorCreateComponent},
-          { path: 'Create-Players/:id', component: CreatePlayersComponent}
+          { path: 'Create-Players/:id', component: CreatePlayersComponent},
+          { path: 'Create-Photo/:id', component: PhotoComponent}
         ],
         
       },
-      {path: 'Class-List',component: ClassListComponent },
+      { path: 'Class-List', component: ClassListComponent },
       { path: 'Users', component: UserComponent },
     ],
-  },
+  }
 ];
 
 @NgModule({

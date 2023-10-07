@@ -10,6 +10,7 @@ export class HttpClientService {
     private httpClient: HttpClient,
     @Inject('baseUrl') private baseUrl: string
   ) {}
+  
   private url(requestParameters: Partial<RequestParameters>): string {
     return `${
       requestParameters.baseUrl ? requestParameters.baseUrl : this.baseUrl
@@ -17,6 +18,7 @@ export class HttpClientService {
       requestParameters.action ? `/${requestParameters.action}` : ''
     }`;
   }
+ 
   get<T>(requestParameters: RequestParameters, id?:string):Observable<T> {
     let url: string = '';
     if(requestParameters.fullEndPoint)

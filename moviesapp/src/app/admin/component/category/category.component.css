@@ -104,7 +104,7 @@ i{
 @media (max-width: 767px) {
   .category-list {
     margin: 0 2rem;
-    padding-bottom: 5rem;
+    padding-bottom: 2rem;
   }
   .lg-table {
     display: block;

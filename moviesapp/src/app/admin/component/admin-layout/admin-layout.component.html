@@ -16,6 +16,12 @@
           <ul class="main-contents">
             <div class="line"></div>
             <li [routerLinkActive]="'active'">
+              <a [routerLink]="['Anasayfa']">
+                <i class="fa-solid fa-video fa-lg"></i>
+                <span>Anasayfa</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="'active'">
               <a [routerLink]="['Movies-List']">
                 <i class="fa-solid fa-video fa-lg"></i>
                 <span>Film İşlemleri</span>
@@ -40,7 +46,7 @@
               </a>
             </li>
             <li [routerLinkActive]="'active'">
-              <a [routerLink]="['/']">
+              <a [routerLink]="['/Filmler']">
                 <i class="fa-solid fa-right-from-bracket fa-lg"></i>
                 <span>Çıkış</span>
               </a>

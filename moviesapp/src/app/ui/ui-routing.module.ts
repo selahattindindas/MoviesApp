@@ -11,6 +11,11 @@ import { UiLayoutComponentComponent } from './component/ui-layout-component/ui-l
 const routes: Route[] = [
   {
     path: '',
+    redirectTo: 'Filmler',
+    pathMatch: 'full'
+  },
+  {
+    path: 'Filmler',
     component: UiLayoutComponentComponent,
     children: [
       { path: '', component: IndexComponent },
@@ -21,7 +26,7 @@ const routes: Route[] = [
       { path: 'Detay', component: VisionDetailsComponent },
       { path: 'Giriş', component: LoginComponent },
     ],
-  },
+  }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

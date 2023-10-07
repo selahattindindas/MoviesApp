@@ -36,7 +36,7 @@
                 <i class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Edit', movie.id]"></i>
                 <i class="fa-solid fa-trash fa-lg delete" (click)="deleteMovie(movie.id)"></i>          
           </td>
-          <td><i class="fa-solid fa-image fa-lg"></i></td>
+          <td><i class="fa-solid fa-image fa-lg" [routerLink]="['Create-Photo', movie.id]"></i></td>
             </tr>
             <tbody>
         </table>

@@ -112,6 +112,11 @@ i{
     font-size: 14px;
     line-height: 40px;
   }
+  .image-src {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
 
   table {
     width: auto;

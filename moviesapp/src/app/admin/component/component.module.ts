@@ -17,6 +17,10 @@ import { DirectorUpdateComponent } from './director/director-update/director-upd
 import { CreatePlayersComponent } from './players/create-players/create-players.component';
 import { UpdatePlayersComponent } from './players/update-players/update-players.component';
 import { LimitPipe } from 'src/app/shared/limit-pipe';
+import { PhotoComponent } from './photo/photo.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -35,8 +39,17 @@ import { LimitPipe } from 'src/app/shared/limit-pipe';
     CreatePlayersComponent,
     UpdatePlayersComponent,
     LimitPipe,
+    PhotoComponent,
   ],
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule, 
+    RouterModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule
+  ],
   providers: [AdminlayoutComponent],
 })
 export class AdminModule {}

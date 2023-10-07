@@ -39,6 +39,8 @@ export class DirectorService {
         const response = await firstValueFrom(observable);
         if(response.statusCode === 200){
           console.log(response.statusMessage);
+          this.sweetAlertService.showAlert(MessageTitle.Success,
+            MessageText.DirectorDelete,icon.Success,false,ConfirmButtonText.Okey,3)
           return response.result;
         }else {
           throw new Error(`${response.statusCode}`);

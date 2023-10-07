@@ -12,6 +12,7 @@ export class MovieListComponent implements OnInit {
   movie: List_Movie[];
   filterText: string;
   filterName: keyof List_Movie = 'name';
+  imageUrl: string | ArrayBuffer | null = null;
   ngOnInit(): void {
     this.getMovie();
   }
@@ -23,5 +24,16 @@ export class MovieListComponent implements OnInit {
   async getMovie() {
     const movieData: Partial<List_Movie[]> = await this.movieService.get();
     this.movie = movieData as List_Movie[];
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageUrl = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 }

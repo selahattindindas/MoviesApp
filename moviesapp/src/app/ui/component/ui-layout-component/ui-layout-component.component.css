@@ -1,12 +1,6 @@
 body {
   /* background: linear-gradient(to bottom, #5a0825, #1d1b1b); */
-  background: -webkit-linear-gradient(
-    right,
-    #5a0825,
-    #1d1b1b,
-    #5a0825,
-    #1d1b1b
-  );
+  background: -webkit-linear-gradient(right,#5a0825,#1d1b1b,#5a0825,#1d1b1b);
   margin: 0;
   padding: 0;
   border: 0;

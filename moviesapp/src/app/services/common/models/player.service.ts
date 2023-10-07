@@ -18,7 +18,7 @@ export class PlayerService {
       {controller:'Players', action:`CreatePlayers/${id}`, queryString:`playerNames=${name}`},director);
     const data = await firstValueFrom(observable)
       this.sweetAlertService.showAlert(
-        MessageTitle.Success,MessageText.PlatformCreate,icon.Success,false,ConfirmButtonText.Okey,3 );
+        MessageTitle.Success,MessageText.PlayerCreate,icon.Success,false,ConfirmButtonText.Okey,3 );
         this.router.navigate(['/Admin', 'Movies-List']);
         return data;
     }
@@ -39,6 +39,8 @@ export class PlayerService {
         const response = await firstValueFrom(observable);
         if(response.statusCode === 200){
           console.log(response.statusMessage);
+          this.sweetAlertService.showAlert(MessageTitle.Success,
+            MessageText.PlayerDelete,icon.Success,false,ConfirmButtonText.Okey,3);
           return response.result;
         }else {
           throw new Error(`${response.statusCode}`);

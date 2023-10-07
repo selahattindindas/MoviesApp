@@ -9,8 +9,8 @@
 
 @media (max-width: 768px) {
     .row {
-        margin: 50px 0;
-        max-width: 100%; /* Mobil cihazlarda tam ekran genişliği kullanmak için */
+        margin: 0px 0;
+        max-width: 100%;
     }
     
     .col {
