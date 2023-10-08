@@ -28,7 +28,7 @@
                   <td class="movie-icon">
                     <i class="fa-solid fa-pen-to-square fa-lg" (click)="update(platform.id)" *ngIf="platform.id !== editPlatformId"></i>
                     <i class="fa-solid fa-trash fa-lg" (click)="deletePlatform(platform.id)" *ngIf="platform.id !== editPlatformId"></i>
-                    <i class="fa-solid fa-check fa-lg" (click)="saveChanges()" *ngIf="platform.id === editPlatformId"></i>
+                    <i class="fa-solid fa-check fa-lg" (click)="saveChanges(platform.id)" *ngIf="platform.id === editPlatformId"></i>
                     <i class="fa-solid fa-xmark fa-lg" (click)="cancelEdit()" *ngIf="platform.id === editPlatformId"></i>
                   </td>
                 </tr>

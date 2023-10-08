@@ -8,25 +8,28 @@ import { MoviesService } from 'src/app/services/common/models/movies.service';
   styleUrls: ['./movie-list.component.css'],
 })
 export class MovieListComponent implements OnInit {
-  constructor(private movieService: MoviesService) {}
   movie: List_Movie[];
   filterText: string;
   filterName: keyof List_Movie = 'name';
   imageUrl: string | ArrayBuffer | null = null;
+
+  constructor(private movieService: MoviesService) {}
+
   ngOnInit(): void {
     this.getMovie();
   }
+
   deleteMovie(id: string) {
     this.movieService.deleteMovie(id).then(() => {
       this.getMovie();
     });
   }
-  async getMovie() {
+
+   getMovie() {
     return this.movieService.getAllMovies().then(movieData=>{
       this.movie = movieData as List_Movie[];
     })
   }
-
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {

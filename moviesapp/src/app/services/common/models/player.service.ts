@@ -20,6 +20,7 @@ export class PlayerService {
       { controller: 'Players', action: 'GetPlayersByMovieId' }, id);
 
     const response = await firstValueFrom(observable);
+
     return response.statusCode === 200
       ? response.result
       : response.statusMessage;
@@ -28,19 +29,24 @@ export class PlayerService {
   async createPlayer(director: Create_Player, id: string, name: string) {
     const observable: Observable<Create_Player> = this.httpClientService.post(
       { controller: 'Players', action: `CreatePlayers/${id}`, queryString: `playerNames=${name}` }, director);
-    const data = await firstValueFrom(observable)
+
+    const data = await firstValueFrom(observable);
+
     this.sweetAlertService.showAlert(
       MessageTitle.Success, MessageText.PlayerCreate, icon.Success, false, ConfirmButtonText.Okey, 3);
+
     this.router.navigate(['/Admin', 'Movies-List']);
+
     return data;
   }
 
   async deletePlayer(id: string) {
     const observable: Observable<any> = this.httpClientService.delete(
       { controller: 'Players', action: 'DeletePlayer' }, id);
+
     const response = await firstValueFrom(observable);
+
     if (response.statusCode === 200) {
-      console.log(response.statusMessage);
       this.sweetAlertService.showAlert(MessageTitle.Success,
         MessageText.PlayerDelete, icon.Success, false, ConfirmButtonText.Okey, 3);
       return response.result;

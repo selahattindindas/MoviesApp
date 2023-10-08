@@ -1,6 +1,6 @@
 export class Create_Platform{
-    platformName:string;
-    constructor( platformName:string){
-        this.platformName = platformName
+    name:string;
+    constructor( name:string){
+        this.name = name
     }
 }

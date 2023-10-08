@@ -18,6 +18,7 @@ export class DirectorService {
   async getDirectorsMovieById(id: string): Promise<List_Director> {
     const observable: Observable<JsonResponse<List_Director>> =
       this.httpClientService.get({ controller: 'Director', action: 'GetDirectorsByMovieId' }, id);
+
     const response = await firstValueFrom(observable);
 
     return response.statusCode === 200
@@ -28,24 +29,26 @@ export class DirectorService {
   async createDirector(director: Create_Director, id: string, name: string) {
     const observable: Observable<Create_Director> = this.httpClientService.post<Create_Director>(
       { controller: 'Director', action: `CreateDirectors/${id}`, queryString: `directorNames=${name}` }, director);
+
     const data = await firstValueFrom(observable)
     this.sweetAlertService.showAlert(
       MessageTitle.Success, MessageText.DirectorCreate, icon.Success, false, ConfirmButtonText.Okey, 3);
+
     this.router.navigate(['/Admin', 'Movies-List']);
+
     return data;
   }
 
   async deleteDirector(id: string) {
-    const observable: Observable<any> = this.httpClientService.delete(
+    const observable: Observable<JsonResponse<List_Director>> = this.httpClientService.delete(
       { controller: 'Director', action: 'DeleteDirector' }, id);
+
     const response = await firstValueFrom(observable);
-    if (response.statusCode === 200) {
-      console.log(response.statusMessage);
-      this.sweetAlertService.showAlert(MessageTitle.Success,
-        MessageText.DirectorDelete, icon.Success, false, ConfirmButtonText.Okey, 3)
-      return response.result;
-    } else {
-      throw new Error(`${response.statusCode}`);
-    }
+    return response.statusCode === 200
+      ? (this.sweetAlertService.showAlert(MessageTitle.Success, MessageText.DirectorDelete, icon.Success, false, ConfirmButtonText.Okey, 3),
+        response.result)
+      : (() => {
+        response.statusMessage;
+      })();
   }
 }

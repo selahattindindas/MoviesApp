@@ -25,7 +25,8 @@ export class UpdateComponent implements OnInit {
   categoryEnum: { value: CategoryEnum; description: string; }[];
   platformEnum:{ value: PlatformEnum; description: string; }[];
   movies: List_Movie;
-  constructor(private fb: FormBuilder, private categoryService: CategoryService, private platformService: PlatformService, private movieService: MoviesService, private activatedRoute: ActivatedRoute) {
+  constructor(
+    private fb: FormBuilder, private categoryService: CategoryService, private platformService: PlatformService, private movieService: MoviesService, private activatedRoute: ActivatedRoute) {
     this.updateForm = this.fb.group({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       categoryId: new FormControl(''),
@@ -40,12 +41,19 @@ export class UpdateComponent implements OnInit {
     this.getPlatform();
     this.getMovieById();
   }
+
   getCategory() {
-    this.categoryEnum = this.categoryService.getCategoryEnumValues(CategoryEnum.Seciniz.toString());
+    return this.categoryService.getCategoryEnumValues(CategoryEnum.Seciniz.toString()).then(categorData=>{
+      this.categoryEnum = categorData;
+    })
   }
+
   getPlatform() {
-    this.platformEnum = this.platformService.getPlatformEnumValues(PlatformEnum.Seciniz.toString());
+    return this.platformService.getPlatformEnumValues(PlatformEnum.Seciniz.toString()).then(platformData =>{
+      this.platformEnum = platformData
+    })
   }
+
   getMovieById() {
     this.activatedRoute.params.subscribe(async (params: Params) => {
       const movieData: Partial<List_Movie> = await this.movieService.getMovieById(params['id']);
@@ -54,6 +62,7 @@ export class UpdateComponent implements OnInit {
       this.movieId = params['id'];
     });
   }
+
   update() {
     if (!this.updateForm.valid) {
       return;

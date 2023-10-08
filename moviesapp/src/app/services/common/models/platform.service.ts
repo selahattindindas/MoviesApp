@@ -17,7 +17,7 @@ export class PlatformService {
 
   constructor(private httpClientService: HttpClientService, private sweetalertService: SweetalertService, private router: Router) { }
 
-  getPlatformEnumValues(select?: string): { value: PlatformEnum; description: string }[] {
+  async getPlatformEnumValues(select?: string): Promise<{ value: PlatformEnum; description: string }[]> {
     const enumValues = Object.keys(PlatformEnum)
       .filter((key) => typeof PlatformEnum[key as keyof typeof PlatformEnum] === 'number')
       .map((key) => ({
@@ -33,7 +33,9 @@ export class PlatformService {
   async getAllPlatform(): Promise<List_Platform[]> {
     const observable: Observable<JsonResponse<List_Platform[]>> = this.httpClientService.get(
       { controller: 'Platform', action: 'GetAllPlatforms' });
+
     const response = await firstValueFrom(observable);
+
     return response.statusCode === 200
       ? response.result
       : response.statusMessage;
@@ -42,7 +44,9 @@ export class PlatformService {
   async getPlatformById(id: string): Promise<List_Platform> {
     const observable: Observable<JsonResponse<List_Platform>> = this.httpClientService.get(
       { controller: 'Platform', action: 'GetByPlatformId' }, id);
+
     const response = await firstValueFrom(observable);
+
     return response.statusCode === 200
       ? response.result
       : response.statusMessage;
@@ -51,10 +55,28 @@ export class PlatformService {
   async createPlatform(platform: Create_Platform, name: string) {
     const observable: Observable<Create_Platform> = this.httpClientService.post(
       { controller: 'Platform', action: 'CreatePlatform', queryString: `platformName=${name}` }, platform);
-    const data = await firstValueFrom(observable)
+
+    const data = await firstValueFrom(observable);
+
     this.sweetalertService.showAlert(
       MessageTitle.Success, MessageText.PlatformCreate, icon.Success, false, ConfirmButtonText.Okey, 3);
+
     this.router.navigate(['/Admin', 'Class-List']);
+
+    return data;
+  }
+
+  async updatePlatform(platform: Update_Platform) {
+    const observable: Observable<Update_Platform> = this.httpClientService.put<Update_Platform>(
+      { controller: 'Platform', action: 'UpdatePlatform' }, platform);
+
+    const data = await firstValueFrom(observable);
+
+    this.sweetalertService.showAlert(
+      MessageTitle.Success, MessageText.PlatformUpdate, icon.Success, false, ConfirmButtonText.Okey, 3);
+
+    this.router.navigate(['/Admin', 'Class-List']);
+
     return data;
   }
 
@@ -67,16 +89,6 @@ export class PlatformService {
       this.sweetalertService.showAlert(MessageTitle.Success,
         MessageText.PlatformDelete, icon.Success, false, ConfirmButtonText.Okey, 3)
     }
-  }
-
-  async updatePlatform(platform: Update_Platform, id: string, name: string) {
-    const observable: Observable<Update_Platform> = this.httpClientService.put<Update_Platform>(
-      { controller: 'Platform', action: `UpdatePlatform/${id}`, queryString: `platformName=${name}` }, platform);
-    const data = await firstValueFrom(observable);
-    this.sweetalertService.showAlert(
-      MessageTitle.Success, MessageText.PlatformUpdate, icon.Success, false, ConfirmButtonText.Okey, 3);
-    this.router.navigate(['/Admin', 'Class-List']);
-    return data;
   }
 
 }

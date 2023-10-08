@@ -1,6 +1,8 @@
 export class Update_Platform{
-    platformName:string;
-    constructor( platformName:string){
-        this.platformName = platformName
+    id: string;
+    name:string;
+    constructor(id:string, name:string){
+        this.id = id;
+        this.name = name
     }
 }

@@ -14,12 +14,14 @@ import { CategoryService } from 'src/app/services/common/models/category.service
 export class AdminCategory implements OnInit {
   
   categories: List_Category[];
+  category: List_Category;
   showCreateFormFlag = false;
   newCategoryName = '';
   categoryForm: FormGroup;
   isCategoryNameReadOnly: boolean = true;
   editCategoryId: string | null = null;
-
+  categoryId: string;
+  
   constructor(private categoryService: CategoryService, private fb: FormBuilder) {
     this.categoryForm = this.fb.group({
       name: new FormControl('', [Validators.required, Validators.minLength(5)])
@@ -35,6 +37,7 @@ export class AdminCategory implements OnInit {
     this.categories = categorData as List_Category[];
   })
  }
+
   deleteCategory(categoryId: string) {
     this.categoryService.deleteCategory(categoryId).then(() => {
       this.getCategory();
@@ -75,13 +78,14 @@ export class AdminCategory implements OnInit {
     }
   }
 
-  saveChanges() {
+  saveChanges(categoryId: string) {
     if (this.categoryForm.valid && this.editCategoryId) {
       const formData = this.categoryForm.value;
       const category: Update_Category = {
-        categoryName: formData.name,
+        id: categoryId,
+        name: formData.name,
       };
-      this.categoryService.updateCategory(category, this.editCategoryId, category.categoryName).then(() => {
+      this.categoryService.updateCategory(category).then(() => {
         this.getCategory();
         this.cancelEdit();
       });

@@ -28,7 +28,7 @@
               <td class="movie-icon">
                 <i class="fa-solid fa-pen-to-square fa-lg" (click)="update(category.id)" *ngIf="category.id !== editCategoryId"></i>
                 <i class="fa-solid fa-trash fa-lg" (click)="deleteCategory(category.id)" *ngIf="category.id !== editCategoryId"></i>
-                <i class="fa-solid fa-check fa-lg" (click)="saveChanges()" *ngIf="category.id === editCategoryId"></i>
+                <i class="fa-solid fa-check fa-lg" (click)="saveChanges(category.id)" *ngIf="category.id === editCategoryId"></i>
                 <i class="fa-solid fa-xmark fa-lg" (click)="cancelEdit()" *ngIf="category.id === editCategoryId"></i>
               </td>
             </tr>
