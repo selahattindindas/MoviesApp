@@ -27,12 +27,12 @@ export class AdminPlatform implements OnInit {
   }
 //////////////////GetAll/////////////////////////////
   async getPlatform() {
-    const platformData: Partial<List_Platform[]> = await this.platformService.get();
+    const platformData: Partial<List_Platform[]> = await this.platformService.getAllPlatform();
     this.platform = platformData as List_Platform[];
   }
 //////////////////Delete/////////////////////////////
   deletePlatform(platformId: string) {
-    this.platformService.delete(platformId).then(() => {
+    this.platformService.deletePlatform(platformId).then(() => {
       this.getPlatform();
     });
   }
@@ -46,16 +46,17 @@ export class AdminPlatform implements OnInit {
     this.newPlatformName = '';
   }
   create() {
-    if (this.platformForm.valid) {
+    if (!this.platformForm.valid) 
+      return;
+
       const formData = this.platformForm.value;
       const platform: Create_Platform = {
         platformName: formData.name
       };
-      this.platformService.post(platform, formData.name).then(() => {
+      this.platformService.createPlatform(platform, formData.name).then(() => {
         this.getPlatform();
         this.cancelCreateForm();
       });
-    }
   }
 //////////////////UPDATE/////////////////////////////
 update(platformId: string) {
@@ -73,7 +74,7 @@ saveChanges() {
     const platform: Update_Platform = {
       platformName: formData.name,
     };
-    this.platformService.put(platform, this.editPlatformId, formData.name).then(() => {
+    this.platformService.updatePlatform(platform, this.editPlatformId, formData.name).then(() => {
       this.getPlatform();
       this.cancelEdit();
     });

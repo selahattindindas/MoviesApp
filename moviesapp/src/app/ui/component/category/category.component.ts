@@ -10,7 +10,7 @@ import { PlatformService } from 'src/app/services/common/models/platform.service
 })
 export class CategoryComponent implements OnInit {
   categoryEnum: CategoryEnum[] = [];
-  categoryDescriptions: { [key in number]: string } = {};
+  categoryDescriptions: { value: CategoryEnum; description: string; }[];
   selectedCategory: CategoryEnum = CategoryEnum.Seciniz;
 
   @Output() categorySelected = new EventEmitter<CategoryEnum>();
@@ -20,7 +20,7 @@ export class CategoryComponent implements OnInit {
     private platformService: PlatformService
   ) {}
   ngOnInit(): void {
-    this.getCategory();
+
   }
 
   onCategorySelected(): void {
@@ -30,8 +30,5 @@ export class CategoryComponent implements OnInit {
   private emitCategorySelection(): void {
     this.categorySelected.emit(this.selectedCategory);
   }
-  getCategory() {
-    this.categoryEnum = this.categoryService.getCategoryEnumValues();
-    this.categoryDescriptions = this.categoryService.getCategoryDescriptions();
-  }
+
 }

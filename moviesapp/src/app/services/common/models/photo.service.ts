@@ -11,14 +11,15 @@ import { ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/m
 })
 export class PhotoService {
 
-  constructor(private httpClientService:HttpClientService, private router:Router, private sweetAlertService: SweetalertService) { }
-  async post(photo: Create_Photo,id:string){
+  constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
+
+  async post(photo: Create_Photo, id: string) {
     const observable: Observable<Create_Photo> = this.httpClientService.post<Create_Photo>(
-      {controller:'Movie', action:'UploadPhoto', queryString:`id=${id}`},photo);
+      { controller: 'Movie', action: 'UploadPhoto', queryString: `id=${id}` }, photo);
     const data = await firstValueFrom(observable)
-      this.sweetAlertService.showAlert(
-        MessageTitle.Success,MessageText.PlayerCreate,icon.Success,false,ConfirmButtonText.Okey,3 );
-        this.router.navigate(['/Admin', 'Movies-List']);
-        return data;
-    }
+    this.sweetAlertService.showAlert(
+      MessageTitle.Success, MessageText.PlayerCreate, icon.Success, false, ConfirmButtonText.Okey, 3);
+    this.router.navigate(['/Admin', 'Movies-List']);
+    return data;
+  }
 }

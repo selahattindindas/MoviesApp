@@ -7,9 +7,9 @@ import { MovieListComponent } from './component/movies/movie-list/movie-list.com
 import { UpdateComponent } from './component/movies/movie-update/movie-update.component';
 import { UserComponent } from './component/user/user.component';
 import { ClassListComponent } from './component/class-list/class-list.component';
-import { DirectorCreateComponent } from './component/director/director-create/director-create.component';
-import { CreatePlayersComponent } from './component/players/create-players/create-players.component';
 import { PhotoComponent } from './component/photo/photo.component';
+import { DirectorsComponent } from './component/directors/directors.component';
+import { PlayersComponent } from './component/players/players.component';
 const route: Route[] = [
   {
     path: 'Admin',
@@ -27,11 +27,11 @@ const route: Route[] = [
           { path: 'Edit/:id', component: UpdateComponent },
           { path: 'Create-Movie', component: MovieCreateComponent },
           { path: '', component: MovieListComponent },
-          { path: 'Create-Director/:id', component: DirectorCreateComponent},
-          { path: 'Create-Players/:id', component: CreatePlayersComponent},
-          { path: 'Create-Photo/:id', component: PhotoComponent}
+          { path: 'Create-Director/:id', component: DirectorsComponent },
+          { path: 'Create-Players/:id', component: PlayersComponent },
+          { path: 'Create-Photo/:id', component: PhotoComponent }
         ],
-        
+
       },
       { path: 'Class-List', component: ClassListComponent },
       { path: 'Users', component: UserComponent },
@@ -43,4 +43,4 @@ const route: Route[] = [
   imports: [RouterModule.forChild(route)],
   exports: [RouterModule],
 })
-export class AdminRouting {}
+export class AdminRouting { }

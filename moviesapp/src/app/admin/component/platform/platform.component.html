@@ -34,7 +34,7 @@
                 </tr>
             <tr *ngIf="showCreateFormFlag">
               <td>
-                <input [(ngModel)]="newPlatformName" [formControlName]="'name'"  placeholder="Platform Adı">
+                <input [(ngModel)]="newPlatformName" formControlName="name"  placeholder="Platform Adı">
               </td>
               <td>
                 <i class="fa-solid fa-check fa-lg" (click)="create()"></i>

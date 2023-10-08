@@ -12,31 +12,35 @@ import { CategoryService } from 'src/app/services/common/models/category.service
 })
 //Template Driven
 export class AdminCategory implements OnInit {
+  
   categories: List_Category[];
   showCreateFormFlag = false;
   newCategoryName = '';
   categoryForm: FormGroup;
   isCategoryNameReadOnly: boolean = true;
   editCategoryId: string | null = null;
+
   constructor(private categoryService: CategoryService, private fb: FormBuilder) {
     this.categoryForm = this.fb.group({
       name: new FormControl('', [Validators.required, Validators.minLength(5)])
     });
   }
+
   ngOnInit(): void {
     this.getCategory();
   }
 
  getCategory(){
-  return this.categoryService.get().then(categorData=>{
+  return this.categoryService.getAllCategories().then(categorData=>{
     this.categories = categorData as List_Category[];
   })
  }
   deleteCategory(categoryId: string) {
-    this.categoryService.delete(categoryId).then(() => {
+    this.categoryService.deleteCategory(categoryId).then(() => {
       this.getCategory();
     });
   }
+
   showCreateForm() {
     this.showCreateFormFlag = true;
     this.editCategoryId = null;
@@ -46,6 +50,7 @@ export class AdminCategory implements OnInit {
     this.showCreateFormFlag = false;
     this.newCategoryName = '';
   }
+
   create() {
     if (!this.categoryForm.valid)
       return;
@@ -54,12 +59,11 @@ export class AdminCategory implements OnInit {
         name: this.categoryForm.value.name
       };
 
-      this.categoryService.post(category).then(() => {
+      this.categoryService.createCategory(category).then(() => {
         this.getCategory();
         this.cancelCreateForm();
       });
   }
-
 
   update(categoryId: string) {
     const categoryItem = this.categories.find(item => item.id === categoryId);
@@ -71,14 +75,13 @@ export class AdminCategory implements OnInit {
     }
   }
 
-  
   saveChanges() {
     if (this.categoryForm.valid && this.editCategoryId) {
       const formData = this.categoryForm.value;
       const category: Update_Category = {
         categoryName: formData.name,
       };
-      this.categoryService.put(category, this.editCategoryId, category.categoryName).then(() => {
+      this.categoryService.updateCategory(category, this.editCategoryId, category.categoryName).then(() => {
         this.getCategory();
         this.cancelEdit();
       });

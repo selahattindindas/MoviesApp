@@ -17,13 +17,14 @@ export class MovieListComponent implements OnInit {
     this.getMovie();
   }
   deleteMovie(id: string) {
-    this.movieService.delete(id).then(() => {
+    this.movieService.deleteMovie(id).then(() => {
       this.getMovie();
     });
   }
   async getMovie() {
-    const movieData: Partial<List_Movie[]> = await this.movieService.get();
-    this.movie = movieData as List_Movie[];
+    return this.movieService.getAllMovies().then(movieData=>{
+      this.movie = movieData as List_Movie[];
+    })
   }
 
   onFileSelected(event: any) {

@@ -1,14 +1,14 @@
 export class Update_Movie{
-    id: string;
+
     name: string;
     categoryId: number;
     platformId: number;
     description:string;
-    releaseDate:Date;
+    releaseDate:string;
     movieTime: string;
 
-constructor(id:string,name:string, categoryId:number, platformId:number, description:string, releaseDate:Date, movieTime:string){
-    this.id = id;
+constructor(name:string, categoryId:number, platformId:number, description:string, releaseDate:string, movieTime:string){
+
     this.name = name,
     this.categoryId = categoryId,
     this.platformId = platformId,

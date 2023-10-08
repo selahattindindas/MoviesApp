@@ -13,13 +13,9 @@ export class VisionMoviesComponent implements OnInit {
   constructor(private movieService: MoviesService) {}
 
   ngOnInit(): void {
-    this.getMovie();
+
   }
 
-  async getMovie() {
-    const movieData: Partial<List_Movie[]> = await this.movieService.get();
-    this.movie = movieData as List_Movie[];
-  }
   // formatDirectors(directors: Director[]): string {
   //   const directorNames: string[] = directors.map((director) => director.name);
   //   return directorNames.join(', ');

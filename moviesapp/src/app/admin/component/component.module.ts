@@ -12,12 +12,10 @@ import { TextFilterPipe } from 'src/app/shared/filter-pipe';
 import { AdminPlatform } from './platform/platform.component';
 import { AdminCategory } from './category/category.component';
 import { ClassListComponent } from './class-list/class-list.component';
-import { DirectorCreateComponent } from './director/director-create/director-create.component';
-import { DirectorUpdateComponent } from './director/director-update/director-update.component';
-import { CreatePlayersComponent } from './players/create-players/create-players.component';
-import { UpdatePlayersComponent } from './players/update-players/update-players.component';
 import { LimitPipe } from 'src/app/shared/limit-pipe';
 import { PhotoComponent } from './photo/photo.component';
+import { PlayersComponent } from './players/players.component';
+import { DirectorsComponent } from './directors/directors.component';
 
 @NgModule({
   declarations: [
@@ -31,20 +29,18 @@ import { PhotoComponent } from './photo/photo.component';
     AdminPlatform,
     AdminCategory,
     ClassListComponent,
-    DirectorCreateComponent,
-    DirectorUpdateComponent,
-    CreatePlayersComponent,
-    UpdatePlayersComponent,
     LimitPipe,
     PhotoComponent,
+    PlayersComponent,
+    DirectorsComponent
   ],
   imports: [
-    CommonModule, 
-    RouterModule, 
-    FormsModule, 
-    ReactiveFormsModule, 
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
 
   ],
   providers: [AdminlayoutComponent],
 })
-export class AdminModule {}
+export class AdminModule { }

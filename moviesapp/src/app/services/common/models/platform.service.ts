@@ -8,6 +8,7 @@ import { SweetalertService, icon } from '../../admin/sweetalert.service';
 import { CancelButtonText, ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
 import { Update_Platform } from 'src/app/contracts/platform/update-platform';
 import { Router } from '@angular/router';
+import { JsonResponse } from 'src/app/contracts/response/response';
 
 @Injectable({
   providedIn: 'root'
@@ -15,60 +16,68 @@ import { Router } from '@angular/router';
 export class PlatformService {
 
   constructor(private httpClientService: HttpClientService, private sweetalertService: SweetalertService, private router: Router) { }
-  getPlatformEnumValues(): PlatformEnum[] {
-    const enumValues = Object.values(PlatformEnum) as PlatformEnum[];
-    return enumValues.filter((value) => typeof value === 'number');
+
+  getPlatformEnumValues(select?: string): { value: PlatformEnum; description: string }[] {
+    const enumValues = Object.keys(PlatformEnum)
+      .filter((key) => typeof PlatformEnum[key as keyof typeof PlatformEnum] === 'number')
+      .map((key) => ({
+        value: PlatformEnum[key as keyof typeof PlatformEnum],
+        description: PlatformDescription[PlatformEnum[key as keyof typeof PlatformEnum]],
+      }));
+
+    return select === PlatformEnum.Seciniz.toString()
+      ? enumValues.filter((item) => item.value !== PlatformEnum.Seciniz)
+      : enumValues;
   }
-  getPlatformDescriptions(): { [key in number]: string } {
-    return PlatformDescription;
+
+  async getAllPlatform(): Promise<List_Platform[]> {
+    const observable: Observable<JsonResponse<List_Platform[]>> = this.httpClientService.get(
+      { controller: 'Platform', action: 'GetAllPlatforms' });
+    const response = await firstValueFrom(observable);
+    return response.statusCode === 200
+      ? response.result
+      : response.statusMessage;
   }
-  async post(platform: Create_Platform, name:string){
-    const observable: Observable<Create_Platform> = this.httpClientService.post<Create_Platform>(
-      {controller:'Platform', action:'CreatePlatform', queryString:`platformName=${name}`},platform);
+
+  async getPlatformById(id: string): Promise<List_Platform> {
+    const observable: Observable<JsonResponse<List_Platform>> = this.httpClientService.get(
+      { controller: 'Platform', action: 'GetByPlatformId' }, id);
+    const response = await firstValueFrom(observable);
+    return response.statusCode === 200
+      ? response.result
+      : response.statusMessage;
+  }
+
+  async createPlatform(platform: Create_Platform, name: string) {
+    const observable: Observable<Create_Platform> = this.httpClientService.post(
+      { controller: 'Platform', action: 'CreatePlatform', queryString: `platformName=${name}` }, platform);
     const data = await firstValueFrom(observable)
-      this.sweetalertService.showAlert(
-        MessageTitle.Success,MessageText.PlatformCreate,icon.Success,false,ConfirmButtonText.Okey,3 );
-        this.router.navigate(['/Admin', 'Class-List']);
-        return data;
-    }
-  async get():Promise<List_Platform[]> {
-    const observable :Observable<any> = this.httpClientService.get(
-      {controller: 'Platform', action:'GetAllPlatforms'});
-    const response = await firstValueFrom(observable);
-    if(response.statusCode === 200){
-      console.log(response.statusMessage);
-      return response.result;
-    }else {
-      throw new Error(`${response.statusCode}`);
-    }
+    this.sweetalertService.showAlert(
+      MessageTitle.Success, MessageText.PlatformCreate, icon.Success, false, ConfirmButtonText.Okey, 3);
+    this.router.navigate(['/Admin', 'Class-List']);
+    return data;
   }
-  async getPlatformId(id: string): Promise<List_Platform> {
-    const observable: Observable<any> = this.httpClientService.get(
-        {controller: 'Platform',action:'GetByPlatformId'},id);
-    const response = await firstValueFrom(observable);
-    if(response.statusCode === 200){
-      console.log(response.statusMessage);
-      return response.result;
-    }else {
-      throw new Error(`${response.statusCode}`);
-    }
-  }
-  async delete(id:string){
-    const  sweetalert = await this.sweetalertService.showAlert(
-      MessageTitle.Deleted,MessageText.DeleteWarning,icon.Warning,true,ConfirmButtonText.Okey,undefined,CancelButtonText.Cancel);
-    if( sweetalert.isConfirmed){
-      await firstValueFrom(this.httpClientService.delete<any>({controller:'Platform', action:'DeletePlatform'},id));
+
+  async deletePlatform(id: string) {
+    const sweetalert = await this.sweetalertService.showAlert(
+      MessageTitle.DeletedQuestion, MessageText.NoTurningBack, icon.Warning, true, ConfirmButtonText.Okey, undefined, CancelButtonText.Cancel);
+    if (sweetalert.isConfirmed) {
+      await firstValueFrom(this.httpClientService.delete(
+        { controller: 'Platform', action: 'DeletePlatform' }, id));
       this.sweetalertService.showAlert(MessageTitle.Success,
-        MessageText.PlatformDelete,icon.Success,false,ConfirmButtonText.Okey,3)
+        MessageText.PlatformDelete, icon.Success, false, ConfirmButtonText.Okey, 3)
     }
   }
-  async put(platform:Update_Platform,id:string, name:string){
+
+  async updatePlatform(platform: Update_Platform, id: string, name: string) {
     const observable: Observable<Update_Platform> = this.httpClientService.put<Update_Platform>(
-      {controller:'Platform', action:`UpdatePlatform/${id}`, queryString:`platformName=${name}`},platform);
-      const data = await firstValueFrom(observable);
-      this.sweetalertService.showAlert(
-        MessageTitle.Success,MessageText.PlatformUpdate,icon.Success,false,ConfirmButtonText.Okey,3);
-        this.router.navigate(['/Admin', 'Class-List']);
-    }
+      { controller: 'Platform', action: `UpdatePlatform/${id}`, queryString: `platformName=${name}` }, platform);
+    const data = await firstValueFrom(observable);
+    this.sweetalertService.showAlert(
+      MessageTitle.Success, MessageText.PlatformUpdate, icon.Success, false, ConfirmButtonText.Okey, 3);
+    this.router.navigate(['/Admin', 'Class-List']);
+    return data;
   }
+
+}
 

@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-layout.component.css']
 })
 export class AdminlayoutComponent implements OnInit {
+
   isMenuOpen = false;
+  
   constructor(){}
+
   ngOnInit(): void {
   }
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }

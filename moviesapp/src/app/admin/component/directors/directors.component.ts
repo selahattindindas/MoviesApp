@@ -3,46 +3,49 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Create_Director } from 'src/app/contracts/director/create-director';
 import { List_Director } from 'src/app/contracts/director/list-director';
-import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { DirectorService } from 'src/app/services/common/models/director.service';
 
 @Component({
   selector: 'app-director-create',
-  templateUrl: './director-create.component.html',
-  styleUrls: ['./director-create.component.css']
+  templateUrl: './directors.component.html',
+  styleUrls: ['./directors.component.css']
 })
-export class DirectorCreateComponent implements OnInit {
+export class DirectorsComponent implements OnInit {
+
   createForm: FormGroup;
   movieId: string;
   directorValue: string = '';
-  directorNames: string[] = []; 
+  directorNames: string[] = [];
   director: List_Director[];
-  constructor(private directorService: DirectorService, private fb: FormBuilder,private activatedRoute: ActivatedRoute) {
+
+  constructor(private directorService: DirectorService, private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
     this.createForm = this.fb.group({
       id: new FormControl(''),
       Name: new FormControl(''),
     });
   }
-  
+
   ngOnInit(): void {
     this.getDirector();
   }
-  getDirector(){
+  getDirector() {
     this.activatedRoute.params.subscribe(async (params) => {
-      const playerData: Partial<List_Director> = await this.directorService.getPlayerId(params['id']);
+      const playerData: Partial<List_Director> = await this.directorService.getDirectorsMovieById(params['id']);
       if (playerData) {
         this.director = playerData as List_Director[];
-        this.movieId = params['id']; 
+        this.movieId = params['id'];
       }
     });
-}
+  }
+
   addDirector(event: any) {
     event.preventDefault();
     if (this.directorValue.trim() !== '') {
-      this.directorNames.push(this.directorValue.trim()); 
+      this.directorNames.push(this.directorValue.trim());
       this.directorValue = '';
     }
   }
+
   create() {
     if (this.createForm.valid) {
       const formData = this.createForm.value;
@@ -51,16 +54,19 @@ export class DirectorCreateComponent implements OnInit {
         directorNames: name
       }));
       for (const director of directors) {
-        this.directorService.post(director, this.movieId,director.directorNames );
+        this.directorService.createDirector(director, this.movieId, director.directorNames);
       }
     }
   }
-  removeDirector(id:string){
-    this.directorService.delete(id).then(()=>{
+
+  removeDirector(id: string) {
+    this.directorService.deleteDirector(id).then(() => {
       this.getDirector();
     })
   }
+
   removeCreate(index: number) {
-       this.directorNames.splice(index, 1);
-     }
+    this.directorNames.splice(index, 1);
+  }
+
 }

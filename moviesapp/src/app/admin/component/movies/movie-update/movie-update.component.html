@@ -12,16 +12,16 @@
           <div class="update-contents">
             <div class="label-input">
               <label for="filmAdi">Film Adı</label>
-              <input type="text" placeholder="Filmin adını yazınız" [(ngModel)]="movies.name" formControlName="Name" />
+              <input type="text" placeholder="Filmin adını yazınız" [(ngModel)]="movies.name" formControlName="name" />
             </div>
           </div>
           <div class="update-contents">
             <div class="label-input">
               <label for="movie-category">Film Kategorisi</label>
               <div class="custom-select">
-                <select class="form-control" [(ngModel)]="movies.categoryName" formControlName="categoryId">
-                  <option *ngFor="let category of categoryEnum">
-                    {{ categoryDescriptions[category] }}
+                <select class="form-control"  formControlName="categoryId">
+                  <option *ngFor="let category of categoryEnum" [value]="category.value">
+                    {{ category.description }}
                   </option>
                 </select>
               </div>
@@ -29,8 +29,9 @@
             <div class="label-input">
               <label for="movie-platform">Film Platformu</label>
               <div class="custom-select">
-                <select class="form-control" [(ngModel)]="movies.platformName" formControlName="platformId">
-                  <option *ngFor="let platform of platformEnum">{{ platformDescriptions[platform] }}
+                <select class="form-control"formControlName="platformId">
+                  <option *ngFor="let platform of platformEnum"  [value]="platform.value">
+                    {{ platform.description }}
                   </option>
                 </select>
               </div>
@@ -39,7 +40,7 @@
           <div class="update-contents">
             <div class="label-input">
               <label for="date">Film Vizyon Tarihi</label>
-              <input type="date" formControlName="date" [ngModel]="movies.releaseDate " />
+              <input type="text" formControlName="date" [ngModel]="movies.releaseDate " />
             </div>
             <div class="label-input">
               <label for="time">Film Süresi</label>

@@ -3,8 +3,7 @@
     <div class="create">
       <div class="card">
         <div class="close">
-          <button href="/Admin/Movies-List">X</button>
-          //href kullanacak
+          <button routerLink="/Admin/Movies-List">X</button>
         </div>
         <div class="create-header">
           <h2>Film Ekleme</h2>
@@ -13,15 +12,15 @@
           <div class="create-contents">
             <div class="label-input">
               <label for="filmAdi">Film Adı</label>
-              <input type="text" placeholder="Filmin adını yazınız" formControlName="Name"/>
+              <input type="text" placeholder="Filmin adını yazınız" formControlName="name"/>
             </div>
           </div>
           <div class="create-contents">
             <div class="label-input">
               <label for="movie-category">Film Kategorisi</label>
               <div class="custom-select">
-                <select class="form-control" id="categoryId"  formControlName="categoryId">
-                <option *ngFor="let category of categoryEnum" [value]="category">{{ categoryDescriptions[category] }}
+                <select class="form-control" formControlName="categoryId">
+                <option *ngFor="let category of categoryEnum" [value]="category.value">{{ category.description }}
                 </option>
               </select>
               </div>
@@ -29,8 +28,8 @@
              <div class="label-input">
               <label for="movie-category">Film Platformu</label>
               <div class="custom-select">
-                <select class="form-control" id="platformId" formControlName="platformId">
-                <option *ngFor="let platform of platformEnum" [value]="platform">{{ platformDescriptions[platform] }}
+                <select class="form-control" formControlName="platformId">
+                <option *ngFor="let platform of platformEnum" [value]="platform.value">{{ platform.description }}
                 </option>
               </select>
               </div>

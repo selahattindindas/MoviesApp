@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Create_Player } from 'src/app/contracts/player/create-player';
 import { List_Player } from 'src/app/contracts/player/list-player';
 import { PlayerService } from 'src/app/services/common/models/player.service';
 
 @Component({
-  selector: 'app-create-players',
-  templateUrl: './create-players.component.html',
-  styleUrls: ['./create-players.component.css']
+  selector: 'app-players',
+  templateUrl: './players.component.html',
+  styleUrls: ['./players.component.css']
 })
-export class CreatePlayersComponent implements OnInit {
+export class PlayersComponent implements OnInit {
   createForm:FormGroup;
   movieId: string;
   player: List_Player[];
@@ -27,7 +27,7 @@ export class CreatePlayersComponent implements OnInit {
   }
   getPlayers(){
       this.activatedRoute.params.subscribe(async (params) => {
-        const playerData: Partial<List_Player> = await this.playerService.getPlayerId(params['id']);
+        const playerData: Partial<List_Player> = await this.playerService.getPlayersMovieById(params['id']);
         if (playerData) {
           this.player = playerData as List_Player[];
           this.movieId = params['id']; 
@@ -49,12 +49,12 @@ export class CreatePlayersComponent implements OnInit {
         playerNames: name
       }));
       for (const actor of player) {
-        this.playerService.post(actor, this.movieId,actor.playerNames );
+        this.playerService.createPlayer(actor, this.movieId,actor.playerNames );
       }
     }
   }
   removePlayer(id: string){
-    this.playerService.delete(id).then(()=>{
+    this.playerService.deletePlayer(id).then(()=>{
       this.getPlayers();
     })
   }

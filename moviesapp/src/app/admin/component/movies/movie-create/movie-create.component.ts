@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Create_Movie } from 'src/app/contracts/movie/create-movie';
 import { CategoryEnum } from 'src/app/enums/category-enum';
 import { PlatformEnum } from 'src/app/enums/platform-enum';
@@ -20,18 +15,13 @@ import { PlatformService } from 'src/app/services/common/models/platform.service
 export class MovieCreateComponent implements OnInit {
   createForm: FormGroup;
   model: Create_Movie = {} as Create_Movie;
-  categoryEnum: CategoryEnum[] = [];
-  categoryDescriptions: { [key in number]: string } = {};
-  platformEnum: PlatformEnum[] = [];
-  platformDescriptions: { [key in number]: string } = {};
-  constructor(
-    private fb: FormBuilder,
-    private categoryService: CategoryService,
-    private platformService: PlatformService,
-    private movieService: MoviesService
-  ) {
+  categoryEnum: { value: CategoryEnum; description: string; }[];
+  platformEnum:{ value: PlatformEnum; description: string; }[];
+  constructor( 
+    private fb: FormBuilder, private categoryService: CategoryService, private platformService: PlatformService,private movieService: MoviesService) 
+    {
     this.createForm = this.fb.group({
-      Name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       categoryId: new FormControl('0'),
       platformId: new FormControl('0'),
       date: new FormControl(''),
@@ -45,24 +35,22 @@ export class MovieCreateComponent implements OnInit {
   }
   getCategory() {
     this.categoryEnum = this.categoryService.getCategoryEnumValues();
-    this.categoryDescriptions = this.categoryService.getCategoryDescriptions();
   }
   getPlatform() {
     this.platformEnum = this.platformService.getPlatformEnumValues();
-    this.platformDescriptions = this.platformService.getPlatformDescriptions();
   }
   create() {
     if (this.createForm.valid) {
       const formData = this.createForm.value;
       const movie: Create_Movie = {
-        name: formData.Name,
+        name: formData.nyame,
         categoryId: formData.categoryId,
         platformId: formData.platformId,
         releaseDate: new Date(formData.date),
         movieTime: formData.time,
         description: formData.detail,
       };
-      this.movieService.create(movie);
+      this.movieService.createMovie(movie);
     }
   }
 }
