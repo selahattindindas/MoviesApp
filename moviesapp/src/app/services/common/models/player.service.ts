@@ -15,9 +15,9 @@ export class PlayerService {
 
   constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
 
-  async getPlayersMovieById(id: string): Promise<List_Player> {
+  async getPlayersMovieById(movieId: string): Promise<List_Player | string> {
     const observable: Observable<JsonResponse<List_Player>> = this.httpClientService.get(
-      { controller: 'Players', action: 'GetPlayersByMovieId' }, id);
+      { controller: 'Players', action: 'GetPlayersByMovieId' }, movieId);
 
     const response = await firstValueFrom(observable);
 
@@ -26,9 +26,9 @@ export class PlayerService {
       : response.statusMessage;
   }
 
-  async createPlayer(director: Create_Player, id: string, name: string) {
+  async createPlayer(player: Create_Player) {
     const observable: Observable<Create_Player> = this.httpClientService.post(
-      { controller: 'Players', action: `CreatePlayers/${id}`, queryString: `playerNames=${name}` }, director);
+      { controller: 'Players', action: `CreatePlayers/${player.movieId}`, queryString: `playerNames=${player.playerNames}` }, player);
 
     const data = await firstValueFrom(observable);
 

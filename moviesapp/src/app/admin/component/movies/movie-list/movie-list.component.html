@@ -10,42 +10,41 @@
       </div>
     </div>
     <div class="table-wrapper">
-        <table class="lg-table" *ngIf="(movie | filter: filterText:'name').length > 0; else noResults">
-            <thead>
-            <tr>
-                <th>Film Adı</th>
-                <th>Film Kategori</th>
-                <th>Film Platform</th>
-                <th>Vizyon Tarihi</th>
-                <th>Kadro İşlemleri</th>
-                <th>Film İşlemleri</th>
-                <th>Fotoğraf İşlemleri</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let movie of movie | filter: filterText: filterName">
-              <td>{{ movie.name | limitTo:20}}</td>
-              <td>{{ movie.categoryName }}</td>
-              <td>{{ movie.platformName }}</td>
-              <td>{{ movie.releaseDate }}</td>
-              <td>
-                <i class="fa-solid fa-square-minus fa-lg actor" [routerLink]="['Create-Players', movie.id]" ></i>
-                <i class="fa-solid fa-square-minus fa-lg director" [routerLink]="['Create-Director', movie.id]"></i>
-              </td>
-              <td>
-                <i class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Edit', movie.id]"></i>
-                <i class="fa-solid fa-trash fa-lg delete" (click)="deleteMovie(movie.id)"></i>          
-          </td>
-          <td><i class="fa-solid fa-image fa-lg" [routerLink]="['Create-Photo', movie.id]"></i></td>
-            </tr>
-            <tbody>
-        </table>
-        <ng-template #noResults>
-          <div class="error">
-            <p>Aranılan Film Bulunamadı: "{{filterText}}".</p>
-          </div>
-        </ng-template>
+      <table class="lg-table" *ngIf="(movie | filter: filterText:'name').length > 0; else noResults">
+        <thead>
+          <tr>
+            <th>Film Adı</th>
+            <th>Film Kategori</th>
+            <th>Film Platform</th>
+            <th>Vizyon Tarihi</th>
+            <th>Film İşlemleri</th>
+            <th>Kadro İşlemleri</th>
+            <th>Fotoğraf İşlemleri</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movie of movie | filter: filterText: filterName">
+            <td>{{ movie.name | limitTo:15}}</td>
+            <td>{{ movie.categoryName }}</td>
+            <td>{{ movie.platformName }}</td>
+            <td>{{ movie.releaseDate }}</td>
+            <td>
+              <i class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Edit', movie.id]"></i>
+              <i class="fa-solid fa-trash fa-lg delete" (click)="deleteMovie(movie.id)"></i>
+            </td>
+            <td>
+              <i class="fa-solid fa-square-minus fa-lg actor" [routerLink]="['Create-Players', movie.id]"></i>
+              <i class="fa-solid fa-square-minus fa-lg director" [routerLink]="['Create-Director', movie.id]"></i>
+            </td>
+            <td><i class="fa-solid fa-image fa-lg" [routerLink]="['Create-Photo', movie.id]"></i></td>
+          </tr>
+        <tbody>
+      </table>
+      <ng-template #noResults>
+        <div class="error">
+          <p>Aranılan Film Bulunamadı: "{{filterText}}".</p>
+        </div>
+      </ng-template>
     </div>
   </div>
 </section>
-

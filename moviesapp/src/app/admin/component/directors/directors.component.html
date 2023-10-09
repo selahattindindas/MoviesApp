@@ -1,5 +1,5 @@
 <section>
-    <form [formGroup]="createForm" >
+    <form [formGroup]="createForm" (ngSubmit)="create(movieId)">
       <div class="create">
         <div class="card">
           <div class="close">
@@ -26,7 +26,7 @@
                 </ul>
               </div> 
             <div class="create-button">
-                <button type="submit" (click)="create()">Ekle</button>
+                <button type="submit">Ekle</button>
             </div>
           </div>
         </div>

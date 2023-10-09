@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Create_Category } from 'src/app/contracts/category/create-category';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { List_Category } from 'src/app/contracts/category/list-category';
 import { Update_Category } from 'src/app/contracts/category/update-category';
 import { CategoryService } from 'src/app/services/common/models/category.service';
@@ -12,20 +11,22 @@ import { CategoryService } from 'src/app/services/common/models/category.service
 })
 //Template Driven
 export class AdminCategory implements OnInit {
-  
+  @ViewChild("categoryForm", {static:true}) categoryForm: NgForm
   categories: List_Category[];
-  category: List_Category;
   showCreateFormFlag = false;
   newCategoryName = '';
-  categoryForm: FormGroup;
   isCategoryNameReadOnly: boolean = true;
   editCategoryId: string | null = null;
   categoryId: string;
+  model: {
+    id: string;
+    categoryName: string;
+  } = {
+    id: '',
+    categoryName: ''
+  };
   
-  constructor(private categoryService: CategoryService, private fb: FormBuilder) {
-    this.categoryForm = this.fb.group({
-      name: new FormControl('', [Validators.required, Validators.minLength(5)])
-    });
+  constructor(private categoryService: CategoryService) {
   }
 
   ngOnInit(): void {
@@ -55,17 +56,15 @@ export class AdminCategory implements OnInit {
   }
 
   create() {
-    if (!this.categoryForm.valid)
-      return;
-
-      const category: Create_Category = {
-        name: this.categoryForm.value.name
+    if (this.categoryForm.valid) {
+      const category = {
+        categoryName: this.model.categoryName
       };
-
       this.categoryService.createCategory(category).then(() => {
         this.getCategory();
         this.cancelCreateForm();
       });
+    }
   }
 
   update(categoryId: string) {
@@ -73,7 +72,7 @@ export class AdminCategory implements OnInit {
     if (categoryItem) {
       this.isCategoryNameReadOnly = false;
       this.editCategoryId = categoryId;
-      this.categoryForm.patchValue({ name: '' });
+      this.categoryForm.setValue({ name: '' });
       this.showCreateFormFlag = false;
     }
   }

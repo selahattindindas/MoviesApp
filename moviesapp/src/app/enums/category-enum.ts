@@ -7,12 +7,11 @@ export enum CategoryEnum {
   Aksiyon = 44,
 }
 
-export const CategoryDescription: { [key in CategoryEnum]: string } = {
+export const CategoryDescription: { [key in CategoryEnum]: string } = 
+{
   [CategoryEnum.Seciniz]: 'Lütfen bir kategori seçiniz',
   [CategoryEnum.Aksiyon]: 'Aksiyon',
   [CategoryEnum.BilimKurgu]: 'Bilim Kurgu',
   [CategoryEnum.Romantik]: 'Romantik',
   [CategoryEnum.Macera]: 'Macera',
 };
-
-

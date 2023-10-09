@@ -15,9 +15,9 @@ export class DirectorService {
 
   constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
 
-  async getDirectorsMovieById(id: string): Promise<List_Director> {
+  async getDirectorsMovieById(movieId: string): Promise<List_Director | string> {
     const observable: Observable<JsonResponse<List_Director>> =
-      this.httpClientService.get({ controller: 'Director', action: 'GetDirectorsByMovieId' }, id);
+      this.httpClientService.get({ controller: 'Director', action: 'GetDirectorsByMovieId' }, movieId);
 
     const response = await firstValueFrom(observable);
 
@@ -26,9 +26,9 @@ export class DirectorService {
       : response.statusMessage;
   }
 
-  async createDirector(director: Create_Director, id: string, name: string) {
+  async createDirector(director: Create_Director) {
     const observable: Observable<Create_Director> = this.httpClientService.post<Create_Director>(
-      { controller: 'Director', action: `CreateDirectors/${id}`, queryString: `directorNames=${name}` }, director);
+      { controller: 'Director', action: `CreateDirectors/${director.movieId}`, queryString: `directorNames=${director.directorNames}` }, director);
 
     const data = await firstValueFrom(observable)
     this.sweetAlertService.showAlert(
@@ -44,11 +44,10 @@ export class DirectorService {
       { controller: 'Director', action: 'DeleteDirector' }, id);
 
     const response = await firstValueFrom(observable);
+    
     return response.statusCode === 200
       ? (this.sweetAlertService.showAlert(MessageTitle.Success, MessageText.DirectorDelete, icon.Success, false, ConfirmButtonText.Okey, 3),
         response.result)
-      : (() => {
-        response.statusMessage;
-      })();
-  }
+      : response.statusMessage;
+      };
 }

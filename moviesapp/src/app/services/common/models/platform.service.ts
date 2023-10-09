@@ -17,10 +17,13 @@ export class PlatformService {
 
   constructor(private httpClientService: HttpClientService, private sweetalertService: SweetalertService, private router: Router) { }
 
-  async getPlatformEnumValues(select?: string): Promise<{ value: PlatformEnum; description: string }[]> {
+  async getPlatformEnumValues(select?: string): Promise<{ value: PlatformEnum; description: string; }[]> {
+
     const enumValues = Object.keys(PlatformEnum)
+
       .filter((key) => typeof PlatformEnum[key as keyof typeof PlatformEnum] === 'number')
-      .map((key) => ({
+      .map((key) =>
+      ({
         value: PlatformEnum[key as keyof typeof PlatformEnum],
         description: PlatformDescription[PlatformEnum[key as keyof typeof PlatformEnum]],
       }));
@@ -30,7 +33,7 @@ export class PlatformService {
       : enumValues;
   }
 
-  async getAllPlatform(): Promise<List_Platform[]> {
+  async getAllPlatform(): Promise<List_Platform[] | string> {
     const observable: Observable<JsonResponse<List_Platform[]>> = this.httpClientService.get(
       { controller: 'Platform', action: 'GetAllPlatforms' });
 
@@ -41,7 +44,7 @@ export class PlatformService {
       : response.statusMessage;
   }
 
-  async getPlatformById(id: string): Promise<List_Platform> {
+  async getPlatformById(id: string): Promise<List_Platform | string> {
     const observable: Observable<JsonResponse<List_Platform>> = this.httpClientService.get(
       { controller: 'Platform', action: 'GetByPlatformId' }, id);
 

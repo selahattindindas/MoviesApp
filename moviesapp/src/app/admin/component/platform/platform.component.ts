@@ -29,7 +29,7 @@ export class AdminPlatform implements OnInit {
   }
 
   async getPlatform() {
-    const platformData: Partial<List_Platform[]> = await this.platformService.getAllPlatform();
+    const platformData: Partial<List_Platform[] | string> = await this.platformService.getAllPlatform();
     this.platform = platformData as List_Platform[];
   }
 

@@ -11,7 +11,7 @@ export class MovieListComponent implements OnInit {
   movie: List_Movie[];
   filterText: string;
   filterName: keyof List_Movie = 'name';
-  imageUrl: string | ArrayBuffer | null = null;
+ 
 
   constructor(private movieService: MoviesService) {}
 
@@ -24,20 +24,10 @@ export class MovieListComponent implements OnInit {
       this.getMovie();
     });
   }
-
+  
    getMovie() {
     return this.movieService.getAllMovies().then(movieData=>{
       this.movie = movieData as List_Movie[];
     })
-  }
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imageUrl = reader.result;
-      };
-      reader.readAsDataURL(file);
-    }
   }
 }

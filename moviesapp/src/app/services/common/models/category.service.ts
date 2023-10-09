@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CategoryDescription, CategoryEnum } from 'src/app/enums/category-enum';
 import { HttpClientService } from '../http-client.service';
-import { Create_Category } from 'src/app/contracts/category/create-category';
 import { List_Category } from 'src/app/contracts/category/list-category';
 import { Observable, firstValueFrom } from 'rxjs';
 import { Update_Category } from 'src/app/contracts/category/update-category';
@@ -34,7 +33,7 @@ export class CategoryService {
       : enumValues;
   }
 
-  async getAllCategories(): Promise<List_Category[]> {
+  async getAllCategories(): Promise<List_Category[] | string> {
     const observable: Observable<JsonResponse<List_Category[]>> = this.httpClientService.get(
       { controller: 'Category', action: 'GetAllCategories' });
 
@@ -45,20 +44,20 @@ export class CategoryService {
       : response.statusMessage;
   }
 
-  async getCategoryById(id: string): Promise<List_Category> {
-    const observable: Observable<JsonResponse<List_Category>> = 
-    this.httpClientService.get({ controller: 'Category', action: 'GetByCategoryId' }, id);
-
+  async getCategoryById(id: string): Promise<List_Category | string> {
+    const observable: Observable<JsonResponse<List_Category>> = this.httpClientService.get(
+      { controller: 'Category', action: 'GetByCategoryId' }, id);
+  
     const response = await firstValueFrom(observable);
-
+  
     return response.statusCode === 200
       ? response.result
       : response.statusMessage;
   }
 
-  async createCategory(category: Create_Category) {
-    const observable: Observable<Create_Category> = this.httpClientService.post(
-      { controller: 'Category', action: 'CreateCategory', queryString: `categoryName=${category.name}` }, category);
+  async createCategory(name) {
+    const observable: Observable<string> = this.httpClientService.post(
+      { controller: 'Category', action: 'CreateCategory', queryString: `categoryName=${name}` });
 
     const data = await firstValueFrom(observable);
 
@@ -68,6 +67,7 @@ export class CategoryService {
     this.router.navigate(['/Admin', 'Class-List']);
 
     return data;
+    //hata yönetimi gerçekleşecek.
   }
 
   async updateCategory(category: Update_Category) {
@@ -90,10 +90,13 @@ export class CategoryService {
 
     if (sweetalert.isConfirmed) 
     {
-      await firstValueFrom(this.httpClientService.delete({ controller: 'Category', action: 'DeleteCategory' }, id));
+      await firstValueFrom(this.httpClientService.delete(
+        { controller: 'Category',
+          action: 'DeleteCategory' 
+        }, id));
+        
       this.sweetalertService.showAlert(
         MessageTitle.Success, MessageText.CategoryDelete, icon.Success, false, ConfirmButtonText.Okey, 3)
     }
   }
-
 }

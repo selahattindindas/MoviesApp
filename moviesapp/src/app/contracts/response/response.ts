@@ -1,5 +1,6 @@
-export interface JsonResponse<T> {
-    statusCode: number;
-    result: T;
-    statusMessage: T;
-  }
+export class JsonResponse<T>
+{
+  statusCode: number;
+  statusMessage: string;
+  result: T;
+}

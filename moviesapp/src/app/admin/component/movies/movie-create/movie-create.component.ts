@@ -37,13 +37,13 @@ export class MovieCreateComponent implements OnInit {
   }
 
   getCategory() {
-    return this.categoryService.getCategoryEnumValues(CategoryEnum.Seciniz.toString()).then(categorData=>{
-      this.categoryEnum = categorData;
+    return this.categoryService.getCategoryEnumValues().then(categoryData=>{
+      this.categoryEnum = categoryData;
     })
   }
 
   getPlatform() {
-    return this.platformService.getPlatformEnumValues(PlatformEnum.Seciniz.toString()).then(platformData =>{
+    return this.platformService.getPlatformEnumValues().then(platformData =>{
       this.platformEnum = platformData
     })
   }
@@ -52,7 +52,7 @@ export class MovieCreateComponent implements OnInit {
     if (this.createForm.valid) {
       const formData = this.createForm.value;
       const movie: Create_Movie = {
-        name: formData.nyame,
+        name: formData.name,
         categoryId: formData.categoryId,
         platformId: formData.platformId,
         releaseDate: new Date(formData.date),

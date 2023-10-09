@@ -1,5 +1,5 @@
 <section>
-  <form [formGroup]="categoryForm">
+  <form #categoryForm="ngForm">
     <div class="category-list">
       <h1>Kategori Listesi</h1>
       <div class="category-button-container">
@@ -22,7 +22,7 @@
                   {{ category.name }}
                 </ng-container>
                 <ng-template #editMode>
-                  <input formControlName="name" type="text" [value]="category.name"/>
+                  <input name="name" type="text" [value]="category.name" ngModel/>
                 </ng-template>
               </td>
               <td class="movie-icon">
@@ -34,7 +34,7 @@
             </tr>
             <tr *ngIf="showCreateFormFlag">
               <td>
-                <input [(ngModel)]="newCategoryName" [formControlName]="'name'" placeholder="Kategori Adı">
+                <input [(ngModel)]="model.categoryName" name="categoryName" #name="ngModel" placeholder="Kategori Adı">
               </td>
               <td>
                 <i class="fa-solid fa-check fa-lg" (click)="create()"></i>

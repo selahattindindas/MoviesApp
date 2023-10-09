@@ -15,14 +15,4 @@ export class VisionMoviesComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
-  // formatDirectors(directors: Director[]): string {
-  //   const directorNames: string[] = directors.map((director) => director.name);
-  //   return directorNames.join(', ');
-  // }
-
-  // formatActors(actors: Actor[]): string {
-  //   const actorNames: string[] = actors.map((actor) => actor.name);
-  //   return actorNames.join(', ');
-  // }
 }

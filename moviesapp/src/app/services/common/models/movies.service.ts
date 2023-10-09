@@ -15,7 +15,7 @@ export class MoviesService {
 
   constructor(private httpClientService: HttpClientService, private sweetalertService: SweetalertService, private router: Router) { }
 
-  async getAllMovies(): Promise<List_Movie[]> {
+  async getAllMovies(): Promise<List_Movie[] | string> {
 
     const observable: Observable<JsonResponse<List_Movie[]>> = this.httpClientService.get(
       { controller: 'Movie', action: 'GetAll' });
@@ -27,7 +27,7 @@ export class MoviesService {
       : response.statusMessage;
   }
 
-  async getMovieById(id: string): Promise<List_Movie> {
+  async getMovieById(id: string): Promise<List_Movie | string> {
     const observable: Observable<JsonResponse<List_Movie>> = this.httpClientService.get(
       { controller: 'Movie', action: 'GetByMovieId' }, id);
 
@@ -53,9 +53,9 @@ export class MoviesService {
     return data;
   }
 
-  async updateMovie(movie: Update_Movie, id: string) {
+  async updateMovie(movie: Update_Movie) {
     const observable: Observable<Update_Movie> = this.httpClientService.put(
-      { controller: 'Movie', action: `UpdateMovie/${id}` }, movie);
+      { controller: 'Movie', action: 'UpdateMovie' }, movie);
 
     const data = await firstValueFrom(observable);
 

@@ -30,7 +30,7 @@ export class DirectorsComponent implements OnInit {
   }
   getDirector() {
     this.activatedRoute.params.subscribe(async (params) => {
-      const playerData: Partial<List_Director> = await this.directorService.getDirectorsMovieById(params['id']);
+      const playerData: Partial<List_Director | string> = await this.directorService.getDirectorsMovieById(params['id']);
       if (playerData) {
         this.director = playerData as List_Director[];
         this.movieId = params['id'];
@@ -46,15 +46,14 @@ export class DirectorsComponent implements OnInit {
     }
   }
 
-  create() {
+  create(movieId:string) {
     if (this.createForm.valid) {
-      const formData = this.createForm.value;
       const directors: Create_Director[] = this.directorNames.map(name => ({
-        movieId: formData.id,
+        movieId: movieId,
         directorNames: name
       }));
       for (const director of directors) {
-        this.directorService.createDirector(director, this.movieId, director.directorNames);
+        this.directorService.createDirector(director);
       }
     }
   }
