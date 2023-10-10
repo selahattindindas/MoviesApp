@@ -41,7 +41,7 @@ export class PlayerService {
   }
 
   async deletePlayer(id: string) {
-    const observable: Observable<any> = this.httpClientService.delete(
+    const observable: Observable<JsonResponse<List_Player>> = this.httpClientService.delete(
       { controller: 'Players', action: 'DeletePlayer' }, id);
 
     const response = await firstValueFrom(observable);
