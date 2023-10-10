@@ -1,10 +1,10 @@
 <section>
-  <form [formGroup]="platformForm">
+  <form #platformForm="ngForm">
     <div class="platform-list">
       <h1>Platform Listesi</h1>
       <div class="platform-button-container">
         <div class="platform-create-button">
-          <button (click)="showCreateForm()">+ Platform Ekle</button>
+          <button (click)="showCreateForm('if')">+ Platform Ekle</button>
         </div>
       </div>
       <div class="table-wrapper">
@@ -16,29 +16,29 @@
             </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let platform of platform">
-                <td>
-                  <ng-container *ngIf="editPlatformId !== platform.id; else editMode">
-                    {{ platform.name }}
-                  </ng-container>
-                  <ng-template #editMode>
-                    <input formControlName="name" type="text"[value]="platform.name" [readonly]="isPlatformNameReadOnly"/>
-                  </ng-template>
-                </td>
-                  <td class="movie-icon">
-                    <i class="fa-solid fa-pen-to-square fa-lg" (click)="update(platform.id)" *ngIf="platform.id !== editPlatformId"></i>
-                    <i class="fa-solid fa-trash fa-lg" (click)="deletePlatform(platform.id)" *ngIf="platform.id !== editPlatformId"></i>
-                    <i class="fa-solid fa-check fa-lg" (click)="saveChanges(platform.id)" *ngIf="platform.id === editPlatformId"></i>
-                    <i class="fa-solid fa-xmark fa-lg" (click)="cancelEdit()" *ngIf="platform.id === editPlatformId"></i>
-                  </td>
-                </tr>
+            <tr *ngFor="let platform of platform">
+              <td>
+                <ng-container *ngIf="editPlatformId !== platform.id; else editMode">
+                  {{ platform.name }}
+                </ng-container>
+                <ng-template #editMode>
+                  <input name="platformName" type="text" #platformName="ngModel" [(ngModel)]="model.name"/>
+                </ng-template>
+              </td>
+              <td class="movie-icon">
+                <i class="fa-solid fa-pen-to-square fa-lg" (click)="showUpdateForm(platform.id)" *ngIf="platform.id !== editPlatformId"></i>
+                <i class="fa-solid fa-trash fa-lg" (click)="deletePlatform(platform.id)" *ngIf="platform.id !== editPlatformId"></i>
+                <i class="fa-solid fa-check fa-lg" (click)="updatePlatform('if', platform.id)" *ngIf="platform.id === editPlatformId"></i>
+                <i class="fa-solid fa-xmark fa-lg" (click)="updatePlatform('else', platform.id)" *ngIf="platform.id === editPlatformId"></i>
+              </td>
+            </tr>
             <tr *ngIf="showCreateFormFlag">
               <td>
-                <input [(ngModel)]="newPlatformName" formControlName="name"  placeholder="Platform Adı">
+                <input [(ngModel)]="model.name" name="name" #name="ngModel" placeholder="Platform Adı">
               </td>
               <td>
-                <i class="fa-solid fa-check fa-lg" (click)="create()"></i>
-                <i class="fa-solid fa-xmark fa-lg" (click)="cancelCreateForm()"></i>
+                <i class="fa-solid fa-check fa-lg" (click)="createPlatform()"></i>
+                <i class="fa-solid fa-xmark fa-lg" (click)="showCreateForm('else')"></i>
               </td>
             </tr>
           </tbody>
@@ -47,4 +47,3 @@
     </div>
   </form>
 </section>
-

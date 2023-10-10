@@ -4,7 +4,7 @@
       <h1>Kategori Listesi</h1>
       <div class="category-button-container">
         <div class="category-create-button">
-          <button (click)="showCreateForm()">+ Kategori Ekle</button>
+          <button (click)="showCreateForm('if')">+ Kategori Ekle</button>
         </div>
       </div>
       <div class="table-wrapper">
@@ -22,23 +22,23 @@
                   {{ category.name }}
                 </ng-container>
                 <ng-template #editMode>
-                  <input name="name" type="text" [value]="category.name" ngModel/>
+                  <input name="categoryName" type="text" #categoryName="ngModel" [(ngModel)]="model.name"/>
                 </ng-template>
               </td>
               <td class="movie-icon">
-                <i class="fa-solid fa-pen-to-square fa-lg" (click)="update(category.id)" *ngIf="category.id !== editCategoryId"></i>
+                <i class="fa-solid fa-pen-to-square fa-lg" (click)="showUpdateForm(category.id)" *ngIf="category.id !== editCategoryId"></i>
                 <i class="fa-solid fa-trash fa-lg" (click)="deleteCategory(category.id)" *ngIf="category.id !== editCategoryId"></i>
-                <i class="fa-solid fa-check fa-lg" (click)="saveChanges(category.id)" *ngIf="category.id === editCategoryId"></i>
-                <i class="fa-solid fa-xmark fa-lg" (click)="cancelEdit()" *ngIf="category.id === editCategoryId"></i>
+                <i class="fa-solid fa-check fa-lg" (click)="updateCategory('if', category.id)" *ngIf="category.id === editCategoryId"></i>
+                <i class="fa-solid fa-xmark fa-lg" (click)="updateCategory('else', category.id)" *ngIf="category.id === editCategoryId"></i>
               </td>
             </tr>
             <tr *ngIf="showCreateFormFlag">
               <td>
-                <input [(ngModel)]="model.categoryName" name="categoryName" #name="ngModel" placeholder="Kategori Adı">
+                <input [(ngModel)]="model.name" name="name" #name="ngModel" placeholder="Kategori Adı">
               </td>
               <td>
-                <i class="fa-solid fa-check fa-lg" (click)="create()"></i>
-                <i class="fa-solid fa-xmark fa-lg" (click)="cancelCreateForm()"></i>
+                <i class="fa-solid fa-check fa-lg" (click)="createCategory()"></i>
+                <i class="fa-solid fa-xmark fa-lg" (click)="showCreateForm('else')"></i>
               </td>
             </tr>
           </tbody>

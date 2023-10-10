@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Create_Platform } from 'src/app/contracts/platform/create-platform';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { List_Platform } from 'src/app/contracts/platform/list-platform';
-import { Update_Platform } from 'src/app/contracts/platform/update-platform';
 import { PlatformService } from 'src/app/services/common/models/platform.service';
 
 @Component({
@@ -11,26 +9,27 @@ import { PlatformService } from 'src/app/services/common/models/platform.service
   styleUrls: ['./platform.component.css']
 })
 export class AdminPlatform implements OnInit {
+  @ViewChild("platformForm", { static: true }) platformForm: NgForm
   platform: List_Platform[] = [];
   showCreateFormFlag = false;
-  newPlatformName = '';
-  platformForm: FormGroup;
-  isPlatformNameReadOnly: boolean = true;
   editPlatformId: string | null = null;
-
-  constructor(private platformService: PlatformService,private fb: FormBuilder) {
-    this.platformForm = this.fb.group({
-      name: new FormControl('', [Validators.required, Validators.minLength(5)])
-    });
-  }
+  model: {
+    id: string;
+    name: string;
+  } = {
+      id: '',
+      name: ''
+    };
+  constructor(private platformService: PlatformService) {}
 
   ngOnInit(): void {
     this.getPlatform();
   }
 
-  async getPlatform() {
-    const platformData: Partial<List_Platform[] | string> = await this.platformService.getAllPlatform();
-    this.platform = platformData as List_Platform[];
+   getPlatform() {
+    return this.platformService.getAllPlatform().then((platformData)=>{
+      this.platform = platformData as List_Platform[];
+    });
   }
 
   deletePlatform(platformId: string) {
@@ -39,58 +38,54 @@ export class AdminPlatform implements OnInit {
     });
   }
 
-  showCreateForm() {
-    this.showCreateFormFlag = true;
-    this.editPlatformId = null;
+  showCreateForm(action: string) {
+    if (action === 'if') {
+      this.showCreateFormFlag = true;
+      this.editPlatformId = null;
+    }
+    else if (action === 'else') {
+      this.showCreateFormFlag = false;
+      this.model.name = '';
+    }
   }
 
-  cancelCreateForm() {
-    this.showCreateFormFlag = false;
-    this.newPlatformName = '';
-  }
-
-  create() {
+  createPlatform() {
     if (!this.platformForm.valid) 
       return;
 
-      const formData = this.platformForm.value;
-      const platform: Create_Platform = {
-        name: formData.name
+      const platform = {
+        platformName: this.model.name
       };
-      this.platformService.createPlatform(platform, formData.name).then(() => {
+      this.platformService.createPlatform(platform).then(() => {
         this.getPlatform();
-        this.cancelCreateForm();
+        this.showCreateForm('else');
       });
   }
 
-
-update(platformId: string) {
+showUpdateForm(platformId: string) {
   const platformItem = this.platform.find(item => item.id === platformId);
   if (platformItem) {
-    this.isPlatformNameReadOnly = false;
     this.editPlatformId = platformId;
-    this.platformForm.patchValue({ name: '' });
+    this.model.name = '';
     this.showCreateFormFlag = false;
   }
 }
 
-saveChanges(platformId:string) {
-  if (this.platformForm.valid && this.editPlatformId) {
-    const formData = this.platformForm.value;
-    const platform: Update_Platform = {
-      id: platformId,
-      name: formData.name,
+updatePlatform(action: string, PlatformId: string) {
+  if (action === 'if' && this.platformForm.valid && this.editPlatformId) {
+    const Platform = {
+      id: PlatformId,
+      name: this.model.name
     };
-    this.platformService.updatePlatform(platform).then(() => {
-      this.getPlatform();
-      this.cancelEdit();
-    });
-  }
-}
 
-  cancelEdit() {
-    this.isPlatformNameReadOnly = true;
+    this.platformService.updatePlatform(Platform).then(() => {
+      this.getPlatform();
+      this.editPlatformId = null;
+    });
+  } 
+  else if (action === 'else') {
     this.editPlatformId = null;
-    this.getPlatform();
   }
+  this.getPlatform();
+}
 }

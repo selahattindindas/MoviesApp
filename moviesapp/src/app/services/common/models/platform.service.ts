@@ -3,10 +3,8 @@ import { List_Platform } from 'src/app/contracts/platform/list-platform';
 import { PlatformDescription, PlatformEnum } from 'src/app/enums/platform-enum';
 import { HttpClientService } from '../http-client.service';
 import { Observable, firstValueFrom } from 'rxjs';
-import { Create_Platform } from 'src/app/contracts/platform/create-platform';
 import { SweetalertService, icon } from '../../admin/sweetalert.service';
 import { CancelButtonText, ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
-import { Update_Platform } from 'src/app/contracts/platform/update-platform';
 import { Router } from '@angular/router';
 import { JsonResponse } from 'src/app/contracts/response/response';
 
@@ -55,9 +53,9 @@ export class PlatformService {
       : response.statusMessage;
   }
 
-  async createPlatform(platform: Create_Platform, name: string) {
-    const observable: Observable<Create_Platform> = this.httpClientService.post(
-      { controller: 'Platform', action: 'CreatePlatform', queryString: `platformName=${name}` }, platform);
+  async createPlatform(name: unknown) {
+    const observable: Observable<unknown> = this.httpClientService.post(
+      { controller: 'Platform', action: 'CreatePlatform', queryString: `platformName=${name}` }, name);
 
     const data = await firstValueFrom(observable);
 
@@ -69,9 +67,9 @@ export class PlatformService {
     return data;
   }
 
-  async updatePlatform(platform: Update_Platform) {
-    const observable: Observable<Update_Platform> = this.httpClientService.put<Update_Platform>(
-      { controller: 'Platform', action: 'UpdatePlatform' }, platform);
+  async updatePlatform(name: unknown) {
+    const observable: Observable<unknown> = this.httpClientService.put(
+      { controller: 'Platform', action: 'UpdatePlatform' }, name);
 
     const data = await firstValueFrom(observable);
 

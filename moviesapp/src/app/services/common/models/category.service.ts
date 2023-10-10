@@ -3,7 +3,6 @@ import { CategoryDescription, CategoryEnum } from 'src/app/enums/category-enum';
 import { HttpClientService } from '../http-client.service';
 import { List_Category } from 'src/app/contracts/category/list-category';
 import { Observable, firstValueFrom } from 'rxjs';
-import { Update_Category } from 'src/app/contracts/category/update-category';
 import { CancelButtonText, ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
 import { SweetalertService, icon } from '../../admin/sweetalert.service';
 import { Router } from '@angular/router';
@@ -47,32 +46,33 @@ export class CategoryService {
   async getCategoryById(id: string): Promise<List_Category | string> {
     const observable: Observable<JsonResponse<List_Category>> = this.httpClientService.get(
       { controller: 'Category', action: 'GetByCategoryId' }, id);
-  
+
     const response = await firstValueFrom(observable);
-  
+
     return response.statusCode === 200
       ? response.result
       : response.statusMessage;
   }
 
-  async createCategory(name) {
-    const observable: Observable<string> = this.httpClientService.post(
-      { controller: 'Category', action: 'CreateCategory', queryString: `categoryName=${name}` });
+  async createCategory(name: unknown) {
+    const observable: Observable<JsonResponse<unknown>> = this.httpClientService.post(
+      {
+        controller: 'Category',
+        action: 'CreateCategory',
+        queryString: `categoryName=${name}`
+      }, name);
 
-    const data = await firstValueFrom(observable);
-
-    this.sweetalertService.showAlert(
-      MessageTitle.Success, MessageText.CategoryCreate, icon.Success, false, ConfirmButtonText.Okey, 3);
-
-    this.router.navigate(['/Admin', 'Class-List']);
-
-    return data;
+    const response = await firstValueFrom(observable);
+    return response.statusCode === 200
+      ? (this.sweetalertService.showAlert(
+        MessageTitle.Success, MessageText.CategoryCreate, icon.Success, false, ConfirmButtonText.Okey, 3), response.result)
+      : response.statusMessage
     //hata yönetimi gerçekleşecek.
   }
 
-  async updateCategory(category: Update_Category) {
-    const observable: Observable<Update_Category> = this.httpClientService.put(
-      { controller: 'Category', action: 'UpdateCategory' }, category);
+  async updateCategory(name: unknown) {
+    const observable: Observable<unknown> = this.httpClientService.put(
+      { controller: 'Category', action: 'UpdateCategory' }, name);
 
     const data = await firstValueFrom(observable);
 
@@ -88,13 +88,13 @@ export class CategoryService {
     const sweetalert = await this.sweetalertService.showAlert(
       MessageTitle.DeletedQuestion, MessageText.NoTurningBack, icon.Warning, true, ConfirmButtonText.Okey, undefined, CancelButtonText.Cancel);
 
-    if (sweetalert.isConfirmed) 
-    {
+    if (sweetalert.isConfirmed) {
       await firstValueFrom(this.httpClientService.delete(
-        { controller: 'Category',
-          action: 'DeleteCategory' 
+        {
+          controller: 'Category',
+          action: 'DeleteCategory'
         }, id));
-        
+
       this.sweetalertService.showAlert(
         MessageTitle.Success, MessageText.CategoryDelete, icon.Success, false, ConfirmButtonText.Okey, 3)
     }

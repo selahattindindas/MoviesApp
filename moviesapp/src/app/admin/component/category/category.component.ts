@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { List_Category } from 'src/app/contracts/category/list-category';
-import { Update_Category } from 'src/app/contracts/category/update-category';
 import { CategoryService } from 'src/app/services/common/models/category.service';
 
 @Component({
@@ -9,35 +8,29 @@ import { CategoryService } from 'src/app/services/common/models/category.service
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css'],
 })
-//Template Driven
 export class AdminCategory implements OnInit {
-  @ViewChild("categoryForm", {static:true}) categoryForm: NgForm
+  @ViewChild("categoryForm", { static: true }) categoryForm: NgForm
   categories: List_Category[];
   showCreateFormFlag = false;
-  newCategoryName = '';
-  isCategoryNameReadOnly: boolean = true;
   editCategoryId: string | null = null;
-  categoryId: string;
   model: {
     id: string;
-    categoryName: string;
+    name: string;
   } = {
-    id: '',
-    categoryName: ''
-  };
-  
-  constructor(private categoryService: CategoryService) {
-  }
+      id: '',
+      name: ''
+    };
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this.getCategory();
   }
 
- getCategory(){
-  return this.categoryService.getAllCategories().then(categorData=>{
-    this.categories = categorData as List_Category[];
-  })
- }
+  getCategory() {
+    return this.categoryService.getAllCategories().then(categorData => {
+      this.categories = categorData as List_Category[];
+    })
+  }
 
   deleteCategory(categoryId: string) {
     this.categoryService.deleteCategory(categoryId).then(() => {
@@ -45,55 +38,54 @@ export class AdminCategory implements OnInit {
     });
   }
 
-  showCreateForm() {
-    this.showCreateFormFlag = true;
-    this.editCategoryId = null;
+  showCreateForm(action: string) {
+    if (action === 'if') {
+      this.showCreateFormFlag = true;
+      this.editCategoryId = null;
+    }
+    else if (action === 'else') {
+      this.showCreateFormFlag = false;
+      this.model.name = '';
+    }
   }
-  //Tek koda indir
-  cancelCreateForm() {
-    this.showCreateFormFlag = false;
-    this.newCategoryName = '';
-  }
-
-  create() {
+//Düzenlendi
+  createCategory() {
     if (this.categoryForm.valid) {
       const category = {
-        categoryName: this.model.categoryName
+        categoryName: this.model.name
       };
       this.categoryService.createCategory(category).then(() => {
         this.getCategory();
-        this.cancelCreateForm();
+        this.showCreateForm('else');
       });
     }
   }
 
-  update(categoryId: string) {
+  showUpdateForm(categoryId: string) {
     const categoryItem = this.categories.find(item => item.id === categoryId);
     if (categoryItem) {
-      this.isCategoryNameReadOnly = false;
       this.editCategoryId = categoryId;
-      this.categoryForm.setValue({ name: '' });
+      this.model.name = ''
       this.showCreateFormFlag = false;
     }
   }
 
-  saveChanges(categoryId: string) {
-    if (this.categoryForm.valid && this.editCategoryId) {
-      const formData = this.categoryForm.value;
-      const category: Update_Category = {
+  updateCategory(action: string, categoryId: string) {
+    if (action === 'if' && this.categoryForm.valid && this.editCategoryId) {
+      const category = {
         id: categoryId,
-        name: formData.name,
+        name: this.model.name
       };
+
       this.categoryService.updateCategory(category).then(() => {
         this.getCategory();
-        this.cancelEdit();
+        this.editCategoryId = null;
       });
+    } 
+    else if (action === 'else') {
+      this.editCategoryId = null;
     }
-  }
-  //Birleşecek.
-  cancelEdit() {
-    this.isCategoryNameReadOnly = true;
-    this.editCategoryId = null;
     this.getCategory();
   }
+  //Düzenlendi
 }
