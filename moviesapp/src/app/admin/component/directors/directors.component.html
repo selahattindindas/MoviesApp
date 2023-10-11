@@ -1,5 +1,5 @@
 <section>
-    <form [formGroup]="createForm" (ngSubmit)="create(movieId)">
+    <form #directorForm="ngForm" (ngSubmit)="create(movieId)">
       <div class="create">
         <div class="card">
           <div class="close">
@@ -12,7 +12,7 @@
             <div class="create-contents">
               <div class="label-input">
                 <label for="directorNames">Yönetmen Adı</label>
-                <input type="text" [(ngModel)]="directorValue" placeholder="Yönetmen adını yazınız" formControlName="Name" (keydown.enter)="addDirector($event)" />
+                <input type="text" [(ngModel)]="directorValue" name="directorNames" #directorNames="ngModel" placeholder="Yönetmen adını yazınız"  (keydown.enter)="addDirector($event)" />
               </div>
             </div>
             <div  class="actors-list">
@@ -20,7 +20,7 @@
                   <li *ngFor="let director of director">
                     {{director.name}} <i class="fa-solid fa-xmark fa-lg" (click)="removeDirector(director.id)"></i>
                   </li>
-                  <li *ngFor="let director of directorNames; let i = index">
+                  <li *ngFor="let director of directorName; let i = index">
                     {{director}} <i class="fa-solid fa-xmark fa-lg" (click)="removeCreate(i)"></i>
                   </li>
                 </ul>

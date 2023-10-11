@@ -1,26 +1,27 @@
-
-.adam-ol {
-  text-align: center; 
+.file-upload {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 25% 0;
 }
 
-h1 {
-  color: #fff;
-  font-weight: 800;
-  margin: 0;
+.drop-container {
+  border: 2px dashed #ccc;
+  padding: 500px;
+  text-align: center;
+  cursor: pointer;
 }
 
-@media (max-width: 767px) {
-  .adam-ol {
-    margin: 5rem 0;
-  }
-
-  h1 {
-    font-size: 24px; 
-  }
+.drop-container.dragging {
+  border-color: #740b0b;
 }
 
+input[type="file"] {
+  display: none;
+}
+
+label {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+}

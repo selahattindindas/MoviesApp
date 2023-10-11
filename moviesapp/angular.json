@@ -37,12 +37,12 @@
           "configurations": {
 
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/app/eenvironments/environment.ts",
-                  "with": "src/app/eenvironments/environment.prod.ts"
-                }
-              ],
+               "fileReplacements": [
+                 {
+                   "replace": "src/app/environments/environment.ts",
+                   "with": "src/app/environments/environment.prod.ts"
+                 }
+               ],
               "budgets": [
                 {
                   "type": "initial",
@@ -59,11 +59,11 @@
             },
             "development": {
               "fileReplacements": [
-                {
-                  "replace": "src/app/environments/environment.ts",
-                  "with": "src/app/environments/environment.development.ts"
-                }
-              ],
+                 {
+                   "replace": "src/app/environments/environment.ts",
+                   "with": "src/app/environments/environment.development.ts"
+                 }
+               ],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -78,10 +78,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "moviesapp:build:production"
+              "browserTarget": "moviesapp:build:production",
+              "port": 4202
             },
             "development": {
-              "browserTarget": "moviesapp:build:development"
+              "browserTarget": "moviesapp:build:development",
+              "port": 4201
             }
           },
           "defaultConfiguration": "development"

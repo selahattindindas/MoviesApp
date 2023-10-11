@@ -23,7 +23,7 @@ export class UpdateComponent implements OnInit {
   movies: List_Movie;
   category: CategoryEnum;
   constructor(
-    private fb: FormBuilder, private categoryService: CategoryService, private platformService: PlatformService, private movieService: MoviesService, private activatedRoute: ActivatedRoute) {
+    private fb: FormBuilder, private categoryService: CategoryService, private platformService: PlatformService, private movieService: MoviesService, private route: ActivatedRoute) {
     this.updateForm = this.fb.group({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       categoryId: new FormControl('0', Validators.required),
@@ -57,8 +57,8 @@ export class UpdateComponent implements OnInit {
   }
 
   getMovieById() {
-    this.activatedRoute.params.subscribe(async (params: Params) => {
-      const movieData: Partial<List_Movie | string> = await this.movieService.getMovieById(params['id']);
+    const params = this.route.snapshot.params;
+    this.movieService.getMovieById(params['id']).then((movieData: Partial<List_Movie | string>) => {
       if (movieData) {
         this.movies = movieData as List_Movie;
         this.movieId = params['id'];

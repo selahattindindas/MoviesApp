@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Create_Director } from 'src/app/contracts/director/create-director';
 import { List_Director } from 'src/app/contracts/director/list-director';
@@ -12,27 +12,22 @@ import { DirectorService } from 'src/app/services/common/models/director.service
 })
 export class DirectorsComponent implements OnInit {
 
-  createForm: FormGroup;
+  @ViewChild("directorForm", { static: true }) directorForm: NgForm
   movieId: string;
   directorValue: string = '';
-  directorNames: string[] = [];
+  directorName: string[] = [];
   director: List_Director[];
 
-  constructor(private directorService: DirectorService, private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
-    this.createForm = this.fb.group({
-      id: new FormControl(''),
-      Name: new FormControl(''),
-    });
-  }
+  constructor(private directorService: DirectorService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getDirector();
   }
   getDirector() {
-    this.activatedRoute.params.subscribe(async (params) => {
-      const playerData: Partial<List_Director | string> = await this.directorService.getDirectorsMovieById(params['id']);
-      if (playerData) {
-        this.director = playerData as List_Director[];
+    const params = this.route.snapshot.params;
+    this.directorService.getDirectorsMovieById(params['id']).then((directorData: Partial<List_Director | string>) => {
+      if (directorData) {
+        this.director = directorData as List_Director[];
         this.movieId = params['id'];
       }
     });
@@ -41,14 +36,14 @@ export class DirectorsComponent implements OnInit {
   addDirector(event: any) {
     event.preventDefault();
     if (this.directorValue.trim() !== '') {
-      this.directorNames.push(this.directorValue.trim());
+      this.directorName.push(this.directorValue.trim());
       this.directorValue = '';
     }
   }
 
   create(movieId:string) {
-    if (this.createForm.valid) {
-      const directors: Create_Director[] = this.directorNames.map(name => ({
+    if (this.directorForm.valid) {
+      const directors: Create_Director[] = this.directorName.map(name => ({
         movieId: movieId,
         directorNames: name
       }));
@@ -65,7 +60,7 @@ export class DirectorsComponent implements OnInit {
   }
 
   removeCreate(index: number) {
-    this.directorNames.splice(index, 1);
+    this.directorName.splice(index, 1);
   }
 
 }

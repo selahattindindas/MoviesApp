@@ -1,3 +1,4 @@
 export class Create_Photo{
-    files: string;
+    id: string;
+    fileName: string ;
 }

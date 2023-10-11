@@ -14,8 +14,8 @@ export class PhotoService {
   constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
 
   async post(photo: Create_Photo, id: string) {
-    const observable: Observable<Create_Photo> = this.httpClientService.post<Create_Photo>(
-      { controller: 'Movie', action: 'UploadPhoto', queryString: `id=${id}` }, photo);
+    const observable: Observable<Create_Photo> = this.httpClientService.post(
+      { controller: 'Movie', action: 'UploadPhoto', queryString: `Id=${id}` }, photo);
     const data = await firstValueFrom(observable)
     this.sweetAlertService.showAlert(
       MessageTitle.Success, MessageText.PlayerCreate, icon.Success, false, ConfirmButtonText.Okey, 3);
