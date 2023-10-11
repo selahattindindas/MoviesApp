@@ -9,15 +9,15 @@ import { Router } from '@angular/router';
 import { CancelButtonText, ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
 import { JsonResponse } from 'src/app/contracts/response/response';
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
+
 export class MoviesService {
 
   constructor(private httpClientService: HttpClientService, private sweetalertService: SweetalertService, private router: Router) { }
 
   async getAllMovies(): Promise<List_Movie[] | string> {
-    try 
-    {
+    try {
       const observable: Observable<JsonResponse<List_Movie[]>> = this.httpClientService.get({
         controller: 'Movie',
         action: 'GetAll'
@@ -28,9 +28,8 @@ export class MoviesService {
       return response.statusCode === 200
         ? response.result
         : response.statusMessage;
-    } 
-    catch (error) 
-    {
+    }
+    catch (error) {
       return error.message;
     }
   }

@@ -29,7 +29,7 @@ import { environment } from './environments/environment';
     
   ],
   providers: [
-    { provide: 'baseUrl', useValue: environment.baseurl, multi: true },
+    { provide: 'baseUrl', useValue: environment.apiUrl, multi: true }
   ],
   bootstrap: [AppComponent],
 

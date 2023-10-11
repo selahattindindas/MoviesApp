@@ -11,15 +11,16 @@ import { JsonResponse } from 'src/app/contracts/response/response';
 @Injectable({
   providedIn: 'root'
 })
+
 export class PlayerService {
 
   constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
 
   async getPlayersMovieById(movieId: string): Promise<List_Player | string> {
     const observable: Observable<JsonResponse<List_Player>> = this.httpClientService.get(
-      { 
-        controller: 'Players', 
-        action: 'GetPlayersByMovieId' 
+      {
+        controller: 'Players',
+        action: 'GetPlayersByMovieId'
       }, movieId);
 
     const response = await firstValueFrom(observable);
@@ -31,22 +32,22 @@ export class PlayerService {
 
   async createPlayer(player: Create_Player) {
     const observable: Observable<Create_Player> = this.httpClientService.post(
-      { 
-        controller: 'Players', 
-        action: `CreatePlayers/${player.movieId}`, 
-        queryString: `playerNames=${player.playerNames}` 
+      {
+        controller: 'Players',
+        action: 'CreatePlayers',
+        queryString: `Id=${player.movieId}&PlayerNames=${player.playerNames}`
       }, player);
 
     const data = await firstValueFrom(observable);
 
     this.sweetAlertService.showAlert(
-      MessageTitle.Success, 
-      MessageText.PlayerCreate, 
-      icon.Success, 
-      false, 
-      ConfirmButtonText.Okey, 
+      MessageTitle.Success,
+      MessageText.PlayerCreate,
+      icon.Success,
+      false,
+      ConfirmButtonText.Okey,
       3
-      );
+    );
 
     this.router.navigate(['/Admin', 'Movies-List']);
 
@@ -62,12 +63,12 @@ export class PlayerService {
     if (response.statusCode === 200) {
       this.sweetAlertService.showAlert(
         MessageTitle.Success,
-        MessageText.PlayerDelete, 
-        icon.Success, 
-        false, 
-        ConfirmButtonText.Okey, 
+        MessageText.PlayerDelete,
+        icon.Success,
+        false,
+        ConfirmButtonText.Okey,
         3
-        );
+      );
       return response.result;
     }
     else {

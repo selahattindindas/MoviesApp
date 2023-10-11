@@ -11,6 +11,7 @@ import { JsonResponse } from 'src/app/contracts/response/response';
 @Injectable({
   providedIn: 'root'
 })
+
 export class DirectorService {
 
   constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
@@ -33,8 +34,8 @@ export class DirectorService {
     const observable: Observable<Create_Director> = this.httpClientService.post(
       {
         controller: 'Director',
-        action: `CreateDirectors/${director.movieId}`,
-        queryString: `directorNames=${director.directorNames}`
+        action: 'CreateDirectors',
+        queryString: `Id=${director.movieId}&DirectorNames=${director.directorNames}`
       }, director);
 
     const data = await firstValueFrom(observable)
@@ -69,7 +70,7 @@ export class DirectorService {
         false,
         ConfirmButtonText.Okey,
         3
-        );
+      );
       return response.result;
     } else {
       return response.statusMessage;

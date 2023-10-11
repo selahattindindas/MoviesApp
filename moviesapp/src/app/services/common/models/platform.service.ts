@@ -11,6 +11,7 @@ import { JsonResponse } from 'src/app/contracts/response/response';
 @Injectable({
   providedIn: 'root'
 })
+
 export class PlatformService {
 
   constructor(private httpClientService: HttpClientService, private sweetalertService: SweetalertService, private router: Router) { }
@@ -129,9 +130,9 @@ export class PlatformService {
       if (sweetalert.isConfirmed) {
         await firstValueFrom(this.httpClientService.delete(
           {
-          controller: 'Platform',
-          action: 'DeletePlatform'
-        }, id));
+            controller: 'Platform',
+            action: 'DeletePlatform'
+          }, id));
 
         this.sweetalertService.showAlert(
           MessageTitle.Success,
@@ -140,7 +141,7 @@ export class PlatformService {
           false,
           ConfirmButtonText.Okey,
           3
-          );
+        );
       }
     } catch (error) {
       console.error(error);
