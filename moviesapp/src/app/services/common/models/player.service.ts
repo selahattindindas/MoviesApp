@@ -17,7 +17,10 @@ export class PlayerService {
 
   async getPlayersMovieById(movieId: string): Promise<List_Player | string> {
     const observable: Observable<JsonResponse<List_Player>> = this.httpClientService.get(
-      { controller: 'Players', action: 'GetPlayersByMovieId' }, movieId);
+      { 
+        controller: 'Players', 
+        action: 'GetPlayersByMovieId' 
+      }, movieId);
 
     const response = await firstValueFrom(observable);
 
@@ -28,12 +31,22 @@ export class PlayerService {
 
   async createPlayer(player: Create_Player) {
     const observable: Observable<Create_Player> = this.httpClientService.post(
-      { controller: 'Players', action: `CreatePlayers/${player.movieId}`, queryString: `playerNames=${player.playerNames}` }, player);
+      { 
+        controller: 'Players', 
+        action: `CreatePlayers/${player.movieId}`, 
+        queryString: `playerNames=${player.playerNames}` 
+      }, player);
 
     const data = await firstValueFrom(observable);
 
     this.sweetAlertService.showAlert(
-      MessageTitle.Success, MessageText.PlayerCreate, icon.Success, false, ConfirmButtonText.Okey, 3);
+      MessageTitle.Success, 
+      MessageText.PlayerCreate, 
+      icon.Success, 
+      false, 
+      ConfirmButtonText.Okey, 
+      3
+      );
 
     this.router.navigate(['/Admin', 'Movies-List']);
 
@@ -47,12 +60,18 @@ export class PlayerService {
     const response = await firstValueFrom(observable);
 
     if (response.statusCode === 200) {
-      this.sweetAlertService.showAlert(MessageTitle.Success,
-        MessageText.PlayerDelete, icon.Success, false, ConfirmButtonText.Okey, 3);
+      this.sweetAlertService.showAlert(
+        MessageTitle.Success,
+        MessageText.PlayerDelete, 
+        icon.Success, 
+        false, 
+        ConfirmButtonText.Okey, 
+        3
+        );
       return response.result;
     }
     else {
-      throw new Error(`${response.statusCode}`);
+      return response.statusMessage;
     }
   }
 }

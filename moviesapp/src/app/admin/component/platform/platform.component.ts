@@ -53,10 +53,9 @@ export class AdminPlatform implements OnInit {
     if (!this.platformForm.valid) 
       return;
 
-      const platform = {
-        platformName: this.model.name
-      };
-      this.platformService.createPlatform(platform).then(() => {
+       const platformName= this.model.name;
+       
+      this.platformService.createPlatform(platformName).then(() => {
         this.getPlatform();
         this.showCreateForm('else');
       });

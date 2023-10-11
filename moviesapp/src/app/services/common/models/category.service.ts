@@ -54,30 +54,47 @@ export class CategoryService {
       : response.statusMessage;
   }
 
-  async createCategory(name: unknown) {
-    const observable: Observable<JsonResponse<unknown>> = this.httpClientService.post(
+  async createCategory(categoryName: string): Promise<string>{
+    const observable: Observable<JsonResponse<string>> = this.httpClientService.post(
       {
         controller: 'Category',
-        action: 'CreateCategory',
-        queryString: `categoryName=${name}`
-      }, name);
+        action: `CreateCategory?categoryName=${categoryName}`
+      }, null);
 
     const response = await firstValueFrom(observable);
-    return response.statusCode === 200
-      ? (this.sweetalertService.showAlert(
-        MessageTitle.Success, MessageText.CategoryCreate, icon.Success, false, ConfirmButtonText.Okey, 3), response.result)
-      : response.statusMessage
+    
+    if(response.statusCode === 200){
+      this.sweetalertService.showAlert(
+        MessageTitle.Success, 
+        MessageText.CategoryCreate, 
+        icon.Success, 
+        false, 
+        ConfirmButtonText.Okey, 
+        3
+      );
+      return response.result;
+    }else{
+      return response.statusMessage;
+    }
     //hata yönetimi gerçekleşecek.
   }
 
   async updateCategory(name: unknown) {
     const observable: Observable<unknown> = this.httpClientService.put(
-      { controller: 'Category', action: 'UpdateCategory' }, name);
+      { 
+        controller: 'Category', 
+        action: 'UpdateCategory' 
+      }, name);
 
     const data = await firstValueFrom(observable);
 
     this.sweetalertService.showAlert(
-      MessageTitle.Success, MessageText.CategoryUpdate, icon.Success, false, ConfirmButtonText.Okey, 3);
+      MessageTitle.Success, 
+      MessageText.CategoryUpdate, 
+      icon.Success, 
+      false, 
+      ConfirmButtonText.Okey, 
+      3);
 
     this.router.navigate(['/Admin', 'Class-List']);
 
@@ -86,7 +103,13 @@ export class CategoryService {
 
   async deleteCategory(id: string) {
     const sweetalert = await this.sweetalertService.showAlert(
-      MessageTitle.DeletedQuestion, MessageText.NoTurningBack, icon.Warning, true, ConfirmButtonText.Okey, undefined, CancelButtonText.Cancel);
+      MessageTitle.DeletedQuestion, 
+      MessageText.NoTurningBack, 
+      icon.Warning, 
+      true, 
+      ConfirmButtonText.Okey, 
+      undefined, 
+      CancelButtonText.Cancel);
 
     if (sweetalert.isConfirmed) {
       await firstValueFrom(this.httpClientService.delete(
@@ -96,7 +119,11 @@ export class CategoryService {
         }, id));
 
       this.sweetalertService.showAlert(
-        MessageTitle.Success, MessageText.CategoryDelete, icon.Success, false, ConfirmButtonText.Okey, 3)
+        MessageTitle.Success, 
+        MessageText.CategoryDelete, 
+        icon.Success, false, 
+        ConfirmButtonText.Okey, 
+        3);
     }
   }
 }

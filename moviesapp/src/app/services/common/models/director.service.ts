@@ -16,8 +16,11 @@ export class DirectorService {
   constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
 
   async getDirectorsMovieById(movieId: string): Promise<List_Director | string> {
-    const observable: Observable<JsonResponse<List_Director>> =
-      this.httpClientService.get({ controller: 'Director', action: 'GetDirectorsByMovieId' }, movieId);
+    const observable: Observable<JsonResponse<List_Director>> = this.httpClientService.get(
+      {
+        controller: 'Director',
+        action: 'GetDirectorsByMovieId'
+      }, movieId);
 
     const response = await firstValueFrom(observable);
 
@@ -27,12 +30,21 @@ export class DirectorService {
   }
 
   async createDirector(director: Create_Director) {
-    const observable: Observable<Create_Director> = this.httpClientService.post<Create_Director>(
-      { controller: 'Director', action: `CreateDirectors/${director.movieId}`, queryString: `directorNames=${director.directorNames}` }, director);
+    const observable: Observable<Create_Director> = this.httpClientService.post(
+      {
+        controller: 'Director',
+        action: `CreateDirectors/${director.movieId}`,
+        queryString: `directorNames=${director.directorNames}`
+      }, director);
 
     const data = await firstValueFrom(observable)
     this.sweetAlertService.showAlert(
-      MessageTitle.Success, MessageText.DirectorCreate, icon.Success, false, ConfirmButtonText.Okey, 3);
+      MessageTitle.Success,
+      MessageText.DirectorCreate,
+      icon.Success,
+      false,
+      ConfirmButtonText.Okey,
+      3);
 
     this.router.navigate(['/Admin', 'Movies-List']);
 
@@ -41,13 +53,26 @@ export class DirectorService {
 
   async deleteDirector(id: string) {
     const observable: Observable<JsonResponse<List_Director>> = this.httpClientService.delete(
-      { controller: 'Director', action: 'DeleteDirector' }, id);
+      {
+        controller: 'Director',
+        action: 'DeleteDirector'
+      }, id);
 
     const response = await firstValueFrom(observable);
-    
-    return response.statusCode === 200
-      ? (this.sweetAlertService.showAlert(MessageTitle.Success, MessageText.DirectorDelete, icon.Success, false, ConfirmButtonText.Okey, 3),
-        response.result)
-      : response.statusMessage;
-      };
+
+    if (response.statusCode === 200) {
+
+      this.sweetAlertService.showAlert(
+        MessageTitle.Success,
+        MessageText.DirectorDelete,
+        icon.Success,
+        false,
+        ConfirmButtonText.Okey,
+        3
+        );
+      return response.result;
+    } else {
+      return response.statusMessage;
+    }
+  };
 }

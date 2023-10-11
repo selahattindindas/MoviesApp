@@ -16,68 +16,124 @@ export class MoviesService {
   constructor(private httpClientService: HttpClientService, private sweetalertService: SweetalertService, private router: Router) { }
 
   async getAllMovies(): Promise<List_Movie[] | string> {
+    try 
+    {
+      const observable: Observable<JsonResponse<List_Movie[]>> = this.httpClientService.get({
+        controller: 'Movie',
+        action: 'GetAll'
+      });
 
-    const observable: Observable<JsonResponse<List_Movie[]>> = this.httpClientService.get(
-      { controller: 'Movie', action: 'GetAll' });
+      const response = await firstValueFrom(observable);
 
-    const response = await firstValueFrom(observable);
-
-    return response.statusCode === 200
-      ? response.result
-      : response.statusMessage;
-  }
-
-  async getMovieById(id: string): Promise<List_Movie | string> {
-    const observable: Observable<JsonResponse<List_Movie>> = this.httpClientService.get(
-      { controller: 'Movie', action: 'GetByMovieId' }, id);
-
-    const response = await firstValueFrom(observable);
-
-    return response.statusCode === 200
-      ? response.result
-      : response.statusMessage;
-  }
-
-  async createMovie(movie: Create_Movie) {
-    const observable: Observable<Create_Movie> = this.httpClientService.post(
-      {controller: 'Movie', action: 'CreateMovie'}, movie);
-
-    const data = await firstValueFrom(observable);
-
-    this.sweetalertService.showAlert(
-      MessageTitle.Success, MessageText.MovieCreate, icon.Success, false, ConfirmButtonText.Okey, 3
-    );
-
-    this.router.navigate(['/Admin', 'Movies-List']);
-
-    return data;
-  }
-
-  async updateMovie(movie: Update_Movie) {
-    const observable: Observable<Update_Movie> = this.httpClientService.put(
-      { controller: 'Movie', action: 'UpdateMovie' }, movie);
-
-    const data = await firstValueFrom(observable);
-
-    this.sweetalertService.showAlert(
-      MessageTitle.Success, MessageText.MovieUpdate, icon.Success, false, ConfirmButtonText.Okey, 3);
-
-    this.router.navigate(['/Admin', 'Movies-List']);
-
-    return data;
-  }
-
-  async deleteMovie(id: string) {
-    const result = await this.sweetalertService.showAlert(
-      MessageTitle.DeletedQuestion, MessageText.NoTurningBack, icon.Warning, true, ConfirmButtonText.Okey, undefined, CancelButtonText.Cancel);
-      
-    if (result.isConfirmed) {
-      await firstValueFrom(this.httpClientService.delete(
-          { controller: 'Movie', action: 'Delete' }, id));
-
-      this.sweetalertService.showAlert(
-        MessageTitle.Success, MessageText.MovieDelete, icon.Success, false, ConfirmButtonText.Okey, 3);
+      return response.statusCode === 200
+        ? response.result
+        : response.statusMessage;
+    } 
+    catch (error) 
+    {
+      return error.message;
     }
   }
 
+  async getMovieById(id: string): Promise<List_Movie | string> {
+    try {
+      const observable: Observable<JsonResponse<List_Movie>> = this.httpClientService.get({
+        controller: 'Movie',
+        action: 'GetByMovieId'
+      }, id);
+
+      const response = await firstValueFrom(observable);
+
+      return response.statusCode === 200
+        ? response.result
+        : response.statusMessage;
+    } catch (error) {
+      return error.message;
+    }
+  }
+
+  async createMovie(movie: Create_Movie) {
+    try {
+      const observable: Observable<Create_Movie> = this.httpClientService.post({
+        controller: 'Movie',
+        action: 'CreateMovie'
+      }, movie);
+
+      const data = await firstValueFrom(observable);
+
+      this.sweetalertService.showAlert(
+        MessageTitle.Success,
+        MessageText.MovieCreate,
+        icon.Success,
+        false,
+        ConfirmButtonText.Okey,
+        3
+      );
+
+      this.router.navigate(['/Admin', 'Movies-List']);
+
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+
+  async updateMovie(movie: Update_Movie) {
+    try {
+      const observable: Observable<Update_Movie> = this.httpClientService.put({
+        controller: 'Movie',
+        action: 'UpdateMovie'
+      }, movie);
+
+      const data = await firstValueFrom(observable);
+
+      this.sweetalertService.showAlert(
+        MessageTitle.Success,
+        MessageText.MovieUpdate,
+        icon.Success,
+        false,
+        ConfirmButtonText.Okey,
+        3
+      );
+
+      this.router.navigate(['/Admin', 'Movies-List']);
+
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+
+  async deleteMovie(id: string) {
+    try {
+      const result = await this.sweetalertService.showAlert(
+        MessageTitle.DeletedQuestion,
+        MessageText.NoTurningBack,
+        icon.Warning,
+        true,
+        ConfirmButtonText.Okey,
+        undefined,
+        CancelButtonText.Cancel
+      );
+
+      if (result.isConfirmed) {
+        await firstValueFrom(this.httpClientService.delete({
+          controller: 'Movie',
+          action: 'Delete'
+        }, id));
+
+        this.sweetalertService.showAlert(
+          MessageTitle.Success,
+          MessageText.MovieDelete,
+          icon.Success,
+          false,
+          ConfirmButtonText.Okey,
+          3
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
+

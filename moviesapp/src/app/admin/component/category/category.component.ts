@@ -13,13 +13,11 @@ export class AdminCategory implements OnInit {
   categories: List_Category[];
   showCreateFormFlag = false;
   editCategoryId: string | null = null;
-  model: {
-    id: string;
-    name: string;
-  } = {
-      id: '',
-      name: ''
-    };
+  model = {
+    id: '',
+    name: '',
+    categoryName: ''
+  };
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
@@ -49,18 +47,20 @@ export class AdminCategory implements OnInit {
     }
   }
 //Düzenlendi
-  createCategory() {
-    if (this.categoryForm.valid) {
-      const category = {
-        categoryName: this.model.name
-      };
-      this.categoryService.createCategory(category).then(() => {
-        this.getCategory();
-        this.showCreateForm('else');
-      });
-    }
+createCategory() {
+  if (!this.categoryForm.valid) 
+  return;
+
+     const categoryName = this.model.name
+
+    this.categoryService.createCategory(categoryName).then((sasa) => {
+      console.log(sasa);
+      this.getCategory();
+      this.showCreateForm('else');
+    });
   }
 
+//Düzenlendi
   showUpdateForm(categoryId: string) {
     const categoryItem = this.categories.find(item => item.id === categoryId);
     if (categoryItem) {
@@ -69,7 +69,7 @@ export class AdminCategory implements OnInit {
       this.showCreateFormFlag = false;
     }
   }
-
+//Düzenlendi
   updateCategory(action: string, categoryId: string) {
     if (action === 'if' && this.categoryForm.valid && this.editCategoryId) {
       const category = {
