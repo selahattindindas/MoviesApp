@@ -1,4 +1,5 @@
-export class Create_Photo{
+export class Create_Photo {
     id: string;
-    fileName: string ;
+    files: File;
 }
+

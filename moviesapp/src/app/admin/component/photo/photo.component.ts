@@ -1,4 +1,5 @@
-import { Component, Renderer2 } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { PhotoService } from 'src/app/services/common/models/photo.service';
 
@@ -8,14 +9,10 @@ import { PhotoService } from 'src/app/services/common/models/photo.service';
   styleUrls: ['./photo.component.css']
 })
 export class PhotoComponent {
-  selectedImage: string;
-  selectedName: string;
-   photo: Create_Photo = {
-    id: '',
-    fileName: '' 
-  };
-  fileName: string[] = [];
-  movieId:string;
+  @ViewChild('files') files: ElementRef;
+  errorMessage: string;
+  movieImageDTO: any[] = [];
+  movieId:string = '37';
   constructor(private renderer: Renderer2, private photoService:PhotoService) {}
 
   onDragOver(event: DragEvent) {
@@ -34,29 +31,24 @@ export class PhotoComponent {
     this.renderer.removeClass(event.target, 'dragging');
     const files = event.dataTransfer.files;
     this.uploadFiles(files);
-
-    if (files.length > 0) {
-      this.selectedImage = URL.createObjectURL(files[0]);
-      this.selectedName = files[0].name; 
-    }
   }
-
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const files = input.files;
-
-    if (files.length > 0) {
-      this.selectedImage = URL.createObjectURL(files[0]);
-      this.selectedName = files[0].name; 
-    }
+  onFileSelected(event: any) {
+    this.files = event.target.files;
   }
-  createPhoto(movieId:string){
-    const photo: Create_Photo[] = this.fileName.map(name => ({
-      id: movieId,
-      fileName: name
-    }));
-    for (const image of photo) {
-      this.photoService.post(image, movieId);
+  
+  onUpload() {
+    const formData = new FormData();
+    if (this.files && this.files[0]) {
+      formData.append('file', this.files[0]);
+      this.photoService.uploadFile(formData, this.movieId)
+        .then((response: any) => {
+          this.movieImageDTO = response;
+        })
+        .catch((error: HttpErrorResponse) => {
+          this.errorMessage = 'Yükleme başarısız oldu.';
+        });
+    } else {
+      this.errorMessage = 'Dosya seçilmedi.';
     }
   }
   private uploadFiles(files: FileList) {

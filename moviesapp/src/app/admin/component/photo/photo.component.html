@@ -1,4 +1,4 @@
-<form #photoForm="ngForm" (ngSubmit)="createPhoto(movieId)">
+<form #photoForm="ngForm" (ngSubmit)="onUpload()">
 <div class="upload-photo">
     <div class="upload-card">
         <div class="upload-header">
@@ -14,14 +14,14 @@
                     <label class="label" for="fileInput"> veya
                         <span class="upload-files">
                             <input 
-                            [(ngModel)]="photo.fileName"
-                            name="fileName" #fileName="ngModel" 
+                            name="file" #files
                             style="display: none;" 
                             type="file"
                             id="fileInput"
+                            multiple
                             (change)="onFileSelected($event)"
-                            accept=".jpg, .png, .pdf"/>
-                            <span class="upload-files-text" >dosya seçin</span>
+                            accept="image/*" />
+                            <span class="upload-files-text">dosya seçin</span>
                         </span>
                     </label>
                 </div>
@@ -29,11 +29,11 @@
             <div class="upload-submit">
                 <button class="upload-button" type="submit">Ekle</button>
             </div>
-            <ul class="image-preview" *ngIf="selectedImage">
-                <li class="images">
-                    <img [src]="selectedImage" alt="Selected Image">
+            <ul class="image-preview" >
+                <li class="images" >
+                    <img />
                     <i class="fa-solid fa-xmark fa-xl"></i>
-                    <p>{{ selectedName }}</p>
+                    <p></p>
                 </li>
 
             </ul>

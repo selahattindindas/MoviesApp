@@ -28,7 +28,7 @@ export class HttpClientService {
   return this.httpClient.get<T>(url,{headers:requestParameters.headers});
   }
 
-  post<T>(requestParameters: RequestParameters, body:Partial<T>):Observable<T> {
+  post<T>(requestParameters: RequestParameters, body?:Partial<T>):Observable<T> {
     let url: string = '';
     if(requestParameters.fullEndPoint)
       url = requestParameters.fullEndPoint;
