@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClientService, RequestParameters } from '../http-client.service';
+import { HttpClientService, } from '../http-client.service';
 import { Router } from '@angular/router';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { Observable, firstValueFrom } from 'rxjs';
@@ -13,23 +13,30 @@ export class PhotoService {
 
   constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
 
-  async post(file: any, movieId:string) {
-    const observable: Observable<Create_Photo> = this.httpClientService.post(
-      { controller: 'Movie', action: 'UploadPhoto', queryString: `Id=${movieId}` },file);
-    const data = await firstValueFrom(observable)
-    this.sweetAlertService.showAlert(
-      MessageTitle.Success, MessageText.PlayerCreate, icon.Success, false, ConfirmButtonText.Okey, 3);
-    this.router.navigate(['/Admin', 'Movies-List']);
+  async uploadPhoto(files: Create_Photo[]) {
+    const formData: FormData = new FormData();
+    files.forEach(photo => {
+      formData.append('Files', photo.files, photo.files.name);
+    });
+
+    const id = `Id=${files.map(photo => photo.id).join('&Id=')}`;
+    const observable: Observable<unknown> = this.httpClientService.post({
+        controller: 'Movie',
+        action: 'UploadPhoto',
+        queryString: id
+      }, formData);
+
+      this.sweetAlertService.showAlert(
+        MessageTitle.Success,
+        MessageText.PhotoCreate,
+        icon.Success,
+        false,
+        ConfirmButtonText.Okey,
+        3);
+        
+      this.router.navigate(['/Admin', 'Movies-List']);
+
+    const data = await firstValueFrom(observable);
     return data;
-  }
-  async posta(file:File, movieId:string) {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('movieId', movieId);
-    this.httpClientService.post(
-      { controller: 'Movie', action: 'UploadPhoto', queryString: `Id=${movieId}` }, formData);
-  }
-  async uploadFile(formData: FormData, movieId:string): Promise<Observable<any>> {
-    return this.httpClientService.post({ controller: 'Movie', action: 'UploadPhoto', queryString: `Id=${movieId}` }, formData);
   }
 }

@@ -17,6 +17,7 @@ export class MessageText {
     static readonly DirectorCreate = 'Yönetmenler Başarıyla Eklendi'
     static readonly PlayerDelete = "Oyuncu Başarıyla Kaldırıldı"
     static readonly DirectorDelete = "Yönetmen Başarıyla Kaldırıldı"
+    static readonly PhotoCreate = "Fotoğraf Başarıyla Eklendi"
 }
 export class ConfirmButtonText{
     static readonly Okey = "Tamam"

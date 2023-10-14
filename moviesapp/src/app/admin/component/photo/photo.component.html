@@ -1,4 +1,4 @@
-<form #photoForm="ngForm" (ngSubmit)="onUpload()">
+<form (ngSubmit)="onUpload()">
 <div class="upload-photo">
     <div class="upload-card">
         <div class="upload-header">
@@ -14,7 +14,8 @@
                     <label class="label" for="fileInput"> veya
                         <span class="upload-files">
                             <input 
-                            name="file" #files
+                            [(ngModel)]="selectedFiles"
+                            name="file" #file="ngModel"
                             style="display: none;" 
                             type="file"
                             id="fileInput"
@@ -29,14 +30,13 @@
             <div class="upload-submit">
                 <button class="upload-button" type="submit">Ekle</button>
             </div>
-            <ul class="image-preview" >
-                <li class="images" >
-                    <img />
-                    <i class="fa-solid fa-xmark fa-xl"></i>
-                    <p></p>
-                </li>
-
-            </ul>
+            <div class="image-preview">
+                <div class="images">
+                    <img *ngFor="let file of selectedFiles" [src]="file" alt="Selected Photo">
+                  <i class="fa-solid fa-xmark fa-xl"></i>
+                </div>
+              </div>
+              
         </div>
     </div>
 </div>

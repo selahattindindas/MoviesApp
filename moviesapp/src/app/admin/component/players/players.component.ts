@@ -43,7 +43,7 @@ export class PlayersComponent implements OnInit {
   create(movieId: string) {
     if (this.playerForm.valid && this.playerName.length > 0) {
       const player: Create_Player[] = this.playerName.map(name => ({
-        movieId: movieId, // Değişken "movieId" kullanılıyor
+        movieId: movieId, 
         playerNames: name
       }));
       for (const actor of player) {

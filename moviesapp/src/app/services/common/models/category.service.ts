@@ -8,7 +8,6 @@ import { SweetalertService, icon } from '../../admin/sweetalert.service';
 import { Router } from '@angular/router';
 import { JsonResponse } from 'src/app/contracts/response/response';
 
-
 @Injectable({
   providedIn: 'root',
 })

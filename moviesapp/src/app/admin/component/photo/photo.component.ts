@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { PhotoService } from 'src/app/services/common/models/photo.service';
 
@@ -9,10 +10,10 @@ import { PhotoService } from 'src/app/services/common/models/photo.service';
   styleUrls: ['./photo.component.css']
 })
 export class PhotoComponent {
-  @ViewChild('files') files: ElementRef;
-  errorMessage: string;
-  movieImageDTO: any[] = [];
+  selectedFiles: File[] = [];
+  photo: Create_Photo[];
   movieId:string = '37';
+  
   constructor(private renderer: Renderer2, private photoService:PhotoService) {}
 
   onDragOver(event: DragEvent) {
@@ -25,7 +26,7 @@ export class PhotoComponent {
     this.renderer.removeClass(event.target, 'dragging');
     this.uploadFiles(event.dataTransfer.files);
   }
-
+  
   onDrop(event: DragEvent) {
     event.preventDefault();
     this.renderer.removeClass(event.target, 'dragging');
@@ -33,24 +34,21 @@ export class PhotoComponent {
     this.uploadFiles(files);
   }
   onFileSelected(event: any) {
-    this.files = event.target.files;
+    this.selectedFiles = Array.from(event.target.files);
+  }
+
+  onUpload() {
+    if (this.selectedFiles.length === 0) 
+      return;
+
+      const photo: Create_Photo[] = this.selectedFiles.map(name => ({
+        id: this.movieId, 
+        files: name
+      }));
+
+    this.photoService.uploadPhoto(photo)
   }
   
-  onUpload() {
-    const formData = new FormData();
-    if (this.files && this.files[0]) {
-      formData.append('file', this.files[0]);
-      this.photoService.uploadFile(formData, this.movieId)
-        .then((response: any) => {
-          this.movieImageDTO = response;
-        })
-        .catch((error: HttpErrorResponse) => {
-          this.errorMessage = 'Yükleme başarısız oldu.';
-        });
-    } else {
-      this.errorMessage = 'Dosya seçilmedi.';
-    }
-  }
   private uploadFiles(files: FileList) {
     for (let i = 0; i < files.length; i++) {
       const file = files.item(i);
