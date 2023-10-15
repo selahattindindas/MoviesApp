@@ -30,6 +30,7 @@ export class DirectorsComponent implements OnInit {
         this.director = directorData as List_Director[];
         this.movieId = params['id'];
       }
+      console.log(directorData);
     });
   }
 

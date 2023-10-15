@@ -1,7 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
+import { List_Photo } from 'src/app/contracts/photo/list-photo';
 import { PhotoService } from 'src/app/services/common/models/photo.service';
 
 @Component({
@@ -9,12 +11,16 @@ import { PhotoService } from 'src/app/services/common/models/photo.service';
   templateUrl: './photo.component.html',
   styleUrls: ['./photo.component.css']
 })
-export class PhotoComponent {
+export class PhotoComponent implements OnInit {
   selectedFiles: File[] = [];
   photo: Create_Photo[];
   movieId:string = '37';
-  
-  constructor(private renderer: Renderer2, private photoService:PhotoService) {}
+  getPhoto: List_Photo[] = [];
+  constructor(private renderer: Renderer2, private photoService:PhotoService, private route:ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.getPhotoAll();    
+  }
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -48,7 +54,11 @@ export class PhotoComponent {
 
     this.photoService.uploadPhoto(photo)
   }
-  
+  getPhotoAll() {
+    this.photoService.GetPhotosMovieById(this.movieId).then(moviePhotos => {
+      this.getPhoto.push(moviePhotos as List_Photo);
+    });
+  }
   private uploadFiles(files: FileList) {
     for (let i = 0; i < files.length; i++) {
       const file = files.item(i);

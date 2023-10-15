@@ -1,43 +1,38 @@
 <form (ngSubmit)="onUpload()">
-<div class="upload-photo">
-    <div class="upload-card">
-        <div class="upload-header">
-            <h1>Fotoğraf Yükleme</h1>
-        </div>
-        <div class="upload-container">
-            <div class="upload-area" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
-                <div class="upload-icon">
-                    <img src="assets/img/upload_img.png">
+    <div class="upload-photo">
+        <div class="upload-card">
+            <div class="upload-header">
+                <h1>Fotoğraf Yükleme</h1>
+            </div>
+            <div class="upload-container">
+                <div class="upload-area" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+                    (drop)="onDrop($event)">
+                    <div class="upload-icon">
+                        <img src="assets/img/upload_img.png">
+                    </div>
+                    <div class="upload-content">
+                        <h3 class="upload-message">Bir dosyayı sürükleyip bırakın</h3>
+                        <label class="label" for="fileInput"> veya
+                            <span class="upload-files">
+                                <input [(ngModel)]="selectedFiles" name="file" #file="ngModel" style="display: none;"
+                                    type="file" id="fileInput" multiple (change)="onFileSelected($event)"
+                                    accept="image/*" />
+                                <span class="upload-files-text">dosya seçin</span>
+                            </span>
+                        </label>
+                    </div>
                 </div>
-                <div class="upload-content">
-                    <h3 class="upload-message">Bir dosyayı sürükleyip bırakın</h3>
-                    <label class="label" for="fileInput"> veya
-                        <span class="upload-files">
-                            <input 
-                            [(ngModel)]="selectedFiles"
-                            name="file" #file="ngModel"
-                            style="display: none;" 
-                            type="file"
-                            id="fileInput"
-                            multiple
-                            (change)="onFileSelected($event)"
-                            accept="image/*" />
-                            <span class="upload-files-text">dosya seçin</span>
-                        </span>
-                    </label>
+                <div class="upload-submit">
+                    <button class="upload-button" type="submit">Ekle</button>
+                </div>
+                <div class="image-preview" *ngFor="let item of getPhoto">
+                    <div class="images" *ngFor="let photo of item.photos">
+                        <img [src]="'photo/' + photo.path" alt="Image">
+                        <p>File Name: {{ photo.fileName }}</p>
+                        <i class="fa-solid fa-xmark fa-xl"></i>
+                    </div>
                 </div>
             </div>
-            <div class="upload-submit">
-                <button class="upload-button" type="submit">Ekle</button>
-            </div>
-            <div class="image-preview">
-                <div class="images">
-                    <img *ngFor="let file of selectedFiles" [src]="file" alt="Selected Photo">
-                  <i class="fa-solid fa-xmark fa-xl"></i>
-                </div>
-              </div>
-              
         </div>
     </div>
-</div>
 </form>
