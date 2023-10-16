@@ -27,8 +27,8 @@
                 </div>
                 <div class="image-preview" *ngFor="let item of getPhoto">
                     <div class="images" *ngFor="let photo of item.photos">
-                        <img [src]="'photo/' + photo.path" alt="Image">
-                        <p>File Name: {{ photo.fileName }}</p>
+                        <img src="{{photo.path}}">
+                        <p>{{photo.fileName}}</p>
                         <i class="fa-solid fa-xmark fa-xl"></i>
                     </div>
                 </div>

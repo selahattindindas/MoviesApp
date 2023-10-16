@@ -1,6 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { List_Photo } from 'src/app/contracts/photo/list-photo';
@@ -14,8 +12,9 @@ import { PhotoService } from 'src/app/services/common/models/photo.service';
 export class PhotoComponent implements OnInit {
   selectedFiles: File[] = [];
   photo: Create_Photo[];
-  movieId:string = '37';
+  movieId:string;
   getPhoto: List_Photo[] = [];
+
   constructor(private renderer: Renderer2, private photoService:PhotoService, private route:ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -39,10 +38,14 @@ export class PhotoComponent implements OnInit {
     const files = event.dataTransfer.files;
     this.uploadFiles(files);
   }
-  onFileSelected(event: any) {
-    this.selectedFiles = Array.from(event.target.files);
-  }
 
+  onFileSelected(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files) {
+      this.selectedFiles = Array.from(inputElement.files);
+    }
+  }
+  
   onUpload() {
     if (this.selectedFiles.length === 0) 
       return;
@@ -55,14 +58,15 @@ export class PhotoComponent implements OnInit {
     this.photoService.uploadPhoto(photo)
   }
   getPhotoAll() {
-    this.photoService.GetPhotosMovieById(this.movieId).then(moviePhotos => {
+    const params = this.route.snapshot.params;
+    this.photoService.GetPhotosMovieById(params['id']).then(moviePhotos => {
       this.getPhoto.push(moviePhotos as List_Photo);
+      this.movieId = params['id'];
     });
   }
   private uploadFiles(files: FileList) {
-    for (let i = 0; i < files.length; i++) {
-      const file = files.item(i);
-      console.log('File selected:', file);
+    if (files) {
+      this.selectedFiles = Array.from(files);
     }
-  }
+  }  
 }
