@@ -64,6 +64,11 @@ export class PhotoComponent implements OnInit {
       this.movieId = params['id'];
     });
   }
+  removePhoto(id:string){
+    this.photoService.DeletePhoto(id).then(()=>{
+      this.getPhotoAll();
+    })
+  }
   private uploadFiles(files: FileList) {
     if (files) {
       this.selectedFiles = Array.from(files);

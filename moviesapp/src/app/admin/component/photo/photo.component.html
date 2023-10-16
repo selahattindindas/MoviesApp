@@ -27,9 +27,10 @@
                 </div>
                 <div class="image-preview" *ngFor="let item of getPhoto">
                     <div class="images" *ngFor="let photo of item.photos">
-                        <img src="{{photo.path}}">
+                        <img [src]="photo.path">
                         <p>{{photo.fileName}}</p>
-                        <i class="fa-solid fa-xmark fa-xl"></i>
+                        <p>{{photo.id}}</p>
+                        <i class="fa-solid fa-xmark fa-xl" (click)="removePhoto(photo.id)"></i>
                     </div>
                 </div>
             </div>
