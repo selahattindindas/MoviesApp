@@ -1,4 +1,5 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { List_Photo } from 'src/app/contracts/photo/list-photo';
@@ -10,15 +11,16 @@ import { PhotoService } from 'src/app/services/common/models/photo.service';
   styleUrls: ['./photo.component.css']
 })
 export class PhotoComponent implements OnInit {
+  @ViewChild("photoForm", { static: true }) photoForm: NgForm
+  movieId: string;
   selectedFiles: File[] = [];
   photo: Create_Photo[];
-  movieId:string;
   getPhoto: List_Photo[] = [];
 
-  constructor(private renderer: Renderer2, private photoService:PhotoService, private route:ActivatedRoute) {}
+  constructor(private renderer: Renderer2, private photoService: PhotoService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getPhotoAll();    
+    this.getPhotoAll();
   }
 
   onDragOver(event: DragEvent) {
@@ -31,7 +33,7 @@ export class PhotoComponent implements OnInit {
     this.renderer.removeClass(event.target, 'dragging');
     this.uploadFiles(event.dataTransfer.files);
   }
-  
+
   onDrop(event: DragEvent) {
     event.preventDefault();
     this.renderer.removeClass(event.target, 'dragging');
@@ -45,33 +47,47 @@ export class PhotoComponent implements OnInit {
       this.selectedFiles = Array.from(inputElement.files);
     }
   }
-  
+
   onUpload() {
-    if (this.selectedFiles.length === 0) 
+    if (this.selectedFiles.length === 0 && this.photoForm.valid)
       return;
 
-      const photo: Create_Photo[] = this.selectedFiles.map(name => ({
-        id: this.movieId, 
-        files: name
-      }));
+    const photo: Create_Photo[] = this.selectedFiles.map(name => ({
+      id: this.movieId,
+      files: name
+    }));
 
-    this.photoService.uploadPhoto(photo)
+    this.photoService.uploadPhoto(photo);
   }
   getPhotoAll() {
     const params = this.route.snapshot.params;
     this.photoService.GetPhotosMovieById(params['id']).then(moviePhotos => {
-      this.getPhoto.push(moviePhotos as List_Photo);
-      this.movieId = params['id'];
+      if (moviePhotos) {
+        this.getPhoto.push(moviePhotos as List_Photo);
+        this.movieId = params['id'];
+      }
     });
   }
-  removePhoto(id:string){
-    this.photoService.DeletePhoto(id).then(()=>{
-      this.getPhotoAll();
-    })
+
+  removePhoto(index: number) {
+    if (index >= 0 && index < this.selectedFiles.length) {
+      this.selectedFiles.splice(index, 1);
+    }
   }
-  private uploadFiles(files: FileList) {
+
+  deletePhoto(id: string) {
+    this.photoService.DeletePhoto(id).then(() => {
+      this.getPhoto = this.getPhoto.map(photoItem => {
+        return photoItem.photos
+          ? { ...photoItem, photos: photoItem.photos.filter(photo => photo.id !== id) }
+          : photoItem;
+      });
+    });
+  }
+
+  uploadFiles(files: FileList) {
     if (files) {
       this.selectedFiles = Array.from(files);
     }
-  }  
+  }
 }

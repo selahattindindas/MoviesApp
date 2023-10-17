@@ -86,7 +86,7 @@ export class PhotoService {
 
         this.sweetAlertService.showAlert(
           MessageTitle.Success,
-          MessageText.MovieDelete,
+          MessageText.PhotoDelete,
           icon.Success,
           false,
           ConfirmButtonText.Okey,

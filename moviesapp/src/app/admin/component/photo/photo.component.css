@@ -62,7 +62,6 @@ label{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 .upload-button {
@@ -79,35 +78,16 @@ label{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: 10px;
 }
 .image-preview img{
     width: 250px;
     height: 200px;
 }
-ul{
-    list-style: none;
-}
-li{
-    padding: 10px;
-    border: 1px solid #ccc;
-    position: relative;
-}
-li p {
-    text-align: center;
-    margin-top: 5px;
-    color: #000;
-    font-size: 15px;
-    font-weight: 800;
-}
-li i {
-    position: absolute;
-    top: 0;
-    right: -7px;
-}
+
 @media (max-width: 767px) {
     .upload-container {
         background-color: transparent;
+        background-color: #fff;
         box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
         border-radius: 40px;
         width: 90%; /* Genişliği yüzde cinsinden ayarlıyoruz */
@@ -119,7 +99,7 @@ li i {
     
     .upload-area {
         
-        color:#ccc;
+        color:#0e0d0d;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -165,16 +145,6 @@ li i {
         width: 100%;
         height: auto;
     }
-    li{
-        margin-bottom: 25px;
-    }
-    li p {
-        font-size: 13px;
-        color: #ccc;
-  }
-  i{
-    color: #fff;
-  }
 }
   
   

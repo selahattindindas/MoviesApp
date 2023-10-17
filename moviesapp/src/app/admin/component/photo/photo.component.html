@@ -1,4 +1,4 @@
-<form (ngSubmit)="onUpload()">
+<form #photoForm="ngForm" (ngSubmit)="onUpload()">
     <div class="upload-photo">
         <div class="upload-card">
             <div class="upload-header">
@@ -11,12 +11,16 @@
                         <img src="assets/img/upload_img.png">
                     </div>
                     <div class="upload-content">
-                        <h3 class="upload-message">Bir dosyayı sürükleyip bırakın</h3>
+                        <ng-container *ngIf="selectedFiles.length > 0; else noPhotos">
+                            <h3 class="upload-message"> {{ selectedFiles.length }} Fotoğraf Eklendi</h3>
+                        </ng-container>
+                        <ng-template #noPhotos>
+                            <h3 class="upload-message">Bir dosyayı sürükleyip bırakın</h3>
+                        </ng-template>
                         <label class="label" for="fileInput"> veya
                             <span class="upload-files">
-                                <input [(ngModel)]="selectedFiles" name="file" #file="ngModel" style="display: none;"
-                                    type="file" id="fileInput" multiple (change)="onFileSelected($event)"
-                                    accept="image/*" />
+                                <input id="fileInput" type="file" (change)="onFileSelected($event)" multiple
+                                    style="display: none;">
                                 <span class="upload-files-text">dosya seçin</span>
                             </span>
                         </label>
@@ -25,12 +29,17 @@
                 <div class="upload-submit">
                     <button class="upload-button" type="submit">Ekle</button>
                 </div>
+                <div class="image-files" *ngFor="let photo of selectedFiles; let i = index">
+                    <div class="image-name">
+                        <p>{{photo.name}}</p>
+                        <i class="fa-solid fa-xmark fa-xl" (click)="removePhoto(i)"></i>
+                    </div>
+                </div>
                 <div class="image-preview" *ngFor="let item of getPhoto">
                     <div class="images" *ngFor="let photo of item.photos">
                         <img [src]="photo.path">
                         <p>{{photo.fileName}}</p>
-                        <p>{{photo.id}}</p>
-                        <i class="fa-solid fa-xmark fa-xl" (click)="removePhoto(photo.id)"></i>
+                        <i class="fa-solid fa-xmark fa-xl" (click)="deletePhoto(photo.id)"></i>
                     </div>
                 </div>
             </div>
