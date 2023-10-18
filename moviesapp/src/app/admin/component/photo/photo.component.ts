@@ -23,7 +23,10 @@ export class PhotoComponent implements OnInit {
     console.log('movieId:', this.movieId);
     this.getPhotoAll();
   }
-
+ 
+  toggleComponent() {
+     location.reload();
+  }
   onDragOver(event: DragEvent) {
     event.preventDefault();
     this.renderer.addClass(event.target, 'dragging');

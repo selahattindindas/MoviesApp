@@ -39,7 +39,6 @@ import { DirectorsComponent } from './directors/directors.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-
   ],
   providers: [AdminlayoutComponent],
 })

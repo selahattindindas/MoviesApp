@@ -7,10 +7,16 @@
 
 .upload-header {
     color: #fff;
-    margin-top: 6rem;
+    margin-top: 4rem;
     padding-bottom: 3rem;
     text-align: center;
 }
+.custom-dialog {
+    background-color: rgba(0, 0, 0, 0.5);
+    max-height: 80%;
+    overflow-y: auto; 
+  }
+  
 .upload-header h1{
     font-size: 40px;
     font-weight: 800;
@@ -20,7 +26,7 @@
     box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
     border-radius: 40px;
     width: 40rem;
-
+    padding: 0 0 50px 0;
 }
 
 .upload-area {
@@ -122,7 +128,7 @@ label{
     margin-top: 10px;
   }
   
-  i {
+  .images i {
     position: absolute;
     top: 0; 
     right: -5px;
@@ -131,6 +137,10 @@ label{
   .upload-cancel {
     display: flex;
     justify-content: flex-end;
+    padding: 2rem;
+  }
+  .upload-cancel i {
+    color:#1d5e48
   }
   
   .upload-cancel button {

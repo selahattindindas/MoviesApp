@@ -1,4 +1,4 @@
-<form #photoForm="ngForm" (ngSubmit)="onUpload()">
+<form #photoForm="ngForm" (ngSubmit)="onUpload()">    
     <div class="upload-photo">
         <div class="upload-card">
             <div class="upload-header">
@@ -6,7 +6,7 @@
             </div>
             <div class="upload-container">
                 <div class="upload-cancel">
-                    <button routerLink="/Admin/Movies-List">X</button>
+                    <i class="fa-regular fa-rectangle-xmark fa-2xl" (click)="toggleComponent()"></i>
                 </div>
                 <div class="upload-area" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
                     (drop)="onDrop($event)">

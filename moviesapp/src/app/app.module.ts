@@ -5,18 +5,16 @@ import { AppComponent } from './app.component';
 import { UiRoutingModule } from './ui/ui-routing.module';
 import { UiModule } from './ui/component/component.module';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router'; 
 import { FormsModule } from '@angular/forms';
 import { AdminModule } from './admin/component/component.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AdminRouting } from './admin/admin-routing.module';
 import { environment } from './environments/environment';
-import { MatDialogModule } from '@angular/material/dialog';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,16 +23,14 @@ import { MatDialogModule } from '@angular/material/dialog';
     AdminModule,
     AdminRouting,
     HttpClientModule,
-    RouterModule,
+    RouterModule, 
     FormsModule,
     SweetAlert2Module,
-    MatDialogModule,
-    
+    NgbModule
   ],
   providers: [
     { provide: 'baseUrl', useValue: environment.apiUrl, multi: true }
   ],
   bootstrap: [AppComponent],
-
 })
 export class AppModule { }
