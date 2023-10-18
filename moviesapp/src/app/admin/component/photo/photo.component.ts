@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
@@ -6,13 +6,13 @@ import { List_Photo } from 'src/app/contracts/photo/list-photo';
 import { PhotoService } from 'src/app/services/common/models/photo.service';
 
 @Component({
-  selector: 'app-photo',
+  selector: 'movie-photo',
   templateUrl: './photo.component.html',
   styleUrls: ['./photo.component.css']
 })
 export class PhotoComponent implements OnInit {
   @ViewChild("photoForm", { static: true }) photoForm: NgForm
-  movieId: string;
+  @Input() movieId: string;
   selectedFiles: File[] = [];
   photo: Create_Photo[];
   getPhoto: List_Photo[] = [];
@@ -20,6 +20,7 @@ export class PhotoComponent implements OnInit {
   constructor(private renderer: Renderer2, private photoService: PhotoService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    console.log('movieId:', this.movieId);
     this.getPhotoAll();
   }
 
@@ -30,13 +31,11 @@ export class PhotoComponent implements OnInit {
 
   onDragLeave(event: DragEvent) {
     event.preventDefault();
-    this.renderer.removeClass(event.target, 'dragging');
     this.uploadFiles(event.dataTransfer.files);
   }
 
   onDrop(event: DragEvent) {
     event.preventDefault();
-    this.renderer.removeClass(event.target, 'dragging');
     const files = event.dataTransfer.files;
     this.uploadFiles(files);
   }
@@ -60,11 +59,9 @@ export class PhotoComponent implements OnInit {
     this.photoService.uploadPhoto(photo);
   }
   getPhotoAll() {
-    const params = this.route.snapshot.params;
-    this.photoService.GetPhotosMovieById(params['id']).then(moviePhotos => {
+    this.photoService.GetPhotosMovieById(this.movieId).then(moviePhotos => {
       if (moviePhotos) {
         this.getPhoto.push(moviePhotos as List_Photo);
-        this.movieId = params['id'];
       }
     });
   }

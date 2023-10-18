@@ -16,37 +16,6 @@ export class PhotoService {
 
   constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
 
-  async uploadPhoto(files: Create_Photo[]) {
-    const formData: FormData = new FormData();
-    files.forEach(photo => {
-      formData.append('Files', photo.files, photo.files.name);
-    });
-  
-    const id = `Id=${files.map(photo => photo.id).join('&Id=')}`;
-    const observable: Observable<unknown> = this.httpClientService.post(
-      {
-        controller: 'Movie',
-        action: 'UploadPhoto',
-        queryString: id
-      },
-      formData
-    );
-  
-    this.sweetAlertService.showAlert(
-      MessageTitle.Success,
-      MessageText.PhotoCreate,
-      icon.Success,
-      false,
-      ConfirmButtonText.Okey,
-      3
-    );
-  
-    this.router.navigate(['/Admin', 'Movies-List']);
-  
-    const response = await firstValueFrom(observable);
-    return response;
-  }
-    
   async GetPhotosMovieById(movieId: string): Promise<List_Photo | string> {
     const observable: Observable<JsonResponse<List_Photo>> = this.httpClientService.get({
       controller: 'Movie',
@@ -66,35 +35,58 @@ export class PhotoService {
       return response.statusMessage;
     }
   }
-  async DeletePhoto(id: string){
-    try {
-      const result = await this.sweetAlertService.showAlert(
-        MessageTitle.DeletedQuestion,
-        MessageText.NoTurningBack,
-        icon.Warning,
-        true,
+
+  async uploadPhoto(files: Create_Photo[]) {
+    const formData: FormData = new FormData();
+    files.forEach(photo => {
+      formData.append('Files', photo.files, photo.files.name);
+    });
+
+    const id = `Id=${files.map(photo => photo.id).join('&Id=')}`;
+    const observable: Observable<unknown> = this.httpClientService.post(
+      {
+        controller: 'Movie',
+        action: 'UploadPhoto',
+        queryString: id
+      },
+      formData
+    );
+
+    this.sweetAlertService.showAlert(
+      MessageTitle.Success,
+      MessageText.PhotoCreate,
+      icon.Success,
+      false,
+      ConfirmButtonText.Okey,
+      3
+    );
+
+    this.router.navigate(['/Admin', 'Movies-List']);
+
+    const response = await firstValueFrom(observable);
+    return response;
+  }
+
+  async DeletePhoto(id: string) {
+    const observable: Observable<JsonResponse<unknown>> = this.httpClientService.delete({
+      controller: 'Movie',
+      action: 'DeleteMoviePhoto'
+    }, id);
+
+    const response = await firstValueFrom(observable);
+
+    if (response.statusCode == 200) {
+      this.sweetAlertService.showAlert(
+        MessageTitle.Success,
+        MessageText.PhotoDelete,
+        icon.Success,
+        false,
         ConfirmButtonText.Okey,
-        undefined,
-        CancelButtonText.Cancel
+        3
       );
-
-      if (result.isConfirmed) {
-        await firstValueFrom(this.httpClientService.delete({
-          controller: 'Movie',
-          action: 'DeleteMoviePhoto'
-        }, id));
-
-        this.sweetAlertService.showAlert(
-          MessageTitle.Success,
-          MessageText.PhotoDelete,
-          icon.Success,
-          false,
-          ConfirmButtonText.Okey,
-          3
-        );
-      }
-    } catch (error) {
-      console.error(error);
+      return response.result
+    } else {
+      return response.statusMessage
     }
   }
 }

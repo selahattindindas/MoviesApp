@@ -1,6 +1,9 @@
 <section>
   <div class="movie-list">
     <h1>Film Listesi</h1>
+    <div class="centered-overlay" *ngIf="photoComponent">
+      <movie-photo [movieId]="selectedMovieId"></movie-photo>
+    </div>
     <div class="movie-search-button-container">
       <div class="movie-search">
         <input placeholder="Film Ara" [(ngModel)]="filterText" />
@@ -17,9 +20,10 @@
             <th>Film Kategori</th>
             <th>Film Platform</th>
             <th>Vizyon Tarihi</th>
-            <th>Film İşlemleri</th>
             <th>Kadro İşlemleri</th>
             <th>Fotoğraf İşlemleri</th>
+            <th>Film İşlemleri</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -29,14 +33,14 @@
             <td>{{ movie.platformName }}</td>
             <td>{{ movie.releaseDate }}</td>
             <td>
-              <i class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Edit', movie.id]"></i>
-              <i class="fa-solid fa-trash fa-lg delete" (click)="deleteMovie(movie.id)"></i>
-            </td>
-            <td>
               <i class="fa-solid fa-square-minus fa-lg actor" [routerLink]="['Create-Players', movie.id]"></i>
               <i class="fa-solid fa-square-minus fa-lg director" [routerLink]="['Create-Director', movie.id]"></i>
             </td>
-            <td><i class="fa-solid fa-image fa-lg" [routerLink]="['Create-Photo', movie.id]"></i></td>
+            <td><i class="fa-solid fa-image fa-lg" (click)="photoContents(movie.id)"></i></td>
+            <td>
+              <i class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Edit', movie.id]"></i>
+              <i class="fa-solid fa-trash fa-lg delete" (click)="deleteMovie(movie.id)"></i>
+            </td>
           </tr>
         <tbody>
       </table>

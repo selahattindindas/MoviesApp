@@ -11,6 +11,8 @@ import { AdminModule } from './admin/component/component.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AdminRouting } from './admin/admin-routing.module';
 import { environment } from './environments/environment';
+import { MatDialogModule } from '@angular/material/dialog';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +28,7 @@ import { environment } from './environments/environment';
     RouterModule,
     FormsModule,
     SweetAlert2Module,
+    MatDialogModule,
     
   ],
   providers: [

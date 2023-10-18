@@ -85,6 +85,20 @@ i{
   margin: 0 10px;
   cursor: pointer;
 }
+.centered-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; 
+  backdrop-filter: blur(10px); 
+}
+
+
 @media (max-width: 767px) {
   .movie-list {
     margin: 0 2rem;
@@ -92,7 +106,7 @@ i{
   }
   .lg-table {
     display: block;
-    flex-direction: column; /* Change to display columns */
+    flex-direction: column;
     font-size: 14px;
     border: 1px solid #4c4c4d;
   }
@@ -124,13 +138,13 @@ i{
   }
   .lg-table td,
   .lg-table th {
-    padding: 20px 0.625em 20px 0.625em; /* Remove horizontal padding */
-    height: auto; /* Adjust height */
+    padding: 20px 0.625em 20px 0.625em; 
+    height: auto; 
     vertical-align: middle;
     box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: auto;
-    width: 100%; /* Full width */
+    width: 100%;
     font-size: 13px;
     text-overflow: ellipsis;
   }
