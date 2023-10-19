@@ -16,6 +16,7 @@ import { LimitPipe } from 'src/app/shared/limit-pipe';
 import { PhotoComponent } from './photo/photo.component';
 import { PlayersComponent } from './players/players.component';
 import { DirectorsComponent } from './directors/directors.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -32,13 +33,14 @@ import { DirectorsComponent } from './directors/directors.component';
     LimitPipe,
     PhotoComponent,
     PlayersComponent,
-    DirectorsComponent
+    DirectorsComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [AdminlayoutComponent],
 })

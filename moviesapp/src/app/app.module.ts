@@ -11,7 +11,7 @@ import { AdminModule } from './admin/component/component.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AdminRouting } from './admin/admin-routing.module';
 import { environment } from './environments/environment';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RouterModule, 
     FormsModule,
     SweetAlert2Module,
-    NgbModule
+    MatDialogModule
   ],
   providers: [
     { provide: 'baseUrl', useValue: environment.apiUrl, multi: true }

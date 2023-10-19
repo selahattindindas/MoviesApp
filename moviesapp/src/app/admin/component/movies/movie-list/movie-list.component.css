@@ -98,9 +98,7 @@ i{
   backdrop-filter: blur(10px);
   overflow: auto;
 }
-.custom-dialog-container{
-  background: red;
-}
+
 .centered-overlay::after {
   position: fixed;
   top: 0;

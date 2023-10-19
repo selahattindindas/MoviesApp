@@ -3,8 +3,6 @@
     "@angular/animations": "^16.2.8",
     "@angular/cdk": "^16.2.7",
     "@angular/cli": "^16.2.3",
-    "@angular/material": "^16.2.7",
-    "@ng-bootstrap/ng-bootstrap": "^15.1.1",
     "@sweetalert2/ngx-sweetalert2": "^12.2.0",
     "rxjs": "^7.8.1",
     "sweetalert2": "^11.7.29"

@@ -13,14 +13,14 @@ import { PlayersComponent } from './component/players/players.component';
 const route: Route[] = [
   {
     path: 'Admin',
-    redirectTo: 'Admin/Anasayfa',
+    redirectTo: 'Admin',
     pathMatch: 'full'
   },
   {
     path: 'Admin',
     component: AdminlayoutComponent,
     children: [
-      { path: 'Anasayfa', component: AdminHomeComponent },
+      { path: '', component: AdminHomeComponent },
       {
         path: 'Movies-List',
         children: [
