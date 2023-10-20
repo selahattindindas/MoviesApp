@@ -1,13 +1,8 @@
-<mat-dialog-content class="mat-content">
-    <form #photoForm="ngForm" (ngSubmit)="onUpload()">
+
+
+ <form #photoForm="ngForm" (ngSubmit)="onUpload()">
         <div class="upload-photo">
             <div class="upload-card">
-                <div class="upload-cancel">
-                    <i class="fa-regular fa-rectangle-xmark fa-2xl" (click)="closeDialog()"></i>
-                </div>
-                <div class="upload-header">
-                    <h1>Fotoğraf Yükleme</h1>
-                </div>
                 <div class="upload-container">
                     <div class="upload-area" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
                         (drop)="onDrop($event)">
@@ -71,4 +66,3 @@
             </div>
         </div>
     </form>
-</mat-dialog-content>

@@ -34,7 +34,7 @@
               <i class="fa-solid fa-square-minus fa-lg actor" [routerLink]="['Create-Players', movie.id]"></i>
               <i class="fa-solid fa-square-minus fa-lg director" [routerLink]="['Create-Director', movie.id]"></i>
             </td>
-            <td><i class="fa-solid fa-image fa-lg" (click)="openDialog(movie.id)"></i></td>
+            <td><i class="fa-solid fa-image fa-lg" (click)="photoContents(movie.id)"></i></td>
             <td>
               <i class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Edit', movie.id]"></i>
               <i class="fa-solid fa-trash fa-lg delete" (click)="deleteMovie(movie.id)"></i>

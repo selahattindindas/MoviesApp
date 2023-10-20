@@ -11,11 +11,7 @@
     text-align: center;
 }
 
-.custom-dialog {
-    background-color: rgba(0, 0, 0, 0.5);
-    max-height: 80%;
-    overflow-y: auto;
-}
+
 
 .upload-header h1 {
     font-size: 40px;

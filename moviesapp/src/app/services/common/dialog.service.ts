@@ -1,40 +1,41 @@
-import { ComponentType } from '@angular/cdk/portal';
+import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
-import { DialogPosition, MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DialogService {
-  constructor(private dialog: MatDialog) {}
+  constructor(private overlay: Overlay) {}
 
-  openDialog(dialogParameters: Partial<DialogParameters>): void {
-    const dialogRef = this.dialog.open(dialogParameters.componentType, {
-      width: dialogParameters.options?.width,
-      height: dialogParameters.options?.height,
-      position: dialogParameters.options?.position,
-      data: dialogParameters.data,
-      panelClass: dialogParameters.options?.panelClass, 
 
+
+   createDialog<T>(dialogParameters: Partial<DialogParameters<T>>): OverlayRef {
+    const defaultOptions = new DialogOptions();
+    const options = { ...defaultOptions, ...dialogParameters.options };
+
+    const config = new OverlayConfig({
+      width: options.width,
+      height: options.height,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result == dialogParameters.data)
-        dialogParameters.afterClosed();
-    });
+    const dialogRef = this.overlay.create(config);
+
+    const componentPortal = new ComponentPortal(dialogParameters.componentType);
+    const componentRef = componentPortal.attach(dialogRef);
+    
+
+    return dialogRef;
   }
 }
 
-export class DialogParameters {
-  componentType: ComponentType<any>;
+export class DialogParameters<T> {
+  componentType: ComponentType<T>;
   data: any;
-  afterClosed: () => void;
   options?: Partial<DialogOptions> = new DialogOptions();
 }
 
 export class DialogOptions {
-  width?: string;
+  width?: string = "250px";
   height?: string;
-  position?: DialogPosition;
-  panelClass?: string | string[]; // PanelClass ekleniyor
 }

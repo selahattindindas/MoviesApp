@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { List_Photo } from 'src/app/contracts/photo/list-photo';
 import { PhotoService } from 'src/app/services/common/models/photo.service';
@@ -15,17 +15,14 @@ export class PhotoComponent implements OnInit {
   selectedFiles: File[] = [];
   photo: Create_Photo[];
   getPhoto: List_Photo[] = [];
+  movieId:string;
 
-  constructor(private renderer: Renderer2, private photoService: PhotoService, private dialogRef: MatDialogRef<PhotoComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private renderer: Renderer2, private photoService: PhotoService) { }
 
   ngOnInit(): void {
     this.getPhotoAll();
-    console.log('movieId:', this.data.movieId);
   }
-  closeDialog(): void {
-    this.dialogRef.close();
-  }
+
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -55,16 +52,16 @@ export class PhotoComponent implements OnInit {
       return;
 
     const photo: Create_Photo[] = this.selectedFiles.map(name => ({
-      id: this.data.movieId,
+      id: this.movieId,
       files: name
     }));
 
     this.photoService.uploadPhoto(photo).then(() =>{
-      this.closeDialog();
+
     });
   }
   getPhotoAll() {
-    this.photoService.GetPhotosMovieById(this.data.movieId).then(moviePhotos => {
+    this.photoService.GetPhotosMovieById(this.movieId).then(moviePhotos => {
       if (moviePhotos) {
         this.getPhoto.push(moviePhotos as List_Photo);
       }
