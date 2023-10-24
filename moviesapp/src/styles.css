@@ -15,7 +15,12 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.ses {
-  backdrop-filter: blur(10px);
-}
 
+.error-message {
+  color: red;
+  font-size: 13px;
+  padding: 1px 0 0 3px;
+}
+.success {
+  border: 2px solid green;
+}

@@ -7,22 +7,8 @@ import { PhotoComponent } from '../photo/photo.component';
   styleUrls: ['./admin-home.component.css']
 })
 export class AdminHomeComponent implements OnInit {
-  modalRef: MdbModalRef<PhotoComponent> | null = null;
-  
-  constructor(private modalService: MdbModalService){}
-  ngOnInit(): void {   
-  }
-  openModal() {
-    this.modalRef = this.modalService.open(PhotoComponent,{
-      modalClass: 'modal-dialog-centered modal-lg',
-      containerClass: 'ses'
-    })
-  }
-  openDialog() {
-    document.getElementById('myModal').style.display = 'block';
-  }
-
-  closeDialog() {
-    document.getElementById('myModal').style.display = 'none';
-  }
+ constructor(){}
+  ngOnInit(): void {
+     
+ }
 }

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
@@ -15,15 +15,17 @@ export class PhotoComponent implements OnInit {
   selectedFiles: File[] = [];
   photo: Create_Photo[];
   getPhoto: List_Photo[] = [];
-  movieId:string;
-
+  @Input() movieId:string;
+  @ViewChild('exampleModalLong') exampleModalLong: any;
   constructor(private renderer: Renderer2, private photoService: PhotoService) { }
 
   ngOnInit(): void {
     this.getPhotoAll();
   }
 
-
+  closeModal() {
+    this.exampleModalLong.hide();
+  }
   onDragOver(event: DragEvent) {
     event.preventDefault();
     this.renderer.addClass(event.target, 'dragging');
