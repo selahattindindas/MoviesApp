@@ -11,49 +11,73 @@
         <div class="create-main">
           <div class="create-contents">
             <div class="label-input">
-              <label for="movieName">Film Adı</label>
-              <input class="form-control" type="text" placeholder="Filmin adını yazınız" formControlName="name"/>
-              <div class="error-message"
-                *ngIf="createForm.get('name').hasError('messageMinLength') || createForm.get('name').hasError('required') ">
-                {{ createForm.get('name').getError('messageMinLength') || createForm.get('name').getError('required')}}
-              </div>
+              <label for="filmAdi">Film Adı</label>
+              <input class="create-input" type="text" placeholder="Filmin adını yazınız" formControlName="name"
+              [ngClass]="{invalidRed: isValidTemplate('name')}"/>           
+              <div class="error-message" *ngIf="isValid('name')">
+                <small *ngIf="createForm.get('name')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
+                <small *ngIf="createForm.get('name')?.errors?.['minlength']">Lütfen minimum 5 karakter giriniz.</small>
+              </div>   
             </div>
-            
           </div>
           <div class="create-contents">
             <div class="label-input">
               <label for="movie-category">Film Kategorisi</label>
               <div class="custom-select">
-                <select class="form-control" formControlName="categoryId">
-                  <option *ngFor="let category of categoryEnum" [value]="category.value">{{ category.description }}
-                  </option>
-                </select>
+                <select class="form-control create-select" formControlName="categoryId" [ngClass]="{invalidRed: isValidTemplate('categoryId')}">
+                <option *ngFor="let category of categoryEnum" [value]="category.value">{{ category.description }}
+                </option>
+              </select>  
+              <div class="error-message" *ngIf="isValid('categoryId')">
+                <small>
+                  {{ createForm.get('categoryId').getError('categorySelected') }}
+                </small>
+              </div>              
               </div>
             </div>
-            <div class="label-input">
+             <div class="label-input">
               <label for="movie-category">Film Platformu</label>
               <div class="custom-select">
-                <select class="form-control" formControlName="platformId">
-                  <option *ngFor="let platform of platformEnum" [value]="platform.value">{{ platform.description }}
-                  </option>
-                </select>
+                <select class="form-control create-select" formControlName="platformId" [ngClass]="{invalidRed: isValidTemplate('platformId')}">
+                <option *ngFor="let platform of platformEnum" [value]="platform.value">{{ platform.description }}
+                </option>
+              </select>
+              <div class="error-message" *ngIf="isValid('platformId')">
+                <small>
+                  {{ createForm.get('platformId').getError('categorySelected') }}
+                </small>
+              </div>           
               </div>
-            </div>
+            </div> 
           </div>
           <div class="create-contents">
             <div class="label-input">
               <label for="date">Film Vizyon Tarihi</label>
-              <input type="date" formControlName="date" />
+              <input class="create-input" type="date" formControlName="date" [ngClass]="{invalidRed: isValidTemplate('date')}"/>
+              <div class="error-message" *ngIf="isValid('date')">
+                <small *ngIf="createForm.get('date')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
+              </div>  
             </div>
             <div class="label-input">
               <label for="time">Film Süresi</label>
-              <input type="text" formControlName="time" />
+              <input class="create-input" type="number" formControlName="time" [ngClass]="{invalidRed: isValidTemplate('time')}"/>
+              <div class="error-message" *ngIf="isValid('time')">
+                <small *ngIf="createForm.get('time')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
+                <small *ngIf="createForm.get('time')?.errors?.['min']">Lütfen minimum 30 dakika giriniz.</small>
+                <small *ngIf="createForm.get('time')?.errors?.['max']">Lütfen maksimum 300 dakika giriniz.</small>
+              </div>  
             </div>
           </div>
           <div class="create-contents">
             <div class="label-input">
               <label for="yil">Film Açıklaması</label>
-              <textarea placeholder="Film açıklamasını yazınız" tabindex="5" formControlName="detail"></textarea>
+              <textarea class="create-input" placeholder="Film açıklamasını yazınız" tabindex="5" formControlName="detail" 
+              [ngClass]="{invalidRed: isValidTemplate('time')}"></textarea> 
+              <div class="error-message" *ngIf="isValid('detail')">
+                <small *ngIf="createForm.get('detail')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
+                <small *ngIf="createForm.get('detail')?.errors?.['minlength']">Lütfen minimum 124 karakter giriniz.</small>
+                <small *ngIf="createForm.get('detail')?.errors?.['maxlength']">Lütfen maksimum 520 karakter giriniz.</small>
+              </div>              
             </div>
           </div>
           <div class="create-button">

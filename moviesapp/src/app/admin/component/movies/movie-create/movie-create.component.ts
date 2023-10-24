@@ -6,8 +6,7 @@ import { PlatformEnum } from 'src/app/enums/platform-enum';
 import { CategoryService } from 'src/app/services/common/models/category.service';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
 import { PlatformService } from 'src/app/services/common/models/platform.service';
-import { minLengthValidator } from 'src/app/shared/minLength.validator';
-import { requiredValidator } from 'src/app/shared/required.validator';
+import { categoryValidator } from 'src/app/shared/required.validator';
 
 @Component({
   selector: 'movie-create',
@@ -19,16 +18,15 @@ export class MovieCreateComponent implements OnInit {
   model: Create_Movie = {} as Create_Movie;
   categoryEnum: { value: CategoryEnum; description: string; }[];
   platformEnum: { value: PlatformEnum; description: string; }[];
-
   constructor(
     private fb: FormBuilder, private categoryService: CategoryService, private platformService: PlatformService, private movieService: MoviesService) {
     this.createForm = this.fb.group({
-      name: new FormControl('', [requiredValidator(), minLengthValidator(5)]),
-      categoryId: new FormControl('0', requiredValidator()),
-      platformId: new FormControl('0', requiredValidator()),
-      date: new FormControl('', requiredValidator()),
-      time: new FormControl('', requiredValidator()),
-      detail: new FormControl('', requiredValidator()),
+      name: new FormControl(null, [Validators.required, Validators.minLength(5)]),
+      categoryId: new FormControl('0', categoryValidator()),
+      platformId: new FormControl('0', categoryValidator()),
+      date: new FormControl(null, Validators.required),
+      time: new FormControl(null, [Validators.required, Validators.max(300), Validators.min(30)]),
+      detail: new FormControl(null, [Validators.required, Validators.maxLength(520), Validators.minLength(124)]),
     });
   }
 
@@ -48,9 +46,24 @@ export class MovieCreateComponent implements OnInit {
       this.platformEnum = platformData
     })
   }
-
+  isValid(formControlName: string) {
+    const formControl = this.createForm.get(formControlName);
+    return formControl?.invalid && (formControl?.touched || formControl?.dirty);
+  }
+  
+  isValidTemplate(formControlName: string): boolean {
+    const formControl = this.createForm.get(formControlName);
+  
+    if (formControl?.invalid && (formControl.touched || formControl?.dirty)) 
+      if (formControl.errors?.['required'] || formControl.errors?.['minlength'] 
+        || formControl.errors?.['maxlength'] || formControl.errors?.['max'] || formControl.errors?.['min']) 
+        return true;
+   
+    return false;
+  }
+  
   create() {
-    if (this.createForm.valid) {
+    if (!this.createForm.valid) {
       const formData = this.createForm.value;
       const movie: Create_Movie = {
         name: formData.name,
@@ -61,6 +74,6 @@ export class MovieCreateComponent implements OnInit {
         description: formData.detail,
       };
       this.movieService.createMovie(movie);
-    }
+    } 
   }
 }

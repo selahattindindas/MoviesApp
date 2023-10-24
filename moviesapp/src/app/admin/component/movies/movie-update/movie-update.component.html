@@ -12,44 +12,70 @@
           <div class="update-contents">
             <div class="label-input">
               <label for="filmAdi">Film Adı</label>
-              <input type="text" placeholder="Filmin adını yazınız" [(ngModel)]="movies.name" formControlName="name" />
+              <input class="update-input" type="text" placeholder="Filmin adını yazınız" [(ngModel)]="movies.name" formControlName="name" 
+              [ngClass]="{invalidRed: isValidTemplate('name')}"/>           
+              <div class="error-message" *ngIf="isValid('name')">
+                <small *ngIf="updateForm.get('name')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
+                <small *ngIf="updateForm.get('name')?.errors?.['minlength']">Lütfen minimum 5 karakter giriniz.</small>
+              </div>
             </div>
           </div>
           <div class="update-contents">
             <div class="label-input">
               <label for="movie-category">Film Kategorisi</label>
               <div class="custom-select">
-                <select class="form-control" formControlName="categoryId">
+                <select class="form-control update-select" formControlName="categoryId">
                   <option *ngFor="let category of categoryEnum">{{ category.description }}
                   </option>
                 </select>
+                <div class="error-message" *ngIf="isValid('categoryId')">
+                  <small>
+                    {{ updateForm.get('categoryId').getError('categorySelected') }}
+                  </small>
+              </div>
               </div>
             </div>
             <div class="label-input">
               <label for="movie-platform">Film Platformu</label>
               <div class="custom-select">
-                <select class="form-control" formControlName="platformId">
+                <select class="form-control update-select" formControlName="platformId">
                   <option *ngFor="let platform of platformEnum">{{ platform.description }}
                   </option>
                 </select>
+                <div class="error-message" *ngIf="isValid('categoryId')">
+                  <small>
+                    {{ updateForm.get('categoryId').getError('categorySelected') }}
+                  </small>
+              </div>
               </div>
             </div>
           </div>
           <div class="update-contents">
             <div class="label-input">
               <label for="date">Film Vizyon Tarihi</label>
-              <input type="text" formControlName="date" [(ngModel)]="movies.releaseDate"/>
+              <input class="update-input" type="text" formControlName="date" [(ngModel)]="movies.releaseDate"/>
             </div>
             <div class="label-input">
               <label for="time">Film Süresi</label>
-              <input type="text" formControlName="time" [(ngModel)]="movies.movieTime" />
+              <input class="update-input" type="number" formControlName="time" [(ngModel)]="movies.movieTime" 
+              [ngClass]="{invalidRed: isValidTemplate('time')}"/>
+              <div class="error-message" *ngIf="isValid('time')">
+                <small *ngIf="updateForm.get('time')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
+                <small *ngIf="updateForm.get('time')?.errors?.['min']">Lütfen minimum 30 dakika giriniz.</small>
+                <small *ngIf="updateForm.get('time')?.errors?.['max']">Lütfen maksimum 300 dakika giriniz.</small>
+              </div>  
             </div>
           </div>
           <div class="update-contents">
             <div class="label-input">
               <label for="yil">Film Açıklaması</label>
-              <textarea placeholder="Film açıklamasını yazınız" formControlName="details"
-                [(ngModel)]="movies.description" tabindex="5"></textarea>
+              <textarea class="update-input" placeholder="Film açıklamasını yazınız" formControlName="details"
+                [(ngModel)]="movies.description" tabindex="5" [ngClass]="{invalidRed: isValidTemplate('details')}"></textarea>
+                <div class="error-message" *ngIf="isValid('details')">
+                  <small *ngIf="updateForm.get('details')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
+                  <small *ngIf="updateForm.get('details')?.errors?.['minlength']">Lütfen minimum 124 karakter giriniz.</small>
+                  <small *ngIf="updateForm.get('details')?.errors?.['maxlength']">Lütfen maksimum 520 karakter giriniz.</small>
+                </div>  
             </div>
           </div>
           <div class="update-button">

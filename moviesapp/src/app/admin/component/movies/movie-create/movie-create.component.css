@@ -52,11 +52,9 @@ input::placeholder {
   color: #2ea57d;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="time"],
-textarea,
-select {
+.create-input,
+.create-select
+ {
   width: 100%;
   padding: 10px;
   font-size: 14px;
@@ -69,36 +67,18 @@ select {
   color: #000;
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="time"]:focus,
-textarea:focus,
-select:focus {
+.create-input:focus,
+.create-select:focus {
   border-bottom: 2px solid #000;
-}
-
-.time-input {
-  display: flex;
-  align-items: center;
-}
-
-.time-input input[type="number"] {
-  width: 45%;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.time-input span {
-  margin: 0 5px;
 }
 
 .create-button {
   display: flex;
   justify-content: flex-end;
 }
-
+.invalidRed{
+  border-bottom: 2px solid rgba(255, 0, 0, 0.5);
+}
 .create-button button {
   display: block;
   padding: 15px;
@@ -190,15 +170,11 @@ li i {
 
   input[type="text"],
   input[type="date"],
-  input[type="time"],
+  input[type="number"],
   textarea,
   select {
     padding: 5px;
     font-size: 12px;
-  }
-
-  .time-input input[type="number"] {
-    width: 100%;
   }
 
   .create-button {

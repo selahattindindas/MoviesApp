@@ -53,11 +53,8 @@ input::placeholder {
   color: #2ea57d;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="time"],
-textarea,
-select {
+.update-input,
+.update-select {
   width: 100%;
   padding: 10px;
   font-size: 14px;
@@ -70,14 +67,13 @@ select {
   color: #000;
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="time"]:focus,
-textarea:focus,
-select:focus {
+.update-input:focus,
+.update-select:focus {
   border-bottom: 2px solid #000;
 }
-
+.invalidRed{
+  border-bottom: 2px solid rgba(255, 0, 0, 0.5);
+}
 .time-input {
   display: flex;
   align-items: center;
