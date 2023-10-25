@@ -17,6 +17,7 @@ export class MoviesService {
   constructor(private httpClientService: HttpClientService, private sweetalertService: SweetalertService, private router: Router) { }
 
   async getAllMovies(): Promise<List_Movie[] | string> {
+    //try catch kalkacak
     try {
       const observable: Observable<JsonResponse<List_Movie[]>> = this.httpClientService.get({
         controller: 'Movie',
@@ -35,6 +36,7 @@ export class MoviesService {
   }
 
   async getMovieById(id: string): Promise<List_Movie | string> {
+    //idler number
     try {
       const observable: Observable<JsonResponse<List_Movie>> = this.httpClientService.get({
         controller: 'Movie',
@@ -66,9 +68,9 @@ export class MoviesService {
         icon.Success,
         false,
         ConfirmButtonText.Okey,
-        3
+        1
       );
-
+      // sweatalert onaylandıktan sonra yönlendirme olucak
       this.router.navigate(['/Admin', 'Movies-List']);
 
       return data;

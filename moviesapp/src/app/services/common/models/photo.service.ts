@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { Observable, firstValueFrom } from 'rxjs';
 import { SweetalertService, icon } from '../../admin/sweetalert.service';
-import { CancelButtonText, ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
+import { ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
 import { List_Photo } from 'src/app/contracts/photo/list-photo';
 import { JsonResponse } from 'src/app/contracts/response/response';
 import { environment } from 'src/app/environments/environment';
@@ -16,7 +16,7 @@ export class PhotoService {
 
   constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
 
-  async GetPhotosMovieById(movieId: string): Promise<List_Photo | string> {
+  async getPhotosMovieById(movieId: string): Promise<List_Photo | string> {
     const observable: Observable<JsonResponse<List_Photo>> = this.httpClientService.get({
       controller: 'Movie',
       action: `GetMoviePhotos/${movieId}`
@@ -67,8 +67,8 @@ export class PhotoService {
     return response;
   }
 
-  async DeletePhoto(id: string) {
-    const observable: Observable<JsonResponse<unknown>> = this.httpClientService.delete({
+  async deletePhoto(id: string) {
+    const observable: Observable<JsonResponse<string>> = this.httpClientService.delete({
       controller: 'Movie',
       action: 'DeleteMoviePhoto'
     }, id);

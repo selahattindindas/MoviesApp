@@ -1,10 +1,4 @@
 import { Injectable } from '@angular/core';
-import {
-  CancelButtonText,
-  ConfirmButtonText,
-  MessageText,
-  MessageTitle,
-} from 'src/app/internal/message-title';
 import Swal, { SweetAlertIcon, SweetAlertResult } from 'sweetalert2';
 
 @Injectable({
@@ -41,3 +35,4 @@ export enum icon {
   Success = 'success',
   Warning = 'warning',
 }
+//Enum buraya yazılmayacak ayrı bir enum oluşturulup oradan çekilecek.

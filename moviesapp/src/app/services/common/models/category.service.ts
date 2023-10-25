@@ -15,7 +15,7 @@ import { JsonResponse } from 'src/app/contracts/response/response';
 export class CategoryService {
 
   constructor(private httpClientService: HttpClientService, private sweetalertService: SweetalertService, private router: Router) { }
-
+// boolean olarak al select kısmını 
   async getCategoryEnumValues(select?: string): Promise<{ value: CategoryEnum; description: string; }[]> {
 
     const enumValues = Object.keys(CategoryEnum)
@@ -33,6 +33,7 @@ export class CategoryService {
   }
 
   async getAllCategories(): Promise<List_Category[] | string> {
+    //Promise'teki stringler kalkacak.
     const observable: Observable<JsonResponse<List_Category[]>> = this.httpClientService.get(
       { controller: 'Category', action: 'GetAllCategories' });
 
@@ -80,6 +81,8 @@ export class CategoryService {
   }
 
   async updateCategory(name: unknown) {
+    //stringe çekilecek
+    // update'de ki gibi olsun create'de
     const observable: Observable<unknown> = this.httpClientService.put(
       {
         controller: 'Category',
@@ -109,6 +112,7 @@ export class CategoryService {
       true,
       ConfirmButtonText.Okey,
       undefined,
+      //false'a çekilecek kullanılan yere göre
       CancelButtonText.Cancel);
 
     if (sweetalert.isConfirmed) {
@@ -127,3 +131,4 @@ export class CategoryService {
     }
   }
 }
+//Buradaki değişikliklerin hepsi platform'da da olacak.

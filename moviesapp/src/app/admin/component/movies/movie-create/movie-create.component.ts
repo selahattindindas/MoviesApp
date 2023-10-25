@@ -63,7 +63,7 @@ export class MovieCreateComponent implements OnInit {
   }
   
   create() {
-    if (!this.createForm.valid) {
+    if (this.createForm.valid) {
       const formData = this.createForm.value;
       const movie: Create_Movie = {
         name: formData.name,
