@@ -12,7 +12,8 @@ export class AdminCategory implements OnInit {
   @ViewChild("categoryForm", { static: true }) categoryForm: NgForm
   categories: List_Category[];
   showCreateFormFlag = false;
-  editCategoryId: string | null = null;
+  //showCreateFormFlag optimize
+  editCategoryId: string;
   model = {
     id: '',
     name: '',
@@ -25,8 +26,8 @@ export class AdminCategory implements OnInit {
   }
 
   getCategory() {
-    return this.categoryService.getAllCategories().then(categorData => {
-      this.categories = categorData as List_Category[];
+    return this.categoryService.getAllCategories().then(categoryData => {
+      this.categories = categoryData as List_Category[];
     })
   }
 
@@ -35,32 +36,30 @@ export class AdminCategory implements OnInit {
       this.getCategory();
     });
   }
-
+  //ShowCreateForm Methodu tamamiyle düzeltilecek!
   showCreateForm(action: string) {
     if (action === 'if') {
       this.showCreateFormFlag = true;
-      this.editCategoryId = null;
     }
     else if (action === 'else') {
       this.showCreateFormFlag = false;
       this.model.name = '';
     }
   }
-//Düzenlendi
-createCategory() {
-  if (!this.categoryForm.valid) 
-  return;
+  //Düzenlendi
+  createCategory() {
+    if (!this.categoryForm.valid)
+      return;
 
-     const categoryName = this.model.name
+    const categoryName = this.model.name
 
-    this.categoryService.createCategory(categoryName).then((sasa) => {
-      console.log(sasa);
+    this.categoryService.createCategory(categoryName).then(() => {
       this.getCategory();
       this.showCreateForm('else');
     });
   }
 
-//Düzenlendi
+  //Düzenlenecek Show Update Form
   showUpdateForm(categoryId: string) {
     const categoryItem = this.categories.find(item => item.id === categoryId);
     if (categoryItem) {
@@ -69,7 +68,7 @@ createCategory() {
       this.showCreateFormFlag = false;
     }
   }
-//Düzenlendi
+  //Düzenlendi
   updateCategory(action: string, categoryId: string) {
     if (action === 'if' && this.categoryForm.valid && this.editCategoryId) {
       const category = {
@@ -81,7 +80,7 @@ createCategory() {
         this.getCategory();
         this.editCategoryId = null;
       });
-    } 
+    }
     else if (action === 'else') {
       this.editCategoryId = null;
     }

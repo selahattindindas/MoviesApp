@@ -2,20 +2,8 @@
   <div class="movie-list">
     <h1>Film Listesi</h1>
     <div *ngIf="photoComponent">
-      <div class="modal fade" id="exampleModal" data-bs-backdrop="true" data-bs-keyboard="true" tabindex="-1"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <movie-photo [movieId]="selectedMovieId"></movie-photo>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <movie-photo [movieId]="selectedMovieId"></movie-photo>
     </div>
     <div class="movie-search-button-container">
       <div class="movie-search">
@@ -36,7 +24,7 @@
             <th>Kadro İşlemleri</th>
             <th>Fotoğraf İşlemleri</th>
             <th>Film İşlemleri</th>
-            
+
           </tr>
         </thead>
         <tbody>
@@ -49,10 +37,10 @@
               <i class="fa-solid fa-square-minus fa-lg actor" [routerLink]="['Create-Players', movie.id]"></i>
               <i class="fa-solid fa-square-minus fa-lg director" [routerLink]="['Create-Director', movie.id]"></i>
             </td>
-            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" 
-              data-bs-target="#exampleModal" (click)="photoContents(movie.id)">
-              Launch demo modal
-            </button ></td>
+            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                (click)="photoContents(movie.id)">
+                Launch demo modal
+              </button></td>
             <td>
               <i class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Edit', movie.id]"></i>
               <i class="fa-solid fa-trash fa-lg delete" (click)="deleteMovie(movie.id)"></i>

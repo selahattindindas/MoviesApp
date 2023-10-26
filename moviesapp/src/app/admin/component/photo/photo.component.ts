@@ -1,6 +1,5 @@
 import { Component, Inject, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { List_Photo } from 'src/app/contracts/photo/list-photo';
 import { PhotoService } from 'src/app/services/common/models/photo.service';
@@ -63,7 +62,7 @@ export class PhotoComponent implements OnInit {
     });
   }
   getPhotoAll() {
-    this.photoService.GetPhotosMovieById(this.movieId).then(moviePhotos => {
+    this.photoService.getPhotosMovieById(this.movieId).then(moviePhotos => {
       if (moviePhotos) {
         this.getPhoto.push(moviePhotos as List_Photo);
       }
@@ -77,7 +76,7 @@ export class PhotoComponent implements OnInit {
   }
 
   deletePhoto(id: string) {
-    this.photoService.DeletePhoto(id).then(() => {
+    this.photoService.deletePhoto(id).then(() => {
       this.getPhoto = this.getPhoto.map(photoItem => {
         return photoItem.photos
           ? { ...photoItem, photos: photoItem.photos.filter(photo => photo.id !== id) }

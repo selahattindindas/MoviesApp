@@ -18,7 +18,7 @@ export class MoviesService {
 
   async getAllMovies(): Promise<List_Movie[] | string> {
     //try catch kalkacak
-    try {
+
       const observable: Observable<JsonResponse<List_Movie[]>> = this.httpClientService.get({
         controller: 'Movie',
         action: 'GetAll'
@@ -30,14 +30,11 @@ export class MoviesService {
         ? response.result
         : response.statusMessage;
     }
-    catch (error) {
-      return error.message;
-    }
-  }
 
-  async getMovieById(id: string): Promise<List_Movie | string> {
+
+  async getMovieById(id: number): Promise<List_Movie> {
     //idler number
-    try {
+
       const observable: Observable<JsonResponse<List_Movie>> = this.httpClientService.get({
         controller: 'Movie',
         action: 'GetByMovieId'
@@ -48,10 +45,8 @@ export class MoviesService {
       return response.statusCode === 200
         ? response.result
         : response.statusMessage;
-    } catch (error) {
-      return error.message;
-    }
-  }
+    } 
+
 
   async createMovie(movie: Create_Movie) {
     try {
@@ -105,7 +100,7 @@ export class MoviesService {
     }
   }
 
-  async deleteMovie(id: string) {
+  async deleteMovie(id: number) {
     try {
       const result = await this.sweetalertService.showAlert(
         MessageTitle.DeletedQuestion,

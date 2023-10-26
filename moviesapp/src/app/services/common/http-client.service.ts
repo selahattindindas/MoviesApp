@@ -19,7 +19,7 @@ export class HttpClientService {
     }`;
   }
  
-  get<T>(requestParameters: RequestParameters, id?:string):Observable<T> {
+  get<T>(requestParameters: RequestParameters, id?:number):Observable<T> {
     let url: string = '';
     if(requestParameters.fullEndPoint)
       url = requestParameters.fullEndPoint;
@@ -46,7 +46,7 @@ export class HttpClientService {
   return this.httpClient.put<T>(url, body,{headers:requestParameters.headers});
   }
   
-  delete<T>(requestParameters: RequestParameters, id:string):Observable<T> {
+  delete<T>(requestParameters: RequestParameters, id:number):Observable<T> {
     let url: string = '';
     if(requestParameters.fullEndPoint)
       url = requestParameters.fullEndPoint;
