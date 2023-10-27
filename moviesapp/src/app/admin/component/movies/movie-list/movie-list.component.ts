@@ -13,7 +13,7 @@ export class MovieListComponent implements OnInit {
   filterText: string;
   filterName: keyof List_Movie = 'name';
   photoComponent: boolean = false;
-  selectedMovieId: string = "";
+  selectedMovieId: number;
   constructor(private movieService: MoviesService) {}
 
   ngOnInit(): void {
@@ -26,12 +26,12 @@ export class MovieListComponent implements OnInit {
     })
   }
 
-  photoContents(id: string) {
+  photoContents(id: number) {
     this.photoComponent = !this.photoComponent;
     this.selectedMovieId = id;
   }
   
-  deleteMovie(id: string) {
+  deleteMovie(id: number) {
     this.movieService.deleteMovie(id).then(() => {
       this.getMovie();
     });

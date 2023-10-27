@@ -12,7 +12,7 @@ export class AdminPlatform implements OnInit {
   @ViewChild("platformForm", { static: true }) platformForm: NgForm
   platform: List_Platform[] = [];
   showCreateFormFlag = false;
-  editPlatformId: string | null = null;
+  editPlatformId: number;
   model: {
     id: string;
     name: string;
@@ -32,7 +32,7 @@ export class AdminPlatform implements OnInit {
     });
   }
 
-  deletePlatform(platformId: string) {
+  deletePlatform(platformId: number) {
     this.platformService.deletePlatform(platformId).then(() => {
       this.getPlatform();
     });
@@ -61,7 +61,7 @@ export class AdminPlatform implements OnInit {
       });
   }
 
-showUpdateForm(platformId: string) {
+showUpdateForm(platformId: number) {
   const platformItem = this.platform.find(item => item.id === platformId);
   if (platformItem) {
     this.editPlatformId = platformId;
@@ -70,9 +70,9 @@ showUpdateForm(platformId: string) {
   }
 }
 
-updatePlatform(action: string, PlatformId: string) {
+updatePlatform(action: string, PlatformId: number) {
   if (action === 'if' && this.platformForm.valid && this.editPlatformId) {
-    const Platform = {
+    const Platform : List_Platform ={
       id: PlatformId,
       name: this.model.name
     };

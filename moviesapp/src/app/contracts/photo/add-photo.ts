@@ -1,5 +1,5 @@
 export class Create_Photo {
-    id: string;
+    id: number;
     files: File;
 }
 

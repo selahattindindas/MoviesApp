@@ -17,7 +17,7 @@ import { categoryValidator } from 'src/app/shared/required.validator';
 })
 export class UpdateComponent implements OnInit {
   updateForm: FormGroup;
-  movieId: string;
+  movieId: number;
   categoryEnum: { value: CategoryEnum; description: string; }[];
   platformEnum:{ value: PlatformEnum; description: string; }[];
   movies: List_Movie;
@@ -47,13 +47,13 @@ export class UpdateComponent implements OnInit {
   }
 
   getCategory() {
-    return this.categoryService.getCategoryEnumValues(CategoryEnum.Seciniz.toString()).then(categoryData=>{
+    return this.categoryService.getCategoryEnumValues(false).then(categoryData=>{
       this.categoryEnum = categoryData;
     })
   }
 
   getPlatform() {
-    return this.platformService.getPlatformEnumValues(PlatformEnum.Seciniz.toString()).then(platformData =>{
+    return this.platformService.getPlatformEnumValues(false).then(platformData =>{
       this.platformEnum = platformData
     })
   }
@@ -84,7 +84,7 @@ export class UpdateComponent implements OnInit {
     return false;
   }
 
-  update(movieId: string) {
+  update(movieId: number) {
     if (!this.updateForm.valid) {
       return;
     }

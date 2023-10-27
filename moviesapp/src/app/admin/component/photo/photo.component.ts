@@ -14,7 +14,7 @@ export class PhotoComponent implements OnInit {
   selectedFiles: File[] = [];
   photo: Create_Photo[];
   getPhoto: List_Photo[] = [];
-  @Input() movieId:string;
+  @Input() movieId:number;
   @ViewChild('exampleModalLong') exampleModalLong: any;
   constructor(private renderer: Renderer2, private photoService: PhotoService) { }
 
@@ -75,7 +75,7 @@ export class PhotoComponent implements OnInit {
     }
   }
 
-  deletePhoto(id: string) {
+  deletePhoto(id: number) {
     this.photoService.deletePhoto(id).then(() => {
       this.getPhoto = this.getPhoto.map(photoItem => {
         return photoItem.photos

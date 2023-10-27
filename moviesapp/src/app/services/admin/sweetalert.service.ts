@@ -1,38 +1,25 @@
 import { Injectable } from '@angular/core';
+import { SweetAlert_Options } from 'src/app/enums/sweetalert-enum';
 import Swal, { SweetAlertIcon, SweetAlertResult } from 'sweetalert2';
-
+declare var sweetalert2: any;
 @Injectable({
   providedIn: 'root',
 })
 export class SweetalertService {
   constructor() {}
 
-  async showAlert(
-    messageTitle: string,
-    messageText: string,
-    icon: icon,
-    showCancelButton: boolean,
-    confirmButtonText: string,
-    delay?: number,
-    cancelButtonText?: string
-  ) {
+  async showAlert(options: Partial<SweetAlert_Options>) {
     const result: SweetAlertResult<any> = await Swal.fire({
-      title: messageTitle,
-      text: messageText,
-      icon: icon as SweetAlertIcon,
-      showCancelButton: showCancelButton,
-      confirmButtonText: confirmButtonText,
-      timer: delay ? delay * 1000 : undefined,
-      cancelButtonText: cancelButtonText,
+      title: options.messageTitle,
+      text: options.messageText,
+      icon: options.icon as SweetAlertIcon,
+      showCancelButton: options.showCancelButton,
+      confirmButtonText: options.confirmButtonText,
+      timer: options.delay * 1000,
+      cancelButtonText: options.cancelButtonText,
     });
     return result;
   }
 }
-export enum icon {
-  Error = 'error',
-  Message = 'message',
-  Notify = 'notify',
-  Success = 'success',
-  Warning = 'warning',
-}
+
 //Enum buraya yazılmayacak ayrı bir enum oluşturulup oradan çekilecek.

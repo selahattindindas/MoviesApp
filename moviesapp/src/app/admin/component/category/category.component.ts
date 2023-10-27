@@ -13,7 +13,7 @@ export class AdminCategory implements OnInit {
   categories: List_Category[];
   showCreateFormFlag = false;
   //showCreateFormFlag optimize
-  editCategoryId: string;
+  editCategoryId: number;
   model = {
     id: '',
     name: '',
@@ -31,7 +31,7 @@ export class AdminCategory implements OnInit {
     })
   }
 
-  deleteCategory(categoryId: string) {
+  deleteCategory(categoryId: number) {
     this.categoryService.deleteCategory(categoryId).then(() => {
       this.getCategory();
     });
@@ -60,7 +60,7 @@ export class AdminCategory implements OnInit {
   }
 
   //Düzenlenecek Show Update Form
-  showUpdateForm(categoryId: string) {
+  showUpdateForm(categoryId: number) {
     const categoryItem = this.categories.find(item => item.id === categoryId);
     if (categoryItem) {
       this.editCategoryId = categoryId;
@@ -69,7 +69,7 @@ export class AdminCategory implements OnInit {
     }
   }
   //Düzenlendi
-  updateCategory(action: string, categoryId: string) {
+  updateCategory(action: string, categoryId: number) {
     if (action === 'if' && this.categoryForm.valid && this.editCategoryId) {
       const category = {
         id: categoryId,

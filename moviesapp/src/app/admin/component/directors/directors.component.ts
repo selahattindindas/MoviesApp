@@ -53,7 +53,7 @@ export class DirectorsComponent implements OnInit {
     }
   }
 
-  removeDirector(id: string) {
+  removeDirector(id: number) {
     this.directorService.deleteDirector(id).then(() => {
       this.getDirector();
     })

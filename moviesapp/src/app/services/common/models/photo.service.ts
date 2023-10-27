@@ -3,11 +3,12 @@ import { HttpClientService, } from '../http-client.service';
 import { Router } from '@angular/router';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { Observable, firstValueFrom } from 'rxjs';
-import { SweetalertService, icon } from '../../admin/sweetalert.service';
+import { SweetalertService } from '../../admin/sweetalert.service';
 import { ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
 import { List_Photo } from 'src/app/contracts/photo/list-photo';
 import { JsonResponse } from 'src/app/contracts/response/response';
 import { environment } from 'src/app/environments/environment';
+import { MessageType } from 'src/app/enums/sweetalert-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class PhotoService {
 
   constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
 
-  async getPhotosMovieById(movieId: string): Promise<List_Photo | string> {
+  async getPhotosMovieById(movieId: number){
     const observable: Observable<JsonResponse<List_Photo>> = this.httpClientService.get({
       controller: 'Movie',
       action: `GetMoviePhotos/${movieId}`
@@ -52,14 +53,13 @@ export class PhotoService {
       formData
     );
 
-    this.sweetAlertService.showAlert(
-      MessageTitle.Success,
-      MessageText.PhotoCreate,
-      icon.Success,
-      false,
-      ConfirmButtonText.Okey,
-      3
-    );
+    this.sweetAlertService.showAlert({
+      messageTitle: MessageTitle.Success,
+      messageText: MessageText.PhotoCreate,
+      icon: MessageType.Success,
+      confirmButtonText: ConfirmButtonText.Okey,
+      delay: 1
+    });
 
     this.router.navigate(['/Admin', 'Movies-List']);
 
@@ -67,8 +67,8 @@ export class PhotoService {
     return response;
   }
 
-  async deletePhoto(id: string) {
-    const observable: Observable<JsonResponse<string>> = this.httpClientService.delete({
+  async deletePhoto(id: number) {
+    const observable: Observable<JsonResponse<number>> = this.httpClientService.delete({
       controller: 'Movie',
       action: 'DeleteMoviePhoto'
     }, id);
@@ -76,14 +76,13 @@ export class PhotoService {
     const response = await firstValueFrom(observable);
 
     if (response.statusCode == 200) {
-      this.sweetAlertService.showAlert(
-        MessageTitle.Success,
-        MessageText.PhotoDelete,
-        icon.Success,
-        false,
-        ConfirmButtonText.Okey,
-        3
-      );
+      this.sweetAlertService.showAlert({
+        messageTitle: MessageTitle.Success,
+        messageText: MessageText.PhotoDelete,
+        icon: MessageType.Success,
+        confirmButtonText: ConfirmButtonText.Okey,
+        delay: 1
+      });
       return response.result
     } else {
       return response.statusMessage

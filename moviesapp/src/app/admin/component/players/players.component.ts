@@ -16,7 +16,7 @@ export class PlayersComponent implements OnInit {
   player: List_Player[] = [];
   playerName: string[] = [];
   playerValue: string = '';
-  movieId: string;
+  movieId: number;
   constructor(private playerService: PlayerService, private route:ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -40,7 +40,7 @@ export class PlayersComponent implements OnInit {
       this.playerValue = '';
     }
   }
-  create(movieId: string) {
+  create(movieId: number) {
     if (this.playerForm.valid && this.playerName.length > 0) {
       const player: Create_Player[] = this.playerName.map(name => ({
         movieId: movieId, 
@@ -52,7 +52,7 @@ export class PlayersComponent implements OnInit {
     }
   }
   
-  removePlayer(id: string) {
+  removePlayer(id: number) {
     this.playerService.deletePlayer(id).then(() => {
       this.getPlayers();
     })

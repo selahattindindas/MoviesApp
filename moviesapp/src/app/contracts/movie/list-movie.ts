@@ -1,5 +1,5 @@
 export class List_Movie{
-    id: string;
+    id: number;
     name: string;
     categoryName: string;
     platformName: string;
@@ -9,7 +9,7 @@ export class List_Movie{
     releaseDate: Date;
     description:string;
 
-constructor(id:string, name:string, categoryName:string, platformName:string, releaseDate:Date, movieTime:string, description:string,directors:string, players:string){
+constructor(id:number, name:string, categoryName:string, platformName:string, releaseDate:Date, movieTime:string, description:string,directors:string, players:string){
     this.id = id;
     this.name = name,
     this.categoryName = categoryName,

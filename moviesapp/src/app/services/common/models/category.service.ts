@@ -4,9 +4,10 @@ import { HttpClientService } from '../http-client.service';
 import { List_Category } from 'src/app/contracts/category/list-category';
 import { Observable, firstValueFrom } from 'rxjs';
 import { CancelButtonText, ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
-import { SweetalertService, icon } from '../../admin/sweetalert.service';
+import { SweetalertService } from '../../admin/sweetalert.service';
 import { Router } from '@angular/router';
 import { JsonResponse } from 'src/app/contracts/response/response';
+import { MessageType } from 'src/app/enums/sweetalert-enum';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +15,9 @@ import { JsonResponse } from 'src/app/contracts/response/response';
 
 export class CategoryService {
 
-  constructor(private httpClientService: HttpClientService, private sweetalertService: SweetalertService, private router: Router) { }
-// boolean olarak al select kısmını 
-  async getCategoryEnumValues(select?: string): Promise<{ value: CategoryEnum; description: string; }[]> {
+  constructor(private httpClientService: HttpClientService, private sweetAlertService: SweetalertService, private router: Router) { }
+// boolean olarak al select kısmını // YAPILDI
+  async getCategoryEnumValues(select?: boolean): Promise<{ value: CategoryEnum; description: string; }[]> {
 
     const enumValues = Object.keys(CategoryEnum)
 
@@ -27,13 +28,13 @@ export class CategoryService {
         description: CategoryDescription[CategoryEnum[key as keyof typeof CategoryEnum]],
       }));
 
-    return select === CategoryEnum.Seciniz.toString()
+    return select === false
       ? enumValues.filter((item) => item.value !== CategoryEnum.Seciniz)
       : enumValues;
   }
 
-  async getAllCategories(): Promise<List_Category[] | string> {
-    //Promise'teki stringler kalkacak.
+  async getAllCategories(){
+    //Promise'teki stringler kalkacak. // YAPILDI
     const observable: Observable<JsonResponse<List_Category[]>> = this.httpClientService.get(
       { controller: 'Category', action: 'GetAllCategories' });
 
@@ -44,7 +45,7 @@ export class CategoryService {
       : response.statusMessage;
   }
 
-  async getCategoryById(id: string): Promise<List_Category | string> {
+  async getCategoryById(id: number){
     const observable: Observable<JsonResponse<List_Category>> = this.httpClientService.get(
       { controller: 'Category', action: 'GetByCategoryId' }, id);
 
@@ -55,24 +56,23 @@ export class CategoryService {
       : response.statusMessage;
   }
 
-  async createCategory(categoryName: string): Promise<string> {
-    const observable: Observable<JsonResponse<string>> = this.httpClientService.post(
+  async createCategory(categoryName: unknown) {
+    const observable: Observable<JsonResponse<unknown>> = this.httpClientService.post(
       {
         controller: 'Category',
         action: `CreateCategory?categoryName=${categoryName}`
-      }, null);
+      }, categoryName);
 
     const response = await firstValueFrom(observable);
 
     if (response.statusCode === 200) {
-      this.sweetalertService.showAlert(
-        MessageTitle.Success,
-        MessageText.CategoryCreate,
-        icon.Success,
-        false,
-        ConfirmButtonText.Okey,
-        3
-      );
+      this.sweetAlertService.showAlert({
+        messageTitle: MessageTitle.Success,
+        messageText: MessageText.CategoryCreate,
+        icon: MessageType.Success,
+        confirmButtonText: ConfirmButtonText.Okey,
+        delay: 1
+      });
       return response.result;
     } else {
       return response.statusMessage;
@@ -91,29 +91,28 @@ export class CategoryService {
 
     const data = await firstValueFrom(observable);
 
-    this.sweetalertService.showAlert(
-      MessageTitle.Success,
-      MessageText.CategoryUpdate,
-      icon.Success,
-      false,
-      ConfirmButtonText.Okey,
-      3);
+    this.sweetAlertService.showAlert({
+      messageTitle: MessageTitle.Success,
+      messageText: MessageText.CategoryUpdate,
+      icon: MessageType.Success,
+      confirmButtonText: ConfirmButtonText.Okey,
+      delay: 1
+    });
 
     this.router.navigate(['/Admin', 'Class-List']);
 
     return data;
   }
 
-  async deleteCategory(id: string) {
-    const sweetalert = await this.sweetalertService.showAlert(
-      MessageTitle.DeletedQuestion,
-      MessageText.NoTurningBack,
-      icon.Warning,
-      true,
-      ConfirmButtonText.Okey,
-      undefined,
-      //false'a çekilecek kullanılan yere göre
-      CancelButtonText.Cancel);
+  async deleteCategory(id: number) {
+    const sweetalert = await this.sweetAlertService.showAlert({
+        messageTitle: MessageTitle.DeletedQuestion,
+        messageText: MessageText.NoTurningBack,
+        icon: MessageType.Warning,
+        showCancelButton: true,
+        confirmButtonText: ConfirmButtonText.Okey,
+        cancelButtonText: CancelButtonText.Cancel,
+      });
 
     if (sweetalert.isConfirmed) {
       await firstValueFrom(this.httpClientService.delete(
@@ -122,12 +121,13 @@ export class CategoryService {
           action: 'DeleteCategory'
         }, id));
 
-      this.sweetalertService.showAlert(
-        MessageTitle.Success,
-        MessageText.CategoryDelete,
-        icon.Success, false,
-        ConfirmButtonText.Okey,
-        3);
+        this.sweetAlertService.showAlert({
+          messageTitle: MessageTitle.Success,
+          messageText: MessageText.CategoryDelete,
+          icon: MessageType.Success,
+          confirmButtonText: ConfirmButtonText.Okey,
+          delay: 1
+        });
     }
   }
 }

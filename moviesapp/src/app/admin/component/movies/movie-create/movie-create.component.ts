@@ -3,6 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Create_Movie } from 'src/app/contracts/movie/create-movie';
 import { CategoryEnum } from 'src/app/enums/category-enum';
 import { PlatformEnum } from 'src/app/enums/platform-enum';
+import { MessageType } from 'src/app/enums/sweetalert-enum';
+import { MessageTitle, MessageText, ConfirmButtonText } from 'src/app/internal/message-title';
+import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { CategoryService } from 'src/app/services/common/models/category.service';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
 import { PlatformService } from 'src/app/services/common/models/platform.service';
@@ -19,7 +22,8 @@ export class MovieCreateComponent implements OnInit {
   categoryEnum: { value: CategoryEnum; description: string; }[];
   platformEnum: { value: PlatformEnum; description: string; }[];
   constructor(
-    private fb: FormBuilder, private categoryService: CategoryService, private platformService: PlatformService, private movieService: MoviesService) {
+    private fb: FormBuilder, private categoryService: CategoryService, 
+    private platformService: PlatformService, private movieService: MoviesService, private sweetAlertService: SweetalertService) {
     this.createForm = this.fb.group({
       name: new FormControl(null, [Validators.required, Validators.minLength(5)]),
       categoryId: new FormControl('0', categoryValidator()),
@@ -73,7 +77,17 @@ export class MovieCreateComponent implements OnInit {
         movieTime: formData.time,
         description: formData.detail,
       };
-      this.movieService.createMovie(movie);
+      this.movieService.createMovie(movie).then((isConfirm) =>{
+        if(isConfirm){
+          this.sweetAlertService.showAlert({
+            messageTitle: MessageTitle.Success,
+            messageText: MessageText.MovieCreate,
+            icon: MessageType.Success,
+            confirmButtonText: ConfirmButtonText.Okey,
+            delay: 1
+          });
+        }
+      });
     } 
   }
 }

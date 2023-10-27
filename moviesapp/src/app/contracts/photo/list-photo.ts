@@ -1,9 +1,9 @@
 export class List_Photo {
-    movieId:string;
+    movieId:number;
     photos: Photo[];
 }
 export class Photo {
-    id: string;
+    id: number;
     fileName: string;
     path: string;
 }
