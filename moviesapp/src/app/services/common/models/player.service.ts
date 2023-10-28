@@ -7,7 +7,7 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
 import { List_Player } from 'src/app/contracts/player/list-player';
 import { JsonResponse } from 'src/app/contracts/response/response';
-import { MessageType } from 'src/app/enums/sweetalert-enum';
+import { MessageType, Position } from 'src/app/enums/sweetalert-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -42,11 +42,13 @@ export class PlayerService {
     const data = await firstValueFrom(observable);
 
     this.sweetAlertService.showAlert({
+      position: Position.TopRight,
       messageTitle: MessageTitle.Success,
       messageText: MessageText.PlayerCreate,
       icon: MessageType.Success,
-      confirmButtonText: ConfirmButtonText.Okey,
-      delay: 1
+      timerProgressBar: true,
+      toast: true,
+      delay: 1,
     });
 
     this.router.navigate(['/Admin', 'Movies-List']);
@@ -62,11 +64,13 @@ export class PlayerService {
 
     if (response.statusCode === 200) {
       this.sweetAlertService.showAlert({
+        position: Position.TopRight,
         messageTitle: MessageTitle.Success,
         messageText: MessageText.PlayerDelete,
         icon: MessageType.Success,
-        confirmButtonText: ConfirmButtonText.Okey,
-        delay: 1
+        timerProgressBar: true,
+        toast: true,
+        delay: 1,
       });
       return response.result;
     }

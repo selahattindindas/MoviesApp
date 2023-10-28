@@ -7,7 +7,7 @@ import { SweetalertService } from '../../admin/sweetalert.service';
 import { CancelButtonText, ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
 import { Router } from '@angular/router';
 import { JsonResponse } from 'src/app/contracts/response/response';
-import { MessageType } from 'src/app/enums/sweetalert-enum';
+import { MessageType, Position } from 'src/app/enums/sweetalert-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -70,11 +70,13 @@ export class PlatformService {
 
       if (response.statusCode === 200) {
         this.sweetAlertService.showAlert({
+          position: Position.TopRight,
           messageTitle: MessageTitle.Success,
           messageText: MessageText.PlatformCreate,
           icon: MessageType.Success,
-          confirmButtonText: ConfirmButtonText.Okey,
-          delay: 1
+          timerProgressBar: true,
+          toast: true,
+          delay: 1,
         });
         return response.result;
       }
@@ -92,11 +94,13 @@ export class PlatformService {
       await firstValueFrom(observable);
 
       this.sweetAlertService.showAlert({
+        position: Position.TopRight,
         messageTitle: MessageTitle.Success,
         messageText: MessageText.PlatformUpdate,
         icon: MessageType.Success,
-        confirmButtonText: ConfirmButtonText.Okey,
-        delay: 1
+        timerProgressBar: true,
+        toast: true,
+        delay: 1,
       });
 
       this.router.navigate(['/Admin', 'Class-List']);
@@ -104,9 +108,11 @@ export class PlatformService {
 
   async deletePlatform(id: number) {
       const sweetalert = await this.sweetAlertService.showAlert({
+        position: Position.Center,
         messageTitle: MessageTitle.DeletedQuestion,
         messageText: MessageText.NoTurningBack,
         icon: MessageType.Warning,
+        showConfirmButton: true,
         showCancelButton: true,
         confirmButtonText: ConfirmButtonText.Okey,
         cancelButtonText: CancelButtonText.Cancel,
@@ -120,11 +126,13 @@ export class PlatformService {
           }, id));
 
           this.sweetAlertService.showAlert({
+            position: Position.TopRight,
             messageTitle: MessageTitle.Success,
             messageText: MessageText.PlatformDelete,
             icon: MessageType.Success,
-            confirmButtonText: ConfirmButtonText.Okey,
-            delay: 1
+            timerProgressBar: true,
+            toast: true,
+            delay: 1,
           });
       }
   }

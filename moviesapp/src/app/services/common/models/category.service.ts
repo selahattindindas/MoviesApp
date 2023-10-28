@@ -7,7 +7,7 @@ import { CancelButtonText, ConfirmButtonText, MessageText, MessageTitle } from '
 import { SweetalertService } from '../../admin/sweetalert.service';
 import { Router } from '@angular/router';
 import { JsonResponse } from 'src/app/contracts/response/response';
-import { MessageType } from 'src/app/enums/sweetalert-enum';
+import { MessageType, Position } from 'src/app/enums/sweetalert-enum';
 
 @Injectable({
   providedIn: 'root',
@@ -67,11 +67,13 @@ export class CategoryService {
 
     if (response.statusCode === 200) {
       this.sweetAlertService.showAlert({
+        position: Position.TopRight,
         messageTitle: MessageTitle.Success,
         messageText: MessageText.CategoryCreate,
         icon: MessageType.Success,
-        confirmButtonText: ConfirmButtonText.Okey,
-        delay: 1
+        timerProgressBar: true,
+        toast: true,
+        delay: 1,
       });
       return response.result;
     } else {
@@ -92,11 +94,13 @@ export class CategoryService {
     const data = await firstValueFrom(observable);
 
     this.sweetAlertService.showAlert({
+      position: Position.TopRight,
       messageTitle: MessageTitle.Success,
       messageText: MessageText.CategoryUpdate,
       icon: MessageType.Success,
-      confirmButtonText: ConfirmButtonText.Okey,
-      delay: 1
+      timerProgressBar: true,
+      toast: true,
+      delay: 1,
     });
 
     this.router.navigate(['/Admin', 'Class-List']);
@@ -106,9 +110,11 @@ export class CategoryService {
 
   async deleteCategory(id: number) {
     const sweetalert = await this.sweetAlertService.showAlert({
+        position: Position.Center,
         messageTitle: MessageTitle.DeletedQuestion,
         messageText: MessageText.NoTurningBack,
         icon: MessageType.Warning,
+        showConfirmButton: true,
         showCancelButton: true,
         confirmButtonText: ConfirmButtonText.Okey,
         cancelButtonText: CancelButtonText.Cancel,
@@ -122,11 +128,13 @@ export class CategoryService {
         }, id));
 
         this.sweetAlertService.showAlert({
+          position: Position.TopRight,
           messageTitle: MessageTitle.Success,
           messageText: MessageText.CategoryDelete,
           icon: MessageType.Success,
-          confirmButtonText: ConfirmButtonText.Okey,
-          delay: 1
+          timerProgressBar: true,
+          toast: true,
+          delay: 1,
         });
     }
   }

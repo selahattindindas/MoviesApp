@@ -1,12 +1,16 @@
 export class SweetAlert_Options{
-    position: Position;
+    position?: Position = Position.Center;
     messageTitle: string;
     messageText: string;
     icon: MessageType;
+    showConfirmButton: boolean;
     showCancelButton: boolean;
     confirmButtonText: string;
+    cancelButtonText: string;
     delay: number;
-    cancelButtonText: string
+    timerProgressBar: boolean;
+    toast: boolean;
+    popup:string;
 }
 
 export enum MessageType {

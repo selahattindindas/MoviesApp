@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Create_Movie } from 'src/app/contracts/movie/create-movie';
 import { CategoryEnum } from 'src/app/enums/category-enum';
 import { PlatformEnum } from 'src/app/enums/platform-enum';
-import { MessageType } from 'src/app/enums/sweetalert-enum';
+import { MessageType, Position } from 'src/app/enums/sweetalert-enum';
 import { MessageTitle, MessageText, ConfirmButtonText } from 'src/app/internal/message-title';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { CategoryService } from 'src/app/services/common/models/category.service';
@@ -23,7 +24,8 @@ export class MovieCreateComponent implements OnInit {
   platformEnum: { value: PlatformEnum; description: string; }[];
   constructor(
     private fb: FormBuilder, private categoryService: CategoryService, 
-    private platformService: PlatformService, private movieService: MoviesService, private sweetAlertService: SweetalertService) {
+    private platformService: PlatformService, private movieService: MoviesService, private sweetAlertService: SweetalertService,
+    private router: Router) {
     this.createForm = this.fb.group({
       name: new FormControl(null, [Validators.required, Validators.minLength(5)]),
       categoryId: new FormControl('0', categoryValidator()),
@@ -77,17 +79,26 @@ export class MovieCreateComponent implements OnInit {
         movieTime: formData.time,
         description: formData.detail,
       };
-      this.movieService.createMovie(movie).then((isConfirm) =>{
-        if(isConfirm){
-          this.sweetAlertService.showAlert({
-            messageTitle: MessageTitle.Success,
-            messageText: MessageText.MovieCreate,
-            icon: MessageType.Success,
-            confirmButtonText: ConfirmButtonText.Okey,
-            delay: 1
-          });
+  
+
+      this.movieService.createMovie(movie, async () => {
+      const result = this.sweetAlertService.showAlert({
+          position: Position.TopRight,
+          messageTitle: MessageTitle.Success,
+          messageText: MessageText.MovieCreate,
+          icon: MessageType.Success,
+          timerProgressBar: true,
+          toast: true,
+          delay: 1,
+        });
+        if((await result).dismiss){
+          setTimeout(()=>{
+            this.router.navigate(['/Admin', 'Movies-List']);
+          }, 1000)
+          
         }
       });
-    } 
+    }
   }
+  
 }

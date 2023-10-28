@@ -8,7 +8,7 @@ import { ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/m
 import { List_Photo } from 'src/app/contracts/photo/list-photo';
 import { JsonResponse } from 'src/app/contracts/response/response';
 import { environment } from 'src/app/environments/environment';
-import { MessageType } from 'src/app/enums/sweetalert-enum';
+import { MessageType, Position } from 'src/app/enums/sweetalert-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -54,11 +54,13 @@ export class PhotoService {
     );
 
     this.sweetAlertService.showAlert({
+      position: Position.TopRight,
       messageTitle: MessageTitle.Success,
       messageText: MessageText.PhotoCreate,
       icon: MessageType.Success,
-      confirmButtonText: ConfirmButtonText.Okey,
-      delay: 1
+      timerProgressBar: true,
+      toast: true,
+      delay: 1,
     });
 
     this.router.navigate(['/Admin', 'Movies-List']);
@@ -77,11 +79,13 @@ export class PhotoService {
 
     if (response.statusCode == 200) {
       this.sweetAlertService.showAlert({
+        position: Position.TopRight,
         messageTitle: MessageTitle.Success,
         messageText: MessageText.PhotoDelete,
         icon: MessageType.Success,
-        confirmButtonText: ConfirmButtonText.Okey,
-        delay: 1
+        timerProgressBar: true,
+        toast: true,
+        delay: 1,
       });
       return response.result
     } else {

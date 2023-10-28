@@ -12,7 +12,6 @@
   align-items: center;
 }
 
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -21,3 +20,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size: 13px;
   padding: 1px 0 0 3px;
 }
+
+.swal2-show {
+  animation: swal2-show .5s !important; 
+  -webkit-animation: swal2-show .5s !important;
+}
+
+.swal2-toast {
+  margin-right: 10px;
+  position: relative !important;
+  padding: 40px 0 40px 10px !important;
+}
+
