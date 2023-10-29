@@ -10,7 +10,7 @@ import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { CategoryService } from 'src/app/services/common/models/category.service';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
 import { PlatformService } from 'src/app/services/common/models/platform.service';
-import { categoryValidator } from 'src/app/shared/required.validator';
+import { categoryValidator } from 'src/app/shared/validators/required.validator';
 
 @Component({
   selector: 'app-update',
