@@ -33,8 +33,8 @@ export class UpdateComponent implements OnInit {
       categoryId: new FormControl('0', categoryValidator()),
       platformId: new FormControl('0', categoryValidator()),
       date: new FormControl(null, Validators.required),
-      time: new FormControl(null, [Validators.required, Validators.max(300), Validators.min(30)]),
-      details: new FormControl(null, [Validators.required, Validators.maxLength(520), Validators.minLength(124)]),
+      time: new FormControl(null, [Validators.required, Validators.max(300), Validators.min(1)]),
+      details: new FormControl(null, [Validators.required, Validators.maxLength(520), Validators.minLength(30)]),
     });
     setTimeout(() => {
       this.updateForm.controls["categoryId"].setValue(this.movies.categoryName),

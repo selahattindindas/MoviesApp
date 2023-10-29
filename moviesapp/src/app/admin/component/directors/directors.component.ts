@@ -19,8 +19,8 @@ export class DirectorsComponent implements OnInit {
   directorValue: string = '';
   directorName: string[] = [];
   director: List_Director[];
-
-  constructor(private directorService: DirectorService, private route: ActivatedRoute, private sweetAlertService:SweetalertService, private router:Router) { }
+  createDirector: Create_Director;
+  constructor(private directorService: DirectorService, private route: ActivatedRoute, private sweetAlertService: SweetalertService, private router: Router) { }
 
   ngOnInit(): void {
     this.getDirector();
@@ -43,32 +43,32 @@ export class DirectorsComponent implements OnInit {
     }
   }
 
-  create(movieId:string) {
+  create(movieId: string) {
     if (this.directorForm.valid) {
       const directors: Create_Director[] = this.directorName.map(name => ({
         movieId: movieId,
-        directorNames: name
+        directorNames: name 
       }));
-      for (const director of directors) {
-        this.directorService.createDirector(director, async ()=>{
-         const response = await this.sweetAlertService.showAlert(SweetDirectors.createDirectors);
-         if (response.dismiss){
-          setTimeout(()=>{
-            this.router.navigate(['/Admin', 'Movies-List']);
-          }, 1000)
-         }
-        })
+      directors.forEach(async (director) => {
+        this.directorService.createDirector(director, async () => {
+          const response = await this.sweetAlertService.showAlert(SweetDirectors.createDirectors);
+          if (response.dismiss) {
+            setTimeout(() => {
+              this.router.navigate(['/Admin', 'Movies-List']);
+            }, 1000);
+          }
+        });
       }
-    }
+    )}
   }
 
   removeDirector(id: number) {
-    this.directorService.deleteDirector(id, () =>{
+    this.directorService.deleteDirector(id, () => {
       this.sweetAlertService.showAlert(SweetDirectors.deletedDirectors);
     })
-    .then(() => {
-      this.getDirector();
-    })
+      .then(() => {
+        this.getDirector();
+      })
   }
 
   removeCreate(index: number) {

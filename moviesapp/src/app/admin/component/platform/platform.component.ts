@@ -14,9 +14,10 @@ import { PlatformService } from 'src/app/services/common/models/platform.service
 export class AdminPlatform implements OnInit {
   @ViewChild("platformForm", { static: true }) platformForm: NgForm
   platform: List_Platform[] = [];
-  showCreateFormFlag = false;
+  showCreateFormFlag : boolean;
   editPlatformId: number;
   model = {name:''};
+
   constructor(private platformService: PlatformService, private sweetAlertService: SweetalertService) { }
 
   ngOnInit(): void {
@@ -41,16 +42,10 @@ export class AdminPlatform implements OnInit {
     }
   }
 
-  showCreateForm(action: string) {
-    if (action === 'if') {
-      this.showCreateFormFlag = true;
-      this.editPlatformId = null;
-    }
-    else if (action === 'else') {
-      this.showCreateFormFlag = false;
-      this.model.name = '';
-    }
-  }
+  showCreateForm() {
+    this.showCreateFormFlag = !this.showCreateFormFlag;
+    this.model.name = '';
+}
 
   createPlatform() {
     if (!this.platformForm.valid)
@@ -60,9 +55,10 @@ export class AdminPlatform implements OnInit {
 
     this.platformService.createPlatform(platformName, () => {
       this.sweetAlertService.showAlert(SweetPlatform.createPlatform);
-    }).then(() => {
+    })
+    .then(() => {
       this.getPlatform();
-      this.showCreateForm('else');
+      this.showCreateForm();
     });
   }
 
@@ -70,26 +66,27 @@ export class AdminPlatform implements OnInit {
     const platformItem = this.platform.find(item => item.id === platformId);
     if (platformItem) {
       this.editPlatformId = platformId;
-      this.model.name = '';
+      this.model.name = this.model.name;
       this.showCreateFormFlag = false;
     }
   }
 
-  updatePlatform(action: string, PlatformId: number) {
-    if (action === 'if' && this.platformForm.valid && this.editPlatformId) {
+  updatePlatform(platformId: number, action:string) {
+    if (action ==='check' && this.platformForm.valid && this.editPlatformId) {
       const Platform: List_Platform = {
-        id: PlatformId,
+        id: platformId,
         name: this.model.name
       };
 
       this.platformService.updatePlatform(Platform, () => {
         this.sweetAlertService.showAlert(SweetPlatform.updatePlatform);
-      }).then(() => {
+      })
+      .then(() => {
         this.getPlatform();
         this.editPlatformId = null;
       });
     }
-    else if (action === 'else') {
+    else if(action === 'cancel'){
       this.editPlatformId = null;
     }
     this.getPlatform();

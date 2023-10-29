@@ -30,8 +30,8 @@ export class MovieCreateComponent implements OnInit {
       categoryId: new FormControl('0', categoryValidator()),
       platformId: new FormControl('0', categoryValidator()),
       date: new FormControl(null, Validators.required),
-      time: new FormControl(null, [Validators.required, Validators.max(300), Validators.min(30)]),
-      detail: new FormControl(null, [Validators.required, Validators.maxLength(520), Validators.minLength(124)]),
+      time: new FormControl(null, [Validators.required, Validators.max(300), Validators.min(1)]),
+      detail: new FormControl(null, [Validators.required, Validators.maxLength(520), Validators.minLength(30)]),
     });
   }
 
@@ -40,13 +40,13 @@ export class MovieCreateComponent implements OnInit {
     this.getPlatform();
   }
 
-  getCategory() {
+  async getCategory() {
     return this.categoryService.getCategoryEnumValues().then(categoryData => {
       this.categoryEnum = categoryData;
     })
   }
 
-  getPlatform() {
+  async getPlatform() {
     return this.platformService.getPlatformEnumValues().then(platformData => {
       this.platformEnum = platformData
     })

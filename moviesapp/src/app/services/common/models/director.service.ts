@@ -53,7 +53,7 @@ export class DirectorService {
     const response = await firstValueFrom(observable);
 
     successCallBack();
-    
+
     return response.statusCode === 200
     ? response.result
     : response.statusMessage;

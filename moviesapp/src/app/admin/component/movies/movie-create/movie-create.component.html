@@ -63,7 +63,7 @@
               <input class="create-input" type="number" formControlName="time" [ngClass]="{invalidRed: isValidTemplate('time')}"/>
               <div class="error-message" *ngIf="isValid('time')">
                 <small *ngIf="createForm.get('time')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
-                <small *ngIf="createForm.get('time')?.errors?.['min']">Lütfen minimum 30 dakika giriniz.</small>
+                <small *ngIf="createForm.get('time')?.errors?.['min']">Lütfen minimum 1 dakika giriniz.</small>
                 <small *ngIf="createForm.get('time')?.errors?.['max']">Lütfen maksimum 300 dakika giriniz.</small>
               </div>  
             </div>
@@ -75,7 +75,7 @@
               [ngClass]="{invalidRed: isValidTemplate('time')}"></textarea> 
               <div class="error-message" *ngIf="isValid('detail')">
                 <small *ngIf="createForm.get('detail')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
-                <small *ngIf="createForm.get('detail')?.errors?.['minlength']">Lütfen minimum 124 karakter giriniz.</small>
+                <small *ngIf="createForm.get('detail')?.errors?.['minlength']">Lütfen minimum 30 karakter giriniz.</small>
                 <small *ngIf="createForm.get('detail')?.errors?.['maxlength']">Lütfen maksimum 520 karakter giriniz.</small>
               </div>              
             </div>

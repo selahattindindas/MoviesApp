@@ -44,11 +44,11 @@ export class PlayersComponent implements OnInit {
   }
   create(movieId: number) {
     if (this.playerForm.valid && this.playerName.length > 0) {
-      const player: Create_Player[] = this.playerName.map(name => ({
+      const players: Create_Player[] = this.playerName.map(name => ({
         movieId: movieId, 
         playerNames: name
       }));
-      for (const actor of player) {
+      players.forEach(async (actor) => {
         this.playerService.createPlayer(actor, async () =>{
           const response = await this.sweetAlertService.showAlert(SweetPlayers.createPlayers);
           if(response.dismiss){
@@ -58,7 +58,7 @@ export class PlayersComponent implements OnInit {
           }
         });
       }
-    }
+    )}
   }
   
   removePlayer(id: number) {

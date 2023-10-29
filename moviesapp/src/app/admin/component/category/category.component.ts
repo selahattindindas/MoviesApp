@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { List_Category } from 'src/app/contracts/category/list-category';
-import { Update_Category } from 'src/app/contracts/category/update-category';
 import { SweetCategory } from 'src/app/internal/sweet-message/category';
 import { SweetCommon } from 'src/app/internal/sweet-message/common';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
@@ -15,17 +14,17 @@ import { CategoryService } from 'src/app/services/common/models/category.service
 export class AdminCategory implements OnInit {
   @ViewChild("categoryForm", { static: true }) categoryForm: NgForm
   listCategory: List_Category[];
-  showCreateFormFlag = false;
-  //showCreateFormFlag optimize
+  showCreateFormFlag : boolean; //showCreateFormFlag optimize //böyle bir şey yaptım
   editCategoryId: number;
   model= {name:''};
+
   constructor(private categoryService: CategoryService, private sweetAlertService:SweetalertService) { }
 
   ngOnInit(): void {
     this.getCategory();
   }
 
-  getCategory() {
+  async getCategory() {
     return this.categoryService.getAllCategories().then(categoryData => {
       this.listCategory = categoryData as List_Category[];
     })
@@ -42,45 +41,38 @@ export class AdminCategory implements OnInit {
       });
     }
   }
-  //ShowCreateForm Methodu tamamiyle düzeltilecek!
-  showCreateForm(action: string) {
-    if (action === 'if') {
-      this.showCreateFormFlag = true;
-    }
-    else if (action === 'else') {
-      this.showCreateFormFlag = false;
+  //ShowCreateForm Methodu tamamiyle düzeltilecek! //Düzenlendi
+  showCreateForm() {
+      this.showCreateFormFlag = !this.showCreateFormFlag;
       this.model.name = '';
-    }
   }
-  //Düzenlendi
+
   createCategory() {
     if (!this.categoryForm.valid)
       return;
 
     const category = this.model.name;
     
-
     this.categoryService.createCategory(category, ()=>{
       this.sweetAlertService.showAlert(SweetCategory.createCategory);
     })
     .then(() => {
       this.getCategory();
-      this.showCreateForm('else');
+      this.showCreateForm();
     });
   }
 
-  //Düzenlenecek Show Update Form
-  showUpdateForm(categoryId: number) {
+  showUpdateForm(categoryId: number) { //Düzenlenecek Show Update Form //Düzenlendi
     const categoryItem = this.listCategory.find(item => item.id === categoryId);
     if (categoryItem) {
       this.editCategoryId = categoryId;
-      this.model.name = this.model.name
+      this.model.name = this.model.name;
       this.showCreateFormFlag = false;
     }
   }
-  //Düzenlendi
-  updateCategory(action: string, categoryId: number) {
-    if (action === 'if' && this.categoryForm.valid && this.editCategoryId) {
+ 
+  updateCategory(categoryId: number, action: string,) {
+    if (action === 'check' && this.categoryForm.valid && this.editCategoryId) {
       const category = {
         id: categoryId,
         name: this.model.name
@@ -94,10 +86,9 @@ export class AdminCategory implements OnInit {
         this.editCategoryId = null;
       });
     }
-    else if (action === 'else') {
+    else if (action === 'cancel') {
       this.editCategoryId = null;
     }
     this.getCategory();
   }
-  //Düzenlendi
 }
