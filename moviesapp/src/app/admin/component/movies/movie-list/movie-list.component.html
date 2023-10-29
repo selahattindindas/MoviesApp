@@ -1,10 +1,9 @@
 <section>
   <div class="movie-list">
-    <h1>Film Listesi</h1>
-    <div *ngIf="photoComponent">
-
-      <movie-photo [movieId]="selectedMovieId"></movie-photo>
+    <div class="photo-dialog" *ngFor="let movie of movie">
+      <movie-photo [movieId]="movie.id"></movie-photo>
     </div>
+    <h1>Film Listesi</h1>
     <div class="movie-search-button-container">
       <div class="movie-search">
         <input placeholder="Film Ara" [(ngModel)]="filterText" />
@@ -37,10 +36,9 @@
               <i class="fa-solid fa-square-minus fa-lg actor" [routerLink]="['Create-Players', movie.id]"></i>
               <i class="fa-solid fa-square-minus fa-lg director" [routerLink]="['Create-Director', movie.id]"></i>
             </td>
-            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                (click)="photoContents(movie.id)">
-                Launch demo modal
-              </button></td>
+            <td>
+              <i type="button" class="fa-solid fa-image fa-lg" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+            </td>
             <td>
               <i class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Edit', movie.id]"></i>
               <i class="fa-solid fa-trash fa-lg delete" (click)="deleteMovie(movie.id)"></i>

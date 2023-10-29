@@ -67,7 +67,9 @@
   white-space: nowrap;
   overflow: hidden;
 }
-
+.model-body{
+  margin-top: 20px;
+}
 
 .lg-table thead th {
   background-color: rgba(1, 19, 9, 0.8);

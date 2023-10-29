@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../http-client.service';
-import { Router } from '@angular/router';
 import { Create_Director } from 'src/app/contracts/director/create-director';
 import { Observable, firstValueFrom } from 'rxjs';
-import { SweetalertService } from '../../admin/sweetalert.service';
-import { ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
 import { List_Director } from 'src/app/contracts/director/list-director';
 import { JsonResponse } from 'src/app/contracts/response/response';
-import { MessageType, Position } from 'src/app/enums/sweetalert-enum';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +12,7 @@ import { MessageType, Position } from 'src/app/enums/sweetalert-enum';
 
 export class DirectorService {
 
-  constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
+  constructor(private httpClientService: HttpClientService) { }
 
   async getDirectorsMovieById(movieId: number) {
     const observable: Observable<JsonResponse<List_Director>> = this.httpClientService.get(
@@ -31,7 +28,7 @@ export class DirectorService {
       : response.statusMessage;
   }
 
-  async createDirector(director: Create_Director) {
+  async createDirector(director: Create_Director, successCallBack?: () => void) {
     const observable: Observable<Create_Director> = this.httpClientService.post(
       {
         controller: 'Director',
@@ -39,23 +36,14 @@ export class DirectorService {
         queryString: `Id=${director.movieId}&DirectorNames=${director.directorNames}`
       }, director);
 
-    const data = await firstValueFrom(observable)
-    this.sweetAlertService.showAlert({
-      position: Position.TopRight,
-      messageTitle: MessageTitle.Success,
-      messageText: MessageText.DirectorCreate,
-      icon: MessageType.Success,
-      timerProgressBar: true,
-      toast: true,
-      delay: 1,
-    });
+    const response = await firstValueFrom(observable);
 
-    this.router.navigate(['/Admin', 'Movies-List']);
+    successCallBack();
 
-    return data;
+    return response;
   }
 
-  async deleteDirector(id: number) {
+  async deleteDirector(id: number, successCallBack?: () => void) {
     const observable: Observable<JsonResponse<List_Director>> = this.httpClientService.delete(
       {
         controller: 'Director',
@@ -64,20 +52,10 @@ export class DirectorService {
 
     const response = await firstValueFrom(observable);
 
-    if (response.statusCode === 200) {
-
-      this.sweetAlertService.showAlert({
-        position: Position.TopRight,
-        messageTitle: MessageTitle.Success,
-        messageText: MessageText.DirectorDelete,
-        icon: MessageType.Success,
-        timerProgressBar: true,
-        toast: true,
-        delay: 1,
-      });
-      return response.result;
-    } else {
-      return response.statusMessage;
-    }
-  };
+    successCallBack();
+    
+    return response.statusCode === 200
+    ? response.result
+    : response.statusMessage;
+  }
 }

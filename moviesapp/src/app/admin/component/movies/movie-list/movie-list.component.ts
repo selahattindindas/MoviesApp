@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
+import { SweetCommon } from 'src/app/internal/sweet-message/common';
+import { SweetMovie } from 'src/app/internal/sweet-message/movie';
+import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
-
 
 @Component({
   selector: 'app-movie-list',
@@ -12,12 +14,11 @@ export class MovieListComponent implements OnInit {
   movie: List_Movie[];
   filterText: string;
   filterName: keyof List_Movie = 'name';
-  photoComponent: boolean = false;
-  selectedMovieId: number;
-  constructor(private movieService: MoviesService) {}
+  constructor(private movieService: MoviesService, private sweetAlertService: SweetalertService) {}
 
   ngOnInit(): void {
     this.getMovie();
+
   }
 
   getMovie() {
@@ -26,15 +27,16 @@ export class MovieListComponent implements OnInit {
     })
   }
 
-  photoContents(id: number) {
-    this.photoComponent = !this.photoComponent;
-    this.selectedMovieId = id;
-  }
-  
-  deleteMovie(id: number) {
-    this.movieService.deleteMovie(id).then(() => {
-      this.getMovie();
-    });
-  }
+  async deleteMovie(id: number) {
+    const sweetAlertResult = await this.sweetAlertService.showAlert(SweetCommon.DeletedQuestion);
 
+    if(sweetAlertResult.isConfirmed){
+       this.movieService.deleteMovie(id, ()=>{
+        this.sweetAlertService.showAlert(SweetMovie.deleteMovie);
+       })
+       .then(() => {
+        this.getMovie();
+      });
+    }
+  }
 }

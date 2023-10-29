@@ -16,7 +16,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let category of categories">
+            <tr *ngFor="let category of listCategory">
               <td>
                 <ng-container *ngIf="editCategoryId !== category.id; else editMode">
                   {{ category.name }}

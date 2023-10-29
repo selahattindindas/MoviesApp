@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../http-client.service';
 import { Create_Movie } from 'src/app/contracts/movie/create-movie';
-import { SweetalertService } from '../../admin/sweetalert.service';
 import { Observable, firstValueFrom } from 'rxjs';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { Update_Movie } from 'src/app/contracts/movie/update-movie';
-import { Router } from '@angular/router';
-import { CancelButtonText, ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
 import { JsonResponse } from 'src/app/contracts/response/response';
-import { MessageType, Position } from 'src/app/enums/sweetalert-enum';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +13,9 @@ import { MessageType, Position } from 'src/app/enums/sweetalert-enum';
 
 export class MoviesService {
 
-  constructor(private httpClientService: HttpClientService, private sweetAlertService: SweetalertService, private router: Router) { }
+  constructor(private httpClientService: HttpClientService) { }
 
-  async getAllMovies(): Promise<List_Movie[] | string> {
+  async getAllMovies() {
     //try catch kalkacak // YAPILDI
       const observable: Observable<JsonResponse<List_Movie[]>> = this.httpClientService.get({
         controller: 'Movie',
@@ -48,69 +45,45 @@ export class MoviesService {
     } 
 
   async createMovie(movie: Create_Movie, successCallBack?: () => void) {
-      const result = this.httpClientService.post({
+      const observable: Observable<Create_Movie> =  this.httpClientService.post({
         controller: 'Movie',
         action: 'CreateMovie'
       }, movie);
    
-        const data = await firstValueFrom(result);
+        const response = await firstValueFrom(observable);
         successCallBack();
         
-        return data;
+        return response;
       }
-      // sweatalert onaylandıktan sonra yönlendirme olucak
+      // sweatalert onaylandıktan sonra yönlendirme olucak // yapıldı
       
-  async updateMovie(movie: Update_Movie) {
+  async updateMovie(movie: Update_Movie, successCallBack?: () => void) {
       const observable: Observable<Update_Movie> = this.httpClientService.put({
         controller: 'Movie',
         action: 'UpdateMovie'
       }, movie);
 
-      const data = await firstValueFrom(observable);
-
-      this.sweetAlertService.showAlert({
-        position: Position.TopRight,
-        messageTitle: MessageTitle.Success,
-        messageText: MessageText.MovieUpdate,
-        icon: MessageType.Success,
-        timerProgressBar: true,
-        toast: true,
-        delay: 1,
-      });
-
-      this.router.navigate(['/Admin', 'Movies-List']);
-
-      return data;
+      const response = await firstValueFrom(observable);
+      
+      successCallBack();
+     
+      return response;
   }
 
-  async deleteMovie(id: number) {
-    const sweetalert = await this.sweetAlertService.showAlert({
-      position: Position.Center,
-      messageTitle: MessageTitle.DeletedQuestion,
-      messageText: MessageText.NoTurningBack,
-      icon: MessageType.Warning,
-      showConfirmButton: true,
-      showCancelButton: true,
-      confirmButtonText: ConfirmButtonText.Okey,
-      cancelButtonText: CancelButtonText.Cancel,
-    });
+  async deleteMovie(id: number, successCallBack?: () => void) {
+    const observable: Observable<JsonResponse<List_Movie>> = this.httpClientService.delete(
+      {
+        controller: 'Movie',
+        action: 'Delete'
+      }, id);
 
-      if (sweetalert.isConfirmed) {
-        await firstValueFrom(this.httpClientService.delete({
-          controller: 'Movie',
-          action: 'Delete'
-        }, id));
+    const response = await firstValueFrom(observable);
 
-        this.sweetAlertService.showAlert({
-          position: Position.TopRight,
-          messageTitle: MessageTitle.Success,
-          messageText: MessageText.MovieDelete,
-          icon: MessageType.Success,
-          timerProgressBar: true,
-          toast: true,
-          delay: 1,
-        });
-      }
+    successCallBack();
+
+    return response.statusCode ===200
+    ? response.result
+    : response.statusMessage;
   }
 }
 

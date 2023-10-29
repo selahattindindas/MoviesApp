@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, NgForm } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { find } from 'rxjs';
 import { Create_Player } from 'src/app/contracts/player/create-player';
 import { List_Player } from 'src/app/contracts/player/list-player';
+import { SweetPlayers } from 'src/app/internal/sweet-message/players';
+import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { PlayerService } from 'src/app/services/common/models/player.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class PlayersComponent implements OnInit {
   playerName: string[] = [];
   playerValue: string = '';
   movieId: number;
-  constructor(private playerService: PlayerService, private route:ActivatedRoute) {}
+  constructor(private playerService: PlayerService, private route:ActivatedRoute, 
+    private sweetAlertService:SweetalertService, private router:Router) {}
 
   ngOnInit(): void {
     this.getPlayers();
@@ -47,13 +49,22 @@ export class PlayersComponent implements OnInit {
         playerNames: name
       }));
       for (const actor of player) {
-        this.playerService.createPlayer(actor);
+        this.playerService.createPlayer(actor, async () =>{
+          const response = await this.sweetAlertService.showAlert(SweetPlayers.createPlayers);
+          if(response.dismiss){
+            setTimeout(()=>{
+              this.router.navigate(['/Admin', 'Movies-List']);
+            }, 1000)
+          }
+        });
       }
     }
   }
   
   removePlayer(id: number) {
-    this.playerService.deletePlayer(id).then(() => {
+    this.playerService.deletePlayer(id, ()=>{
+      this.sweetAlertService.showAlert(SweetPlayers.deletedPlayers);
+    }).then(() => {
       this.getPlayers();
     })
   }

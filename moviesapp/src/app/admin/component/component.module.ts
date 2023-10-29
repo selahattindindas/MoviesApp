@@ -16,8 +16,6 @@ import { LimitPipe } from 'src/app/shared/limit-pipe';
 import { PhotoComponent } from './photo/photo.component';
 import { PlayersComponent } from './players/players.component';
 import { DirectorsComponent } from './directors/directors.component';
-import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
-import { MdbModalService } from 'mdb-angular-ui-kit/modal';
 @NgModule({
   declarations: [
     UserComponent,
@@ -41,8 +39,7 @@ import { MdbModalService } from 'mdb-angular-ui-kit/modal';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    MdbCheckboxModule
   ],
-  providers: [AdminlayoutComponent, MdbModalService],
+  providers: [AdminlayoutComponent],
 })
 export class AdminModule { }

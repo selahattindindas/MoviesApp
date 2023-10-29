@@ -1,4 +1,4 @@
-export class List_Platform{
+export class Update_Platform{
     id:number;
     name:string;
 }

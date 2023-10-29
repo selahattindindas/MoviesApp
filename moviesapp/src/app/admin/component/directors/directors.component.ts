@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Create_Director } from 'src/app/contracts/director/create-director';
 import { List_Director } from 'src/app/contracts/director/list-director';
+import { SweetDirectors } from 'src/app/internal/sweet-message/directors';
+import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { DirectorService } from 'src/app/services/common/models/director.service';
 
 @Component({
@@ -18,7 +20,7 @@ export class DirectorsComponent implements OnInit {
   directorName: string[] = [];
   director: List_Director[];
 
-  constructor(private directorService: DirectorService, private route: ActivatedRoute) { }
+  constructor(private directorService: DirectorService, private route: ActivatedRoute, private sweetAlertService:SweetalertService, private router:Router) { }
 
   ngOnInit(): void {
     this.getDirector();
@@ -48,13 +50,23 @@ export class DirectorsComponent implements OnInit {
         directorNames: name
       }));
       for (const director of directors) {
-        this.directorService.createDirector(director);
+        this.directorService.createDirector(director, async ()=>{
+         const response = await this.sweetAlertService.showAlert(SweetDirectors.createDirectors);
+         if (response.dismiss){
+          setTimeout(()=>{
+            this.router.navigate(['/Admin', 'Movies-List']);
+          }, 1000)
+         }
+        })
       }
     }
   }
 
   removeDirector(id: number) {
-    this.directorService.deleteDirector(id).then(() => {
+    this.directorService.deleteDirector(id, () =>{
+      this.sweetAlertService.showAlert(SweetDirectors.deletedDirectors);
+    })
+    .then(() => {
       this.getDirector();
     })
   }

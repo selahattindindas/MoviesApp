@@ -8,7 +8,7 @@ declare var sweetalert2: any;
 export class SweetalertService {
   constructor() {}
 
-  async showAlert(options: Partial<SweetAlert_Options>) {
+  async showAlert(options: Partial<SweetAlert_Options>){
     const result: SweetAlertResult<any> = await Swal.fire({
       position: options.position as SweetAlertPosition,
       title: options.messageTitle,

@@ -3,11 +3,8 @@ import { CategoryDescription, CategoryEnum } from 'src/app/enums/category-enum';
 import { HttpClientService } from '../http-client.service';
 import { List_Category } from 'src/app/contracts/category/list-category';
 import { Observable, firstValueFrom } from 'rxjs';
-import { CancelButtonText, ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
-import { SweetalertService } from '../../admin/sweetalert.service';
-import { Router } from '@angular/router';
 import { JsonResponse } from 'src/app/contracts/response/response';
-import { MessageType, Position } from 'src/app/enums/sweetalert-enum';
+import { Update_Category } from 'src/app/contracts/category/update-category';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +12,8 @@ import { MessageType, Position } from 'src/app/enums/sweetalert-enum';
 
 export class CategoryService {
 
-  constructor(private httpClientService: HttpClientService, private sweetAlertService: SweetalertService, private router: Router) { }
-// boolean olarak al select kısmını // YAPILDI
+  constructor(private httpClientService: HttpClientService) { }
+  // boolean olarak al select kısmını // YAPILDI
   async getCategoryEnumValues(select?: boolean): Promise<{ value: CategoryEnum; description: string; }[]> {
 
     const enumValues = Object.keys(CategoryEnum)
@@ -33,7 +30,7 @@ export class CategoryService {
       : enumValues;
   }
 
-  async getAllCategories(){
+  async getAllCategories() {
     //Promise'teki stringler kalkacak. // YAPILDI
     const observable: Observable<JsonResponse<List_Category[]>> = this.httpClientService.get(
       { controller: 'Category', action: 'GetAllCategories' });
@@ -45,7 +42,7 @@ export class CategoryService {
       : response.statusMessage;
   }
 
-  async getCategoryById(id: number){
+  async getCategoryById(id: number) {
     const observable: Observable<JsonResponse<List_Category>> = this.httpClientService.get(
       { controller: 'Category', action: 'GetByCategoryId' }, id);
 
@@ -56,87 +53,53 @@ export class CategoryService {
       : response.statusMessage;
   }
 
-  async createCategory(categoryName: unknown) {
-    const observable: Observable<JsonResponse<unknown>> = this.httpClientService.post(
+  async createCategory(name: string, successCallBack?: () => void) {
+    const observable = this.httpClientService.post(
       {
         controller: 'Category',
-        action: `CreateCategory?categoryName=${categoryName}`
-      }, categoryName);
+        action: `CreateCategory?categoryName=${name}`
+      }, name);
 
     const response = await firstValueFrom(observable);
 
-    if (response.statusCode === 200) {
-      this.sweetAlertService.showAlert({
-        position: Position.TopRight,
-        messageTitle: MessageTitle.Success,
-        messageText: MessageText.CategoryCreate,
-        icon: MessageType.Success,
-        timerProgressBar: true,
-        toast: true,
-        delay: 1,
-      });
-      return response.result;
-    } else {
-      return response.statusMessage;
-    }
+    successCallBack();
+
+    return response;
     //hata yönetimi gerçekleşecek.
   }
 
-  async updateCategory(name: unknown) {
-    //stringe çekilecek
-    // update'de ki gibi olsun create'de
-    const observable: Observable<unknown> = this.httpClientService.put(
+  async updateCategory(category:Update_Category, successCallBack?: () => void) {
+    //stringe çekilecek // yapıldı
+    // update'de ki gibi olsun create'de // yapıldı
+    const observable= this.httpClientService.put(
       {
         controller: 'Category',
         action: 'UpdateCategory'
-      }, name);
+      }, category);
 
-    const data = await firstValueFrom(observable);
+    const response = await firstValueFrom(observable);
 
-    this.sweetAlertService.showAlert({
-      position: Position.TopRight,
-      messageTitle: MessageTitle.Success,
-      messageText: MessageText.CategoryUpdate,
-      icon: MessageType.Success,
-      timerProgressBar: true,
-      toast: true,
-      delay: 1,
-    });
+    successCallBack();
 
-    this.router.navigate(['/Admin', 'Class-List']);
-
-    return data;
+    return response;
   }
 
-  async deleteCategory(id: number) {
-    const sweetalert = await this.sweetAlertService.showAlert({
-        position: Position.Center,
-        messageTitle: MessageTitle.DeletedQuestion,
-        messageText: MessageText.NoTurningBack,
-        icon: MessageType.Warning,
-        showConfirmButton: true,
-        showCancelButton: true,
-        confirmButtonText: ConfirmButtonText.Okey,
-        cancelButtonText: CancelButtonText.Cancel,
-      });
 
-    if (sweetalert.isConfirmed) {
-      await firstValueFrom(this.httpClientService.delete(
-        {
-          controller: 'Category',
-          action: 'DeleteCategory'
-        }, id));
+  async deleteCategory(id: number, successCallBack?: () => void) {
+    const observable: Observable<JsonResponse<List_Category>> = this.httpClientService.delete(
+      {
+        controller: 'Category',
+        action: 'DeleteCategory'
+      }, id);
 
-        this.sweetAlertService.showAlert({
-          position: Position.TopRight,
-          messageTitle: MessageTitle.Success,
-          messageText: MessageText.CategoryDelete,
-          icon: MessageType.Success,
-          timerProgressBar: true,
-          toast: true,
-          delay: 1,
-        });
-    }
+    const response = await firstValueFrom(observable);
+
+    successCallBack();
+
+    return response.statusCode === 200
+      ? response.result
+      : response.statusMessage;
   }
 }
-//Buradaki değişikliklerin hepsi platform'da da olacak.
+
+//Buradaki değişikliklerin hepsi platform'da da olacak. //YAPILDI

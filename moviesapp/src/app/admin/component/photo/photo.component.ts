@@ -1,7 +1,10 @@
-import { Component, Inject, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { List_Photo } from 'src/app/contracts/photo/list-photo';
+import { SweetPhoto } from 'src/app/internal/sweet-message/photo';
+import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { PhotoService } from 'src/app/services/common/models/photo.service';
 
 @Component({
@@ -16,7 +19,7 @@ export class PhotoComponent implements OnInit {
   getPhoto: List_Photo[] = [];
   @Input() movieId:number;
   @ViewChild('exampleModalLong') exampleModalLong: any;
-  constructor(private renderer: Renderer2, private photoService: PhotoService) { }
+  constructor(private renderer: Renderer2, private photoService: PhotoService, private router:Router, private sweetAlertService:SweetalertService) { }
 
   ngOnInit(): void {
     this.getPhotoAll();
@@ -57,10 +60,17 @@ export class PhotoComponent implements OnInit {
       files: name
     }));
 
-    this.photoService.uploadPhoto(photo).then(() =>{
+    this.photoService.uploadPhoto(photo, async ()=>{
+      const result = await this.sweetAlertService.showAlert(SweetPhoto.createPhoto);
 
+      if(result.dismiss){
+        setTimeout(()=>{
+          location.href= '/Admin/Movies-List'
+        }, 1000)
+      }
     });
   }
+
   getPhotoAll() {
     this.photoService.getPhotosMovieById(this.movieId).then(moviePhotos => {
       if (moviePhotos) {
@@ -76,7 +86,10 @@ export class PhotoComponent implements OnInit {
   }
 
   deletePhoto(id: number) {
-    this.photoService.deletePhoto(id).then(() => {
+    this.photoService.deletePhoto(id, ()=>{
+      this.sweetAlertService.showAlert(SweetPhoto.deletedPhoto);
+    })
+    .then(() => {
       this.getPhoto = this.getPhoto.map(photoItem => {
         return photoItem.photos
           ? { ...photoItem, photos: photoItem.photos.filter(photo => photo.id !== id) }

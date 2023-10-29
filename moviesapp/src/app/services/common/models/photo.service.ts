@@ -1,21 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService, } from '../http-client.service';
-import { Router } from '@angular/router';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { Observable, firstValueFrom } from 'rxjs';
-import { SweetalertService } from '../../admin/sweetalert.service';
-import { ConfirmButtonText, MessageText, MessageTitle } from 'src/app/internal/message-title';
 import { List_Photo } from 'src/app/contracts/photo/list-photo';
 import { JsonResponse } from 'src/app/contracts/response/response';
 import { environment } from 'src/app/environments/environment';
-import { MessageType, Position } from 'src/app/enums/sweetalert-enum';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PhotoService {
 
-  constructor(private httpClientService: HttpClientService, private router: Router, private sweetAlertService: SweetalertService) { }
+  constructor(private httpClientService: HttpClientService) { }
 
   async getPhotosMovieById(movieId: number){
     const observable: Observable<JsonResponse<List_Photo>> = this.httpClientService.get({
@@ -29,7 +26,7 @@ export class PhotoService {
       const result = response.result as List_Photo;
 
       result.photos.forEach(photo => {
-        photo.path = environment.apiUrl.replace('api', '') + photo.path;
+        photo.path = environment.photoUrl + photo.path;  //DÜZENLENDİ
       });
       return result;
     } else {
@@ -37,7 +34,7 @@ export class PhotoService {
     }
   }
 
-  async uploadPhoto(files: Create_Photo[]) {
+  async uploadPhoto(files: Create_Photo[], successCallBack?: () => void) {
     const formData: FormData = new FormData();
     files.forEach(photo => {
       formData.append('Files', photo.files, photo.files.name);
@@ -49,27 +46,16 @@ export class PhotoService {
         controller: 'Movie',
         action: 'UploadPhoto',
         queryString: id
-      },
-      formData
-    );
-
-    this.sweetAlertService.showAlert({
-      position: Position.TopRight,
-      messageTitle: MessageTitle.Success,
-      messageText: MessageText.PhotoCreate,
-      icon: MessageType.Success,
-      timerProgressBar: true,
-      toast: true,
-      delay: 1,
-    });
-
-    this.router.navigate(['/Admin', 'Movies-List']);
+      },formData);
 
     const response = await firstValueFrom(observable);
+
+    successCallBack();
+    
     return response;
   }
 
-  async deletePhoto(id: number) {
+  async deletePhoto(id: number, successCallBack?: () => void) {
     const observable: Observable<JsonResponse<number>> = this.httpClientService.delete({
       controller: 'Movie',
       action: 'DeleteMoviePhoto'
@@ -77,19 +63,10 @@ export class PhotoService {
 
     const response = await firstValueFrom(observable);
 
-    if (response.statusCode == 200) {
-      this.sweetAlertService.showAlert({
-        position: Position.TopRight,
-        messageTitle: MessageTitle.Success,
-        messageText: MessageText.PhotoDelete,
-        icon: MessageType.Success,
-        timerProgressBar: true,
-        toast: true,
-        delay: 1,
-      });
-      return response.result
-    } else {
-      return response.statusMessage
-    }
+    successCallBack();
+
+    return response.statusCode === 200
+      ? response.result
+      : response.statusMessage;
   }
 }

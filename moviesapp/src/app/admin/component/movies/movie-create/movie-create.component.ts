@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { Create_Movie } from 'src/app/contracts/movie/create-movie';
 import { CategoryEnum } from 'src/app/enums/category-enum';
 import { PlatformEnum } from 'src/app/enums/platform-enum';
-import { MessageType, Position } from 'src/app/enums/sweetalert-enum';
-import { MessageTitle, MessageText, ConfirmButtonText } from 'src/app/internal/message-title';
+import { SweetMovie } from 'src/app/internal/sweet-message/movie';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { CategoryService } from 'src/app/services/common/models/category.service';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
@@ -23,7 +22,7 @@ export class MovieCreateComponent implements OnInit {
   categoryEnum: { value: CategoryEnum; description: string; }[];
   platformEnum: { value: PlatformEnum; description: string; }[];
   constructor(
-    private fb: FormBuilder, private categoryService: CategoryService, 
+    private fb: FormBuilder, private categoryService: CategoryService,
     private platformService: PlatformService, private movieService: MoviesService, private sweetAlertService: SweetalertService,
     private router: Router) {
     this.createForm = this.fb.group({
@@ -56,18 +55,18 @@ export class MovieCreateComponent implements OnInit {
     const formControl = this.createForm.get(formControlName);
     return formControl?.invalid && (formControl?.touched || formControl?.dirty);
   }
-  
+
   isValidTemplate(formControlName: string): boolean {
     const formControl = this.createForm.get(formControlName);
-  
-    if (formControl?.invalid && (formControl.touched || formControl?.dirty)) 
-      if (formControl.errors?.['required'] || formControl.errors?.['minlength'] 
-        || formControl.errors?.['maxlength'] || formControl.errors?.['max'] || formControl.errors?.['min']) 
+
+    if (formControl?.invalid && (formControl.touched || formControl?.dirty))
+      if (formControl.errors?.['required'] || formControl.errors?.['minlength']
+        || formControl.errors?.['maxlength'] || formControl.errors?.['max'] || formControl.errors?.['min'])
         return true;
-   
+
     return false;
   }
-  
+
   create() {
     if (this.createForm.valid) {
       const formData = this.createForm.value;
@@ -79,26 +78,16 @@ export class MovieCreateComponent implements OnInit {
         movieTime: formData.time,
         description: formData.detail,
       };
-  
 
       this.movieService.createMovie(movie, async () => {
-      const result = this.sweetAlertService.showAlert({
-          position: Position.TopRight,
-          messageTitle: MessageTitle.Success,
-          messageText: MessageText.MovieCreate,
-          icon: MessageType.Success,
-          timerProgressBar: true,
-          toast: true,
-          delay: 1,
-        });
-        if((await result).dismiss){
-          setTimeout(()=>{
+        const result = await this.sweetAlertService.showAlert(SweetMovie.createsMovie);
+        if (result.dismiss) {
+          setTimeout(() => {
             this.router.navigate(['/Admin', 'Movies-List']);
           }, 1000)
-          
         }
       });
     }
   }
-  
+
 }

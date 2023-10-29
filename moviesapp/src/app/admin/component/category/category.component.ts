@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { List_Category } from 'src/app/contracts/category/list-category';
+import { Update_Category } from 'src/app/contracts/category/update-category';
+import { SweetCategory } from 'src/app/internal/sweet-message/category';
+import { SweetCommon } from 'src/app/internal/sweet-message/common';
+import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { CategoryService } from 'src/app/services/common/models/category.service';
 
 @Component({
@@ -10,16 +14,12 @@ import { CategoryService } from 'src/app/services/common/models/category.service
 })
 export class AdminCategory implements OnInit {
   @ViewChild("categoryForm", { static: true }) categoryForm: NgForm
-  categories: List_Category[];
+  listCategory: List_Category[];
   showCreateFormFlag = false;
   //showCreateFormFlag optimize
   editCategoryId: number;
-  model = {
-    id: '',
-    name: '',
-    categoryName: ''
-  };
-  constructor(private categoryService: CategoryService) { }
+  model= {name:''};
+  constructor(private categoryService: CategoryService, private sweetAlertService:SweetalertService) { }
 
   ngOnInit(): void {
     this.getCategory();
@@ -27,14 +27,20 @@ export class AdminCategory implements OnInit {
 
   getCategory() {
     return this.categoryService.getAllCategories().then(categoryData => {
-      this.categories = categoryData as List_Category[];
+      this.listCategory = categoryData as List_Category[];
     })
   }
 
-  deleteCategory(categoryId: number) {
-    this.categoryService.deleteCategory(categoryId).then(() => {
-      this.getCategory();
-    });
+  async deleteCategory(categoryId: number) {
+    const sweetAlertResult = await this.sweetAlertService.showAlert(SweetCommon.DeletedQuestion);
+    if(sweetAlertResult.isConfirmed){
+      this.categoryService.deleteCategory(categoryId, ()=>{
+        this.sweetAlertService.showAlert(SweetCategory.deletedCategory);
+      })
+      .then(() => {
+        this.getCategory();
+      });
+    }
   }
   //ShowCreateForm Methodu tamamiyle düzeltilecek!
   showCreateForm(action: string) {
@@ -51,9 +57,13 @@ export class AdminCategory implements OnInit {
     if (!this.categoryForm.valid)
       return;
 
-    const categoryName = this.model.name
+    const category = this.model.name;
+    
 
-    this.categoryService.createCategory(categoryName).then(() => {
+    this.categoryService.createCategory(category, ()=>{
+      this.sweetAlertService.showAlert(SweetCategory.createCategory);
+    })
+    .then(() => {
       this.getCategory();
       this.showCreateForm('else');
     });
@@ -61,10 +71,10 @@ export class AdminCategory implements OnInit {
 
   //Düzenlenecek Show Update Form
   showUpdateForm(categoryId: number) {
-    const categoryItem = this.categories.find(item => item.id === categoryId);
+    const categoryItem = this.listCategory.find(item => item.id === categoryId);
     if (categoryItem) {
       this.editCategoryId = categoryId;
-      this.model.name = ''
+      this.model.name = this.model.name
       this.showCreateFormFlag = false;
     }
   }
@@ -76,7 +86,10 @@ export class AdminCategory implements OnInit {
         name: this.model.name
       };
 
-      this.categoryService.updateCategory(category).then(() => {
+      this.categoryService.updateCategory(category, ()=>{
+        this.sweetAlertService.showAlert(SweetCategory.updateCategory);
+      })
+      .then(() => {
         this.getCategory();
         this.editCategoryId = null;
       });
