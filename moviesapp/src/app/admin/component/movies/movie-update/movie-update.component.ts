@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BaseComponent } from 'src/app/base/base.component';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { Update_Movie } from 'src/app/contracts/movie/update-movie';
 import { CategoryEnum } from 'src/app/enums/category-enum';
 import { PlatformEnum } from 'src/app/enums/platform-enum';
+import { SpinnerType } from 'src/app/enums/spinner-enum';
 import { SweetMovie } from 'src/app/internal/sweet-message/movie';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { CategoryService } from 'src/app/services/common/models/category.service';
@@ -17,7 +20,7 @@ import { categoryValidator } from 'src/app/shared/validators/required.validator'
   templateUrl: './movie-update.component.html',
   styleUrls: ['./movie-update.component.css'],
 })
-export class UpdateComponent implements OnInit {
+export class UpdateComponent extends BaseComponent implements OnInit {
   updateForm: FormGroup;
   movieId: number;
   categoryEnum: { value: CategoryEnum; description: string; }[];
@@ -27,7 +30,9 @@ export class UpdateComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder, private categoryService: CategoryService, private platformService: PlatformService,
-    private movieService: MoviesService, private route: ActivatedRoute, private sweetAlertService: SweetalertService, private router: Router) {
+    private movieService: MoviesService, private route: ActivatedRoute, private sweetAlertService: SweetalertService, private router: Router,
+    spinner:NgxSpinnerService) {
+      super(spinner)
     this.updateForm = this.fb.group({
       name: new FormControl(null, [Validators.required, Validators.minLength(5)]),
       categoryId: new FormControl('0', categoryValidator()),
@@ -40,6 +45,7 @@ export class UpdateComponent implements OnInit {
       this.updateForm.controls["categoryId"].setValue(this.movies.categoryName),
         this.updateForm.controls["platformId"].setValue(this.movies.platformName)
     }, 200)
+    
   }
 
   ngOnInit(): void {
@@ -98,7 +104,7 @@ export class UpdateComponent implements OnInit {
 
     const selectedPlatform = this.platformEnum.find(item => item.description === formData.platformId);
     const platformId = selectedPlatform ? selectedPlatform.value : 0;
-
+    
     const movie: Update_Movie = {
       id: movieId,
       name: formData.name,
@@ -110,11 +116,10 @@ export class UpdateComponent implements OnInit {
     };
 
     this.movieService.updateMovie(movie, async () => {
+      this.showSpinner(SpinnerType.BallCircus);
       const result = await this.sweetAlertService.showAlert(SweetMovie.updateMovie);
       if (result.dismiss) {
-        setTimeout(() => {
-          this.router.navigate(['/Admin', 'Movies-List']);
-        }, 1000)
+        this.router.navigate(['/Admin', 'Movies-List']);
       }
     });
   }

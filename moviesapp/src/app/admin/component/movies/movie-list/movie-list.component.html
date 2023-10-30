@@ -1,4 +1,7 @@
 <section>
+  <div class="spinner">
+    <ngx-spinner size="large">Sayfa Yükleniyor</ngx-spinner>
+  </div>
   <div class="movie-list">
     <div class="photo-dialog" *ngFor="let movie of movie">
       <movie-photo [movieId]="movie.id"></movie-photo>

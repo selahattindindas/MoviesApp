@@ -27,7 +27,7 @@ import { environment } from './environments/environment';
     SweetAlert2Module,
   ],
   providers: [
-    { provide: 'baseUrl', useValue: environment.apiUrl, multi: true }
+    { provide: 'baseUrl', useValue: environment.apiUrl, multi: true },
   ],
   bootstrap: [AppComponent],
 })

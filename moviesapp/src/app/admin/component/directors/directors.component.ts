@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BaseComponent } from 'src/app/base/base.component';
 import { Create_Director } from 'src/app/contracts/director/create-director';
 import { List_Director } from 'src/app/contracts/director/list-director';
+import { SpinnerType } from 'src/app/enums/spinner-enum';
 import { SweetDirectors } from 'src/app/internal/sweet-message/directors';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { DirectorService } from 'src/app/services/common/models/director.service';
@@ -12,7 +15,7 @@ import { DirectorService } from 'src/app/services/common/models/director.service
   templateUrl: './directors.component.html',
   styleUrls: ['./directors.component.css']
 })
-export class DirectorsComponent implements OnInit {
+export class DirectorsComponent extends BaseComponent implements OnInit {
 
   @ViewChild("directorForm", { static: true }) directorForm: NgForm
   movieId: string;
@@ -20,7 +23,10 @@ export class DirectorsComponent implements OnInit {
   directorName: string[] = [];
   director: List_Director[];
   createDirector: Create_Director;
-  constructor(private directorService: DirectorService, private route: ActivatedRoute, private sweetAlertService: SweetalertService, private router: Router) { }
+  constructor(private directorService: DirectorService, private route: ActivatedRoute, private sweetAlertService: SweetalertService, 
+    private router: Router, spinner:NgxSpinnerService) {
+      super(spinner)
+     }
 
   ngOnInit(): void {
     this.getDirector();
@@ -45,18 +51,16 @@ export class DirectorsComponent implements OnInit {
 
   create(movieId: string) {
     if (this.directorForm.valid) {
+      
       const directors: Create_Director[] = this.directorName.map(name => ({
         movieId: movieId,
         directorNames: name 
       }));
       directors.forEach(async (director) => {
         this.directorService.createDirector(director, async () => {
+          this.showSpinner(SpinnerType.BallCircus);
           const response = await this.sweetAlertService.showAlert(SweetDirectors.createDirectors);
-          if (response.dismiss) {
-            setTimeout(() => {
-              this.router.navigate(['/Admin', 'Movies-List']);
-            }, 1000);
-          }
+          response.dismiss && this.router.navigate(['/Admin', 'Movies-List']);
         });
       }
     )}

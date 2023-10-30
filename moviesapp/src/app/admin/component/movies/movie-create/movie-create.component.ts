@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BaseComponent } from 'src/app/base/base.component';
 import { Create_Movie } from 'src/app/contracts/movie/create-movie';
 import { CategoryEnum } from 'src/app/enums/category-enum';
 import { PlatformEnum } from 'src/app/enums/platform-enum';
+import { SpinnerType } from 'src/app/enums/spinner-enum';
 import { SweetMovie } from 'src/app/internal/sweet-message/movie';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { CategoryService } from 'src/app/services/common/models/category.service';
@@ -16,7 +19,7 @@ import { categoryValidator } from 'src/app/shared/validators/required.validator'
   templateUrl: './movie-create.component.html',
   styleUrls: ['./movie-create.component.css'],
 })
-export class MovieCreateComponent implements OnInit {
+export class MovieCreateComponent extends BaseComponent implements OnInit {
   createForm: FormGroup;
   model: Create_Movie = {} as Create_Movie;
   categoryEnum: { value: CategoryEnum; description: string; }[];
@@ -24,7 +27,8 @@ export class MovieCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder, private categoryService: CategoryService,
     private platformService: PlatformService, private movieService: MoviesService, private sweetAlertService: SweetalertService,
-    private router: Router) {
+    private router: Router, spinner:NgxSpinnerService) {
+      super(spinner)
     this.createForm = this.fb.group({
       name: new FormControl(null, [Validators.required, Validators.minLength(5)]),
       categoryId: new FormControl('0', categoryValidator()),
@@ -78,13 +82,11 @@ export class MovieCreateComponent implements OnInit {
         movieTime: formData.time,
         description: formData.detail,
       };
-
       this.movieService.createMovie(movie, async () => {
+        this.showSpinner(SpinnerType.BallCircus);
         const result = await this.sweetAlertService.showAlert(SweetMovie.createsMovie);
         if (result.dismiss) {
-          setTimeout(() => {
             this.router.navigate(['/Admin', 'Movies-List']);
-          }, 1000)
         }
       });
     }

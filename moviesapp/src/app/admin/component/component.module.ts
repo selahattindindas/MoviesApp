@@ -16,6 +16,10 @@ import { LimitPipe } from 'src/app/shared/limit-pipe';
 import { PhotoComponent } from './photo/photo.component';
 import { PlayersComponent } from './players/players.component';
 import { DirectorsComponent } from './directors/directors.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 @NgModule({
   declarations: [
     UserComponent,
@@ -39,6 +43,8 @@ import { DirectorsComponent } from './directors/directors.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
   ],
   providers: [AdminlayoutComponent],
 })

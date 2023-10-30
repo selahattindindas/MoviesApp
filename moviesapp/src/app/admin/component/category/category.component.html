@@ -22,7 +22,7 @@
                   {{ category.name }}
                 </ng-container>
                 <ng-template #editMode>
-                  <input name="name" type="text" #name="ngModel" [(ngModel)]="model.name" (keydown.enter)="$event.preventDefault()"/>
+                  <input name="name" type="text" #name="ngModel" [(ngModel)]="updateCategories.name" (keydown.enter)="$event.preventDefault()"/>
                 </ng-template>
               </td>
               <td class="movie-icon">

@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BaseComponent } from 'src/app/base/base.component';
 import { Create_Player } from 'src/app/contracts/player/create-player';
 import { List_Player } from 'src/app/contracts/player/list-player';
+import { SpinnerType } from 'src/app/enums/spinner-enum';
 import { SweetPlayers } from 'src/app/internal/sweet-message/players';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { PlayerService } from 'src/app/services/common/models/player.service';
@@ -12,14 +15,16 @@ import { PlayerService } from 'src/app/services/common/models/player.service';
   templateUrl: './players.component.html',
   styleUrls: ['./players.component.css']
 })
-export class PlayersComponent implements OnInit {
+export class PlayersComponent extends BaseComponent implements OnInit {
   @ViewChild("playerForm", { static: true }) playerForm: NgForm;
   player: List_Player[] = [];
   playerName: string[] = [];
   playerValue: string = '';
   movieId: number;
   constructor(private playerService: PlayerService, private route:ActivatedRoute, 
-    private sweetAlertService:SweetalertService, private router:Router) {}
+    private sweetAlertService:SweetalertService, private router:Router, spinner: NgxSpinnerService) {
+      super(spinner)
+    }
 
   ngOnInit(): void {
     this.getPlayers();
@@ -42,6 +47,7 @@ export class PlayersComponent implements OnInit {
       this.playerValue = '';
     }
   }
+
   create(movieId: number) {
     if (this.playerForm.valid && this.playerName.length > 0) {
       const players: Create_Player[] = this.playerName.map(name => ({
@@ -50,12 +56,9 @@ export class PlayersComponent implements OnInit {
       }));
       players.forEach(async (actor) => {
         this.playerService.createPlayer(actor, async () =>{
+          this.showSpinner(SpinnerType.BallCircus);
           const response = await this.sweetAlertService.showAlert(SweetPlayers.createPlayers);
-          if(response.dismiss){
-            setTimeout(()=>{
-              this.router.navigate(['/Admin', 'Movies-List']);
-            }, 1000)
-          }
+          response.dismiss && this.router.navigate(['/Admin', 'Movies-List']);
         });
       }
     )}
@@ -68,6 +71,7 @@ export class PlayersComponent implements OnInit {
       this.getPlayers();
     })
   }
+
   removeCreate(index: number) {
     this.playerName.splice(index, 1);
   }

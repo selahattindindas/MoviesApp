@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { List_Category } from 'src/app/contracts/category/list-category';
+import { Update_Category } from 'src/app/contracts/category/update-category';
 import { SweetCategory } from 'src/app/internal/sweet-message/category';
 import { SweetCommon } from 'src/app/internal/sweet-message/common';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
@@ -14,6 +15,7 @@ import { CategoryService } from 'src/app/services/common/models/category.service
 export class AdminCategory implements OnInit {
   @ViewChild("categoryForm", { static: true }) categoryForm: NgForm
   listCategory: List_Category[];
+  updateCategories: Update_Category = {name:''};
   showCreateFormFlag : boolean; //showCreateFormFlag optimize //böyle bir şey yaptım
   editCategoryId: number;
   model= {name:''};
@@ -41,8 +43,8 @@ export class AdminCategory implements OnInit {
       });
     }
   }
-  //ShowCreateForm Methodu tamamiyle düzeltilecek! //Düzenlendi
-  showCreateForm() {
+  
+  showCreateForm() { //ShowCreateForm Methodu tamamiyle düzeltilecek! //Düzenlendi
       this.showCreateFormFlag = !this.showCreateFormFlag;
       this.model.name = '';
   }
@@ -66,7 +68,7 @@ export class AdminCategory implements OnInit {
     const categoryItem = this.listCategory.find(item => item.id === categoryId);
     if (categoryItem) {
       this.editCategoryId = categoryId;
-      this.model.name = this.model.name;
+      this.updateCategories.name = categoryItem.name;
       this.showCreateFormFlag = false;
     }
   }
@@ -75,7 +77,7 @@ export class AdminCategory implements OnInit {
     if (action === 'check' && this.categoryForm.valid && this.editCategoryId) {
       const category = {
         id: categoryId,
-        name: this.model.name
+        name: this.updateCategories.name
       };
 
       this.categoryService.updateCategory(category, ()=>{

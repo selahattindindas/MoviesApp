@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { SweetAlert_Options } from 'src/app/enums/sweetalert-enum';
+import { SweetAlert_Options } from 'src/app/contracts/sweetAlert/sweetAlert-options';
 import Swal, { SweetAlertIcon, SweetAlertPosition, SweetAlertResult } from 'sweetalert2';
-declare var sweetalert2: any;
 @Injectable({
   providedIn: 'root',
 })

@@ -1,4 +1,4 @@
 export class Update_Category{
-    id:number;
+    id?:number;
     name:string = '';
 }

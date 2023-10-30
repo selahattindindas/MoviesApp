@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BaseComponent } from 'src/app/base/base.component';
 import { List_Platform } from 'src/app/contracts/platform/list-platform';
+import { Update_Platform } from 'src/app/contracts/platform/update-platform';
 import { SweetCommon } from 'src/app/internal/sweet-message/common';
 import { SweetPlatform } from 'src/app/internal/sweet-message/platform';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
@@ -13,12 +16,13 @@ import { PlatformService } from 'src/app/services/common/models/platform.service
 })
 export class AdminPlatform implements OnInit {
   @ViewChild("platformForm", { static: true }) platformForm: NgForm
-  platform: List_Platform[] = [];
+  listPlatform: List_Platform[] = [];
+  updatedPlatform: Update_Platform = {name:''};
   showCreateFormFlag : boolean;
   editPlatformId: number;
   model = {name:''};
 
-  constructor(private platformService: PlatformService, private sweetAlertService: SweetalertService) { }
+  constructor(private platformService: PlatformService, private sweetAlertService: SweetalertService) {}
 
   ngOnInit(): void {
     this.getPlatform();
@@ -26,7 +30,7 @@ export class AdminPlatform implements OnInit {
 
   async getPlatform() {
     return this.platformService.getAllPlatform().then((platformData) => {
-      this.platform = platformData as List_Platform[];
+      this.listPlatform = platformData as List_Platform[];
     });
   }
 
@@ -63,10 +67,10 @@ export class AdminPlatform implements OnInit {
   }
 
   showUpdateForm(platformId: number) {
-    const platformItem = this.platform.find(item => item.id === platformId);
+    const platformItem = this.listPlatform.find(item => item.id === platformId);
     if (platformItem) {
       this.editPlatformId = platformId;
-      this.model.name = this.model.name;
+      this.updatedPlatform.name = platformItem.name;
       this.showCreateFormFlag = false;
     }
   }
@@ -75,7 +79,7 @@ export class AdminPlatform implements OnInit {
     if (action ==='check' && this.platformForm.valid && this.editPlatformId) {
       const Platform: List_Platform = {
         id: platformId,
-        name: this.model.name
+        name: this.updatedPlatform.name
       };
 
       this.platformService.updatePlatform(Platform, () => {

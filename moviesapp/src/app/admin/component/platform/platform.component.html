@@ -16,13 +16,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let platform of platform">
+            <tr *ngFor="let platform of listPlatform">
               <td>
                 <ng-container *ngIf="editPlatformId !== platform.id; else editMode">
                   {{ platform.name }}
                 </ng-container>
                 <ng-template #editMode>
-                  <input name="platformName" type="text" #platformName="ngModel" [(ngModel)]="model.name" (keydown.enter)="$event.preventDefault()"/>
+                  <input name="platformName" type="text" #platformName="ngModel" [(ngModel)]="updatedPlatform.name" (keydown.enter)="$event.preventDefault()"/>
                 </ng-template>
               </td>
               <td class="movie-icon">
