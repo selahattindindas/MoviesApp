@@ -10,7 +10,7 @@ import { SpinnerType } from 'src/app/enums/spinner-enum';
 })
 export class ClassListComponent extends BaseComponent implements OnInit{
   constructor(spinner:NgxSpinnerService){
-    super(spinner)
+    super(spinner);
   }
   ngOnInit(): void {
       this.componentSpinner(SpinnerType.JellyBox);

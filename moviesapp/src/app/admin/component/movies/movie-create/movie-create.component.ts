@@ -4,14 +4,12 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
 import { Create_Movie } from 'src/app/contracts/movie/create-movie';
-import { CategoryEnum } from 'src/app/enums/category-enum';
-import { PlatformEnum } from 'src/app/enums/platform-enum';
+import { ListCategoryEnum, CategoryEnum } from 'src/app/enums/category-enum';
+import { ListPlatformEnum, PlatformEnum } from 'src/app/enums/platform-enum';
 import { SpinnerType } from 'src/app/enums/spinner-enum';
 import { SweetMovie } from 'src/app/internal/sweet-message/movie';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
-import { CategoryService } from 'src/app/services/common/models/category.service';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
-import { PlatformService } from 'src/app/services/common/models/platform.service';
 import { categoryValidator } from 'src/app/shared/validators/required.validator';
 
 @Component({
@@ -24,11 +22,15 @@ export class MovieCreateComponent extends BaseComponent implements OnInit {
   model: Create_Movie = {} as Create_Movie;
   categoryEnum: { value: CategoryEnum; description: string; }[];
   platformEnum: { value: PlatformEnum; description: string; }[];
+  categories: ListCategoryEnum;
+  platform: ListPlatformEnum;
   constructor(
-    private fb: FormBuilder, private categoryService: CategoryService,
-    private platformService: PlatformService, private movieService: MoviesService, private sweetAlertService: SweetalertService,
+    private fb: FormBuilder, private movieService: MoviesService, private sweetAlertService: SweetalertService,
     private router: Router, spinner:NgxSpinnerService) {
-      super(spinner)
+      super(spinner);
+      this.categories = new ListCategoryEnum();
+      this.platform = new ListPlatformEnum();
+
     this.createForm = this.fb.group({
       name: new FormControl(null, [Validators.required, Validators.minLength(5)]),
       categoryId: new FormControl('0', categoryValidator()),
@@ -43,18 +45,18 @@ export class MovieCreateComponent extends BaseComponent implements OnInit {
     this.getCategory();
     this.getPlatform();
   }
-
-  async getCategory() {
-    return this.categoryService.getCategoryEnumValues().then(categoryData => {
+   getCategory() {
+     this.categories.getCategoryEnumValues().then(categoryData => {
       this.categoryEnum = categoryData;
-    })
+    });
   }
 
-  async getPlatform() {
-    return this.platformService.getPlatformEnumValues().then(platformData => {
-      this.platformEnum = platformData
-    })
-  }
+  getPlatform() {
+    this.platform.getPlatformEnumValues().then(platformData => {
+     this.platformEnum = platformData;
+   });
+ }
+
   isValid(formControlName: string) {
     const formControl = this.createForm.get(formControlName);
     return formControl?.invalid && (formControl?.touched || formControl?.dirty);
@@ -91,5 +93,4 @@ export class MovieCreateComponent extends BaseComponent implements OnInit {
       });
     }
   }
-
 }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { CategoryDescription, CategoryEnum } from 'src/app/enums/category-enum';
 import { HttpClientService } from '../http-client.service';
 import { List_Category } from 'src/app/contracts/category/list-category';
 import { Observable, firstValueFrom } from 'rxjs';
@@ -13,23 +12,7 @@ import { Update_Category } from 'src/app/contracts/category/update-category';
 export class CategoryService {
 
   constructor(private httpClientService: HttpClientService) { }
-  // boolean olarak al select kısmını // YAPILDI
-  async getCategoryEnumValues(select?: boolean): Promise<{ value: CategoryEnum; description: string; }[]> {
-
-    const enumValues = Object.keys(CategoryEnum)
-
-      .filter((key) => typeof CategoryEnum[key as keyof typeof CategoryEnum] === 'number')
-      .map((key) =>
-      ({
-        value: CategoryEnum[key as keyof typeof CategoryEnum],
-        description: CategoryDescription[CategoryEnum[key as keyof typeof CategoryEnum]],
-      }));
-
-    return select === false
-      ? enumValues.filter((item) => item.value !== CategoryEnum.Seciniz)
-      : enumValues;
-  }
-
+ 
   async getAllCategories() {
     //Promise'teki stringler kalkacak. // YAPILDI
     const observable: Observable<JsonResponse<List_Category[]>> = this.httpClientService.get(

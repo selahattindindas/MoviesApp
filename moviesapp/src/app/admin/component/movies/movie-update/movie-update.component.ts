@@ -5,14 +5,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { Update_Movie } from 'src/app/contracts/movie/update-movie';
-import { CategoryEnum } from 'src/app/enums/category-enum';
-import { PlatformEnum } from 'src/app/enums/platform-enum';
+import { ListCategoryEnum, CategoryEnum } from 'src/app/enums/category-enum';
+import { ListPlatformEnum, PlatformEnum } from 'src/app/enums/platform-enum';
 import { SpinnerType } from 'src/app/enums/spinner-enum';
 import { SweetMovie } from 'src/app/internal/sweet-message/movie';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
-import { CategoryService } from 'src/app/services/common/models/category.service';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
-import { PlatformService } from 'src/app/services/common/models/platform.service';
 import { categoryValidator } from 'src/app/shared/validators/required.validator';
 
 @Component({
@@ -27,12 +25,15 @@ export class UpdateComponent extends BaseComponent implements OnInit {
   platformEnum: { value: PlatformEnum; description: string; }[];
   movies: List_Movie;
   category: CategoryEnum;
-
+  categories: ListCategoryEnum;
+  platform: ListPlatformEnum;
   constructor(
-    private fb: FormBuilder, private categoryService: CategoryService, private platformService: PlatformService,
-    private movieService: MoviesService, private route: ActivatedRoute, private sweetAlertService: SweetalertService, private router: Router,
-    spinner:NgxSpinnerService) {
-      super(spinner)
+    private fb: FormBuilder, private movieService: MoviesService, private route: ActivatedRoute, 
+    private sweetAlertService: SweetalertService, private router: Router, spinner: NgxSpinnerService) {
+    super(spinner);
+    this.categories = new ListCategoryEnum();
+    this.platform = new ListPlatformEnum();
+
     this.updateForm = this.fb.group({
       name: new FormControl(null, [Validators.required, Validators.minLength(5)]),
       categoryId: new FormControl('0', categoryValidator()),
@@ -41,11 +42,11 @@ export class UpdateComponent extends BaseComponent implements OnInit {
       time: new FormControl(null, [Validators.required, Validators.max(300), Validators.min(1)]),
       details: new FormControl(null, [Validators.required, Validators.maxLength(520), Validators.minLength(30)]),
     });
+
     setTimeout(() => {
       this.updateForm.controls["categoryId"].setValue(this.movies.categoryName),
         this.updateForm.controls["platformId"].setValue(this.movies.platformName)
     }, 200)
-    
   }
 
   ngOnInit(): void {
@@ -55,16 +56,16 @@ export class UpdateComponent extends BaseComponent implements OnInit {
   }
 
   getCategory() {
-    return this.categoryService.getCategoryEnumValues(false).then(categoryData => {
+    this.categories.getCategoryEnumValues(false).then(categoryData => {
       this.categoryEnum = categoryData;
-    })
+    });
   }
 
   getPlatform() {
-    return this.platformService.getPlatformEnumValues(false).then(platformData => {
-      this.platformEnum = platformData
-    })
-  }
+    this.platform.getPlatformEnumValues(false).then(platformData => {
+     this.platformEnum = platformData;
+   });
+ }
 
   getMovieById() {
     const params = this.route.snapshot.params;
@@ -104,7 +105,7 @@ export class UpdateComponent extends BaseComponent implements OnInit {
 
     const selectedPlatform = this.platformEnum.find(item => item.description === formData.platformId);
     const platformId = selectedPlatform ? selectedPlatform.value : 0;
-    
+
     const movie: Update_Movie = {
       id: movieId,
       name: formData.name,
