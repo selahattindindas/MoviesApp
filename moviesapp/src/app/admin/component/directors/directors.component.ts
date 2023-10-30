@@ -58,7 +58,7 @@ export class DirectorsComponent extends BaseComponent implements OnInit {
       }));
       directors.forEach(async (director) => {
         this.directorService.createDirector(director, async () => {
-          this.showSpinner(SpinnerType.BallCircus);
+   
           const response = await this.sweetAlertService.showAlert(SweetDirectors.createDirectors);
           response.dismiss && this.router.navigate(['/Admin', 'Movies-List']);
         });

@@ -1,6 +1,7 @@
 export class MessageTitle {
     static readonly Success = "Başarılı."
     static readonly DeletedQuestion = "Silmek istiyor musunuz?"
+    static readonly Error = "Hata Oluştu!"
 }
 export class MessageText {
     static readonly NoTurningBack = "Bu İşlem Geri Alınamaz."
@@ -19,6 +20,7 @@ export class MessageText {
     static readonly DirectorDelete = "Yönetmen Başarıyla Kaldırıldı"
     static readonly PhotoCreate = "Fotoğraf Başarıyla Eklendi"
     static readonly PhotoDelete = "Fotoğraf Başarıyla Kaldırıldı"
+    static readonly ServerError = "Sunucu Hatası Lütfen Daha Sonra Tekrar Deneyin!"
 }
 export class ConfirmButtonText{
     static readonly Okey = "Tamam"

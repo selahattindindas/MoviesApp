@@ -7,6 +7,7 @@ import { Create_Movie } from 'src/app/contracts/movie/create-movie';
 import { ListCategoryEnum, CategoryEnum } from 'src/app/enums/category-enum';
 import { ListPlatformEnum, PlatformEnum } from 'src/app/enums/platform-enum';
 import { SpinnerType } from 'src/app/enums/spinner-enum';
+import { SweetHttpError } from 'src/app/internal/sweet-message/http-error';
 import { SweetMovie } from 'src/app/internal/sweet-message/movie';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
@@ -85,12 +86,16 @@ export class MovieCreateComponent extends BaseComponent implements OnInit {
         description: formData.detail,
       };
       this.movieService.createMovie(movie, async () => {
-        this.showSpinner(SpinnerType.BallCircus);
+     
         const result = await this.sweetAlertService.showAlert(SweetMovie.createsMovie);
         if (result.dismiss) {
             this.router.navigate(['/Admin', 'Movies-List']);
         }
-      });
+      }, errorMessage => {
+         this.sweetAlertService.showAlert(SweetHttpError.serverError);
+         console.log(errorMessage);
+      }
+      );
     }
   }
 }

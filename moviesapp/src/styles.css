@@ -31,4 +31,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   position: relative !important;
   padding: 40px 0 40px 10px !important;
 }
-
+.modal-body{
+  background-color: #ccc;
+}

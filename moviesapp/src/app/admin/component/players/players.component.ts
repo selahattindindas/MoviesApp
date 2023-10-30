@@ -56,7 +56,7 @@ export class PlayersComponent extends BaseComponent implements OnInit {
       }));
       players.forEach(async (actor) => {
         this.playerService.createPlayer(actor, async () =>{
-          this.showSpinner(SpinnerType.BallCircus);
+        
           const response = await this.sweetAlertService.showAlert(SweetPlayers.createPlayers);
           response.dismiss && this.router.navigate(['/Admin', 'Movies-List']);
         });

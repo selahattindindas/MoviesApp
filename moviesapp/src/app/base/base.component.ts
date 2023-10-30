@@ -10,16 +10,15 @@ export class BaseComponent {
     });
   }
 
-  componentSpinner(spinnerNameType: string): void {
+  componentSpinner(spinnerNameType: SpinnerType): void {
     this.spinner.show(undefined, {
       type: spinnerNameType,
-      bdColor: '#fff',
-      color: '#000',
+      color: '#fff',
     });
 
     setTimeout(() => {
       this.spinner.hide();
-    }, 3000);
+    }, 750);
   }
 
 }

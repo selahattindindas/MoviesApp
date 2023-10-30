@@ -62,7 +62,7 @@ export class PhotoComponent extends BaseComponent implements OnInit {
     }));
 
     this.photoService.uploadPhoto(photo, async ()=>{
-      this.showSpinner(SpinnerType.BallCircus);
+  
       const result = await this.sweetAlertService.showAlert(SweetPhoto.createPhoto);
       if(result.dismiss)
           location.href= '/Admin/Movies-List';

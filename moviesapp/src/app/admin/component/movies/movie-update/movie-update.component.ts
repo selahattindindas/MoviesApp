@@ -117,7 +117,7 @@ export class UpdateComponent extends BaseComponent implements OnInit {
     };
 
     this.movieService.updateMovie(movie, async () => {
-      this.showSpinner(SpinnerType.BallCircus);
+    
       const result = await this.sweetAlertService.showAlert(SweetMovie.updateMovie);
       if (result.dismiss) {
         this.router.navigate(['/Admin', 'Movies-List']);

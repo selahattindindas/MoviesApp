@@ -5,6 +5,7 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { Update_Movie } from 'src/app/contracts/movie/update-movie';
 import { JsonResponse } from 'src/app/contracts/response/response';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Injectable({
@@ -44,16 +45,22 @@ export class MoviesService {
         : response.statusMessage;
     } 
 
-  async createMovie(movie: Create_Movie, successCallBack?: () => void) {
-      const observable: Observable<Create_Movie> =  this.httpClientService.post({
+  async createMovie(movie: Create_Movie, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
+      this.httpClientService.post({
         controller: 'Movie',
         action: 'CreateMovie'
-      }, movie);
-   
-        const response = await firstValueFrom(observable);
+      }, movie).subscribe(result =>{
         successCallBack();
-        
-        return response;
+      },(errorResponse: HttpErrorResponse) => {
+        const _error: Array<{ key: string, value: Array<string> }> = errorResponse.error;
+        let message = "";
+        _error.forEach((v, _index) => {
+          v.value.forEach((_v, _index) => {
+            message += `${_v}<br>`;
+          });
+        });
+        errorCallBack(message);
+      });
       }
       // sweatalert onaylandıktan sonra yönlendirme olucak // yapıldı
       

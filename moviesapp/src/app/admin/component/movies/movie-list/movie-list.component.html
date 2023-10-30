@@ -26,7 +26,6 @@
             <th>Kadro İşlemleri</th>
             <th>Fotoğraf İşlemleri</th>
             <th>Film İşlemleri</th>
-
           </tr>
         </thead>
         <tbody>
@@ -36,15 +35,18 @@
             <td>{{ movie.platformName }}</td>
             <td>{{ movie.releaseDate }}</td>
             <td>
-              <i class="fa-solid fa-square-minus fa-lg actor" [routerLink]="['Create-Players', movie.id]"></i>
-              <i class="fa-solid fa-square-minus fa-lg director" [routerLink]="['Create-Director', movie.id]"></i>
+              <i class="fa-solid fa-users fa-ml actor" title="Oyuncu Ekle"
+                [routerLink]="['Create-Players', movie.id]"></i>
+              <i class="fa-solid fa-user fa-ml director" title="Yönetmen Ekle"
+                [routerLink]="['Create-Director', movie.id]"></i>
             </td>
             <td>
-              <i type="button" class="fa-solid fa-image fa-lg" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+              <i type="button" class="fa-solid fa-image fa-lg" title="Fotoğraf Ekle" data-bs-toggle="modal"
+                data-bs-target="#exampleModal"></i>
             </td>
             <td>
-              <i class="fa-solid fa-pen-to-square fa-lg update" [routerLink]="['Edit', movie.id]"></i>
-              <i class="fa-solid fa-trash fa-lg delete" (click)="deleteMovie(movie.id)"></i>
+              <i class="fa-solid fa-pen-to-square fa-lg update" title="Düzenle" [routerLink]="['Edit', movie.id]"></i>
+              <i class="fa-solid fa-trash fa-lg delete" title="Sil" (click)="deleteMovie(movie.id)"></i>
             </td>
           </tr>
         <tbody>
