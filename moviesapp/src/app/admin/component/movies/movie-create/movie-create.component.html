@@ -14,7 +14,7 @@
               <label for="filmAdi">Film Adı</label>
               <input class="create-input" type="text" placeholder="Filmin adını yazınız" formControlName="name"
               [ngClass]="{invalidRed: isValidTemplate('name')}"/>           
-              <div class="error-message" *ngIf="isValid('name')">
+              <div class="text-danger" *ngIf="isValid('name')">
                 <small *ngIf="createForm.get('name')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
                 <small *ngIf="createForm.get('name')?.errors?.['minlength']">Lütfen minimum 5 karakter giriniz.</small>
               </div>   
@@ -28,7 +28,7 @@
                 <option *ngFor="let category of categoryEnum" [value]="category.value">{{ category.description }}
                 </option>
               </select>  
-              <div class="error-message" *ngIf="isValid('categoryId')">
+              <div class="text-danger" *ngIf="isValid('categoryId')">
                 <small>
                   {{ createForm.get('categoryId').getError('categorySelected') }}
                 </small>
@@ -42,7 +42,7 @@
                 <option *ngFor="let platform of platformEnum" [value]="platform.value">{{ platform.description }}
                 </option>
               </select>
-              <div class="error-message" *ngIf="isValid('platformId')">
+              <div class="text-danger" *ngIf="isValid('platformId')">
                 <small>
                   {{ createForm.get('platformId').getError('categorySelected') }}
                 </small>
@@ -53,15 +53,20 @@
           <div class="create-contents">
             <div class="label-input">
               <label for="date">Film Vizyon Tarihi</label>
-              <input class="create-input" type="date" formControlName="date" [ngClass]="{invalidRed: isValidTemplate('date')}"/>
-              <div class="error-message" *ngIf="isValid('date')">
-                <small *ngIf="createForm.get('date')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
-              </div>  
+              <input class="create-input" type="date" formControlName="date" [ngClass]="{invalidRed: createForm.get('date').invalid && createForm.get('date').touched}" />
+              <div class="text-danger">
+                <small *ngIf="createForm.get('date').hasError('required') && createForm.get('date').touched">
+                  Lütfen boş bırakmayınız.
+                </small>
+                <small *ngIf="createForm.get('date').hasError('customDateFormat') && !createForm.get('date').hasError('required') && createForm.get('date').touched">
+                  Hatalı tarih. Lütfen geçerli bir tarih girin.
+                </small>
+              </div>
             </div>
             <div class="label-input">
               <label for="time">Film Süresi</label>
               <input class="create-input" type="number" formControlName="time" [ngClass]="{invalidRed: isValidTemplate('time')}"/>
-              <div class="error-message" *ngIf="isValid('time')">
+              <div class="text-danger" *ngIf="isValid('time')">
                 <small *ngIf="createForm.get('time')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
                 <small *ngIf="createForm.get('time')?.errors?.['min']">Lütfen minimum 1 dakika giriniz.</small>
                 <small *ngIf="createForm.get('time')?.errors?.['max']">Lütfen maksimum 300 dakika giriniz.</small>
@@ -73,7 +78,7 @@
               <label for="yil">Film Açıklaması</label>
               <textarea class="create-input" placeholder="Film açıklamasını yazınız" tabindex="5" formControlName="detail" 
               [ngClass]="{invalidRed: isValidTemplate('time')}"></textarea> 
-              <div class="error-message" *ngIf="isValid('detail')">
+              <div class="text-danger" *ngIf="isValid('detail')">
                 <small *ngIf="createForm.get('detail')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
                 <small *ngIf="createForm.get('detail')?.errors?.['minlength']">Lütfen minimum 30 karakter giriniz.</small>
                 <small *ngIf="createForm.get('detail')?.errors?.['maxlength']">Lütfen maksimum 520 karakter giriniz.</small>
@@ -81,7 +86,7 @@
             </div>
           </div>
           <div class="create-button">
-            <button type="submit">Film Ekle</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">Film Ekle</button>
           </div>
           <div class="spinner">
             <ngx-spinner size="large"></ngx-spinner>

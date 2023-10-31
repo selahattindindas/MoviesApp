@@ -12,6 +12,7 @@ import { SweetHttpError } from 'src/app/internal/sweet-message/http-error';
 import { SweetMovie } from 'src/app/internal/sweet-message/movie';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
+import { dateFormatValidator } from 'src/app/shared/validators/date.validator';
 import { categoryValidator } from 'src/app/shared/validators/required.validator';
 
 @Component({
@@ -39,7 +40,7 @@ export class UpdateComponent extends BaseComponent implements OnInit {
       name: new FormControl(null, [Validators.required, Validators.minLength(5)]),
       categoryId: new FormControl('0', categoryValidator()),
       platformId: new FormControl('0', categoryValidator()),
-      date: new FormControl(null, Validators.required),
+      date: new FormControl(null, [Validators.required,dateFormatValidator]),
       time: new FormControl(null, [Validators.required, Validators.max(300), Validators.min(1)]),
       details: new FormControl(null, [Validators.required, Validators.maxLength(520), Validators.minLength(30)]),
     });

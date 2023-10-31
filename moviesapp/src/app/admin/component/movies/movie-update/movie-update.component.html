@@ -14,7 +14,7 @@
               <label for="filmAdi">Film Adı</label>
               <input class="update-input" type="text" placeholder="Filmin adını yazınız" [(ngModel)]="movies.name" formControlName="name" 
               [ngClass]="{invalidRed: isValidTemplate('name')}"/>           
-              <div class="error-message" *ngIf="isValid('name')">
+              <div class="text-danger" *ngIf="isValid('name')">
                 <small *ngIf="updateForm.get('name')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
                 <small *ngIf="updateForm.get('name')?.errors?.['minlength']">Lütfen minimum 5 karakter giriniz.</small>
               </div>
@@ -28,7 +28,7 @@
                   <option *ngFor="let category of categoryEnum">{{ category.description }}
                   </option>
                 </select>
-                <div class="error-message" *ngIf="isValid('categoryId')">
+                <div class="text-danger" *ngIf="isValid('categoryId')">
                   <small>
                     {{ updateForm.get('categoryId').getError('categorySelected') }}
                   </small>
@@ -42,7 +42,7 @@
                   <option *ngFor="let platform of platformEnum">{{ platform.description }}
                   </option>
                 </select>
-                <div class="error-message" *ngIf="isValid('categoryId')">
+                <div class="text-danger" *ngIf="isValid('categoryId')">
                   <small>
                     {{ updateForm.get('categoryId').getError('categorySelected') }}
                   </small>
@@ -53,13 +53,21 @@
           <div class="update-contents">
             <div class="label-input">
               <label for="date">Film Vizyon Tarihi</label>
-              <input class="update-input" type="text" formControlName="date" [(ngModel)]="movies.releaseDate"/>
+              <input class="update-input" type="date" formControlName="date" [ngModel]="movies.releaseDate | date:'yyyy-MM-dd'" />
+              <div class="text-danger">
+                <small *ngIf="updateForm.get('date').hasError('required') && updateForm.get('date').touched">
+                  Lütfen boş bırakmayınız.
+                </small>
+                <small *ngIf="updateForm.get('date').hasError('customDateFormat') && !updateForm.get('date').hasError('required') && updateForm.get('date').touched">
+                  Hatalı tarih. Lütfen geçerli bir tarih girin.
+                </small>
+              </div>
             </div>
             <div class="label-input">
               <label for="time">Film Süresi</label>
               <input class="update-input" type="number" formControlName="time" [(ngModel)]="movies.movieTime" 
               [ngClass]="{invalidRed: isValidTemplate('time')}"/>
-              <div class="error-message" *ngIf="isValid('time')">
+              <div class="text-danger" *ngIf="isValid('time')">
                 <small *ngIf="updateForm.get('time')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
                 <small *ngIf="updateForm.get('time')?.errors?.['min']">Lütfen minimum 1 dakika giriniz.</small>
                 <small *ngIf="updateForm.get('time')?.errors?.['max']">Lütfen maksimum 300 dakika giriniz.</small>
@@ -71,7 +79,7 @@
               <label for="yil">Film Açıklaması</label>
               <textarea class="update-input" placeholder="Film açıklamasını yazınız" formControlName="details"
                 [(ngModel)]="movies.description" tabindex="5" [ngClass]="{invalidRed: isValidTemplate('details')}"></textarea>
-                <div class="error-message" *ngIf="isValid('details')">
+                <div class="text-danger" *ngIf="isValid('details')">
                   <small *ngIf="updateForm.get('details')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
                   <small *ngIf="updateForm.get('details')?.errors?.['minlength']">Lütfen minimum 30 karakter giriniz.</small>
                   <small *ngIf="updateForm.get('details')?.errors?.['maxlength']">Lütfen maksimum 520 karakter giriniz.</small>
@@ -79,7 +87,7 @@
             </div>
           </div>
           <div class="update-button">
-            <button type="submit">Filmi Güncelle</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!updateForm.valid">Filmi Güncelle</button>
           </div>
           <div class="spinner">
             <ngx-spinner size="large"></ngx-spinner>
