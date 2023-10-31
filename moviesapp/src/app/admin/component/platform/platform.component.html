@@ -22,7 +22,12 @@
                   {{ platform.name }}
                 </ng-container>
                 <ng-template #editMode>
-                  <input name="platformName" type="text" #platformName="ngModel" [(ngModel)]="updatedPlatform.name" (keydown.enter)="$event.preventDefault()"/>
+                  <input name="platformName" type="text" #platformName="ngModel" [(ngModel)]="updatedPlatform.name" 
+                  (keydown.enter)="$event.preventDefault()" required minlength="5" />
+                  <div class="text-danger" *ngIf="platformName.invalid && (platformName.touched)">
+                    <small *ngIf="platformName.errors?.['required']">Boş bırakılamaz.</small>
+                    <small *ngIf="platformName.errors?.['minlength']">En az 5 karakter olmalıdır.</small>
+                  </div>
                 </ng-template>
               </td>
               <td class="movie-icon">
@@ -34,7 +39,12 @@
             </tr>
             <tr *ngIf="showCreateFormFlag === true">
               <td>
-                <input [(ngModel)]="model.name" name="name" #name="ngModel" placeholder="Platform Adı" (keydown.enter)="$event.preventDefault()">
+                <input [(ngModel)]="model.name" name="name" #name="ngModel" placeholder="Platform Adı" 
+                (keydown.enter)="$event.preventDefault()" required minlength="5">
+                <div class="text-danger" *ngIf="name.invalid && (name.touched)">
+                  <small *ngIf="name.errors?.['required']">Boş bırakılamaz.</small>
+                  <small *ngIf="name.errors?.['minlength']">En az 5 karakter olmalıdır.</small>
+                </div>
               </td>
               <td>
                 <i class="fa-solid fa-check fa-lg" (click)="createPlatform()"></i>

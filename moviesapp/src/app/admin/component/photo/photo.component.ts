@@ -5,6 +5,7 @@ import { BaseComponent } from 'src/app/base/base.component';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { List_Photo } from 'src/app/contracts/photo/list-photo';
 import { SpinnerType } from 'src/app/enums/spinner-enum';
+import { SweetHttpError } from 'src/app/internal/sweet-message/http-error';
 import { SweetPhoto } from 'src/app/internal/sweet-message/photo';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { PhotoService } from 'src/app/services/common/models/photo.service';
@@ -19,11 +20,11 @@ export class PhotoComponent extends BaseComponent implements OnInit {
   selectedFiles: File[] = [];
   photo: Create_Photo[];
   getPhoto: List_Photo[] = [];
-  @Input() movieId:number;
-  constructor(private renderer: Renderer2, private photoService: PhotoService, 
-    private sweetAlertService:SweetalertService, spinner:NgxSpinnerService) {
-      super(spinner);
-     }
+  @Input() movieId: number;
+  constructor(private photoService: PhotoService,
+    private sweetAlertService: SweetalertService, spinner: NgxSpinnerService) {
+    super(spinner);
+  }
 
   ngOnInit(): void {
     this.getPhotoAll();
@@ -31,7 +32,6 @@ export class PhotoComponent extends BaseComponent implements OnInit {
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
-    this.renderer.addClass(event.target, 'dragging');
   }
 
   onDragLeave(event: DragEvent) {
@@ -42,9 +42,19 @@ export class PhotoComponent extends BaseComponent implements OnInit {
   onDrop(event: DragEvent) {
     event.preventDefault();
     const files = event.dataTransfer.files;
-    this.uploadFiles(files);
+    if (this.areFilesImages(files)) {
+      this.uploadFiles(files);
+    }
   }
-
+  areFilesImages(files: FileList): boolean {
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (!file.type.startsWith('image/')) {
+        return false;
+      }
+    }
+    return true; 
+  }
   onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files) {
@@ -61,12 +71,15 @@ export class PhotoComponent extends BaseComponent implements OnInit {
       files: name
     }));
 
-    this.photoService.uploadPhoto(photo, async ()=>{
-  
+    this.photoService.uploadPhoto(photo, async () => {
+
       const result = await this.sweetAlertService.showAlert(SweetPhoto.createPhoto);
-      if(result.dismiss)
-          location.href= '/Admin/Movies-List';
-    });
+      if (result.dismiss)
+        location.href = '/Admin/Movies-List';
+    },
+      error => {
+        this.sweetAlertService.showAlert(SweetHttpError.serverError);
+      });
   }
 
   getPhotoAll() {
@@ -84,16 +97,19 @@ export class PhotoComponent extends BaseComponent implements OnInit {
   }
 
   deletePhoto(id: number) {
-    this.photoService.deletePhoto(id, ()=>{
+    this.photoService.deletePhoto(id, () => {
       this.sweetAlertService.showAlert(SweetPhoto.deletedPhoto);
-    })
-    .then(() => {
-      this.getPhoto = this.getPhoto.map(photoItem => {
-        return photoItem.photos
-          ? { ...photoItem, photos: photoItem.photos.filter(photo => photo.id !== id) }
-          : photoItem;
+    },
+      error => {
+        this.sweetAlertService.showAlert(SweetHttpError.serverError);
+      })
+      .then(() => {
+        this.getPhoto = this.getPhoto.map(photoItem => {
+          return photoItem.photos
+            ? { ...photoItem, photos: photoItem.photos.filter(photo => photo.id !== id) }
+            : photoItem;
+        });
       });
-    });
   }
 
   uploadFiles(files: FileList) {

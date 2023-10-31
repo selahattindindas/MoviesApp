@@ -20,7 +20,9 @@
 .category-create-button {
   margin-left: auto; /* Bu stil, "category-create-button" öğesini en sağa itecektir */
 }
-
+.has-error {
+  border-bottom:5px solid red;
+}
 .category-create-button button {
   background-color: transparent;
   border-radius: 5px;

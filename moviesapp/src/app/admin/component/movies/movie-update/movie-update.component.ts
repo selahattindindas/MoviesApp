@@ -8,6 +8,7 @@ import { Update_Movie } from 'src/app/contracts/movie/update-movie';
 import { ListCategoryEnum, CategoryEnum } from 'src/app/enums/category-enum';
 import { ListPlatformEnum, PlatformEnum } from 'src/app/enums/platform-enum';
 import { SpinnerType } from 'src/app/enums/spinner-enum';
+import { SweetHttpError } from 'src/app/internal/sweet-message/http-error';
 import { SweetMovie } from 'src/app/internal/sweet-message/movie';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
@@ -79,13 +80,13 @@ export class UpdateComponent extends BaseComponent implements OnInit {
 
   isValid(formControlName: string) {
     const formControl = this.updateForm.get(formControlName);
-    return formControl?.invalid && (formControl?.touched || formControl?.dirty);
+    return formControl?.invalid && (formControl?.touched);
   }
 
   isValidTemplate(formControlName: string): boolean {
     const formControl = this.updateForm.get(formControlName);
 
-    if (formControl?.invalid && (formControl.touched || formControl?.dirty))
+    if (formControl?.invalid && (formControl.touched))
       if (formControl.errors?.['required'] || formControl.errors?.['minlength']
         || formControl.errors?.['maxlength'] || formControl.errors?.['max'] || formControl.errors?.['min'])
         return true;
@@ -122,6 +123,9 @@ export class UpdateComponent extends BaseComponent implements OnInit {
       if (result.dismiss) {
         this.router.navigate(['/Admin', 'Movies-List']);
       }
-    });
+    },  
+    error => {
+      this.sweetAlertService.showAlert(SweetHttpError.serverError);
+   });
   }
 }

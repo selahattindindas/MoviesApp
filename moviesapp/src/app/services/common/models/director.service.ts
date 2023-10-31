@@ -28,7 +28,7 @@ export class DirectorService {
       : response.statusMessage;
   }
 
-  async createDirector(director: Create_Director, successCallBack?: () => void) {
+  async createDirector(director: Create_Director, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const observable: Observable<Create_Director> = this.httpClientService.post(
       {
         controller: 'Director',
@@ -36,26 +36,30 @@ export class DirectorService {
         queryString: `Id=${director.movieId}&DirectorNames=${director.directorNames}`
       }, director);
 
-    const response = await firstValueFrom(observable);
-
-    successCallBack();
-
-    return response;
+    await firstValueFrom(observable)
+      .then(response => {
+        successCallBack();
+        return response;
+      })
+      .catch(errorResponse => {
+        errorCallBack(errorResponse);
+      });
   }
 
-  async deleteDirector(id: number, successCallBack?: () => void) {
+  async deleteDirector(id: number, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const observable: Observable<JsonResponse<List_Director>> = this.httpClientService.delete(
       {
         controller: 'Director',
         action: 'DeleteDirector'
       }, id);
 
-    const response = await firstValueFrom(observable);
-
-    successCallBack();
-
-    return response.statusCode === 200
-    ? response.result
-    : response.statusMessage;
+    await firstValueFrom(observable)
+      .then(response => {
+        successCallBack();
+        return response.statusCode === 200 && response.result;
+      })
+      .catch(errorResponse => {
+        errorCallBack(errorResponse);
+      });
   }
 }

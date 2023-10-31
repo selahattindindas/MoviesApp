@@ -7,6 +7,7 @@ import { Create_Director } from 'src/app/contracts/director/create-director';
 import { List_Director } from 'src/app/contracts/director/list-director';
 import { SpinnerType } from 'src/app/enums/spinner-enum';
 import { SweetDirectors } from 'src/app/internal/sweet-message/directors';
+import { SweetHttpError } from 'src/app/internal/sweet-message/http-error';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { DirectorService } from 'src/app/services/common/models/director.service';
 
@@ -23,6 +24,7 @@ export class DirectorsComponent extends BaseComponent implements OnInit {
   directorName: string[] = [];
   director: List_Director[];
   createDirector: Create_Director;
+  directorError: string = '';
   constructor(private directorService: DirectorService, private route: ActivatedRoute, private sweetAlertService: SweetalertService, 
     private router: Router, spinner:NgxSpinnerService) {
       super(spinner)
@@ -43,11 +45,14 @@ export class DirectorsComponent extends BaseComponent implements OnInit {
 
   addDirector(event: any) {
     event.preventDefault();
-    if (this.directorValue.trim() !== '') {
+    if (this.directorValue.trim().length >= 5) {
       this.directorName.push(this.directorValue.trim());
       this.directorValue = '';
+    } else {
+      this.directorError = 'En az 5 karakter olmalıdır!';
     }
   }
+  
 
   create(movieId: string) {
     if (this.directorForm.valid) {
@@ -58,10 +63,12 @@ export class DirectorsComponent extends BaseComponent implements OnInit {
       }));
       directors.forEach(async (director) => {
         this.directorService.createDirector(director, async () => {
-   
           const response = await this.sweetAlertService.showAlert(SweetDirectors.createDirectors);
           response.dismiss && this.router.navigate(['/Admin', 'Movies-List']);
-        });
+        },
+        error => {
+          this.sweetAlertService.showAlert(SweetHttpError.serverError);
+       });
       }
     )}
   }
@@ -69,7 +76,10 @@ export class DirectorsComponent extends BaseComponent implements OnInit {
   removeDirector(id: number) {
     this.directorService.deleteDirector(id, () => {
       this.sweetAlertService.showAlert(SweetDirectors.deletedDirectors);
-    })
+    },
+    error => {
+      this.sweetAlertService.showAlert(SweetHttpError.serverError);
+   })
       .then(() => {
         this.getDirector();
       })

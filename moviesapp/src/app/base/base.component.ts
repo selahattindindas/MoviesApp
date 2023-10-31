@@ -4,11 +4,6 @@ import { SpinnerType } from "../enums/spinner-enum";
 export class BaseComponent {
   constructor(private spinner: NgxSpinnerService) {
   }
-  showSpinner(spinnerNameType: SpinnerType): void {
-    this.spinner.show(undefined, {
-      type: spinnerNameType
-    });
-  }
 
   componentSpinner(spinnerNameType: SpinnerType): void {
     this.spinner.show(undefined, {

@@ -12,7 +12,7 @@ import { Update_Category } from 'src/app/contracts/category/update-category';
 export class CategoryService {
 
   constructor(private httpClientService: HttpClientService) { }
- 
+
   async getAllCategories() {
     //Promise'teki stringler kalkacak. // YAPILDI
     const observable: Observable<JsonResponse<List_Category[]>> = this.httpClientService.get(
@@ -36,53 +36,52 @@ export class CategoryService {
       : response.statusMessage;
   }
 
-  async createCategory(name: string, successCallBack?: () => void) {
+  async createCategory(name: string, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const observable = this.httpClientService.post(
       {
         controller: 'Category',
         action: `CreateCategory?categoryName=${name}`
       }, name);
 
-    const response = await firstValueFrom(observable);
-
-    successCallBack();
-
-    return response;
-    //hata yönetimi gerçekleşecek.
+    await firstValueFrom(observable)
+      .then(response => {
+        successCallBack();
+        return response;
+      }).catch(errorResponse => {
+        errorCallBack(errorResponse);
+      });
   }
 
-  async updateCategory(category:Update_Category, successCallBack?: () => void) {
-    //stringe çekilecek // yapıldı
-    // update'de ki gibi olsun create'de // yapıldı
-    const observable= this.httpClientService.put(
+  async updateCategory(category: Update_Category, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
+    const observable = this.httpClientService.put(
       {
         controller: 'Category',
         action: 'UpdateCategory'
       }, category);
 
-    const response = await firstValueFrom(observable);
-
-    successCallBack();
-
-    return response;
+    await firstValueFrom(observable)
+      .then(response => {
+        successCallBack();
+        return response;
+      })
+      .catch(errorResponse => {
+        errorCallBack(errorResponse);
+      });
   }
 
-
-  async deleteCategory(id: number, successCallBack?: () => void) {
+  async deleteCategory(id: number, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const observable: Observable<JsonResponse<List_Category>> = this.httpClientService.delete(
       {
         controller: 'Category',
         action: 'DeleteCategory'
       }, id);
 
-    const response = await firstValueFrom(observable);
-
-    successCallBack();
-
-    return response.statusCode === 200
-      ? response.result
-      : response.statusMessage;
+    await firstValueFrom(observable)
+      .then(response => {
+        successCallBack();
+        return response.statusCode === 200 && response.result;
+      }).catch(errorResponse => {
+        errorCallBack(errorResponse);
+      });
   }
 }
-
-//Buradaki değişikliklerin hepsi platform'da da olacak. //YAPILDI

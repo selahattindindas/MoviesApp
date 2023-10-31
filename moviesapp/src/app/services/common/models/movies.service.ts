@@ -17,80 +17,77 @@ export class MoviesService {
   constructor(private httpClientService: HttpClientService) { }
 
   async getAllMovies() {
-    //try catch kalkacak // YAPILDI
-      const observable: Observable<JsonResponse<List_Movie[]>> = this.httpClientService.get({
-        controller: 'Movie',
-        action: 'GetAll'
-      });
+    const observable: Observable<JsonResponse<List_Movie[]>> = this.httpClientService.get({
+      controller: 'Movie',
+      action: 'GetAll'
+    });
 
-      const response = await firstValueFrom(observable);
+    const response = await firstValueFrom(observable);
 
-      return response.statusCode === 200
-        ? response.result
-        : response.statusMessage;
-    }
-
-
-  async getMovieById(id: number){
-    //idler number // YAPILDI
-      const observable: Observable<JsonResponse<List_Movie>> = this.httpClientService.get({
-        controller: 'Movie',
-        action: 'GetByMovieId'
-      }, id);
-
-      const response = await firstValueFrom(observable);
-
-      return response.statusCode === 200
-        ? response.result
-        : response.statusMessage;
-    } 
-
-  async createMovie(movie: Create_Movie, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
-      this.httpClientService.post({
-        controller: 'Movie',
-        action: 'CreateMovie'
-      }, movie).subscribe(result =>{
-        successCallBack();
-      },(errorResponse: HttpErrorResponse) => {
-        const _error: Array<{ key: string, value: Array<string> }> = errorResponse.error;
-        let message = "";
-        _error.forEach((v, _index) => {
-          v.value.forEach((_v, _index) => {
-            message += `${_v}<br>`;
-          });
-        });
-        errorCallBack(message);
-      });
-      }
-      // sweatalert onaylandıktan sonra yönlendirme olucak // yapıldı
-      
-  async updateMovie(movie: Update_Movie, successCallBack?: () => void) {
-      const observable: Observable<Update_Movie> = this.httpClientService.put({
-        controller: 'Movie',
-        action: 'UpdateMovie'
-      }, movie);
-
-      const response = await firstValueFrom(observable);
-      
-      successCallBack();
-     
-      return response;
+    return response.statusCode === 200
+      ? response.result
+      : response.statusMessage;
   }
 
-  async deleteMovie(id: number, successCallBack?: () => void) {
+  async getMovieById(id: number) {
+    const observable: Observable<JsonResponse<List_Movie>> = this.httpClientService.get({
+      controller: 'Movie',
+      action: 'GetByMovieId'
+    }, id);
+
+    const response = await firstValueFrom(observable);
+
+    return response.statusCode === 200
+      ? response.result
+      : response.statusMessage;
+  }
+
+  async createMovie(movie: Create_Movie, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
+    const observable: Observable<Create_Movie> = this.httpClientService.post({
+      controller: 'Movie',
+      action: 'CreateMovie'
+    }, movie);
+
+    await firstValueFrom(observable)
+      .then(response => {
+        successCallBack();
+        return response;
+      })
+      .catch(errorResponse => {
+        errorCallBack(errorResponse);
+      });
+  }
+
+  async updateMovie(movie: Update_Movie, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
+    const observable: Observable<Update_Movie> = this.httpClientService.put({
+      controller: 'Movie',
+      action: 'UpdateMovie'
+    }, movie);
+
+    await firstValueFrom(observable)
+      .then(response => {
+        successCallBack();
+        return response;
+      })
+      .catch(errorResponse => {
+        errorCallBack(errorResponse);
+      });
+  }
+
+  async deleteMovie(id: number, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const observable: Observable<JsonResponse<List_Movie>> = this.httpClientService.delete(
       {
         controller: 'Movie',
         action: 'Delete'
       }, id);
 
-    const response = await firstValueFrom(observable);
-
-    successCallBack();
-
-    return response.statusCode ===200
-    ? response.result
-    : response.statusMessage;
+    await firstValueFrom(observable)
+      .then(response => {
+        successCallBack();
+        return response.statusCode === 200 && response.result;
+      }).catch(errorResponse => {
+        errorCallBack(errorResponse);
+      });
   }
 }
 

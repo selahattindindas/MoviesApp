@@ -14,7 +14,7 @@ export class PhotoService {
 
   constructor(private httpClientService: HttpClientService) { }
 
-  async getPhotosMovieById(movieId: number){
+  async getPhotosMovieById(movieId: number) {
     const observable: Observable<JsonResponse<List_Photo>> = this.httpClientService.get({
       controller: 'Movie',
       action: `GetMoviePhotos/${movieId}`
@@ -26,15 +26,15 @@ export class PhotoService {
       const result = response.result as List_Photo;
 
       result.photos.forEach(photo => {
-        photo.path = environment.photoUrl + photo.path;  //DÜZENLENDİ
+        photo.path = environment.photoUrl + photo.path;
       });
-      return result;
+      return response.result;
     } else {
       return response.statusMessage;
     }
   }
 
-  async uploadPhoto(files: Create_Photo[], successCallBack?: () => void) {
+  async uploadPhoto(files: Create_Photo[], successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const formData: FormData = new FormData();
     files.forEach(photo => {
       formData.append('Files', photo.files, photo.files.name);
@@ -46,27 +46,31 @@ export class PhotoService {
         controller: 'Movie',
         action: 'UploadPhoto',
         queryString: id
-      },formData);
+      }, formData);
 
-    const response = await firstValueFrom(observable);
-
-    successCallBack();
-    
-    return response;
+    await firstValueFrom(observable)
+      .then(response => {
+        successCallBack();
+        return response;
+      })
+      .catch(errorResponse => {
+        errorCallBack(errorResponse);
+      })
   }
 
-  async deletePhoto(id: number, successCallBack?: () => void) {
+  async deletePhoto(id: number, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const observable: Observable<JsonResponse<number>> = this.httpClientService.delete({
       controller: 'Movie',
       action: 'DeleteMoviePhoto'
     }, id);
 
-    const response = await firstValueFrom(observable);
-
-    successCallBack();
-
-    return response.statusCode === 200
-      ? response.result
-      : response.statusMessage;
+    await firstValueFrom(observable)
+      .then(response => {
+        successCallBack();
+        return response.statusCode === 200 && response.result;
+      })
+      .catch(errorResponse => {
+        errorCallBack(errorResponse);
+      })
   }
 }

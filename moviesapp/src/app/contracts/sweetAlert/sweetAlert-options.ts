@@ -1,7 +1,7 @@
 import { MessageType, Position } from "src/app/enums/sweetalert-enum";
 
 export class SweetAlert_Options{
-    position?: Position = Position.Center;
+    position: Position;
     messageTitle: string;
     messageText: string;
     icon: MessageType;

@@ -12,7 +12,11 @@
             <div class="create-contents">
               <div class="label-input">
                 <label for="directorNames">Yönetmen Adı</label>
-                <input type="text" [(ngModel)]="directorValue" name="directorNames" #directorNames="ngModel" placeholder="Yönetmen adını yazınız"  (keydown.enter)="addDirector($event)" />
+                <input type="text" [(ngModel)]="directorValue" name="directorNames" #directorNames="ngModel" placeholder="Yönetmen adını yazınız"
+                (keydown.enter)="addDirector($event)"/>
+                <div class="error-message" *ngIf="directorError">
+                  {{ directorError }}
+                </div>
               </div>
             </div>
             <div  class="actors-list">

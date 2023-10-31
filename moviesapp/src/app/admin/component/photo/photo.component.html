@@ -22,13 +22,18 @@
                                     <ng-template #noPhotos>
                                         <h3 class="upload-message">Bir dosyayı sürükleyip bırakın</h3>
                                     </ng-template>
-                                    <label class="label" for="fileInput"> veya
+                                    <p class="label" > veya
                                         <span class="upload-files">
-                                            <input id="fileInput" type="file" (change)="onFileSelected($event)" multiple
-                                                style="display: none;">
-                                            <span class="upload-files-text">dosya seçin</span>
+                                            <input #name="ngModel" name="name" [(ngModel)]="selectedFiles" id="fileInput" 
+                                            type="file" (change)="onFileSelected($event)" multiple
+                                                style="display: none;" accept="image/*" required>
+                                            <label for="fileInput" class="upload-files-text">dosya seçin</label>
                                         </span>
-                                    </label>
+                                    </p>
+                                    <div class="text-danger" *ngIf="name.invalid && (name.touched)">
+                                        <small *ngIf="name.errors?.['required']">Boş bırakılamaz.</small>
+                                        <small *ngIf="name.errors?.['minlength']">En az 5 karakter olmalıdır.</small>
+                                      </div>
                                 </div>
                             </div>
                             <div class="upload-submit">

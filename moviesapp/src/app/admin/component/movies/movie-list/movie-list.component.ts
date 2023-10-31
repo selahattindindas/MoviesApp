@@ -4,6 +4,7 @@ import { BaseComponent } from 'src/app/base/base.component';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { SpinnerType } from 'src/app/enums/spinner-enum';
 import { SweetCommon } from 'src/app/internal/sweet-message/common';
+import { SweetHttpError } from 'src/app/internal/sweet-message/http-error';
 import { SweetMovie } from 'src/app/internal/sweet-message/movie';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
@@ -17,7 +18,7 @@ export class MovieListComponent extends BaseComponent implements OnInit {
   movie: List_Movie[];
   filterText: string;
   filterName: keyof List_Movie = 'name';
-  constructor(private movieService: MoviesService, private sweetAlertService: SweetalertService, spinner:NgxSpinnerService) {
+  constructor(private movieService: MoviesService, private sweetAlertService: SweetalertService, spinner: NgxSpinnerService) {
     super(spinner)
   }
 
@@ -27,7 +28,7 @@ export class MovieListComponent extends BaseComponent implements OnInit {
   }
 
   getMovie() {
-    return this.movieService.getAllMovies().then(movieData=>{
+    return this.movieService.getAllMovies().then(movieData => {
       this.movie = movieData as List_Movie[];
     })
   }
@@ -35,11 +36,14 @@ export class MovieListComponent extends BaseComponent implements OnInit {
   async deleteMovie(id: number) {
     const sweetAlertResult = await this.sweetAlertService.showAlert(SweetCommon.DeletedQuestion);
 
-    if(sweetAlertResult.isConfirmed){
-       this.movieService.deleteMovie(id, ()=>{
+    if (sweetAlertResult.isConfirmed) {
+      this.movieService.deleteMovie(id, () => {
         this.sweetAlertService.showAlert(SweetMovie.deleteMovie);
-       })
-       .then(() => {
+      },
+      error => {
+        this.sweetAlertService.showAlert(SweetHttpError.serverError);
+      })
+      .then(() => {
         this.getMovie();
       });
     }

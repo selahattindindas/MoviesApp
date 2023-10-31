@@ -5,6 +5,7 @@ import { BaseComponent } from 'src/app/base/base.component';
 import { List_Platform } from 'src/app/contracts/platform/list-platform';
 import { Update_Platform } from 'src/app/contracts/platform/update-platform';
 import { SweetCommon } from 'src/app/internal/sweet-message/common';
+import { SweetHttpError } from 'src/app/internal/sweet-message/http-error';
 import { SweetPlatform } from 'src/app/internal/sweet-message/platform';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { PlatformService } from 'src/app/services/common/models/platform.service';
@@ -17,12 +18,12 @@ import { PlatformService } from 'src/app/services/common/models/platform.service
 export class AdminPlatform implements OnInit {
   @ViewChild("platformForm", { static: true }) platformForm: NgForm
   listPlatform: List_Platform[] = [];
-  updatedPlatform: Update_Platform = {name:''};
-  showCreateFormFlag : boolean;
+  updatedPlatform: Update_Platform = { name: '' };
+  showCreateFormFlag: boolean;
   editPlatformId: number;
-  model = {name:''};
+  model = { name: '' };
 
-  constructor(private platformService: PlatformService, private sweetAlertService: SweetalertService) {}
+  constructor(private platformService: PlatformService, private sweetAlertService: SweetalertService) { }
 
   ngOnInit(): void {
     this.getPlatform();
@@ -39,7 +40,10 @@ export class AdminPlatform implements OnInit {
     if (sweetAlertResult.isConfirmed) {
       this.platformService.deletePlatform(platformId, () => {
         this.sweetAlertService.showAlert(SweetPlatform.deletedPlatform);
-      })
+      },
+        error => {
+          this.sweetAlertService.showAlert(SweetHttpError.serverError);
+        })
         .then(() => {
           this.getPlatform();
         });
@@ -49,7 +53,7 @@ export class AdminPlatform implements OnInit {
   showCreateForm() {
     this.showCreateFormFlag = !this.showCreateFormFlag;
     this.model.name = '';
-}
+  }
 
   createPlatform() {
     if (!this.platformForm.valid)
@@ -59,11 +63,14 @@ export class AdminPlatform implements OnInit {
 
     this.platformService.createPlatform(platformName, () => {
       this.sweetAlertService.showAlert(SweetPlatform.createPlatform);
-    })
-    .then(() => {
-      this.getPlatform();
-      this.showCreateForm();
-    });
+    },
+      error => {
+        this.sweetAlertService.showAlert(SweetHttpError.serverError);
+      })
+      .then(() => {
+        this.getPlatform();
+        this.showCreateForm();
+      });
   }
 
   showUpdateForm(platformId: number) {
@@ -75,8 +82,8 @@ export class AdminPlatform implements OnInit {
     }
   }
 
-  updatePlatform(platformId: number, action:string) {
-    if (action ==='check' && this.platformForm.valid && this.editPlatformId) {
+  updatePlatform(platformId: number, action: string) {
+    if (action === 'check' && this.platformForm.valid && this.editPlatformId) {
       const Platform: List_Platform = {
         id: platformId,
         name: this.updatedPlatform.name
@@ -84,13 +91,16 @@ export class AdminPlatform implements OnInit {
 
       this.platformService.updatePlatform(Platform, () => {
         this.sweetAlertService.showAlert(SweetPlatform.updatePlatform);
-      })
-      .then(() => {
-        this.getPlatform();
-        this.editPlatformId = null;
-      });
+      },
+        error => {
+          this.sweetAlertService.showAlert(SweetHttpError.serverError);
+        })
+        .then(() => {
+          this.getPlatform();
+          this.editPlatformId = null;
+        });
     }
-    else if(action === 'cancel'){
+    else if (action === 'cancel') {
       this.editPlatformId = null;
     }
     this.getPlatform();

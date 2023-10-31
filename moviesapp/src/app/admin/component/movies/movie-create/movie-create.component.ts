@@ -27,10 +27,10 @@ export class MovieCreateComponent extends BaseComponent implements OnInit {
   platform: ListPlatformEnum;
   constructor(
     private fb: FormBuilder, private movieService: MoviesService, private sweetAlertService: SweetalertService,
-    private router: Router, spinner:NgxSpinnerService) {
-      super(spinner);
-      this.categories = new ListCategoryEnum();
-      this.platform = new ListPlatformEnum();
+    private router: Router, spinner: NgxSpinnerService) {
+    super(spinner);
+    this.categories = new ListCategoryEnum();
+    this.platform = new ListPlatformEnum();
 
     this.createForm = this.fb.group({
       name: new FormControl(null, [Validators.required, Validators.minLength(5)]),
@@ -46,27 +46,27 @@ export class MovieCreateComponent extends BaseComponent implements OnInit {
     this.getCategory();
     this.getPlatform();
   }
-   getCategory() {
-     this.categories.getCategoryEnumValues().then(categoryData => {
+  getCategory() {
+    this.categories.getCategoryEnumValues().then(categoryData => {
       this.categoryEnum = categoryData;
     });
   }
 
   getPlatform() {
     this.platform.getPlatformEnumValues().then(platformData => {
-     this.platformEnum = platformData;
-   });
- }
+      this.platformEnum = platformData;
+    });
+  }
 
   isValid(formControlName: string) {
     const formControl = this.createForm.get(formControlName);
-    return formControl?.invalid && (formControl?.touched || formControl?.dirty);
+    return formControl?.invalid && (formControl?.touched);
   }
 
   isValidTemplate(formControlName: string): boolean {
     const formControl = this.createForm.get(formControlName);
 
-    if (formControl?.invalid && (formControl.touched || formControl?.dirty))
+    if (formControl?.invalid && (formControl.touched))
       if (formControl.errors?.['required'] || formControl.errors?.['minlength']
         || formControl.errors?.['maxlength'] || formControl.errors?.['max'] || formControl.errors?.['min'])
         return true;
@@ -86,16 +86,14 @@ export class MovieCreateComponent extends BaseComponent implements OnInit {
         description: formData.detail,
       };
       this.movieService.createMovie(movie, async () => {
-     
+
         const result = await this.sweetAlertService.showAlert(SweetMovie.createsMovie);
         if (result.dismiss) {
-            this.router.navigate(['/Admin', 'Movies-List']);
+          this.router.navigate(['/Admin', 'Movies-List']);
         }
-      }, errorMessage => {
-         this.sweetAlertService.showAlert(SweetHttpError.serverError);
-         console.log(errorMessage);
-      }
-      );
+      }, error => {
+        this.sweetAlertService.showAlert(SweetHttpError.serverError);
+      });
     }
   }
 }

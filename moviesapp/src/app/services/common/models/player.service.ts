@@ -27,7 +27,7 @@ export class PlayerService {
       : response.statusMessage;
   }
 
-  async createPlayer(player: Create_Player, successCallBack?: () => void) {
+  async createPlayer(player: Create_Player, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const observable: Observable<Create_Player> = this.httpClientService.post(
       {
         controller: 'Players',
@@ -35,26 +35,29 @@ export class PlayerService {
         queryString: `Id=${player.movieId}&PlayerNames=${player.playerNames}`
       }, player);
 
-    const response = await firstValueFrom(observable);
-
-    successCallBack();
-
-    return response;
+      await firstValueFrom(observable)
+      .then(response => {
+        successCallBack();
+        return response;
+      })
+      .catch(errorResponse => {
+        errorCallBack(errorResponse);
+      });
   }
 
-  async deletePlayer(id: number, successCallBack?: () => void) {
+  async deletePlayer(id: number, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const observable: Observable<JsonResponse<List_Player>> = this.httpClientService.delete(
       { 
         controller: 'Players', 
         action: 'DeletePlayer' 
       }, id);
 
-    const response = await firstValueFrom(observable);
-
-    successCallBack();
-
-    return response.statusCode === 200
-      ? response.result
-      : response.statusMessage;
+      await firstValueFrom(observable)
+      .then(response => {
+        successCallBack();
+        return response.statusCode === 200 && response.result;
+      }).catch(errorResponse => {
+        errorCallBack(errorResponse);
+      });
   }
 }

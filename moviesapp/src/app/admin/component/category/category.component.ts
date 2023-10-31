@@ -4,6 +4,7 @@ import { List_Category } from 'src/app/contracts/category/list-category';
 import { Update_Category } from 'src/app/contracts/category/update-category';
 import { SweetCategory } from 'src/app/internal/sweet-message/category';
 import { SweetCommon } from 'src/app/internal/sweet-message/common';
+import { SweetHttpError } from 'src/app/internal/sweet-message/http-error';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { CategoryService } from 'src/app/services/common/models/category.service';
 
@@ -37,7 +38,10 @@ export class AdminCategory implements OnInit {
     if(sweetAlertResult.isConfirmed){
       this.categoryService.deleteCategory(categoryId, ()=>{
         this.sweetAlertService.showAlert(SweetCategory.deletedCategory);
-      })
+      },
+      error => {
+        this.sweetAlertService.showAlert(SweetHttpError.serverError);
+     })
       .then(() => {
         this.getCategory();
       });
@@ -57,7 +61,10 @@ export class AdminCategory implements OnInit {
     
     this.categoryService.createCategory(category, ()=>{
       this.sweetAlertService.showAlert(SweetCategory.createCategory);
-    })
+    },
+    error => {
+      this.sweetAlertService.showAlert(SweetHttpError.serverError);
+   })
     .then(() => {
       this.getCategory();
       this.showCreateForm();
@@ -82,7 +89,10 @@ export class AdminCategory implements OnInit {
 
       this.categoryService.updateCategory(category, ()=>{
         this.sweetAlertService.showAlert(SweetCategory.updateCategory);
-      })
+      },
+      error => {
+        this.sweetAlertService.showAlert(SweetHttpError.serverError);
+     })
       .then(() => {
         this.getCategory();
         this.editCategoryId = null;
@@ -93,4 +103,5 @@ export class AdminCategory implements OnInit {
     }
     this.getCategory();
   }
+  
 }
