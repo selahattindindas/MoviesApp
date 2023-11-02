@@ -6,24 +6,24 @@
   color: #ffffff;
   font-size: 50px;
   letter-spacing: 2px;
-  margin-bottom: 4rem;
+  margin-bottom: 6rem;
   width: 100%; /* Genişliği tam genişlik yaparak hizalamayı sağlar */
 }
 .table-wrapper{
   box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+  margin-top: 3rem;
 }
 .movie-search-button-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .movie-search input {
   color: #fff;
   width: 250px;
-  height: 50px;
+  height: 60px;
   line-height: 50px; 
   border: 1px solid #a7a3a3;
   padding: 0 0 0 20px;
@@ -31,7 +31,9 @@
   outline: none;
   border-radius: 5px;
 }
-
+.movie-search input::placeholder{
+  color: #cacaca;
+}
 .movie-create-button button {
   background-color: transparent;
   border-radius: 5px;
@@ -41,7 +43,7 @@
   color: #ffffff;
   cursor: pointer;
   font-weight: 600;
-  line-height: 50px; 
+  line-height: 60px; 
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 .movie-create-button button:hover {
@@ -72,16 +74,20 @@
 }
 
 .lg-table thead th {
-  background-color: rgba(1, 19, 9, 0.8);
+  background-color:  rgba(39, 39, 39, 0.5);
   white-space: normal;
   font-weight: bold;
   font-size: 1em;
+  padding: 30px 0;
 }
 
 .lg-table tr{
-  background-color: rgba(94, 94, 94, 0.4);
+  background-color: rgba(94, 94, 94, 0.2);
   border-bottom: 3px solid transparent;
   transition: background-color 0.3s ease;
+}
+.lg-table tr:hover{
+  background-color: rgba(255, 255, 255, 0.3);
 }
 i{
   margin: 0 10px;

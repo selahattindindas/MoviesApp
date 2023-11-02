@@ -6,16 +6,13 @@ body {
   font-family: "Quicksand", sans-serif;
   font-weight: 500;
   line-height: 1.5;
-  background-color: #1a1818;
-  overflow-x: hidden; 
-}
 
+}
 
 main {
   display: flex;
   align-items: stretch;
-  min-height: 100vh;
-
+  background: -webkit-linear-gradient(right,#5a0825,#1d1b1b,#5a0825,#1d1b1b);
 }
 
 .menu-toggle {
@@ -26,20 +23,18 @@ main {
   display: none; 
 }
 
-.side-menu {
-  width: 350px;
-  flex: 0 0 auto;
-}
 .details{
-  background-color: #1a1818;
   flex: 1;
 }
 .left-menu {
-  height: 100%;
-  background-color: #1a1818;
-  backdrop-filter: blur(5px);
+  position: sticky;
+  top: 0;
+  width: 350px; 
+  height: 100vh; 
+  background-color: rgba(39, 39, 39, 0.5);
   box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.2);
 }
+
 .left-menu::after{
   height: 100%;
 }
@@ -84,7 +79,7 @@ li {
   align-items: center;
 }
 li:hover {
-  color: #2ea57d;
+  color: rgba(255, 255, 255, 0.1);
 }
 a {
   text-decoration: none;
@@ -102,25 +97,22 @@ i {
   right: 0;
 }
 .active{
-  border-right: 15px solid rgba(46, 165, 125, 0.5);
+  border-right: 15px solid rgba(94, 94, 94, 0.7);
 }
 .active-link{
-  border-right: 15px solid rgba(46, 165, 125, 0.5);
+  border-right: 15px solid rgba(94, 94, 94, 0.7);
 }
 .fa-lg, .fa-xl{
   color: #ccc
 }
 @media screen and (max-width: 1024px) {
-
   main {
     flex-direction: column; 
   }
   .menu-toggle {
-    display: block; 
+    display: block;
 }
-  .side-menu {
-    width: 100%;
-  }
+
   .details {
     flex: 1; 
   }
@@ -129,6 +121,7 @@ i {
     
   }
   .left-menu {
+    position: relative;
     width: 100%;
     height: 100%;
   }
