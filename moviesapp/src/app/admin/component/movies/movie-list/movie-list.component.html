@@ -7,55 +7,69 @@
       <movie-photo [movieId]="movie.id"></movie-photo>
     </div>
     <h1>Film Listesi</h1>
-    <div class="movie-search-button-container">
-      <div class="movie-search">
-        <input placeholder="Film Ara" [(ngModel)]="filterText" />
-      </div>
-      <div class="movie-create-button">
-        <button [routerLink]="['Create-Movie']">+ Film Ekle</button>
-      </div>
-    </div>
-    <div class="table-wrapper">
-      <table class="lg-table">
-        <thead>
-          <tr>
-            <th>Film Adı</th>
-            <th>Film Kategori</th>
-            <th>Film Platform</th>
-            <th>Vizyon Tarihi</th>
-            <th>Kadro İşlemleri</th>
-            <th>Fotoğraf İşlemleri</th>
-            <th>Film İşlemleri</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let movie of movie | filter: filterText: filterName">
-            <td>{{ movie.name | limitTo:15}}</td>
-            <td>{{ movie.categoryName }}</td>
-            <td>{{ movie.platformName }}</td>
-            <td>{{ movie.releaseDate }}</td>
-            <td>
-              <i class="fa-solid fa-users fa-ml actor" title="Oyuncu Ekle"
-                [routerLink]="['Create-Players', movie.id]"></i>
-              <i class="fa-solid fa-user fa-ml director" title="Yönetmen Ekle"
-                [routerLink]="['Create-Director', movie.id]"></i>
-            </td>
-            <td>
-              <i type="button" class="fa-solid fa-image fa-lg" title="Fotoğraf Ekle" data-bs-toggle="modal"
-                data-bs-target="#exampleModal"></i>
-            </td>
-            <td>
-              <i class="fa-solid fa-pen-to-square fa-lg update" title="Düzenle" [routerLink]="['Edit', movie.id]"></i>
-              <i class="fa-solid fa-trash fa-lg delete" title="Sil" (click)="deleteMovie(movie.id)"></i>
-            </td>
-          </tr>
-        <tbody>
-      </table>
-      <ng-template #noResults>
-        <div class="error">
-          <p>Aranılan Film Bulunamadı: "{{filterText}}".</p>
+    <div class="card-body">
+      <div class="card-container card-flex">
+        <div class="icon">
+          <img src="assets/img/admin/table/table_img.png" alt="">
         </div>
-      </ng-template>
+        <div class="count_content">
+          <h3><span class="counter">{{ movie.length }}</span></h3>
+          <p>Film Bulunuyor</p>
+        </div>
+      </div>
     </div>
+    <div class="movie-tables">
+      <div class="movie-search-button-container">
+        <div class="movie-search">
+          <input placeholder="Film Ara" [(ngModel)]="filterText" />
+        </div>
+        <div class="movie-create-button">
+          <button [routerLink]="['Create-Movie']">+ Film Ekle</button>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table class="lg-table">
+          <thead>
+            <tr>
+              <th>Film Adı</th>
+              <th>Film Kategori</th>
+              <th>Film Platform</th>
+              <th>Vizyon Tarihi</th>
+              <th>Kadro İşlemleri</th>
+              <th>Fotoğraf İşlemleri</th>
+              <th>Film İşlemleri</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let movie of movie | filter: filterText: filterName">
+              <td>{{ movie.name | limitTo:15}}</td>
+              <td>{{ movie.categoryName }}</td>
+              <td>{{ movie.platformName }}</td>
+              <td>{{ movie.releaseDate }}</td>
+              <td>
+                <i class="fa-solid fa-users fa-ml actor" title="Oyuncu Ekle"
+                  [routerLink]="['Create-Players', movie.id]"></i>
+                <i class="fa-solid fa-user fa-ml director" title="Yönetmen Ekle"
+                  [routerLink]="['Create-Director', movie.id]"></i>
+              </td>
+              <td>
+                <i type="button" class="fa-solid fa-image fa-lg" title="Fotoğraf Ekle" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"></i>
+              </td>
+              <td>
+                <i class="fa-solid fa-pen-to-square fa-lg update" title="Düzenle" [routerLink]="['Edit', movie.id]"></i>
+                <i class="fa-solid fa-trash fa-lg delete" title="Sil" (click)="deleteMovie(movie.id)"></i>
+              </td>
+            </tr>
+          <tbody>
+        </table>
+        <ng-template #noResults>
+          <div class="error">
+            <p>Aranılan Film Bulunamadı: "{{filterText}}".</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
   </div>
 </section>

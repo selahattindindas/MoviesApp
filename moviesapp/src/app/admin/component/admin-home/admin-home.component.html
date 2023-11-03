@@ -1,32 +1,28 @@
-<form #categoryForm="ngForm">
-    <table>
-      <tr>
-        <td><label for="name">Adınız:</label></td>
-        <td><input type="text" id="name" name="name" [(ngModel)]="userData.name" required minlength="5" #name="ngModel"></td>
-      </tr>
-      <tr>
-        <td>
-          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
-            <small *ngIf="name.errors?.['required']">Boş bırakılamaz.</small>
-            <small *ngIf="name.errors?.['minlength']">En az 5 karakter olmalıdır.</small>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td><label for="email">E-posta Adresiniz:</label></td>
-        <td><input type="email" id="email" name="email" [(ngModel)]="userData.email" required #email="ngModel"></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>
-          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
-            <small *ngIf="email.errors?.['required']">Boş bırakılamaz.</small>
-            <small *ngIf="email.errors?.['minlength']">En az 5 karakter olmalıdır.</small>
-          </div>
-        </td>
-      </tr>
-    </table>
-  
-    <button type="submit">Gönder</button>
-  </form>
-  
+<div class="navbar-contents content-between content-center">
+  <div class="navbar-center">
+      <button class="button-17" role="button">
+        <i class="fa-brands fa-github-alt fa-lg"></i>
+        Github Profilim İçin Tıklayınız</button>
+      <button class="button-17" role="button">
+        <i class="fa-brands fa-linkedin-in fa-lg"></i>
+        Linkedin Profilim İçin Tıklayınız</button>
+  </div>
+  <div class="navbar-right">
+    <div class="navbar-profile">
+      <img src="assets/img/admin/navbar/man-user.png">
+      <div class="dropdown">
+        <button class="btn dropdown-toggle btn-design" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Selahattin DİNDAŞ
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <button class="dropdown-item" type="button">
+              <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
+              Oturum Kapat
+            </button>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
