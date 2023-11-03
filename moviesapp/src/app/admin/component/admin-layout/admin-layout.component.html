@@ -1,7 +1,16 @@
 <body>
   <main>
-    <div class="details">
-      <router-outlet></router-outlet>
+    <div class="sidebar-container">
+      <admin-sidebar></admin-sidebar>
+    </div> 
+    <div class="content-wrapper">
+      <admin-navbar></admin-navbar>
+      <div class="component-content">
+        <router-outlet></router-outlet>
+      </div>
+      <!-- <div class="footer">
+        <admin-footer></admin-footer>
+      </div> -->
     </div>
   </main>
 </body>

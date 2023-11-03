@@ -1,6 +1,5 @@
 .row {
-    margin: 10rem auto;
-    max-width: 1450px; /* veya istediğiniz bir maksimum genişlik değeri */
+    margin: 2rem 3rem;
 }
 
 .col {

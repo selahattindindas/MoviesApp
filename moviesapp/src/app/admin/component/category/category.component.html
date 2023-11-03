@@ -1,7 +1,19 @@
 <section>
   <form #categoryForm="ngForm">
     <div class="category-list">
-      <h1>Kategori Listesi</h1>
+      <h2>Kategori Listesi</h2>
+      <div class="card-body">
+        <div class="card-container card-flex">
+          <div class="icon">
+            <img src="assets/img/admin/table/table_img.png" alt="">
+          </div>
+          <div class="count_content">
+            <h3><span class="counter">{{ listCategory.length }}</span></h3>
+            <p>Kategori Bulunuyor</p>
+          </div>
+        </div>
+      </div>
+      <div class="category-tables">
       <div class="category-button-container">
         <div class="category-create-button">
           <button (click)="showCreateForm()">+ Kategori Ekle</button>
@@ -54,6 +66,7 @@
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   </form>
 </section>

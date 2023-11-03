@@ -1,45 +1,28 @@
-body {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font-family: "Quicksand", sans-serif;
-    font-weight: 500;
-    line-height: 1.5;
-  }
-  
-  main {
-    display: flex;
-    align-items: stretch;
-  }
-  
-  .menu-toggle {
+.menu-toggle {
     position: absolute;
     top: 30px;
     right: 5px;
     z-index: 1;
     display: none;
   }
-  
-  .details {
-    background-color: #eff1f7;
-    flex: 1;
-    position: relative;
+  .sidebar-close img{
+    display: none;
   }
-  
   .left-menu {
     height: 100vh;
     left: 0;
     top: 0;
+    z-index: 1000;
     padding-bottom: 50px;
+    position: sticky;
     width: 270px;
     overflow: hidden;
     overflow-y: auto;
     transition: .5s;
     background: #fff;
     box-shadow: 0 0 40px #eff1f7;
-    z-index: 2;
-  }
+}
+
   
   .left-header {
     margin: 30px;
@@ -51,7 +34,7 @@ body {
   .logo-img img {
     width: 100%;
   }
-  
+
   .name {
     margin-top: 20px;
     color: #ccc;
@@ -127,65 +110,45 @@ body {
   
   .fa-lg,
   .fa-xl {
-    color: #ccc
+    color: #ccc;
   }
   
-  @media screen and (max-width: 1024px) {
-    main {
-      flex-direction: column;
-    }
-  
+  @media screen and (max-width: 991px) {
+   
     .menu-toggle {
       display: block;
     }
-  
-    .details {
-      flex: 1;
-    }
-  
     .left-menu .close {
       display: none;
-  
     }
-  
+    .sidebar-close img {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        text-align: center;
+        line-height: 40px;
+        position: absolute;
+        right: 30px;
+        font-size: 25px;
+        top: 29px;
+        cursor: pointer;
+        color: #222;
+        display: none;
+      }
     .left-menu {
-      position: relative;
-      width: 100%;
-      height: 100%;
+      left: 0;
+      width: 80%;
+      position: fixed;
+      box-shadow: 0 5px 20px rgba(0,0,0,.2);
     }
-  
-    .left-header {
-      padding-bottom: 20px;
+    .sidebar {
+      left: -280px;
+      -webkit-transition: .5s;
+      transition: .5s;
+      top: 0;
+      width: 280px;
+      background: #fff;
     }
-  
-    .user-img {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      position: relative;
-      margin-left: 20px;
-    }
-  
-    .user-img img {
-      width: 50px;
-      height: 50px;
-    }
-  
-    .name {
-      position: absolute;
-      right: 10px;
-      top: 80px;
-      margin: 0;
-    }
-  
-    .rank {
-      font-size: 14px;
-      position: absolute;
-      right: 10px;
-      top: 110px;
-      margin: 0;
-    }
-  
     ul {
       margin-top: 30px;
     }

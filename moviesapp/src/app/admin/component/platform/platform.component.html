@@ -1,7 +1,19 @@
 <section>
   <form #platformForm="ngForm">
     <div class="platform-list">
-      <h1>Platform Listesi</h1>
+      <h2>Platform Listesi</h2>
+      <div class="card-body">
+        <div class="card-container card-flex">
+          <div class="icon">
+            <img src="assets/img/admin/table/table_img.png" alt="">
+          </div>
+          <div class="count_content">
+            <h3><span class="counter">{{ listPlatform.length }}</span></h3>
+            <p>Platform Bulunuyor</p>
+          </div>
+        </div>
+      </div>
+      <div class="platform-tables">
       <div class="platform-button-container">
         <div class="platform-create-button">
           <button (click)="showCreateForm()">+ Platform Ekle</button>
@@ -54,6 +66,7 @@
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   </form>
 </section>

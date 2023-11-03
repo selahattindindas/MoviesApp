@@ -1,0 +1,63 @@
+<div class="menu-toggle" (click)="toggleMenu()">
+    <i class="fa-solid fa-bars fa-xl"></i>
+  </div>
+  <div class="left-menu sidebar" [ngClass]="{'sidebar': isMenuOpen}">
+    <div class="left-header" >
+      <div class="logo-img">
+        <img src="assets/img/admin/sidebar/admin-verse.png"/>
+    </div>
+    <div class="sidebar-close">
+        <img src="assets/img/admin/sidebar/sidebar-close.png">
+    </div>
+    </div>
+    <div class="left-main">
+      <ul class="main-contents">
+        <div class="line"></div>
+        <li class="side-menu-title">
+          <span>Kontrol Paneli</span>
+        </li>
+        <li>
+          <a [routerLink]="['/Admin']">
+            <i class="fa-solid fa-house fa-lg"></i>
+            <span>Anasayfa</span>
+          </a>
+        </li>
+        <li class="side-menu-title">
+          <span>İşlem Paneli</span>
+        </li>
+        <li [routerLinkActive]="'active'">
+          <a [routerLink]="['Movies-List']">
+            <i class="fa-solid fa-video fa-lg"></i>
+            <span>Film İşlemleri</span>
+          </a>
+        </li>
+        <li [routerLinkActive]="'active'">
+          <a [routerLink]="['Class-List']">
+            <i class="fa-solid fa-border-all fa-lg"></i>
+            <span>Sınıf İşlemleri</span>
+          </a>
+        </li>
+        <li [routerLinkActive]="'active'">
+          <a [routerLink]="['News']">
+            <i class="fa-regular fa-newspaper fa-lg"></i>
+            <span>Haber İşlemleri</span>
+          </a>
+        </li>
+        <li [routerLinkActive]="'active'">
+          <a [routerLink]="['Users']">
+            <i class="fa-solid fa-user fa-lg"></i>
+            <span>Kullanıcı İşlemleri</span>
+          </a>
+        </li>
+        <li class="side-menu-title">
+          <span>Yönlentirme Paneli</span>
+        </li>
+        <li [routerLinkActive]="'active'">
+          <a [routerLink]="['/Filmler']">
+            <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+            <span>Çıkış</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
