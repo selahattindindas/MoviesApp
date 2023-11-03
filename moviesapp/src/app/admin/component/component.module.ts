@@ -18,10 +18,6 @@ import { PlayersComponent } from './players/players.component';
 import { DirectorsComponent } from './directors/directors.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SidebarComponent } from './templates/sidebar/sidebar.component';
-import { NavbarComponent } from './templates/navbar/navbar.component';
-import { FooterComponent } from './templates/footer/footer.component';
-
 
 @NgModule({
   declarations: [
@@ -38,11 +34,7 @@ import { FooterComponent } from './templates/footer/footer.component';
     LimitPipe,
     PhotoComponent,
     PlayersComponent,
-    DirectorsComponent,
-    SidebarComponent,
-    NavbarComponent,
-    FooterComponent,
-    
+    DirectorsComponent
   ],
   imports: [
     CommonModule,
