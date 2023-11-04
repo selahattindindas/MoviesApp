@@ -53,7 +53,7 @@
           <div class="create-contents">
             <div class="label-input">
               <label for="date">Film Vizyon Tarihi</label>
-              <input class="create-input" type="date" formControlName="date" [ngClass]="{invalidRed: createForm.get('date').invalid && createForm.get('date').touched}" />
+              <input class="create-input custom-input" type="date" formControlName="date" [ngClass]="{invalidRed: createForm.get('date').invalid && createForm.get('date').touched}" />
               <div class="text-danger">
                 <small *ngIf="createForm.get('date').hasError('required') && createForm.get('date').touched">
                   Lütfen boş bırakmayınız.
@@ -65,7 +65,8 @@
             </div>
             <div class="label-input">
               <label for="time">Film Süresi</label>
-              <input class="create-input" type="number" formControlName="time" [ngClass]="{invalidRed: isValidTemplate('time')}"/>
+              <input class="create-input custom-input" type="number"  placeholder="Film süresi yazınız"
+              formControlName="time" [ngClass]="{invalidRed: isValidTemplate('time')}"/>
               <div class="text-danger" *ngIf="isValid('time')">
                 <small *ngIf="createForm.get('time')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
                 <small *ngIf="createForm.get('time')?.errors?.['min']">Lütfen minimum 1 dakika giriniz.</small>

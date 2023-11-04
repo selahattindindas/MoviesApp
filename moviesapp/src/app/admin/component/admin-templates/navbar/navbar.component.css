@@ -94,11 +94,15 @@
     }
   
     .button-17 {
-      margin: 10px 0; /* Düğmeler arasında boşluk ekleyin */
+      margin: 230px 0; /* Düğmeler arasında boşluk ekleyin */
     }
   
     .button-17 i {
       padding-right: 5px; /* İkon ve metin arasındaki boşluğu azaltın */
     }
   }
-  
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+  .navbar-center {
+    display: flex;
+}
+}

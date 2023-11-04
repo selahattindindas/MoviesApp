@@ -53,7 +53,7 @@
           <div class="update-contents">
             <div class="label-input">
               <label for="date">Film Vizyon Tarihi</label>
-              <input class="update-input" type="date" formControlName="date" [ngModel]="movies.releaseDate | date:'yyyy-MM-dd'" />
+              <input class="update-input custom-input" type="date" formControlName="date" [ngModel]="movies.releaseDate | date:'yyyy-MM-dd'" />
               <div class="text-danger">
                 <small *ngIf="updateForm.get('date').hasError('required') && updateForm.get('date').touched">
                   Lütfen boş bırakmayınız.
@@ -65,7 +65,7 @@
             </div>
             <div class="label-input">
               <label for="time">Film Süresi</label>
-              <input class="update-input" type="number" formControlName="time" [(ngModel)]="movies.movieTime" 
+              <input class="update-input custom-input" type="number" formControlName="time" [(ngModel)]="movies.movieTime" 
               [ngClass]="{invalidRed: isValidTemplate('time')}"/>
               <div class="text-danger" *ngIf="isValid('time')">
                 <small *ngIf="updateForm.get('time')?.errors?.['required']">Lütfen boş bırakmayınız.</small>

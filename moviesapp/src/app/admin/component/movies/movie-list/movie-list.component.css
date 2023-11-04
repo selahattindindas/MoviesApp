@@ -201,7 +201,7 @@ i{
   line-height: 1;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .movie-list {
     margin: 0 2rem;
     padding-bottom: 5rem;
@@ -260,9 +260,42 @@ i{
   }
   .card-body {
     display: flex;
-    justify-content: space-between; /* İçeriği yatay olarak hizala */
+    justify-content: space-between; 
     align-items: center;
     flex-wrap: wrap;
     margin-bottom: 30px;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .lg-table {
+    display: block;
+    flex-direction: column;
+    font-size: 14px;
+  }
+  table {
+    width: auto;
+    position: relative;
+    overflow-x: auto;
+  }
+  .lg-table td,
+  .lg-table th {
+    padding: 20px 0.625em 20px 0.625em; 
+    height: auto; 
+    vertical-align: middle;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    font-size: 13px;
+    text-overflow: ellipsis;
+  }
+  .lg-table thead th {
+    text-align: center;
+  }
+  .lg-table tbody tr:nth-child(odd) {
+    background: none;
+  }
+  .lg-table tr:nth-child(even) {
+    background: transparent;
   }
 }

@@ -197,7 +197,7 @@ i{
   line-height: 1;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .platform-list {
     margin: 0 2rem;
     padding-bottom: 5rem;
@@ -260,5 +260,10 @@ i{
     align-items: center;
     flex-wrap: wrap;
     margin-bottom: 30px;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  section{
+    margin-top: 3rem;
   }
 }
