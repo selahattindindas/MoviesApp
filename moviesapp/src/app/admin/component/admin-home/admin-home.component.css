@@ -1,5 +1,27 @@
+.category-container, .platform-container, .date-container {
+    display: inline-block;
+    width: 50%; 
+    vertical-align: top; 
+}
+.category-charts, .platform-charts, .date-charts {
+    border: 2px solid #ccc; 
+    border-radius: 20px;
+    padding: 20px; 
+    margin: 10px;
+}
+#platformCharts, #categoryCharts, #dateCharts{
+    width: 100%;
+    height: 400px;
+}
 
-  .categoryCharts{
-    width: 100%; 
-    height: 500px;
-  }
+@media screen and (max-width: 768px){
+    .category-container, .platform-container, .date-container {
+        display: block;
+        width: 100%;
+        margin-top: 5rem;
+    }
+    #platformCharts, #categoryCharts, #dateCharts {
+        width: 100%;
+        height: 300px;
+    }
+}

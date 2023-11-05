@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './admin-templates/navbar/navbar.component';
 import { FooterComponent } from './admin-templates/footer/footer.component';
 import { SidebarComponent } from './admin-templates/sidebar/sidebar.component';
+import { CustomDatePipe } from 'src/app/shared/pipes/date-pipe';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SidebarComponent } from './admin-templates/sidebar/sidebar.component';
     DirectorsComponent,
     NavbarComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    CustomDatePipe
   ],
   imports: [
     CommonModule,
