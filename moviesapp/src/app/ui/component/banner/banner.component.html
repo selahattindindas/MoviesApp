@@ -1,11 +1,6 @@
-<div class="index-main">
-  <img src="assets/img/deneme.jpg" [hidden]="currentImageIndex !== 2" />
-  <img src="assets/img/transfor.jpg" [hidden]="currentImageIndex !== 1" />
-  <img src="assets/img/meg2.jpg" [hidden]="currentImageIndex !== 0" />
-</div>
-<div class="movie-left" (click)="changeImage(0)">
-  <i class="fa-solid fa-circle-chevron-left fa-2xl" style="color: #898b90;"></i>
-</div>
-<div class="movie-right" (click)="changeImage(1)">
-  <i class="fa-solid fa-circle-chevron-right fa-2xl" style="color: #898b90;"></i>
-</div>
+<swiper-container>
+
+  <swiper-slide><img src="assets/img/meg2.jpg"></swiper-slide>
+  <swiper-slide><img src="assets/img/transfor.jpg"></swiper-slide>
+  <swiper-slide><img src="assets/img/meg2.jpg"></swiper-slide>
+</swiper-container>

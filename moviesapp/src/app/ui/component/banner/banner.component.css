@@ -1,36 +1,4 @@
-.index-main {
-    width: 100%;
-    height: calc(100vh - 100px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .index-main img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .movie-left {
-    position: absolute;
-    top: 50%;
-    left: 2%;
-    z-index: 1;
-  }
-  
-  .movie-left i {
-    width: 40px;
-    color: #fff;
-  }
-  
-  .movie-right {
-    position: absolute;
-    top: 50%;
-    right: 2%;
-    z-index: 1;
-  }
-  
-  .movie-right i {
-    width: 40px;
-  }
-  
+img{
+  width: 100%;
+  height: calc(100vh - 80px);
+}

@@ -1,6 +1,5 @@
 body {
-  /* background: linear-gradient(to bottom, #5a0825, #1d1b1b); */
-  background: -webkit-linear-gradient(right,#5a0825,#1d1b1b,#5a0825,#1d1b1b);
+ 
   margin: 0;
   padding: 0;
   border: 0;
@@ -13,8 +12,12 @@ body {
   font-style: normal;
   font-weight: 600;
   line-height: 1.5;
+  min-height: 100vh; 
 }
 
+.ui-content{
+  background: -webkit-linear-gradient(right, #5a0825, #1d1b1b, #5a0825, #1d1b1b);
+}
 header {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
   background-color: transparent;
@@ -23,7 +26,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  height: 80px;
+  padding: 0 20px;
 }
 
 .header-logo {

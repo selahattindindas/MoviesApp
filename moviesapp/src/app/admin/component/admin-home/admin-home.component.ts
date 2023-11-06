@@ -183,27 +183,27 @@ export class AdminHomeComponent implements AfterViewInit {
       const oneWeekLater = new Date();
       oneWeekLater.setDate(currentDate.getDate() + 7);
 
-      const vizyondakiFilmler = movies.filter((movie) => {
+      const visionMovies = movies.filter((movie) => {
         const [day, month, year] = movie.releaseDate.split('.').map(Number);
         const movieDate = new Date(year, month - 1, day);
         return movieDate >= currentDate && movieDate <= oneWeekLater;
       });
 
-      const vizyondanKalkanFilmler = movies.filter((movie) => {
+      const noMovies = movies.filter((movie) => {
         const [day, month, year] = movie.releaseDate.split('.').map(Number);
         const movieDate = new Date(year, month - 1, day);
         return movieDate < currentDate;
       });
 
-      const vizyonTarihiYaklasanFilmler = movies.filter((movie) => {
+      const commingMovies = movies.filter((movie) => {
         const [day, month, year] = movie.releaseDate.split('.').map(Number);
         const movieDate = new Date(year, month - 1, day);
         return movieDate > currentDate && movieDate >= oneWeekLater;
       });
       const chartData = [
-        { category: "Vizyondaki Filmler", count: vizyondakiFilmler.length, value: 1 },
-        { category: "Vizyondan Kalkan Filmler", count: vizyondanKalkanFilmler.length, value: 1 },
-        { category: "Yaklaşan Filmler", count: vizyonTarihiYaklasanFilmler.length, value: 1 },
+        { category: "Vizyondaki Filmler", count: visionMovies.length, value: 1 },
+        { category: "Vizyondan Kalkan Filmler", count: noMovies.length, value: 1 },
+        { category: "Yaklaşan Filmler", count: commingMovies.length, value: 1 },
       ];
       let columnTemplate = series.columns.template;
 
