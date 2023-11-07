@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA,NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BannerComponent } from './banner/banner.component';
 import { CategoryComponent } from './category/category.component';
@@ -14,10 +14,9 @@ import { FormsModule } from '@angular/forms';
 import { UpcomingComponent } from './upcoming/upcoming.component';
 import { VisionDetailsComponent } from './vision-details/vision-details.component';
 import { UiLayoutComponentComponent } from './ui-layout-component/ui-layout-component.component';
+import { NavbarComponent } from './ui-templates/navbar/navbar.component';
+import { FooterComponent } from './ui-templates/footer/footer.component';
 
-import { register } from 'swiper/element/bundle';
-// register Swiper custom elements
-register();
 @NgModule({
   declarations: [
     BannerComponent,
@@ -32,6 +31,8 @@ register();
     UpcomingComponent,
     VisionDetailsComponent,
     UiLayoutComponentComponent,
+    NavbarComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -40,7 +41,6 @@ register();
   ],
   providers:[
     UiLayoutComponentComponent
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  ]
 })
 export class UiModule {}

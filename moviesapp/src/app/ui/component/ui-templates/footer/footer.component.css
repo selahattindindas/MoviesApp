@@ -1,0 +1,124 @@
+footer {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    background-color: transparent;
+    padding: 3.5rem 0;
+  }
+  
+  div.footer-container {
+    border: 0;
+    margin: 0 auto;
+    width: 1200px;
+  }
+  footer .footer-content {
+    width: 100%;
+    display: flex;
+  }
+  
+  footer .footer-content .footer-promotion {
+    width: 25%;
+    padding-right: 3.75rem;
+  }
+  footer .footer-content .footer-promotion img {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  footer .footer-content .footer-promotion .footer-text {
+    color: #ffffff;
+    line-height: 26px;
+    padding-left: 0.1rem;
+    padding-top: 1rem;
+  }
+  footer .footer-content .footer-promotion p {
+    font-size: 0.875rem;
+  }
+  .social-media {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 50%;
+    background-color: transparent;
+    overflow: hidden;
+    margin: 0 5px;
+  }
+  
+  .circle img {
+    max-width: 80%;
+    max-height: 80%;
+    display: block;
+    margin: auto;
+  }
+  
+  footer .footer-content .footer-LinkBlock {
+    padding-right: 8.75rem;
+  }
+  footer .footer-content span {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 0.9375rem;
+    display: block;
+    font-weight: bold;
+  }
+  footer .footer-content .footer-LinkBlock ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  footer .footer-content .footer-LinkBlock ul li {
+    margin-bottom: 5px;
+  }
+  footer .footer-content ul li a {
+    font-size: 0.875rem;
+    color: #ffffff;
+    line-height: 26px;
+  }
+  a {
+    text-decoration: none;
+  }
+  .footer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .info {
+    margin: 0 0 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .info-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .info i {
+    margin-right: 10px;
+    align-items: center;
+  }
+  
+  .info p {
+    color: #ffffff;
+    line-height: 26px;
+    padding-left: 0.1rem;
+    padding-top: 1rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+  .fa-lg, .fa-xl{
+    color:#fff;
+  }

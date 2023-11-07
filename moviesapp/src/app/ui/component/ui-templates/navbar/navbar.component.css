@@ -1,0 +1,85 @@
+header {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    background-color: transparent;
+  }
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 0 20px;
+  }
+  
+  .header-logo {
+    display: inline-block;
+  }
+  .header-logo img {
+    max-width: 200px;
+  }
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Yatayda içerikleri ortala */
+    align-items: center;
+  }
+  
+  .nav-links li {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+  }
+  
+  .nav-links li i {
+    margin-right: 7px;
+  }
+  
+  .nav-links li a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center; /* İçerikleri yan yana hizalar */
+    line-height: 40px;
+    position: relative;
+  }
+  
+  .nav-links li span {
+    font-size: 16px;
+    font-weight: 800;
+  }
+  
+  .nav-links li a:hover {
+    color: #ff416c;
+    transition: all 0.5s;
+  }
+  .user {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Yatayda içerikleri ortala */
+    align-items: center;
+  }
+  .user a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center; /* İçerikleri yan yana hizalar */
+    line-height: 40px;
+    position: relative;
+    cursor: pointer; /* Özel el işareti imleci */
+  }
+  .user img {
+    width: 16px;
+    height: 16px;
+  }
+  .user span {
+    font-size: 16px;
+    font-weight: 800;
+    margin-right: 10px;
+  }
+  .user a:hover {
+    color: #ff416c;
+    transition: all 0.5s;
+  }

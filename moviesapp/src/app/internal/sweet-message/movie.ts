@@ -3,7 +3,7 @@ import { MessageType, Position } from "src/app/enums/sweetalert-enum";
 import { MessageText, MessageTitle } from "../message-title";
 
 export const SweetMovie = {
-    createsMovie:{
+    createsMovie: {
         position: Position.TopRight,
         messageTitle: MessageTitle.Success,
         messageText: MessageText.MovieCreate,
@@ -12,7 +12,7 @@ export const SweetMovie = {
         toast: true,
         delay: 1,
     },
-    updateMovie:{
+    updateMovie: {
         position: Position.TopRight,
         messageTitle: MessageTitle.Success,
         messageText: MessageText.MovieUpdate,
@@ -21,7 +21,7 @@ export const SweetMovie = {
         toast: true,
         delay: 1,
     },
-    deleteMovie:{
+    deleteMovie: {
         position: Position.TopRight,
         messageTitle: MessageTitle.Success,
         messageText: MessageText.MovieDelete,
@@ -30,4 +30,5 @@ export const SweetMovie = {
         toast: true,
         delay: 1,
     }
+
 }

@@ -6,6 +6,7 @@ import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { Update_Movie } from 'src/app/contracts/movie/update-movie';
 import { JsonResponse } from 'src/app/contracts/response/response';
 import { HttpErrorResponse } from '@angular/common/http';
+import { environment } from 'src/app/environments/environment';
 
 
 @Injectable({
@@ -24,9 +25,25 @@ export class MoviesService {
 
     const response = await firstValueFrom(observable);
 
-    return response.statusCode === 200
-      ? response.result
-      : response.statusMessage;
+  if (response.statusCode === 200) {
+      const result = response.result as List_Movie[];
+      result.forEach(movie => {
+        if (movie.movieImages) {
+          movie.movieImages.forEach(photo => {
+            if (photo.photos) {
+              photo.photos.forEach(photoPath => {
+                if (photoPath.path) {
+                  photoPath.path = environment.photoUrl + photoPath.path;
+                }
+              });
+            }
+          });
+        }
+      });
+      return response.result;
+    } else {
+      return response.statusMessage;
+    }
   }
 
   async getMovieById(id: number) {

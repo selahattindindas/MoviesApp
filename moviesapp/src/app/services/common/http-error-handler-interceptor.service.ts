@@ -36,3 +36,6 @@ export class HttpErrorHandlerInterceptorService {
     ));
   }
 }
+
+//Intercept'in mantığını araştır kodu kısalt Medium yazısı yaz. 
+

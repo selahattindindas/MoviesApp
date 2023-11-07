@@ -3,7 +3,6 @@ import { MessageTitle, MessageText } from "../message-title";
 
 export const SweetCategory = {
     createCategory:{
-        position: Position.TopRight,
         messageTitle: MessageTitle.Success,
         messageText: MessageText.CategoryCreate,
         icon: MessageType.Success,

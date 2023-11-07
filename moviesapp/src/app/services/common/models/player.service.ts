@@ -13,7 +13,7 @@ export class PlayerService {
 
   constructor(private httpClientService: HttpClientService) { }
 
-  async getPlayersMovieById(movieId: number){
+  async getPlayersMovieById(movieId: number) {
     const observable: Observable<JsonResponse<List_Player>> = this.httpClientService.get(
       {
         controller: 'Players',
@@ -35,7 +35,7 @@ export class PlayerService {
         queryString: `Id=${player.movieId}&PlayerNames=${player.playerNames}`
       }, player);
 
-      await firstValueFrom(observable)
+    await firstValueFrom(observable)
       .then(response => {
         successCallBack();
         return response;
@@ -47,12 +47,12 @@ export class PlayerService {
 
   async deletePlayer(id: number, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const observable: Observable<JsonResponse<List_Player>> = this.httpClientService.delete(
-      { 
-        controller: 'Players', 
-        action: 'DeletePlayer' 
+      {
+        controller: 'Players',
+        action: 'DeletePlayer'
       }, id);
 
-      await firstValueFrom(observable)
+    await firstValueFrom(observable)
       .then(response => {
         successCallBack();
         return response.statusCode === 200 && response.result;

@@ -11,7 +11,7 @@ export class SweetalertService {
     const result: SweetAlertResult<any> = await Swal.fire({
       position: options.position as SweetAlertPosition,
       title: options.messageTitle,
-      text: options.messageText,
+      text: options.messageText, 
       icon: options.icon as SweetAlertIcon,
       showConfirmButton: options.showConfirmButton,
       showCancelButton: options.showCancelButton,

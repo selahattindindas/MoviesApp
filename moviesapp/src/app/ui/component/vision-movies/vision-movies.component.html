@@ -15,7 +15,11 @@
       <div class="movie-box" *ngFor="let movie of movie">
         <figure>
           <a class="movie-details"></a>
-          <img src="assets/img/oppen_kucuk.jpg" />
+            <div class="images" *ngFor="let photo of movie.movieImages">
+              <div class="images" *ngFor="let item of photo.photos">
+          <img [src]="item.path">
+            </div>
+          </div>
         </figure>
         <div class="movie-box-text">
           <div class="movie-box-contents">

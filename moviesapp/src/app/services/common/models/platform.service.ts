@@ -39,7 +39,7 @@ export class PlatformService {
       ? response.result
       : response.statusMessage;
   }
-
+//düzeltileck
   async createPlatform(name: string, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const observable = this.httpClientService.post({
       controller: 'Platform',

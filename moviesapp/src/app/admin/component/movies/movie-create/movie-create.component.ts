@@ -6,10 +6,9 @@ import { BaseComponent } from 'src/app/base/base.component';
 import { Create_Movie } from 'src/app/contracts/movie/create-movie';
 import { ListCategoryEnum, CategoryEnum } from 'src/app/enums/category-enum';
 import { ListPlatformEnum, PlatformEnum } from 'src/app/enums/platform-enum';
-import { SpinnerType } from 'src/app/enums/spinner-enum';
 import { SweetHttpError } from 'src/app/internal/sweet-message/http-error';
 import { SweetMovie } from 'src/app/internal/sweet-message/movie';
-import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
+import { SweetalertService } from 'src/app/services/admin/sweetalert.service'; // import ile çek
 import { MoviesService } from 'src/app/services/common/models/movies.service';
 import { dateFormatValidator } from 'src/app/shared/validators/date.validator';
 import { categoryValidator } from 'src/app/shared/validators/required.validator';

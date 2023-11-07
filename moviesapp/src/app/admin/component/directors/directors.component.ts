@@ -78,7 +78,7 @@ export class DirectorsComponent extends BaseComponent implements OnInit {
       this.sweetAlertService.showAlert(SweetDirectors.deletedDirectors);
     },
     error => {
-      this.sweetAlertService.showAlert(SweetHttpError.serverError);
+      this.sweetAlertService.showAlert(SweetHttpError.serverError);  //Componentlerdeki error sweeti düzelt.
    })
       .then(() => {
         this.getDirector();
