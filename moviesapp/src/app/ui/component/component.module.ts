@@ -16,7 +16,8 @@ import { VisionDetailsComponent } from './vision-details/vision-details.componen
 import { UiLayoutComponentComponent } from './ui-layout-component/ui-layout-component.component';
 import { NavbarComponent } from './ui-templates/navbar/navbar.component';
 import { FooterComponent } from './ui-templates/footer/footer.component';
-
+import { JoinArrayPipe } from 'src/app/shared/pipes/join-pipe';
+import { imageArrayPipe } from 'src/app/shared/pipes/image-pipe';
 @NgModule({
   declarations: [
     BannerComponent,
@@ -33,6 +34,8 @@ import { FooterComponent } from './ui-templates/footer/footer.component';
     UiLayoutComponentComponent,
     NavbarComponent,
     FooterComponent,
+    JoinArrayPipe,
+    imageArrayPipe
   ],
   imports: [
     CommonModule,

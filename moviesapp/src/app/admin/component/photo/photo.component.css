@@ -8,12 +8,16 @@
 .upload-header {
     color: #424040;
     padding: 2rem;
-    text-align: center;
+    text-align: start;
 }
 
 .upload-header h1 {
-    font-size: 40px;
     font-weight: 800;
+    color: #2e4765;
+    font-size: 35px;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    width: 100%;
 }
 
 .upload-container {

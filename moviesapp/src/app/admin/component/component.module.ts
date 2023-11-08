@@ -12,7 +12,7 @@ import { TextFilterPipe } from 'src/app/shared/pipes/filter-pipe';
 import { AdminPlatform } from './platform/platform.component';
 import { AdminCategory } from './category/category.component';
 import { ClassListComponent } from './class-list/class-list.component';
-import { LimitPipe } from 'src/app/shared/limit-pipe';
+import { LimitPipe } from 'src/app/shared/pipes/limit-pipe';
 import { PhotoComponent } from './photo/photo.component';
 import { PlayersComponent } from './players/players.component';
 import { DirectorsComponent } from './directors/directors.component';

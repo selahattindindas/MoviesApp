@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
 import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { List_Photo } from 'src/app/contracts/photo/list-photo';
-import { SpinnerType } from 'src/app/enums/spinner-enum';
 import { SweetHttpError } from 'src/app/internal/sweet-message/http-error';
 import { SweetPhoto } from 'src/app/internal/sweet-message/photo';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
@@ -20,9 +20,9 @@ export class PhotoComponent extends BaseComponent implements OnInit {
   selectedFiles: File[] = [];
   photo: Create_Photo[];
   getPhoto: List_Photo[] = [];
-  @Input() movieId: number;
+  movieId: number;
   constructor(private photoService: PhotoService,
-    private sweetAlertService: SweetalertService, spinner: NgxSpinnerService) {
+    private sweetAlertService: SweetalertService, spinner: NgxSpinnerService, private router: Router, private route: ActivatedRoute ) {
     super(spinner);
   }
 
@@ -83,9 +83,11 @@ export class PhotoComponent extends BaseComponent implements OnInit {
   }
 
   getPhotoAll() {
-    this.photoService.getPhotosMovieById(this.movieId).then(moviePhotos => {
+    const params = this.route.snapshot.params;
+    this.photoService.getPhotosMovieById(params['id']).then(moviePhotos => {
       if (moviePhotos) {
         this.getPhoto.push(moviePhotos as List_Photo);
+        this.movieId = params['id'];
       }
     });
   }

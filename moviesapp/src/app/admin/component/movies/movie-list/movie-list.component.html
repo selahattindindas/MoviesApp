@@ -3,9 +3,6 @@
     <ngx-spinner size="large">Sayfa Yükleniyor</ngx-spinner>
   </div>
   <div class="movie-list">
-    <div class="photo-dialog" *ngFor="let movie of movie">
-      <movie-photo [movieId]="movie.id"></movie-photo>
-    </div>
     <h2>Film Listesi</h2>
     <div class="card-body">
       <div class="card-container card-flex">
@@ -53,8 +50,8 @@
                   [routerLink]="['Create-Director', movie.id]"></i>
               </td>
               <td>
-                <i type="button" class="fa-solid fa-image fa-lg" title="Fotoğraf Ekle" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"></i>
+                <i class="fa-solid fa-image fa-lg" title="Fotoğraf Ekle" 
+                [routerLink]="['Create-Photos', movie.id]"></i>
               </td>
               <td>
                 <i class="fa-solid fa-pen-to-square fa-lg update" title="Düzenle" [routerLink]="['Edit', movie.id]"></i>
@@ -62,6 +59,7 @@
               </td>
             </tr>
           <tbody>
+            
         </table>
         <ng-template #noResults>
           <div class="error">

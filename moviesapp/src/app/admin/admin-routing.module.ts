@@ -29,6 +29,7 @@ const route: Route[] = [
           { path: '', component: MovieListComponent },
           { path: 'Create-Director/:id', component: DirectorsComponent },
           { path: 'Create-Players/:id', component: PlayersComponent },
+          { path: 'Create-Photos/:id', component: PhotoComponent },
         ],
 
       },

@@ -72,7 +72,8 @@ figure {
 
 .movie-box figure img {
   border-radius: 15px;
-  
+  width: 285px;
+  height: 380px;
 }
 
 .movie-box-text {

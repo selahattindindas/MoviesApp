@@ -14,23 +14,21 @@
     <div class="movie-list-card">
       <div class="movie-box" *ngFor="let movie of movie">
         <figure>
-          <a class="movie-details"></a>
-            <div class="images" *ngFor="let photo of movie.movieImages">
-              <div class="images" *ngFor="let item of photo.photos">
-          <img [src]="item.path">
-            </div>
-          </div>
+          <a class="movie-details"></a>  
+              <img [src]="movie.movieImages | imageArray:0" alt="Photo">
         </figure>
         <div class="movie-box-text">
           <div class="movie-box-contents">
             <h2>{{ movie.name }}</h2>
-            <h3>Yönetmenler: {{movie.directors}}</h3>
-            <p>{{movie.players}}</p>
+            <h3>Yönetmenler: 
+                {{ movie.directors | joinArray:', ' : 'name'}}   
+            </h3>
+            <p>{{ movie.players | joinArray:', ' : 'name' }}   </p>
           </div>
           <div class="movie-box-time">
             <ul>
               <li>
-                <span>2saat aga</span>
+                <span>{{movie.movieTime}} dk.</span>
               </li>
               <li>
                 <span >{{ movie.categoryName}}</span>
