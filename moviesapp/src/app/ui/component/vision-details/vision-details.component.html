@@ -1,45 +1,42 @@
 <section>
-  <div class="movie-details">
+  <div class="movie-details" *ngIf="movies">
     <div class="banner">
-      <img src="assets/img/meg2.jpg" />
+      <img [src]="movies.movieImages | imageArray:0 " />
     </div>
-    <div class="movie-details">
+    <div class="movie-details" >
       <div class="movie-header">
-        <h1>Meg 2: Çukur</h1>
+        <h1>{{movies.name}}</h1>
       </div>
       <div class="movie-info">
         <p>
           Yönetmen:
-          <span>Ben Wheatley</span>
+          <span>{{ movies.directors | joinArray:', ' : 'name'}}</span>
         </p>
         <p>
           Oyuncular:
-          <span>Letitia Wright, Angela Bassett, Lupita Nyong'o</span>
+          <span>{{ movies.players | joinArray:', ' : 'name'}}</span>
         </p>
         <p>
-          Tür:
-          <span>Aksiyon</span>
+          Kategori:
+          <span>{{movies.categoryName}}</span>
+        </p>
+        <p>
+          Platform:
+          <span>{{movies.platformName}}</span>
         </p>
         <p>
           Vizyon Tarihi:
-          <span>19.09.2023</span>
+          <span>{{movies.releaseDate | date:'dd-MM-yyyy'}}</span>
         </p>
         <p>
           Süre:
-          <span>2 sa 41 dk</span>
+          <span>{{movies.movieTime}} dk.</span>
         </p>
       </div>
       <div class="movie-area">
         <p>Film Özeti:</p>
-        <span
-          >Meg 2: Çukur Filmi, devasa Meg'lere ve amansız çevre yağmacılarına
-          karşı mücadele eden bir araştırma ekibinin hikâyesini konu alıyor.
-          Kötü niyetli bir maden operasyonu sebebi ile görevleri tehdit edilen
-          ve zora giren ekibin yolculukları kaosa sürüklenir. Hayatta kalmak
-          için yüksek riskli bir savaşın içine giren araştırma ekibi, zamana
-          karşı nabız gibi atan bir yarışta acımasız yırtıcıları zekâlarıyla alt
-          etmeye ve onları geride bırakmaya çalışır. Meg 2: Çukur, 2018 yapımı
-          Meg: Derinlerdeki Dehşet'in devam filmidir.
+        <span>
+          {{movies.description}}
         </span>
       </div>
     </div>

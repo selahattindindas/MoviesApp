@@ -1,8 +1,9 @@
 <section class="movie">
   <div class="movies-search">
     <h2 class="tag-name">Vizyondaki Filmler</h2>
+    <category-filter (categorySelected)="onCategorySelected($event)"></category-filter>
     <div>
-      <input type="text" id="search" placeholder="Vizyondaki Filmleri Arayın" />
+      <input type="text"  placeholder="Vizyondaki Filmleri Arayın" [(ngModel)]="filterText"/>
       <button class="button-with-image">
         <i
           class="fa-solid fa-magnifying-glass fa-lg"
@@ -12,7 +13,7 @@
     </div>
   </div>
     <div class="movie-list-card">
-      <div class="movie-box" *ngFor="let movie of movie">
+      <div class="movie-box" *ngFor="let movie of movie | filter: filterText: filterName">
         <figure>
           <a class="movie-details"></a>  
               <img [src]="movie.movieImages | imageArray:0" alt="Photo">
@@ -36,7 +37,8 @@
             </ul>
           </div>
           <div class="movie-box-link">
-            <button>Detay Sayfası</button>
+            <button [routerLink]="'/Filmler/Detay/' + movie.id">Detay Sayfası</button>
+
           </div>
         </div>
       </div>

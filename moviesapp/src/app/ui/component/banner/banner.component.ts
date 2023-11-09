@@ -7,28 +7,29 @@ import { MoviesService } from 'src/app/services/common/models/movies.service';
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.css']
 })
-export class BannerComponent implements OnInit {
-  currentSlide: number = 1;
-  dotHelper: Array<Number> = [];
-  slider: KeenSliderInstance = null;
-  movies: List_Movie[];
-  @ViewChild('sliderContainer') sliderContainer: ElementRef;
-  constructor(private movieService:MoviesService){}
-  ngOnInit() {
-    this.movieService.getAllMovies().then((movies: List_Movie[]) => {
-      this.movies = movies; // Assign the fetched data to the movies array
+export class BannerComponent {
+  @ViewChild("sliderRef") sliderRef: ElementRef<HTMLElement>
 
-      // Create the KeenSlider instance with dynamic data
-      this.slider = new KeenSlider(this.sliderContainer.nativeElement, {
+  currentSlide: number = 1
+  dotHelper: Array<Number> = []
+  slider: KeenSliderInstance = null
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.slider = new KeenSlider(this.sliderRef.nativeElement, {
         initial: this.currentSlide,
-      
-      });
-
-    
-    });
+        loop:true,
+        slideChanged: (s) => {
+          this.currentSlide = s.track.details.rel
+        },
+      })
+      this.dotHelper = [
+        ...Array(this.slider.track.details.slides.length).keys(),
+      ]
+    })
   }
 
   ngOnDestroy() {
-    if (this.slider) this.slider.destroy();
+    if (this.slider) this.slider.destroy()
   }
 }

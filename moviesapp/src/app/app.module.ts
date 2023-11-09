@@ -11,6 +11,7 @@ import { AdminModule } from './admin/component/component.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AdminRouting } from './admin/admin-routing.module';
 import { environment } from './environments/environment';
+import { TextFilterPipe } from './shared/pipes/filter-pipe';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { environment } from './environments/environment';
   providers: [
     { provide: 'baseUrl', useValue: environment.apiUrl, multi: true },
   ],
+ 
   bootstrap: [AppComponent],
 })
 export class AppModule { }

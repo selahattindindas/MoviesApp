@@ -5,7 +5,7 @@ export enum CategoryEnum {
   BilimKurgu = 3,
   Romantik = 113,
 }
-//Düzenlendi
+
 export const CategoryDescription: { [key in CategoryEnum]: string } = 
 {
   [CategoryEnum.Seciniz]: 'Lütfen bir kategori seçiniz',
@@ -15,7 +15,7 @@ export const CategoryDescription: { [key in CategoryEnum]: string } =
   [CategoryEnum.Macera]: 'Macera',
 };
 export class ListCategoryEnum{
-    // boolean olarak al select kısmını // YAPILDI
+  
   async getCategoryEnumValues(select?: boolean): Promise<{ value: CategoryEnum; description: string; }[]> {
 
     const enumValues = Object.keys(CategoryEnum)

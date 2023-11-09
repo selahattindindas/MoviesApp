@@ -1,9 +1,6 @@
 <div>
   <label for="categorySelect">Kategori Filtresi:</label>
-  <select [(ngModel)]="selectedCategory" (change)="onCategorySelected()">
-    <option name="selected">
-      <p>Selahattin Dindaş</p>
-
-    </option>
+  <select class="form-select" [(ngModel)]="selectedCategory" (change)="onCategorySelected()">
+    <option *ngFor="let category of categoryEnum" [value]="category.description">{{category.description}}</option>
   </select>
 </div>

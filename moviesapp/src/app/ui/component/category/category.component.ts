@@ -1,33 +1,34 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { CategoryEnum } from 'src/app/enums/category-enum';
-import { CategoryService } from 'src/app/services/common/models/category.service';
-import { PlatformService } from 'src/app/services/common/models/platform.service';
+import { CategoryEnum, ListCategoryEnum } from 'src/app/enums/category-enum';
 
 @Component({
-  selector: 'app-category',
+  selector: 'category-filter',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit {
-  categoryEnum: CategoryEnum[] = [];
-  categoryDescriptions: { value: CategoryEnum; description: string; }[];
-  selectedCategory: CategoryEnum = CategoryEnum.Seciniz;
-
+  categoryEnum: { value: CategoryEnum; description: string; }[];
+  selectedCategory:CategoryEnum;
+  categoryList: ListCategoryEnum;
   @Output() categorySelected = new EventEmitter<CategoryEnum>();
 
-  constructor(
-    private categoryService: CategoryService,
-    private platformService: PlatformService
-  ) {}
+  constructor() {
+    this.categoryList = new ListCategoryEnum();
+  }
   ngOnInit(): void {
+    this.getCategory();
+  }
 
+  async getCategory() {
+    this.categoryEnum = await this.categoryList.getCategoryEnumValues();
   }
 
   onCategorySelected(): void {
     this.emitCategorySelection();
   }
 
-  private emitCategorySelection(): void {
+  private emitCategorySelection() {
+    console.log("selectedCategory:", this.selectedCategory);
     this.categorySelected.emit(this.selectedCategory);
   }
 

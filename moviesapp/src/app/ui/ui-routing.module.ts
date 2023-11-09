@@ -23,7 +23,7 @@ const routes: Route[] = [
       { path: 'Platformdakiler', component: PlatformMoviesComponent },
       { path: 'Yaklasanlar', component: UpcomingComponent },
       { path: 'Haberler', component: NewsListComponent },
-      { path: 'Detay', component: VisionDetailsComponent },
+      { path: 'Detay/:id', component: VisionDetailsComponent },
       { path: 'Giriş', component: LoginComponent },
     ],
   }
