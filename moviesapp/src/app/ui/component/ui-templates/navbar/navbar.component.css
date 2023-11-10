@@ -15,6 +15,7 @@ header {
   }
   .header-logo img {
     max-width: 200px;
+    cursor: pointer;
   }
   .nav-links {
     list-style: none;

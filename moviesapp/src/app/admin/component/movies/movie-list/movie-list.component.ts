@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
+import { CategoryEnum } from 'src/app/enums/category-enum';
+import { PlatformEnum } from 'src/app/enums/platform-enum';
 import { SpinnerType } from 'src/app/enums/spinner-enum';
 import { SweetCommon } from 'src/app/internal/sweet-message/common';
 import { SweetHttpError } from 'src/app/internal/sweet-message/http-error';

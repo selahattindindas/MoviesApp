@@ -8,7 +8,7 @@ import { CategoryEnum, ListCategoryEnum } from 'src/app/enums/category-enum';
 })
 export class CategoryComponent implements OnInit {
   categoryEnum: { value: CategoryEnum; description: string; }[];
-  selectedCategory:CategoryEnum;
+  selectedCategory:CategoryEnum = CategoryEnum.Seciniz;
   categoryList: ListCategoryEnum;
   @Output() categorySelected = new EventEmitter<CategoryEnum>();
 
@@ -28,7 +28,6 @@ export class CategoryComponent implements OnInit {
   }
 
   private emitCategorySelection() {
-    console.log("selectedCategory:", this.selectedCategory);
     this.categorySelected.emit(this.selectedCategory);
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
 import { CategoryEnum } from 'src/app/enums/category-enum';
-import { ListPlatformEnum, PlatformEnum } from 'src/app/enums/platform-enum';
+import { PlatformEnum } from 'src/app/enums/platform-enum';
 
 @Component({
   selector: 'app-vision-movies',
@@ -11,32 +11,37 @@ import { ListPlatformEnum, PlatformEnum } from 'src/app/enums/platform-enum';
 })
 
 export class VisionMoviesComponent implements OnInit {
-  originalMovieData: List_Movie[];
   movie: List_Movie[];
   filterText: string;
   filterName: keyof List_Movie = 'name';
-  selectedCategory: CategoryEnum;
-  constructor(private movieService: MoviesService) {
-  }
+  platformEnum: PlatformEnum;
+  constructor(private movieService: MoviesService) { }
 
   ngOnInit(): void {
-    this.getMovie();
+    this.getMovies();
   }
 
-  async getMovie() {
-    const movieData = await this.movieService.getAllMovies();
-    this.movie = movieData as List_Movie[];
+  async getMovies() {
+    this.movie = await this.movieService.getAllMovies(PlatformEnum.Sinema) as List_Movie[];
   }
 
-  onCategorySelected(category: CategoryEnum) {
-    this.selectedCategory = category;
+  async onCategorySelected(category: CategoryEnum) {
+    const categoryValue = category as unknown;
 
-    if (this.selectedCategory === CategoryEnum.Seciniz) {
+    if (categoryValue === CategoryEnum.Seciniz.toString())
+      this.getMovies();
 
-      this.movie = [...this.originalMovieData];
-    } else {
+    else {
 
-      this.movie = this.movie.filter(movie => movie.categoryName === this.selectedCategory.toString());
+      const categoryName = CategoryEnum[category];
+
+      const movieData = await this.movieService.getAllMovies(PlatformEnum.Sinema);
+      if (Array.isArray(movieData)) {
+        this.movie = movieData.filter(movie => {
+          return movie.categoryName === categoryName;
+        });
+      }
     }
   }
+
 }

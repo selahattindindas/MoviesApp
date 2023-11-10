@@ -5,7 +5,8 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { Update_Movie } from 'src/app/contracts/movie/update-movie';
 import { JsonResponse } from 'src/app/contracts/response/response';
-import { environment } from 'src/app/environments/environment';
+import { PlatformEnum } from 'src/app/enums/platform-enum';
+import { CategoryEnum } from 'src/app/enums/category-enum';
 
 
 @Injectable({
@@ -15,23 +16,31 @@ import { environment } from 'src/app/environments/environment';
 export class MoviesService {
 
   constructor(private httpClientService: HttpClientService) { }
-
-  async getAllMovies() {
+  async getAllMovies(platform?: PlatformEnum) {
     const observable: Observable<JsonResponse<List_Movie[]>> = this.httpClientService.get({
       controller: 'Movie',
       action: 'GetAll'
     });
-
+  
     const response = await firstValueFrom(observable);
-
-  if (response.statusCode === 200) {
-     
-      return response.result;
+  
+    if (response.statusCode === 200) {
+      if (platform === undefined) {
+        return response.result; 
+      } else {
+        const filteredMovies = response.result.filter(movie => {
+          return movie.platformName === PlatformEnum[platform];
+        });
+        return filteredMovies;
+      }
     } else {
       return response.statusMessage;
     }
   }
-
+  
+  
+  
+  
   async getMovieById(id: number) {
     const observable: Observable<JsonResponse<List_Movie>> = this.httpClientService.get({
       controller: 'Movie',

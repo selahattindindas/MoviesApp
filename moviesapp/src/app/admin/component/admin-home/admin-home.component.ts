@@ -6,6 +6,7 @@ import { MoviesService } from 'src/app/services/common/models/movies.service';
 import * as am5percent from "@amcharts/amcharts5/percent";
 import * as am5xy from '@amcharts/amcharts5/xy';
 
+
 @Component({
   selector: 'app-adminhome',
   templateUrl: './admin-home.component.html',
