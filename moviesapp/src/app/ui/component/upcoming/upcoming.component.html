@@ -4,63 +4,18 @@
     </div>
     <div class="soon-conteiner">
         <ul class="soon-box">
-            <li>
+            <li *ngFor="let movie of movies | dateMovieFilter:'upcomingMovies'">
                 <div class="soon-img">
-                    <img src="assets/img/barbie_kucuk.jpg">
+                    <img [src]="movie.movieImages | imageArray:0">
                     <div class="overlay">
-                        <button class="detail-button">Film Detayı</button>
+                        <button class="detail-button" [routerLink]="'/Filmler/Detay/' + movie.id">Film Detayı</button>
                     </div>
                 </div>
                 <div class="soon-details">
-                    <span class="soon-name">Barbie</span>
+                    <span class="soon-name">{{movie.name}}</span>
                     <p class="date">
                         <i class="fa-regular fa-calendar-days"></i>
-                        <span class="soon-date">28.03.2023</span>
-                    </p>
-                </div>
-            </li>
-            <li>
-                <div class="soon-img">
-                    <img src="assets/img/barbie_kucuk.jpg">
-                    <div class="overlay">
-                        <button class="detail-button">Film Detayı</button>
-                    </div>
-                </div>
-                <div class="soon-details">
-                    <span class="soon-name">Barbie</span>
-                    <p class="date">
-                        <i class="fa-regular fa-calendar-days"></i>
-                        <span class="soon-date">28.03.2023</span>
-                    </p>
-                </div>
-            </li>
-            <li>
-                <div class="soon-img">
-                    <img src="assets/img/barbie_kucuk.jpg">
-                    <div class="overlay">
-                        <button class="detail-button">Film Detayı</button>
-                    </div>
-                </div>
-                <div class="soon-details">
-                    <span class="soon-name">Barbie</span>
-                    <p class="date">
-                        <i class="fa-regular fa-calendar-days"></i>
-                        <span class="soon-date">28.03.2023</span>
-                    </p>
-                </div>
-            </li>
-            <li>
-                <div class="soon-img">
-                    <img src="assets/img/barbie_kucuk.jpg">
-                    <div class="overlay">
-                        <button class="detail-button">Film Detayı</button>
-                    </div>
-                </div>
-                <div class="soon-details">
-                    <span class="soon-name">Barbie</span>
-                    <p class="date">
-                        <i class="fa-regular fa-calendar-days"></i>
-                        <span class="soon-date">28.03.2023</span>
+                        <span class="soon-date">{{movie.releaseDate}}</span>
                     </p>
                 </div>
             </li>

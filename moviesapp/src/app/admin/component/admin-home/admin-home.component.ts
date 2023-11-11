@@ -180,14 +180,12 @@ export class AdminHomeComponent implements AfterViewInit {
 
     this.movieservice.getAllMovies().then((movies: List_Movie[]) => {
       const currentDate = new Date();
-
-      const oneWeekLater = new Date();
-      oneWeekLater.setDate(currentDate.getDate() + 7);
+      currentDate.setDate(currentDate.getDate() + 42);
 
       const visionMovies = movies.filter((movie) => {
         const [day, month, year] = movie.releaseDate.split('.').map(Number);
         const movieDate = new Date(year, month - 1, day);
-        return movieDate >= currentDate && movieDate <= oneWeekLater;
+        return movieDate >= currentDate && movieDate <= currentDate;
       });
 
       const noMovies = movies.filter((movie) => {
@@ -199,13 +197,15 @@ export class AdminHomeComponent implements AfterViewInit {
       const commingMovies = movies.filter((movie) => {
         const [day, month, year] = movie.releaseDate.split('.').map(Number);
         const movieDate = new Date(year, month - 1, day);
-        return movieDate > currentDate && movieDate >= oneWeekLater;
+        return movieDate > currentDate && movieDate > currentDate;
       });
+
       const chartData = [
         { category: "Vizyondaki Filmler", count: visionMovies.length, value: 1 },
         { category: "Vizyondan Kalkan Filmler", count: noMovies.length, value: 1 },
         { category: "Yaklaşan Filmler", count: commingMovies.length, value: 1 },
       ];
+
       let columnTemplate = series.columns.template;
 
       columnTemplate.setAll({
@@ -216,6 +216,7 @@ export class AdminHomeComponent implements AfterViewInit {
         cornerRadiusTR: 10,
         strokeOpacity: 0
       });
+      
       columnTemplate.adapters.add("fill", (fill, target) => {
         return chart.get("colors").getIndex(series.columns.indexOf(target));
       });

@@ -55,3 +55,6 @@ img {
 .dot.active {
   background: #5a0825;
 }
+.arrow--disabled{
+  display: none;
+}

@@ -9,27 +9,28 @@ import { MoviesService } from 'src/app/services/common/models/movies.service';
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.css']
 })
-export class BannerComponent implements  OnInit, OnDestroy,AfterViewInit  {
+export class BannerComponent implements  OnInit, OnDestroy  {
   @ViewChild("sliderRef") sliderRef: ElementRef<HTMLElement>;
 
   currentSlide: number = 0;
-  slider: KeenSliderInstance;
+  slider: KeenSliderInstance ;
   movies: List_Movie[];
 
   constructor(private movieService: MoviesService) {}
 
   ngOnInit() {
     this.getMovies();
+    this.getBanner();
   }
 
   async getMovies() {
     this.movies = await this.movieService.getAllMovies(PlatformEnum.Sinema) as List_Movie[];
   }
 
-  ngAfterViewInit() {
+  getBanner(){
     setTimeout(() => {
       this.slider = new KeenSlider(this.sliderRef.nativeElement, {
-        initial: this.currentSlide,
+        initial: 0,
         loop: true,
       }, [
         (slider) => {
@@ -58,7 +59,6 @@ export class BannerComponent implements  OnInit, OnDestroy,AfterViewInit  {
       ]);
     }, 200);
   }
-  
 
   ngOnDestroy() {
     if (this.slider) this.slider.destroy();

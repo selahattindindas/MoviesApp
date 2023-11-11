@@ -1,0 +1,53 @@
+<div class="platform-company">
+    <div class="platform-header">
+        <img src="assets/img/netflix.jpg" alt="Netflix Logo" />
+        <h2>Netflix Filmleri</h2>
+    </div>
+    <ul class="new-movie">
+        <div class="keen-slider" #sliderRef>
+        <li class="keen-slider__slide" *ngFor="let movie of movies | dateMovieFilter:'visionMovies'">
+            <div class="movie-elements" >
+                <img class="movies-img" [src]="movie.movieImages | imageArray:0" />
+                <div class="movie-details">
+                    <span class="movie-name">{{movie.name}}</span>
+                    <span class="movie-content">
+                        <strong>Tür:</strong>
+                        {{movie.categoryName}}
+                    </span>
+                    <span class="movie-content">
+                        <strong>Yıl:</strong>
+                        {{movie.releaseDate}}
+                    </span>
+                    <span class="movie-content">
+                        <strong>Süre:</strong>
+                        {{movie.movieTime}} dk.
+                    </span>
+                    <div class="movie-link">
+                        <button [routerLink]="'/Filmler/Detay/' + movie.id">Detay</button>
+                    </div>
+                </div>
+            </div>
+       
+        </li>
+    </div>
+    <svg
+    [ngClass]="'arrow arrow--left ' + (this.movies.length < 4 ? 'arrow--disabled' : '')"
+    (click)="slider.prev()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"
+    />
+  </svg>
+  <svg
+    *ngIf="slider"
+    [ngClass]="'arrow arrow--right ' + (this.movies.length < 4 ? 'arrow--disabled' : '')"
+    (click)="slider.next()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+  </svg>
+    </ul>
+</div>

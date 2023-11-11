@@ -5,7 +5,7 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { Update_Movie } from 'src/app/contracts/movie/update-movie';
 import { JsonResponse } from 'src/app/contracts/response/response';
-import { PlatformEnum } from 'src/app/enums/platform-enum';
+import { PlatformDescription, PlatformEnum } from 'src/app/enums/platform-enum';
 import { CategoryEnum } from 'src/app/enums/category-enum';
 
 
@@ -29,7 +29,7 @@ export class MoviesService {
         return response.result; 
       } else {
         const filteredMovies = response.result.filter(movie => {
-          return movie.platformName === PlatformEnum[platform];
+          return movie.platformName === PlatformDescription[platform];
         });
         return filteredMovies;
       }
@@ -37,9 +37,6 @@ export class MoviesService {
       return response.statusMessage;
     }
   }
-  
-  
-  
   
   async getMovieById(id: number) {
     const observable: Observable<JsonResponse<List_Movie>> = this.httpClientService.get({

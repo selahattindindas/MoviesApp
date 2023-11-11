@@ -13,7 +13,7 @@
     </div>
   </div>
     <div class="movie-list-card">
-      <div class="movie-box" *ngFor="let movie of movie | filter: filterText: filterName">
+      <div class="movie-box" *ngFor="let movie of movie | filter: filterText: filterName | dateMovieFilter:'visionMovies'">
         <figure>
           <a class="movie-details"></a>  
               <img [src]="movie.movieImages | imageArray:0" alt="Photo">

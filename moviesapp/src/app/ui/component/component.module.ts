@@ -17,6 +17,8 @@ import { UiLayoutComponentComponent } from './ui-layout-component/ui-layout-comp
 import { NavbarComponent } from './ui-templates/navbar/navbar.component';
 import { FooterComponent } from './ui-templates/footer/footer.component';
 import { SharedModule } from 'src/app/shared/pipes/pipe-module';
+import { NetflixComponent } from './platform-movies/netflix/netflix.component';
+import { DisneyComponent } from './platform-movies/disney/disney.component';
 
 
 
@@ -36,6 +38,8 @@ import { SharedModule } from 'src/app/shared/pipes/pipe-module';
     UiLayoutComponentComponent,
     NavbarComponent,
     FooterComponent,
+    NetflixComponent,
+    DisneyComponent,
   ],
   imports: [
     CommonModule,
