@@ -16,7 +16,7 @@
                     </span>
                     <span class="movie-content">
                         <strong>Yıl:</strong>
-                        {{movie.releaseDate}}
+                        {{movie.releaseDate | customDate | date:'yyyy'}}
                     </span>
                     <span class="movie-content">
                         <strong>Süre:</strong>

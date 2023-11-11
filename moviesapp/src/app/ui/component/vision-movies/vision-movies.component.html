@@ -1,7 +1,6 @@
 <section class="movie">
   <div class="movies-search">
-    <h2 class="tag-name">Vizyondaki Filmler</h2>
-    <category-filter (categorySelected)="onCategorySelected($event)"></category-filter>
+    <h2>Vizyondaki Filmler</h2>
     <div>
       <input type="text"  placeholder="Vizyondaki Filmleri Arayın" [(ngModel)]="filterText"/>
       <button class="button-with-image">
@@ -11,6 +10,9 @@
         ></i>
       </button>
     </div>
+  </div>
+  <div class="category-filter">
+    <category-filter (categorySelected)="onCategorySelected($event)"></category-filter>
   </div>
     <div class="movie-list-card">
       <div class="movie-box" *ngFor="let movie of movie | filter: filterText: filterName | dateMovieFilter:'visionMovies'">

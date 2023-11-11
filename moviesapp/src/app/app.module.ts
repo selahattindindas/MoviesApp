@@ -11,7 +11,8 @@ import { AdminModule } from './admin/component/component.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AdminRouting } from './admin/admin-routing.module';
 import { environment } from './environments/environment';
-import { TextFilterPipe } from './shared/pipes/filter-pipe';
+import { UiTestRoutingModule } from './ui-test/ui-test.routing';
+import { UiTesterModule } from './ui-test/ui-test.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,8 @@ import { TextFilterPipe } from './shared/pipes/filter-pipe';
     RouterModule, 
     FormsModule,
     SweetAlert2Module,
+    UiTesterModule,
+    UiTestRoutingModule
   ],
   providers: [
     { provide: 'baseUrl', useValue: environment.apiUrl, multi: true },

@@ -6,12 +6,11 @@ body {
   font-family: "Quicksand", sans-serif;
   font-weight: 500;
   line-height: 1.5;
-  min-height: 100vh;
-  background: -webkit-linear-gradient(right, #5a0825, #1d1b1b, #5a0825, #1d1b1b);
 }
 
 main{
   display: block;
+  min-height: 100%;
   background: -webkit-linear-gradient(right, #5a0825, #1d1b1b, #5a0825, #1d1b1b);
 }
 .content{

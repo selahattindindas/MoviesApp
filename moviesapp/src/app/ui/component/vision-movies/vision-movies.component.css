@@ -7,9 +7,17 @@ section{
   color: #fff;
   display: flex;
   justify-content: space-between;
-  padding: 40px 0;
+  padding: 40px 0 0 0;
   align-items: center;
 }
+
+h2 {
+  font-size: 35px;
+  font-weight: bold;
+  width: 100%;
+  position: relative;
+}
+
 .movies-search div {
   position: relative;
   display: flex;
@@ -46,7 +54,11 @@ section{
   border: none;
   cursor: pointer;
 }
-
+.category-filter{
+  display: flex;
+  justify-content: flex-end;
+  margin: 2rem 0
+}
 .movie-list-card {
   display: flex;
   flex-direction: row;

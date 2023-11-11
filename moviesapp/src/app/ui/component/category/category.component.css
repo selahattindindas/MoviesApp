@@ -1,0 +1,37 @@
+
+  .select-category {
+    min-width: 215px;
+    position: relative;
+  }
+  
+  .select-category select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    font-size: 16px;
+    padding: 0.885em 1em;
+    background-color: #5a0825;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+
+  .select-category::before,
+  .select-category::after {
+    --size: 0.4rem;
+    content: "";
+    position: absolute;
+    right: 1rem;
+    pointer-events: none;
+  }
+  
+  .select-category::after {
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid #fff;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  

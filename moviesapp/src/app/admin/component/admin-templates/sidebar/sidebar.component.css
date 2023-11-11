@@ -118,23 +118,7 @@
     .menu-toggle {
       display: block;
     }
-    .left-menu .close {
-      display: none;
-    }
-    .sidebar-close img {
-        width: 20px;
-        height: 20px;
-        display: inline-block;
-        text-align: center;
-        line-height: 40px;
-        position: absolute;
-        right: 30px;
-        font-size: 25px;
-        top: 29px;
-        cursor: pointer;
-        color: #222;
-        display: none;
-      }
+
     .left-menu {
       left: 0;
       width: 80%;

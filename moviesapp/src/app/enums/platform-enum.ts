@@ -6,7 +6,7 @@ export enum PlatformEnum {
 }
 //Düzenlendi
 export const PlatformDescription: { [key in number]: string } = {
-    [PlatformEnum.Seciniz]: "Lütfen bir platform seçiniz",
+    [PlatformEnum.Seciniz]: "Tüm Platformlar",
     [PlatformEnum.Sinema]: "Sinema",
     [PlatformEnum.Netflix]: "Netflix",
     [PlatformEnum.Disney]: "Disney+", 

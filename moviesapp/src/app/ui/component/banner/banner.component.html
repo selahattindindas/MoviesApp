@@ -23,12 +23,9 @@
   </svg>
   <svg
     *ngIf="slider"
-    [ngClass]="
-      'arrow arrow--right ' +
-      (slider.track.details.slides.length - 1 === currentSlide
+    [ngClass]="'arrow arrow--right ' +(slider.track.details.slides.length - 1 === currentSlide
         ? 'arrow--disabled'
-        : '')
-    "
+        : '')"
     (click)="slider.next()"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"

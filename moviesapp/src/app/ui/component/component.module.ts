@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BannerComponent } from './banner/banner.component';
 import { CategoryComponent } from './category/category.component';
-import { SearchComponent } from './search/search.component';
 import { PlatformMoviesComponent } from './platform-movies/platform-movies.component';
 import { VisionMoviesComponent } from './vision-movies/vision-movies.component';
 import { NewsListComponent } from './news-list/news-list.component';
@@ -19,6 +18,8 @@ import { FooterComponent } from './ui-templates/footer/footer.component';
 import { SharedModule } from 'src/app/shared/pipes/pipe-module';
 import { NetflixComponent } from './platform-movies/netflix/netflix.component';
 import { DisneyComponent } from './platform-movies/disney/disney.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -26,7 +27,6 @@ import { DisneyComponent } from './platform-movies/disney/disney.component';
   declarations: [
     BannerComponent,
     CategoryComponent,
-    SearchComponent,
     PlatformMoviesComponent,
     VisionMoviesComponent,
     NewsListComponent,
@@ -45,7 +45,9 @@ import { DisneyComponent } from './platform-movies/disney/disney.component';
     CommonModule,
     RouterModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule,
+    BrowserModule
   ],
   providers:[
     UiLayoutComponentComponent
