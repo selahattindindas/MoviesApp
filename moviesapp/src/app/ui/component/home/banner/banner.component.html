@@ -1,0 +1,36 @@
+<div class="navigation-wrapper">
+    <div class="keen-slider" #sliderRef>
+      <div class="keen-slider__slide" *ngFor="let movie of movies | dateMovieFilter:'visionMovies'">
+        <img [src]="movie.movieImages | imageArray:1" [routerLink]="'/Filmler/Detay/' + movie.id" />
+      </div>
+    </div>
+    
+    <div class="dots">
+      <button (click)="slider.moveToIdx(i)" *ngFor="let movie of movies | dateMovieFilter:'visionMovies' ; let i = index" [class]="'dot ' + (i === currentSlide ? 'active' : '')"></button>
+    </div>
+    
+    <svg
+      [ngClass]="
+        'arrow arrow--left ' + (currentSlide === 0 ? 'arrow--disabled' : '')
+      "
+      (click)="slider.prev()"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"
+      />
+    </svg>
+    <svg
+      *ngIf="slider"
+      [ngClass]="'arrow arrow--right ' +(slider.track.details.slides.length - 1 === currentSlide
+          ? 'arrow--disabled'
+          : '')"
+      (click)="slider.next()"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+    </svg>
+  </div>
+  

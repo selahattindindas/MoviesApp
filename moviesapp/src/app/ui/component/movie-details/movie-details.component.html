@@ -1,0 +1,45 @@
+<section>
+    <div class="movie-details" *ngIf="movies">
+      <div class="banner">
+        <img [src]="movies.movieImages | imageArray:0 " />
+      </div>
+      <div class="movie-details" >
+        <div class="movie-header">
+          <h1>{{movies.name}}</h1>
+        </div>
+        <div class="movie-info">
+          <p>
+            Yönetmen:
+            <span>{{ movies.directors | joinArray:', ' : 'name'}}</span>
+          </p>
+          <p>
+            Oyuncular:
+            <span>{{ movies.players | joinArray:', ' : 'name'}}</span>
+          </p>
+          <p>
+            Kategori:
+            <span>{{movies.categoryName}}</span>
+          </p>
+          <p>
+            Platform:
+            <span>{{movies.platformName}}</span>
+          </p>
+          <p>
+            Vizyon Tarihi:
+            <span>{{movies.releaseDate | date:'dd-MM-yyyy'}}</span>
+          </p>
+          <p>
+            Süre:
+            <span>{{movies.movieTime}} dk.</span>
+          </p>
+        </div>
+        <div class="movie-area">
+          <p>Film Özeti:</p>
+          <span>
+            {{movies.description}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+  

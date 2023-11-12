@@ -6,12 +6,10 @@ describe('PlatformMoviesComponent', () => {
   let component: PlatformMoviesComponent;
   let fixture: ComponentFixture<PlatformMoviesComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ PlatformMoviesComponent ]
-    })
-    .compileComponents();
-
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [PlatformMoviesComponent]
+    });
     fixture = TestBed.createComponent(PlatformMoviesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

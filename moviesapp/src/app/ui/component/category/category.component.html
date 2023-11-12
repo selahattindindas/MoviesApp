@@ -1,5 +1,6 @@
 <div class="select-category" >
-  <select  [(ngModel)]="selectedCategory" (change)="onCategorySelected()">
-    <option *ngFor="let category of categoryEnum" [value]="category.value">{{category.description}}</option>
-  </select>
-</div>
+    <select  [(ngModel)]="selectedCategory" (change)="onCategorySelected()">
+      <option *ngFor="let category of categoryEnum" [value]="category.value">{{category.description}}</option>
+    </select>
+  </div>
+  
