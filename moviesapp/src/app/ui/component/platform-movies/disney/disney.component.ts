@@ -4,6 +4,7 @@ import { PlatformEnum } from 'src/app/enums/platform-enum';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
 import KeenSlider, { KeenSliderInstance, KeenSliderOptions } from "keen-slider"
 import { ViewChild } from '@angular/core';
+import { DateEnum } from 'src/app/enums/date-enum';
 
 @Component({
   selector: 'disney-movie',
@@ -22,7 +23,7 @@ export class DisneyComponent implements OnInit {
   }
 
   async getMovies(){
-    this.movies = await this.movieService.getAllMovies(PlatformEnum.Disney) as List_Movie[];
+    this.movies = await this.movieService.getAllMovies(PlatformEnum.Disney, DateEnum.Vizyonda) as List_Movie[];
   }
  
   getSlider(): void {

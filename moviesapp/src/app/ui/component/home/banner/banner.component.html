@@ -1,12 +1,21 @@
 <div class="navigation-wrapper">
     <div class="keen-slider" #sliderRef>
-      <div class="keen-slider__slide" *ngFor="let movie of movies | dateMovieFilter:'visionMovies'">
-        <img [src]="movie.movieImages | imageArray:1" [routerLink]="'/Filmler/Detay/' + movie.id" />
-      </div>
+      <div class="keen-slider__slide" *ngFor="let movie of movies">
+        <img 
+        *ngIf="isMobile; else desktopImage" 
+        [src]="movie.movieImages | imageArray:0" 
+        [routerLink]="'/Filmler/Detay/' + movie.id" 
+      />
+      <ng-template #desktopImage>
+        <img 
+          [src]="movie.movieImages | imageArray:1" 
+          [routerLink]="'/Filmler/Detay/' + movie.id" 
+        />
+      </ng-template>
     </div>
     
     <div class="dots">
-      <button (click)="slider.moveToIdx(i)" *ngFor="let movie of movies | dateMovieFilter:'visionMovies' ; let i = index" [class]="'dot ' + (i === currentSlide ? 'active' : '')"></button>
+      <button (click)="slider.moveToIdx(i)" *ngFor="let movie of movies; let i = index" [class]="'dot ' + (i === currentSlide ? 'active' : '')"></button>
     </div>
     
     <svg

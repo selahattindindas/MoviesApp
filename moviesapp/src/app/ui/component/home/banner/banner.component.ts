@@ -1,6 +1,7 @@
-import { Component, ElementRef, AfterViewInit, OnDestroy, ViewChild, OnInit} from '@angular/core';
+import { Component, ElementRef, AfterViewInit, OnDestroy, ViewChild, OnInit, HostListener} from '@angular/core';
 import KeenSlider, { KeenSliderInstance } from 'keen-slider';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
+import { DateEnum } from 'src/app/enums/date-enum';
 import { PlatformEnum } from 'src/app/enums/platform-enum';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
 
@@ -15,18 +16,26 @@ export class BannerComponent implements  OnInit, OnDestroy  {
   currentSlide: number = 0;
   slider: KeenSliderInstance ;
   movies: List_Movie[];
-
+  isMobile: boolean = false;
   constructor(private movieService: MoviesService) {}
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.checkWindowSize();
+  }
 
   ngOnInit() {
     this.getMovies();
     this.getBanner();
+    this.checkWindowSize();
   }
 
   async getMovies() {
-    this.movies = await this.movieService.getAllMovies(PlatformEnum.Sinema) as List_Movie[];
+    this.movies = await this.movieService.getAllMovies(PlatformEnum.Sinema, DateEnum.Vizyonda) as List_Movie[];
   }
-
+  private checkWindowSize(): void {
+    this.isMobile = window.innerWidth < 768;
+  }
   getBanner(){
     setTimeout(() => {
       this.slider = new KeenSlider(this.sliderRef.nativeElement, {

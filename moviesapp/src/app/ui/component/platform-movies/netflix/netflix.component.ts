@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import KeenSlider, { KeenSliderInstance } from "keen-slider"
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
+import { DateEnum } from 'src/app/enums/date-enum';
 import { PlatformEnum } from 'src/app/enums/platform-enum';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
 
@@ -19,7 +20,7 @@ export class NetflixComponent implements OnInit {
       this.getSlider();
   }
   async getMovies(){
-    this.movies = await this.movieService.getAllMovies(PlatformEnum.Netflix) as List_Movie[];
+    this.movies = await this.movieService.getAllMovies(PlatformEnum.Netflix, DateEnum.Vizyonda) as List_Movie[];
   }
   
   getSlider(): void {

@@ -5,7 +5,7 @@
     </div>
     <ul>
         <div class="keen-slider" #sliderRef>
-          <ng-container *ngFor="let movie of movies | dateMovieFilter:'visionMovies'">
+          <ng-container *ngFor="let movie of movies">
             <li class="keen-slider__slide">
             <div class="movie-elements" >
                 <img class="movies-img" [src]="movie.movieImages | imageArray:0" />

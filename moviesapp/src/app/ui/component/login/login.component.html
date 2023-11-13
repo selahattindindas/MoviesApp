@@ -1,112 +1,111 @@
 <section>
-    <div class="container" id="container">
-      <div class="form-container signin-form">
-        <form class="login-form">
-          <h2 class="form-title">Giriş Yap</h2>
-          <div class="social-container">
-            <a href="#" class="social"
-              ><i class="fab fa-facebook-f" style="color: #ff416c"></i
-            ></a>
-            <a href="#" class="social"
-              ><i class="fab fa-google-plus-g" style="color: #ff416c"></i
-            ></a>
-            <a href="#" class="social"
-              ><i class="fab fa-linkedin-in" style="color: #ff416c"></i
-            ></a>
-          </div>
-          <div class="form-group">
-            <label class="input-icon" for="email"
-              ><i class="fa-solid fa-envelope" style="color: #000000"></i>
-            </label>
-            <input type="text" name="email" placeholder="Email" />
-          </div>
-          <div class="form-group" (click)="EyesPassword()">
-            <label class="input-icon" for="password"
-              ><i class="fa-solid fa-lock" style="color: #000000"></i>
-            </label>
-            <input
-              id="type-value"
-              type="password"
-              name="password"
-              placeholder="Şifre"
-            />
-            <label class="password-eyes"
-              ><i
-                class="fa-solid fa-eye-slash fa-xs"
-                id="eyes-true"
-                style="color: #000000"
-              ></i>
-              <i
-                id="eyes-false"
-                class="fa-solid fa-eye fa-xs"
-                style="color: #000000"
-              >
-              </i
-            ></label>
-          </div>
-          <a class="signin-forget" href="#">Şifreni mi Unuttun?</a>
-          <div class="form-group form-button">
-            <button class="button">Giriş Yap</button>
-          </div>
-        </form>
-      </div>
-      <div class="form-container signup-form">
-        <form class="register-form">
-          <h2 class="form-title">Kayıt Ol</h2>
-          <div class="social-container">
-            <a href="#" class="social"
-              ><i class="fab fa-facebook-f" style="color: #ff416c"></i
-            ></a>
-            <a href="#" class="social"
-              ><i class="fab fa-google-plus-g" style="color: #ff416c"></i
-            ></a>
-            <a href="#" class="social"
-              ><i class="fab fa-linkedin-in" style="color: #ff416c"></i
-            ></a>
-          </div>
-          <div class="form-group">
-            <label class="input-icon" for="name"
-              ><i class="fa-solid fa-user" style="color: #000000"></i>
-            </label>
-            <input type="text" name="name" placeholder="Ad Soyad" />
-          </div>
-          <div class="form-group">
-            <label class="input-icon" for="email"
-              ><i class="fa-solid fa-envelope" style="color: #000000"></i>
-            </label>
-            <input type="text" name="email" placeholder="Email" />
-          </div>
-          <div class="form-group">
-            <label class="input-icon" for="password">
-              <i class="fa-solid fa-lock" style="color: #000000"></i>
-            </label>
-            <input type="password" name="password" placeholder="Şifre" />
-            <label class="password-eyes"
-              ><i class="fa-solid fa-eye fa-xs" style="color: #000000"></i
-            ></label>
-          </div>
-          <div class="form-group form-button">
-            <button class="button">Kayıt Ol</button>
-          </div>
-        </form>
-      </div>
-      <div class="overlay-container">
-        <div class="overlay">
-          <div class="overlay-panel overlay-left">
-            <h1>Hoşgeldin!</h1>
-            <p>
-              Giriş yapmak isterseniz, lütfen buraya tıklayarak hesabınıza erişim
-              sağlayabilirsiniz.
-            </p>
-            <button class="ghost" (click)="togglePanel()">Giriş Yap</button>
-          </div>
-          <div class="overlay-panel overlay-right">
-            <h1>Hoşgeldin!</h1>
-            <p>Eğer henüz üye değilseniz, lütfen buraya tıklayarak üye olun.</p>
-            <button class="ghost" (click)="togglePanel()">Kayıt Ol</button>
-          </div>
+  <div class="container" id="container">
+    <div class="form-container signin-form">
+      <form class="login-form">
+        <h2 class="form-title">Giriş Yap</h2>
+        <div class="social-container">
+          <a href="#" class="social"
+            ><i class="fab fa-facebook-f" style="color: #ff416c"></i
+          ></a>
+          <a href="#" class="social"
+            ><i class="fab fa-google-plus-g" style="color: #ff416c"></i
+          ></a>
+          <a href="#" class="social"
+            ><i class="fab fa-linkedin-in" style="color: #ff416c"></i
+          ></a>
+        </div>
+        <div class="form-group">
+          <label class="input-icon" for="email"
+            ><i class="fa-solid fa-envelope" style="color: #000000"></i>
+          </label>
+          <input type="text" name="email" placeholder="Email" />
+        </div>
+        <div class="form-group" (click)="EyesPassword()">
+          <label class="input-icon" for="password"
+            ><i class="fa-solid fa-lock" style="color: #000000"></i>
+          </label>
+          <input
+            id="type-value"
+            type="password"
+            name="password"
+            placeholder="Şifre"
+          />
+          <label class="password-eyes"
+            ><i
+              class="fa-solid fa-eye-slash fa-xs"
+              id="eyes-true"
+              style="color: #000000"
+            ></i>
+            <i
+              id="eyes-false"
+              class="fa-solid fa-eye fa-xs"
+              style="color: #000000"
+            >
+            </i
+          ></label>
+        </div>
+        <a class="signin-forget" href="#">Şifreni mi Unuttun?</a>
+        <div class="form-group form-button">
+          <button class="button">Giriş Yap</button>
+        </div>
+      </form>
+    </div>
+    <div class="form-container signup-form">
+      <form class="register-form">
+        <h2 class="form-title">Kayıt Ol</h2>
+        <div class="social-container">
+          <a href="#" class="social"
+            ><i class="fab fa-facebook-f" style="color: #ff416c"></i
+          ></a>
+          <a href="#" class="social"
+            ><i class="fab fa-google-plus-g" style="color: #ff416c"></i
+          ></a>
+          <a href="#" class="social"
+            ><i class="fab fa-linkedin-in" style="color: #ff416c"></i
+          ></a>
+        </div>
+        <div class="form-group">
+          <label class="input-icon" for="name"
+            ><i class="fa-solid fa-user" style="color: #000000"></i>
+          </label>
+          <input type="text" name="name" placeholder="Ad Soyad" />
+        </div>
+        <div class="form-group">
+          <label class="input-icon" for="email"
+            ><i class="fa-solid fa-envelope" style="color: #000000"></i>
+          </label>
+          <input type="text" name="email" placeholder="Email" />
+        </div>
+        <div class="form-group">
+          <label class="input-icon" for="password">
+            <i class="fa-solid fa-lock" style="color: #000000"></i>
+          </label>
+          <input type="password" name="password" placeholder="Şifre" />
+          <label class="password-eyes"
+            ><i class="fa-solid fa-eye fa-xs" style="color: #000000"></i
+          ></label>
+        </div>
+        <div class="form-group form-button">
+          <button class="button">Kayıt Ol</button>
+        </div>
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1>Hoşgeldin!</h1>
+          <p>
+            Giriş yapmak isterseniz, lütfen buraya tıklayarak hesabınıza erişim
+            sağlayabilirsiniz.
+          </p>
+          <button class="ghost" (click)="togglePanel()">Giriş Yap</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>Hoşgeldin!</h1>
+          <p>Eğer henüz üye değilseniz, lütfen buraya tıklayarak üye olun.</p>
+          <button class="ghost" (click)="togglePanel()">Kayıt Ol</button>
         </div>
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>

@@ -58,3 +58,16 @@ img {
   .arrow--disabled{
     display: none;
   }
+  @media screen and (max-width:768px) {
+    .navigation-wrapper{
+      margin-top: 60px;
+    }
+    .arrow{
+      display: none;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+  }

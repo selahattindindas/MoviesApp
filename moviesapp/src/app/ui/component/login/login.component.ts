@@ -11,8 +11,8 @@ export class LoginComponent {
 
     if (container) 
       container.classList.toggle('right-panel-active');
-    
   }
+  
   EyesPassword() {
     const eyesYes: HTMLElement | null = document.getElementById('eyes-true');
     const eyesNo: HTMLElement | null = document.getElementById('eyes-false');

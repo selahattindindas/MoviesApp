@@ -1,6 +1,25 @@
 <section>
-    <div class="text-title">
-      <h2 class="tag-name">Popüler Platformdaki Filmler</h2>
-    </div>
-  </section>
-  
+  <div class="popular-name">
+      <h2>Popüler Platform Filmleri</h2>
+  </div>
+  <ul>
+      <li *ngFor="let movie of movies">
+          <div class="popular-img">
+              <img [src]="movie.movieImages | imageArray:0">
+              <div class="overlay">
+                  <button class="detail-button" [routerLink]="'/Filmler/Detay/' + movie.id">Film Detayı</button>
+              </div>
+          </div>
+          <div class="popular-details">
+              <span class="popular-name">{{movie.name}}</span>
+              <p class="class-category">
+                  <span class="popular-category">{{movie.categoryName}}</span>
+              </p>
+              <p class="class-date">
+                  <i class="fa-regular fa-calendar-days"></i>
+                  <span class="popular-date">{{movie.releaseDate}}</span>
+              <p>
+          </div>
+      </li>
+  </ul>
+</section>

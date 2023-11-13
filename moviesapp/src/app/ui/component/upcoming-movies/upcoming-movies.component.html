@@ -7,37 +7,7 @@
         </div>
     </div>
         <ul>
-            <li *ngFor="let movie of movies | filter: filterText: filterName | dateMovieFilter:'upcomingMovies'">
-                <div class="soon-img">
-                    <img [src]="movie.movieImages | imageArray:0">
-                    <div class="overlay">
-                        <button class="detail-button" [routerLink]="'/Filmler/Detay/' + movie.id">Film Detayı</button>
-                    </div>
-                </div>
-                <div class="soon-details">
-                    <span class="soon-name">{{movie.name}}</span>
-                    <p>
-                        <i class="fa-regular fa-calendar-days"></i>
-                        <span class="soon-date">{{movie.releaseDate | date:'dd/MM/yyyy'}}</span>
-                    <p>
-                </div>
-            </li>
-            <li *ngFor="let movie of movies | filter: filterText: filterName | dateMovieFilter:'upcomingMovies'">
-                <div class="soon-img">
-                    <img [src]="movie.movieImages | imageArray:0">
-                    <div class="overlay">
-                        <button class="detail-button" [routerLink]="'/Filmler/Detay/' + movie.id">Film Detayı</button>
-                    </div>
-                </div>
-                <div class="soon-details">
-                    <span class="soon-name">{{movie.name}}</span>
-                    <p>
-                        <i class="fa-regular fa-calendar-days"></i>
-                        <span class="soon-date">{{movie.releaseDate | date:'dd/MM/yyyy'}}</span>
-                    <p>
-                </div>
-            </li>
-            <li *ngFor="let movie of movies | filter: filterText: filterName | dateMovieFilter:'upcomingMovies'">
+            <li *ngFor="let movie of movies | filter: filterText: filterName">
                 <div class="soon-img">
                     <img [src]="movie.movieImages | imageArray:0">
                     <div class="overlay">

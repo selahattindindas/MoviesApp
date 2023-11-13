@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
+import { DateEnum } from 'src/app/enums/date-enum';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class UpcomingMoviesComponent implements OnInit {
       this.getMovies();
   }
   async getMovies(){
-    this.movies = await this.movieService.getAllMovies() as List_Movie[];
+    this.movies = await this.movieService.getAllMovies(undefined,DateEnum.Yakinda) as List_Movie[];
 
   } 
 
