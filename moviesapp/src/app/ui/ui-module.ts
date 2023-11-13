@@ -21,6 +21,7 @@ import { FooterComponent } from './component/ui-templates/footer/footer.componen
 import { NavbarComponent } from './component/ui-templates/navbar/navbar.component';
 import { UpcomingMoviesComponent } from './component/upcoming-movies/upcoming-movies.component';
 import { DisneyComponent } from './component/platform-movies/disney/disney.component';
+import { SidebarComponent } from './component/ui-templates/sidebar/sidebar.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { DisneyComponent } from './component/platform-movies/disney/disney.compo
         LoginComponent,
         MovieDetailsComponent,
         FooterComponent,
-        NavbarComponent
+        NavbarComponent,
+        SidebarComponent
     ],
     imports: [
         CommonModule,

@@ -1,5 +1,6 @@
 <div class="menu-toggle" (click)="toggleMenu()">
-  <i class="fa-solid fa-bars fa-xl"></i>
+  <i *ngIf="isMenuOpen" class="fa-solid fa-bars fa-xl"></i>
+  <i *ngIf="!isMenuOpen" class="fa-solid fa-xmark fa-xl"></i>
 </div>
 <div class="left-menu sidebar" [ngClass]="{'sidebar': isMenuOpen}">
   <div class="left-header" >

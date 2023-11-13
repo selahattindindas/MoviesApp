@@ -10,7 +10,7 @@
     width: 100%;
     font-size: 16px;
     padding: 0.885em 1em;
-    background-color: #5a0825;
+    background-color: #3c3d4c;
     border-radius: 10px;
     color: #fff;
     cursor: pointer;
@@ -30,7 +30,7 @@
   .select-category::after {
     border-left: var(--size) solid transparent;
     border-right: var(--size) solid transparent;
-    border-top: var(--size) solid #fff;
+    border-top: var(--size) solid #ffc303;
     top: 50%;
     transform: translateY(-50%);
   }

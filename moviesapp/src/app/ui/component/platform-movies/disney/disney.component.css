@@ -18,11 +18,6 @@
     font-size: 25px;
 }
 
-.new-movie {
-    display: flex;
-    flex-direction: row;
-}
-
 ul {
     position: relative;
     list-style: none;
@@ -118,4 +113,26 @@ li:first-child {
 }
 .arrow--disabled{
     display: none;
+}
+@media screen and (max-width:768px) {
+    .platform-company{
+        padding: 0 1rem;
+    }
+    .movie-elements{
+        margin: 0 auto;
+    }
+    li:first-child{
+        margin: 0;
+    }
+    li{
+        margin:0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .movie-details {
+        display: grid;
+        margin: 15px;
+        color: #fff;
+    }
 }

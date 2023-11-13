@@ -1,23 +1,35 @@
 section{
     margin: 0 auto;
     max-width: 1200px;
-    position: relative;
-  }
-  h2 {
-    font-size: 35px;
-    font-weight: bold;
-    width: 100%;
-    position: relative;
   }
   .platform-name {
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    padding: 40px 0;
-    align-items: center;
+    padding: 3rem 0;
   }
-  
+  h2 {
+    color: #fff;
+    font-size: 35px;
+    font-weight: 800;
+  }
   .disney-movie{
     margin-top: 3rem;
+  }
+  @media screen and (max-width:768px) {
+    section{
+      margin: 90px 20px;
+    }
+    .platform-name{
+      padding: 0;
+    }
+    h2{
+      font-size: 25px;
+      font-weight: 800;
+      text-align: left;
+    }
+    .disney-movie{
+      margin-top: 2rem;
+    }
+    .all-movies{
+      padding-top: 35px;
+    }
   }
   

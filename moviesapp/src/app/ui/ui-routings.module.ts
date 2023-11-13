@@ -11,6 +11,7 @@ import { LoginComponent } from './component/login/login.component';
 import { NetflixComponent } from './component/platform-movies/netflix/netflix.component';
 import { FooterComponent } from './component/ui-templates/footer/footer.component';
 import { NavbarComponent } from './component/ui-templates/navbar/navbar.component';
+import { SidebarComponent } from './component/ui-templates/sidebar/sidebar.component';
 
 const routes: Route[] = [
     {

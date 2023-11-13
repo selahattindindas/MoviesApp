@@ -1,49 +1,35 @@
-<section class="movie">
-    <div class="movies-search">
+<section>
+<div class="movie-container">
+  <div class="movie-header">
       <h2>Vizyondaki Filmler</h2>
-      <div>
-        <input type="text"  placeholder="Vizyondaki Filmleri Arayın" [(ngModel)]="filterText"/>
-        <button class="button-with-image">
-          <i
-            class="fa-solid fa-magnifying-glass fa-lg"
-            style="color: #000000"
-          ></i>
-        </button>
+    <div class="movie-search">
+      <input type="text"  placeholder="Film ara..." [(ngModel)]="filterText"/>
+        <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+    </div>
+  </div>
+  <div class="movie-category">
+    <category-filter (categorySelected)="onCategorySelected($event)"></category-filter>
+  </div>
+  <div class="movie-main">
+    <div class="movie-content" *ngFor="let movie of movie | filter: filterText: filterName | dateMovieFilter:'visionMovies'">
+      <div class="movie-image">
+        <img [src]="movie.movieImages | imageArray:0">
       </div>
-    </div>
-    <div class="category-filter">
-      <category-filter (categorySelected)="onCategorySelected($event)"></category-filter>
-    </div>
-      <div class="movie-list-card">
-        <div class="movie-box" *ngFor="let movie of movie | filter: filterText: filterName | dateMovieFilter:'visionMovies'">
-          <figure>
-            <a class="movie-details"></a>  
-                <img [src]="movie.movieImages | imageArray:0" alt="Photo">
-          </figure>
-          <div class="movie-box-text">
-            <div class="movie-box-contents">
-              <h2>{{ movie.name }}</h2>
-              <h3>Yönetmenler: 
-                  {{ movie.directors | joinArray:', ' : 'name'}}   
-              </h3>
-              <p>{{ movie.players | joinArray:', ' : 'name' }}   </p>
-            </div>
-            <div class="movie-box-time">
-              <ul>
-                <li>
-                  <span>{{movie.movieTime}} dk.</span>
-                </li>
-                <li>
-                  <span >{{ movie.categoryName}}</span>
-                </li>
-              </ul>
-            </div>
-            <div class="movie-box-link">
-              <button [routerLink]="'/Filmler/Detay/' + movie.id">Detay Sayfası</button>
-  
-            </div>
-          </div>
+      <div class="movie-card">
+        <div class="card-content">
+          <h2>{{movie.name | titlecase | limitTo:19}}</h2>
+          <h3>Yönetmen: {{movie.directors | joinArray:',' : 'name'| limitTo:18}}</h3>
+          <p>{{movie.players | joinArray:',': 'name' | limitTo:36}}</p>
+        </div>
+        <div class="card-info">
+          <span class="bold">{{movie.movieTime}} dk.</span>
+          <span class="normal">{{movie.categoryName}}</span>
+        </div>
+        <div class="card-button">
+          <button [routerLink]="'/Filmler/Detay/' + movie.id">Detay Sayfası</button>
         </div>
       </div>
-  </section>
-  
+    </div>
+  </div>
+</div>
+</section>

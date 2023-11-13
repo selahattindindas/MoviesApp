@@ -11,10 +11,15 @@ body {
   main{
     display: block;
     min-height: 100%;
-    background: -webkit-linear-gradient(right, #5a0825, #1d1b1b, #5a0825, #1d1b1b);
+    background-color: #272832;
   }
   .header{
     width: 100%;
+    background-color: #231f20;
+    /* background: linear-gradient(to bottom right,#00c4cc,#8b3dff) border-box; */
+  }
+  .sidebar{
+    display: none;
   }
   .content{
     margin-bottom: 4rem;
@@ -22,5 +27,16 @@ body {
   .footer{
     position: sticky;
     top: 100%;
+  }
+  @media screen and (max-width:768px) {
+    main{
+      background-color: #272832;
+    }
+    .header{
+      display: none;
+    }
+    .sidebar{
+      display: block;
+    }
   }
   

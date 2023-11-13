@@ -7,13 +7,9 @@
 
   .header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     margin-left: 100px;
-  }
-
-  .menu-toggle {
-    display: none;
   }
 
   .header-logo img {
@@ -23,12 +19,16 @@
 
   ul {
     list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 0;
     margin: 0;
   }
+
+  .nav-links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
   .nav-links li {
     margin-right: 50px;
   }
@@ -43,7 +43,6 @@
     display: flex;
     align-items: center;
     line-height: 40px;
-
   }
 
   span:hover {
@@ -56,71 +55,8 @@
     font-weight: 600;
   }
 
-  @media screen and (max-width: 768px) {
-    .navbar {
-      display: flex;
-      height: 100px;
-    }
-    .header-content {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    .header-logo{
-      margin-left: 1rem;
-    }
-    .menu-toggle {
-      margin-right: 1rem;
-      display: inline;
-      color: #fff;
-    }
-    .nav-links {
-      top: 0;
-      left: 0;
-      width: 80%;
-      position: fixed;
-      background-color: #f2f2f2;
-      height: 100%;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-      z-index: 1000; 
-      transition: .5s;
-    }
-    .sidebar {
-      left: -281px;
-      transition: 0.5s;
-      top: 0;
-      width: 280px;
-      position: fixed;
-    }
-    ul {
-      display: block;
-      list-style: none;
-      margin: 0;
-      padding: 2rem 0 0 0;
-    }
-    .nav-links li {
-      border-bottom: 2px solid #ececec; 
-      padding: 1.5rem 3rem; 
-      margin: 0 1px;
-    }
-    a {
-      text-decoration: none;
-      color: #262626;
-      display: flex;
-      align-items: center;
-      line-height: 40px;
-    }
-    span {
-      font-size: 19px;
-      font-weight: 600;
-    }
-    li i{
-      display: none;
-    }
-    .user{
-      display: none;
-    }
+  .user{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 100px;
   }
-  

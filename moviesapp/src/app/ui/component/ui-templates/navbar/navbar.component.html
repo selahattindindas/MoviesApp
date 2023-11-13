@@ -1,13 +1,10 @@
 <nav class="navbar">
   <div class="header-content">
     <div class="header-logo" routerLink="/Filmler">
-      <img src="assets/img/filmverse.png" />
-    </div>
-    <div class="menu-toggle" (click)="toggleMenu()">
-      <i class="fa-solid fa-bars fa-xl"></i>
+      <img src="assets/img/common/filmverse.png" />
     </div>
   </div>
-  <ul class="nav-links sidebar" [ngClass]="{'sidebar': isMenuOpen}">
+  <ul class="nav-links sidebar">
     <li>
       <a routerLink="Vizyondakiler">
         <i class="fa-solid fa-film fa-lg"></i>
@@ -44,14 +41,11 @@
         <span>İletişim</span>
       </a>
     </li>
-    <li class="user">
-      <a routerLink="Giriş">
-        <i class="fa-solid fa-house-user fa-lg"></i>
-        <span>Giriş Yap</span>
-      </a>
-    </li>
   </ul>
-  <div class="right">
-    <
+  <div class="user">
+    <a routerLink="Giriş">
+      <i class="fa-solid fa-house-user fa-lg"></i>
+      <span>Giriş Yap</span>
+    </a>
   </div>
 </nav>

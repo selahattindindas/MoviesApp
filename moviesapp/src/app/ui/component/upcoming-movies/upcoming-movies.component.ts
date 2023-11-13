@@ -9,7 +9,8 @@ import { MoviesService } from 'src/app/services/common/models/movies.service';
 })
 export class UpcomingMoviesComponent implements OnInit {
   movies : List_Movie[];
-
+  filterText: string;
+  filterName: keyof List_Movie = 'name';
   constructor(private movieService: MoviesService){}
 
   ngOnInit(): void {

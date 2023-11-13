@@ -22,17 +22,24 @@ export class NetflixComponent implements OnInit {
     this.movies = await this.movieService.getAllMovies(PlatformEnum.Netflix) as List_Movie[];
   }
   
-  getSlider(){
-    setTimeout(()=>{
+  getSlider(): void {
+    setTimeout(() => {
       this.slider = new KeenSlider(this.sliderRef.nativeElement, {
         initial: 0,
-        loop:true,
-        slides: {
-          perView: 3,
-          spacing: 15,
+        loop: true,
+        drag: false,
+        breakpoints: {
+          "(min-width: 350px)": {
+            slides: { perView: 1, spacing: 5 },
+          },
+          "(min-width: 900px)": {
+            slides: { perView: 2, spacing: 10 },
+          },
+          "(min-width: 1300px)": {
+            slides: { perView: 3, spacing: 15 },
+          },
         },
-        drag: false
-      })
-    }, 200)
+      });
+    }, 200);
   }
 }

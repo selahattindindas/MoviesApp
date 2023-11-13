@@ -1,11 +1,12 @@
 <div class="platform-company">
     <div class="platform-header">
-        <img src="assets/img/disney.jpg" alt="Disney Logo" />
+        <img src="assets/img/ui/platform/disney.jpg" alt="Disney Logo" />
         <h2>Disney+ Filmleri</h2>
     </div>
-    <ul class="new-movie">
+    <ul>
         <div class="keen-slider" #sliderRef>
-        <li class="keen-slider__slide" *ngFor="let movie of movies | dateMovieFilter:'visionMovies'">
+          <ng-container *ngFor="let movie of movies | dateMovieFilter:'visionMovies'">
+            <li class="keen-slider__slide">
             <div class="movie-elements" >
                 <img class="movies-img" [src]="movie.movieImages | imageArray:0" />
                 <div class="movie-details">
@@ -26,12 +27,12 @@
                         <button [routerLink]="'/Filmler/Detay/' + movie.id">Detay</button>
                     </div>
                 </div>
-            </div>
-       
+            </div>  
         </li>
+      </ng-container>
     </div>
     <svg
-    [ngClass]="'arrow arrow--left ' + (this.movies.length < 4 ? 'arrow--disabled' : '')"
+    [ngClass]="'arrow arrow--left ' + (this.movies.length < 0 ? 'arrow--disabled' : '')"
     (click)="slider.prev()"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -42,7 +43,7 @@
   </svg>
   <svg
     *ngIf="slider"
-    [ngClass]="'arrow arrow--right ' + (this.movies.length < 4 ? 'arrow--disabled' : '')"
+    [ngClass]="'arrow arrow--right ' + (this.movies.length < 0 ? 'arrow--disabled' : '')"
     (click)="slider.next()"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"

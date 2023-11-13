@@ -45,8 +45,8 @@ section{
     padding: 30px;
   }
   .news-box > li > .news-details {
-      width: 55%; /* Önceki değeri 55% olarak değiştirin */
-      padding: 25px; /* Daha küçük iç içe boşluklar kullanın */
+      width: 55%; 
+      padding: 25px;
       border-radius: 0 12px 12px 0; /* Daha küçük border yarıçapı */
       background: #f9f9f9;
       position: relative;
@@ -60,7 +60,7 @@ section{
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
-      height: 60px; /* Adjust line height for consistent spacing */
+      height: 60px; 
     }
     
     .news-details h3 {
