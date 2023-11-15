@@ -11,7 +11,7 @@
     <category-filter (categorySelected)="onCategorySelected($event)"></category-filter>
   </div>
   <div class="movie-main">
-    <div class="movie-content" *ngFor="let movie of movie | filter: filterText: filterName">
+    <div class="movie-content" *ngFor="let movie of movie | filter: filterText: filterName | categoryFilter:selectedCategory">
       <div class="movie-image">
         <img [src]="movie.movieImages | imageArray:0">
       </div>

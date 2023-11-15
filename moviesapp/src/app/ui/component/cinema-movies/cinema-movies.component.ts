@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
-import { CategoryEnum } from 'src/app/enums/category-enum';
+import { CategoryDescription, CategoryEnum } from 'src/app/enums/category-enum';
 import { PlatformEnum } from 'src/app/enums/platform-enum';
 import { DateEnum } from 'src/app/enums/date-enum';
 
@@ -15,6 +15,8 @@ export class CinemaMoviesComponent implements OnInit {
   filterText: string;
   filterName: keyof List_Movie = 'name';
   platformEnum: PlatformEnum;
+  selectedCategory = CategoryEnum.Seciniz;
+
   constructor(private movieService: MoviesService) { }
 
   ngOnInit(): void {
@@ -26,21 +28,6 @@ export class CinemaMoviesComponent implements OnInit {
   }
 
   async onCategorySelected(category: CategoryEnum) {
-    const categoryValue = category as unknown;
-
-    if (categoryValue === CategoryEnum.Seciniz.toString())
-      this.getMovies();
-
-    else {
-
-      const categoryName = CategoryEnum[category];
-
-      const movieData = await this.movieService.getAllMovies(PlatformEnum.Sinema, DateEnum.Vizyonda);
-      if (Array.isArray(movieData)) {
-        this.movie = movieData.filter(movie => {
-          return movie.categoryName === categoryName;
-        });
-      }
-    }
+    this.selectedCategory = category;
   }
 }
