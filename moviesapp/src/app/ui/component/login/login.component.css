@@ -1,10 +1,240 @@
-section{
-  width: 1200px;
+section {
+  max-width: 1200px;
   margin: 0 auto;
 }
-.login-card{
+
+.login-card {
+  padding: 3rem 0;
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0px 30px 60px -5px #000;
+  position: relative;
 }
-.container{
-  padding: 3rem;
+
+input {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 16px;
+  padding-left: 30px;
+  width: 250px;
 }
+.signin-form, .signup-form{
+  width: 50%;
+}
+
+.form-title {
+  font-weight: 800;
+  font-size: 35px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.social-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.social-container a {
+  margin-left: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: 1px solid #DDDDDD;
+}
+
+.social-container i {
+  color: #646464;
+}
+.signin-form, .signup-form{
+  display: flex;
+  justify-content: center;
+}
+.form-group{
+  margin-bottom: 20px;
+  position: relative;
+}
+.input-icon {
+  position: absolute;
+  left: 5px; 
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.password-eyes {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.password-eyes i {
+  display: block; 
+}
+.input-icon, .password-eyes i {
+  color: #646464;
+}
+.password-info{
+  text-align: center;
+  margin: 28px 0 18px;
+}
+.signin-forget{
+  text-decoration: none;
+  font-size: 14px;
+  color: #000;
+}
+.form-button{
+ text-align: center;
+}
+
+.form-button button {
+  padding: 8px 15px;
+  border-radius: 25px;
+  color: #f9f9f9;
+  font-weight: bold;
+  background: #ffc303;
+  transition: all 0.6s;
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 15px;
+}
+
+.form-button button:before {
+  content: "";
+  position: absolute;
+  left: -25px;
+  top: -25px;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  background: #f9f9f9;
+  z-index: -1;
+  transition: all 0.6s;
+}
+
+.form-button button:hover {
+  color: #ffc303;
+  background: #f9f9f9;
+}
+
+.form-button button:hover:before {
+  width: 155%;
+  height: 185%;
+}
+.ghost {
+	border-radius: 20px;
+	border: 1px solid #fff;
+	background-color: transparent;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+.ghost:active {
+	transform: scale(0.95);
+}
+
+.ghost:focus {
+	outline: none;
+}
+
+.overlay-container{
+  position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	transition: transform 0.6s ease-in-out;
+	z-index: 100;
+  border-radius: 20px;
+}
+
+.overlay {
+	background: linear-gradient(to right, #ffc303, #d6bc66);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 0;
+	color: #FFFFFF;
+	position: relative;
+	left: -100%;
+	height: 100%;
+	width: 200%;
+  transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+}
+
+.overlay-panel {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 40px;
+	text-align: center;
+	top: 0;
+	height: 100%;
+	width: 50%;
+	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+  
+}
+
+.overlay-right, .overlay-left{
+  right: 0;
+	transform: translateX(0);
+}
+
+.slide-left {
+  transform: translateX(-100%);
+}
+@media screen and (max-width:768px) {
+  section{
+    margin: 90px 20px 30px;
+  }
+  .login-card{
+    display: block;
+  }
+  input{
+    width: 250px;
+  }
+  .signin-form, .signup-form{
+    width: 100%;
+  }
+  .overlay-container{
+    position: absolute;
+    top:50%;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+    border-radius: 20px;
+  }
+  
+  .slide-left {
+    transform: translateY(-101%);
+  }
+}
+
+
+

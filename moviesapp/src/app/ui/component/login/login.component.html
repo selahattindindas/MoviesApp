@@ -1,100 +1,98 @@
 <section>
-  <div class="container">
-    <div class="login-card">
-      <div class="form-container signin-form">
-        <form class="login-form">
-          <h2 class="form-title">Giriş Yap</h2>
-          <div class="social-container">
-            <a href="#" class="social">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" class="social">
-              <i class="fab fa-google-plus-g"></i>
-            </a>
-            <a href="#" class="social">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
-          </div>
-          <div class="form-group">
-            <label class="input-icon" for="email">
-              <i class="fa-solid fa-envelope"></i>
-            </label>
-            <input type="text" name="email" placeholder="Email" />
-          </div>
-          <div class="form-group">
-            <label class="input-icon" for="password"
-              ><i class="fa-solid fa-lock" ></i>
-            </label>
-            <input type="password" name="password" placeholder="Şifre"/>
-            <label class="password-eyes">
-              <i class="fa-solid fa-eye-slash fa-xs"></i>
-              <i class="fa-solid fa-eye fa-xs"></i>
-            </label>
-          </div>
+  <div class="login-card">
+    <div class="form-container signin-form">
+      <form class="login-form">
+        <h2 class="form-title">Giriş Yap</h2>
+        <div class="social-container">
+          <a href="#" class="social">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social">
+            <i class="fab fa-google-plus-g"></i>
+          </a>
+          <a href="#" class="social">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+        <div class="form-group">
+          <label class="input-icon" for="email">
+            <i class="fa-solid fa-envelope"></i>
+          </label>
+          <input type="text" name="email" placeholder="Email" />
+        </div>
+        <div class="form-group">
+          <label class="input-icon" for="password">
+            <i class="fa-solid fa-lock"></i>
+          </label>
+          <label class="password-eyes" for="password">
+            <i class="fa-solid fa-eye-slash fa-xs" *ngIf="hide" (click)="toPassword()"></i>
+            <i class="fa-solid fa-eye fa-xs" *ngIf="!hide" (click)="toPassword()"></i>
+          </label>
+          <input type="password" name="password" [type]="hide ? 'password' : 'text'" placeholder="Şifre" />
+        </div>
+        <div class="password-info">
           <a class="signin-forget" href="#">Şifreni mi Unuttun?</a>
-          <div class="form-group form-button">
-            <button class="button">Giriş Yap</button>
-          </div>
-        </form>
-      </div>
-      <div class="form-container signup-form">
-        <form class="register-form">
-          <h2 class="form-title">Kayıt Ol</h2>
-          <div class="social-container">
-            <a href="#" class="social">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" class="social">
-              <i class="fab fa-google-plus-g"></i>
-            </a>
-            <a href="#" class="social">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
-          </div>
-          <div class="form-group">
-            <label class="input-icon" for="name"
-              ><i class="fa-solid fa-user"></i>
-            </label>
-            <input type="text" name="name" placeholder="Ad Soyad" />
-          </div>
-          <div class="form-group">
-            <label class="input-icon" for="email">
-              <i class="fa-solid fa-envelope"></i>
-            </label>
-            <input type="text" name="email" placeholder="Email" />
-          </div>
-          <div class="form-group">
-            <label class="input-icon" for="password">
-              <i class="fa-solid fa-lock" ></i>
-            </label>
-            <input type="password" name="password" placeholder="Şifre" />
-            <label class="password-eyes">
-              <i class="fa-solid fa-eye fa-xs" ></i>
-            </label>
-          </div>
-          <div class="form-group form-button">
-            <button class="button">Kayıt Ol</button>
-          </div>
-        </form>
-      </div>
-      <div class="overlay-container">
-        <div class="overlay">
-          <div class="overlay-panel overlay-left">
-            <h1>Hoşgeldin!</h1>
-            <p>
-              Giriş yapmak isterseniz, lütfen buraya tıklayarak hesabınıza erişim
-              sağlayabilirsiniz.
-            </p>
-            <button class="ghost">Giriş Yap</button>
-          </div>
-          <div class="overlay-panel overlay-right">
+        </div>
+        <div class="form-group form-button">
+          <button class="button">Giriş Yap</button>
+        </div>
+      </form>
+    </div>
+    <div class="form-container signup-form">
+      <form class="register-form">
+        <h2 class="form-title">Kayıt Ol</h2>
+        <div class="social-container">
+          <a href="#" class="social">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social">
+            <i class="fab fa-google-plus-g"></i>
+          </a>
+          <a href="#" class="social">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+        <div class="form-group">
+          <label class="input-icon" for="name"><i class="fa-solid fa-user"></i>
+          </label>
+          <input type="text" name="name" placeholder="Ad Soyad" />
+        </div>
+        <div class="form-group">
+          <label class="input-icon" for="email">
+            <i class="fa-solid fa-envelope"></i>
+          </label>
+          <input type="text" name="email" placeholder="Email" />
+        </div>
+        <div class="form-group">
+          <label class="input-icon" for="password">
+            <i class="fa-solid fa-lock"></i>
+          </label>
+          <label class="password-eyes" for="password">
+            <i class="fa-solid fa-eye-slash fa-xs" *ngIf="hide" (click)="toPassword()"></i>
+            <i class="fa-solid fa-eye fa-xs" *ngIf="!hide" (click)="toPassword()"></i>
+          </label>
+          <input type="password" name="password" [type]="hide ? 'password' : 'text'" placeholder="Şifre" />
+        </div>
+        <div class="form-group form-button">
+          <button class="button" (click)="toForm()">Kayıt Ol</button>
+        </div>
+      </form>
+    </div>
+    <div class="overlay-container" [ngClass]="{'slide-left': isForm}">
+      <div class="overlay">
+        <div class="overlay-panel" [ngClass]="{'overlay-left': isForm, 'overlay-right': !isForm}">
+          <ng-template [ngIf]="!isForm">
             <h1>Hoşgeldin!</h1>
             <p>Eğer henüz üye değilseniz, lütfen buraya tıklayarak üye olun.</p>
-            <button class="ghost">Kayıt Ol</button>
-          </div>
+            <button class="ghost" (click)="toForm()">Kayıt Ol</button>
+          </ng-template>
+          <ng-template [ngIf]="isForm">
+            <h1>Hoşgeldin!</h1>
+            <p>Giriş yapmak isterseniz, lütfen buraya tıklayarak hesabınıza erişim sağlayabilirsiniz.</p>
+            <button class="ghost" (click)="toForm()">Giriş Yap</button>
+          </ng-template>
         </div>
       </div>
     </div>
   </div>
-
 </section>
