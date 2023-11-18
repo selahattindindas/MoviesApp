@@ -3,12 +3,13 @@
         <img src="assets/img/ui/platform/netflix.jpg" alt="Netflix Logo" />
         <h2>Netflix Filmleri</h2>
     </div>
-    <ul class="new-movie">
+    <div class="new-movie">
+    <ul>
       <div class="keen-slider" #sliderRef>
-        <ng-container *ngFor="let movie of movies">
+        <ng-container class="slider-container" *ngFor="let movie of movies">
           <li class="keen-slider__slide">
-          <div class="movie-elements" >
-              <img class="movies-img" [src]="movie.movieImages | imageArray:0" />
+          <div class="movie-elements">
+              <img class="movies-img" [src]="movie.movieImages | imageArray:0" />       
               <div class="movie-details">
                   <span class="movie-name">{{movie.name}}</span>
                   <span class="movie-content">
@@ -43,7 +44,7 @@
 </svg>
 <svg
   *ngIf="slider"
-  [ngClass]="'arrow arrow--right ' + (this.movies.length < 4 ? 'arrow--disabled' : '')"
+  [ngClass]="'arrow arrow--right ' + (this.movies.length < 0 ? 'arrow--disabled' : '')"
   (click)="slider.next()"
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 24 24"
@@ -51,4 +52,5 @@
   <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
 </svg>
   </ul>
+</div>
 </div>

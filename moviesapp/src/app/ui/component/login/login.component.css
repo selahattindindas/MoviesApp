@@ -1,10 +1,11 @@
 section {
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
 }
 
 .login-card {
-  padding: 3rem 0;
+  padding: 3rem;
   max-width: 1000px;
   display: flex;
   align-items: center;
@@ -26,7 +27,12 @@ input {
 .signin-form, .signup-form{
   width: 50%;
 }
-
+.signin-form{
+  padding-right: 50px;
+}
+.signup-form{
+  padding-left: 50px;
+}
 .form-title {
   font-weight: 800;
   font-size: 35px;
@@ -54,7 +60,7 @@ input {
 }
 
 .social-container i {
-  color: #646464;
+  color: #ffc303;
 }
 .signin-form, .signup-form{
   display: flex;
@@ -78,7 +84,9 @@ input {
   transform: translateY(-50%);
 }
 .password-eyes i {
-  display: block; 
+  display: block;
+  cursor: pointer; 
+
 }
 .input-icon, .password-eyes i {
   color: #646464;
@@ -207,11 +215,16 @@ input {
 }
 @media screen and (max-width:768px) {
   section{
-    margin: 90px 20px 30px;
+    margin: 90px 2rem 0;
   }
+
   .login-card{
     display: block;
   }
+  .signin-form, .signup-form{
+    padding: 0;
+  }
+
   input{
     width: 250px;
   }

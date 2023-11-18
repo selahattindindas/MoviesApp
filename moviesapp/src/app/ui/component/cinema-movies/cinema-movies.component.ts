@@ -14,7 +14,6 @@ export class CinemaMoviesComponent implements OnInit {
   movie: List_Movie[];
   filterText: string;
   filterName: keyof List_Movie = 'name';
-  platformEnum: PlatformEnum;
   selectedCategory = CategoryEnum.Seciniz;
 
   constructor(private movieService: MoviesService) { }

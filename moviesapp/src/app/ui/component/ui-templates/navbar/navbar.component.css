@@ -46,7 +46,7 @@
   }
 
   span:hover {
-    color: #ff416c;
+    color: #ffc303;
     transition: all 0.5s;
   }
 
@@ -59,4 +59,7 @@
     display: flex;
     justify-content: flex-end;
     margin-right: 100px;
+  }
+  .user i {
+    padding-right: 7px;
   }

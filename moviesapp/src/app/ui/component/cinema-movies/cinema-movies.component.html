@@ -1,35 +1,36 @@
 <section>
-<div class="movie-container">
-  <div class="movie-header">
+  <div class="movie-container">
+    <div class="movie-header">
       <h2>Vizyondaki Filmler</h2>
-    <div class="movie-search">
-      <input type="text"  placeholder="Film ara..." [(ngModel)]="filterText"/>
+      <div class="movie-search">
+        <input type="text" placeholder="Film ara..." [(ngModel)]="filterText" />
         <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-    </div>
-  </div>
-  <div class="movie-category">
-    <category-filter (categorySelected)="onCategorySelected($event)"></category-filter>
-  </div>
-  <div class="movie-main">
-    <div class="movie-content" *ngFor="let movie of movie | filter: filterText: filterName | categoryFilter:selectedCategory">
-      <div class="movie-image">
-        <img [src]="movie.movieImages | imageArray:0">
-      </div>
-      <div class="movie-card">
-        <div class="card-content">
-          <h2>{{movie.name | titlecase | limitTo:19}}</h2>
-          <h3>Yönetmen: {{movie.directors | joinArray:',' : 'name'| limitTo:18}}</h3>
-          <p>{{movie.players | joinArray:',': 'name' | limitTo:36}}</p>
-        </div>
-        <div class="card-info">
-          <span class="bold">{{movie.movieTime}} dk.</span>
-          <span class="normal">{{movie.categoryName}}</span>
-        </div>
-        <div class="card-button">
-          <button [routerLink]="'/Filmler/Detay/' + movie.id">Detay Sayfası</button>
-        </div>
       </div>
     </div>
+    <div class="movie-category">
+      <category-filter (categorySelected)="onCategorySelected($event)"></category-filter>
+    </div>
+    <div class="movie-main">
+      <div class="movie-content"
+        *ngFor="let movie of movie | filter: filterText: filterName | categoryFilter:selectedCategory">
+        <div class="movie-image">
+          <img [src]="movie.movieImages | imageArray:0">
+        </div>
+        <div class="movie-card">
+          <div class="card-content">
+            <h2>{{movie.name | titlecase | limitTo:19}}</h2>
+            <h3>Yönetmen: {{movie.directors | joinArray:',' : 'name'| limitTo:18}}</h3>
+            <p>{{movie.players | joinArray:',': 'name' | limitTo:36}}</p>
+          </div>
+          <div class="card-info">
+            <span class="bold">{{movie.movieTime}} dk.</span>
+            <span class="normal">{{movie.categoryName}}</span>
+          </div>
+          <div class="card-button">
+            <button [routerLink]="'/Filmler/Detay/' + movie.id">Detay Sayfası</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 </section>

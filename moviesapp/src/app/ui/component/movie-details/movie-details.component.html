@@ -1,7 +1,15 @@
 <section a>
   <div class="movie-details" *ngIf="movies">
     <div class="movie-image">
-      <img [src]="movies.movieImages | imageArray:1" />
+      <img 
+      *ngIf="isMobile; else desktopImage" 
+      [src]="movies.movieImages | imageArray:0" 
+    />
+    <ng-template #desktopImage>
+      <img 
+        [src]="movies.movieImages | imageArray:1" 
+      />
+    </ng-template>
     </div>
     <div class="movie-content">
       <div class="movie-header">

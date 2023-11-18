@@ -92,7 +92,7 @@ section{
       font-weight: 600;
       color: #ffffff;
       padding: 8px 15px;
-      background: #d00049;
+      background: #ffc303;
       border-radius: 15px;
       transition: all 0.4s;
       position: absolute; /* Sabit pozisyon */
@@ -100,7 +100,7 @@ section{
       right: 10px;
       transform: translate(0, 0);  /* Sağ alt köşeye göre sağ kenardan uzaklık */
       overflow: hidden;
-      border: 1px solid #d00049;
+      border: 1px solid #ffc303;
       cursor: pointer;
   }
   

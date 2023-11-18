@@ -192,6 +192,7 @@ input:focus {
   }
   input {
     border: 1px solid #ffc303;
+    width: 300px;
   }
   .movie-category {
     display: inline-flexbox;
