@@ -22,6 +22,7 @@ import { NavbarComponent } from './component/ui-templates/navbar/navbar.componen
 import { UpcomingMoviesComponent } from './component/upcoming-movies/upcoming-movies.component';
 import { DisneyComponent } from './component/platform-movies/disney/disney.component';
 import { SidebarComponent } from './component/ui-templates/sidebar/sidebar.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { SidebarComponent } from './component/ui-templates/sidebar/sidebar.compo
         FormsModule,
         SharedModule,
         BrowserAnimationsModule,
-        BrowserModule
+        BrowserModule,
+        NgxSpinnerModule
     ],
     providers: [
         UiLayoutComponent

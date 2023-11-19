@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1265px) {
     .navbar{
         margin: 0;
         padding: 0;
@@ -41,6 +41,8 @@
         height: 100%;
         z-index: 1000;
         transition: .5s;
+        overflow: hidden;
+        overflow-y: auto;
     }
 
     .sidebar {
@@ -48,7 +50,7 @@
         transition: 0.5s;
         top: 0;
         width: 280px;
-        position: fixed;
+        position: absolute;
     }
 
     ul {
@@ -56,8 +58,8 @@
         list-style: none;
         margin-top: 60px;
     }
-    .nav-links li:first-child{
-        margin-top: 50px;
+    li:first-child{
+        margin-top: 10px;
     }
     .nav-links li {
         border-bottom: 1px solid #3f3f3f;
@@ -88,7 +90,7 @@
         align-items: center;
         text-align: center;
         color: #fff;
-        margin-top: 5rem;
+        margin-top: 3rem;
       }
       
       .info span {
@@ -106,7 +108,8 @@
         padding: 0 15px;
       }
       .logo{
-        margin-top: 5rem;
+        margin-top: 3rem;
+        margin-bottom: 1rem;
       }
     .logo img{
         width: 200px;

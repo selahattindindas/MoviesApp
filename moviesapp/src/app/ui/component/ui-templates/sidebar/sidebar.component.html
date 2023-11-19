@@ -4,11 +4,17 @@
             <i *ngIf="isMenuOpen" class="fa-solid fa-bars fa-xl"></i>
             <i *ngIf="!isMenuOpen" class="fa-solid fa-xmark fa-xl"></i>
           </div>
-      <div class="header-logo" routerLink="/Filmler">
+      <div class="header-logo">
         <img src="assets/img/common/filmverse.png" />
       </div>
     </div>
     <ul class="nav-links sidebar" [ngClass]="{'sidebar': isMenuOpen}">
+      <li>
+        <a routerLink="/Filmler">
+          <i class="fa-solid fa-film fa-xl"></i>
+          <span>Anasayfa</span>
+        </a>
+      </li>
       <li>
         <a routerLink="Vizyondakiler">
           <i class="fa-solid fa-film fa-xl"></i>

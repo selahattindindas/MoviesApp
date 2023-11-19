@@ -29,7 +29,18 @@ body {
     position: sticky;
     top: 100%;
   }
-  @media screen and (max-width:768px) {
+  @media screen and (max-width:767px) {
+    main{
+      background-color: #272832;
+    }
+    .header{
+      display: none;
+    }
+    .sidebar{
+      display: block;
+    }
+  }
+  @media screen and (min-width: 768px) and (max-width: 1265px) {
     main{
       background-color: #272832;
     }

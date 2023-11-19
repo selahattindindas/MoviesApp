@@ -213,7 +213,7 @@ input {
 .slide-left {
   transform: translateX(-100%);
 }
-@media screen and (max-width:768px) {
+@media screen and (max-width:767px) {
   section{
     margin: 90px 2rem 0;
   }
@@ -248,6 +248,11 @@ input {
     transform: translateY(-101%);
   }
 }
+@media screen and (min-width: 768px) and (max-width: 1265px) {
+  section{
+    margin: 120px 20px 0;
+  }
 
+}
 
 

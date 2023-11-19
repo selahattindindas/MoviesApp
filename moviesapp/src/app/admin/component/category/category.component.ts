@@ -15,7 +15,7 @@ import { CategoryService } from 'src/app/services/common/models/category.service
 })
 export class AdminCategory implements OnInit {
   @ViewChild("categoryForm", { static: true }) categoryForm: NgForm
-  listCategory: List_Category[];
+  listCategory: List_Category[] = [];
   updateCategories: Update_Category = {name:''};
   showCreateFormFlag : boolean; //showCreateFormFlag optimize //böyle bir şey yaptım
   editCategoryId: number;

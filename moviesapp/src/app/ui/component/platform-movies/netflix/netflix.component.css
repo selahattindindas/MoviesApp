@@ -34,7 +34,6 @@ li:first-child{
 .movie-elements {
     display: flex;
     justify-content: center;
-
 }
 
 .movies-img {
@@ -125,7 +124,7 @@ li:first-child{
     display: none;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:767px) {
 
     .movie-img{
         position: relative;

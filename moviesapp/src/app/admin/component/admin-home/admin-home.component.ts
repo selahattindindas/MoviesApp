@@ -13,7 +13,7 @@ import * as am5xy from '@amcharts/amcharts5/xy';
   styleUrls: ['./admin-home.component.css'],
 })
 export class AdminHomeComponent implements AfterViewInit {
-  movies: List_Movie[];
+  movies: List_Movie[] = [];
   chart: am5.Chart;
   constructor(private movieservice: MoviesService) { }
 

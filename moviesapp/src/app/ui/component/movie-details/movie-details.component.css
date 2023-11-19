@@ -50,7 +50,7 @@ span {
   font-weight: 500;
   margin-left: 7px;
 }
-@media screen and (max-width:768px) {
+@media screen and (max-width:767px) {
   section{
     margin: 110px 20px;
   }
@@ -92,5 +92,25 @@ span {
   span {
     font-size: 14px;
     margin-left: 6px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1265px) {
+  section{
+    margin: 50px 20px;
+  }
+  .movie-direction{
+    display: block;
+  }
+  .movie-left{
+    width: 100%;
+    padding: 0;
+  }
+  .movie-right{
+    padding: 0;
+    width: 100%;
+    margin: 0;
+  }
+  .movie-right span{
+    margin: 0;
   }
 }

@@ -168,7 +168,7 @@ input:focus {
   width: 155%;
   height: 185%;
 }
-@media screen and (max-width:768px) {
+@media screen and (max-width:767px) {
   section{
     margin: 90px 20px;
   }
@@ -208,4 +208,20 @@ input:focus {
     margin: 10px auto;
     padding: 0;
   }
+}
+@media screen and (min-width: 768px) and (max-width: 1265px) {
+  section{
+    margin: 50px 20px;
+  }
+  .movie-header  {
+    display: block;
+    text-align: center;
+    padding: 0;
+  }
+  .movie-main {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
 }

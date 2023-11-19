@@ -33,10 +33,10 @@ export class NetflixComponent implements OnInit {
           "(min-width: 350px)": {
             slides: { perView: 1, spacing: 5 },
           },
-          "(min-width: 900px)": {
+          "(min-width: 600px)": {
             slides: { perView: 2, spacing: 10 },
           },
-          "(min-width: 1300px)": {
+          "(min-width: 1150px)": {
             slides: { perView: 3, spacing: 15 },
           },
         },

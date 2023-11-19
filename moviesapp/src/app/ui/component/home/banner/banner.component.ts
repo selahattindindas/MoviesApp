@@ -34,7 +34,7 @@ export class BannerComponent implements  OnInit, OnDestroy  {
     this.movies = await this.movieService.getAllMovies(PlatformEnum.Sinema, DateEnum.Vizyonda) as List_Movie[];
   }
   private checkWindowSize(): void {
-    this.isMobile = window.innerWidth < 768;
+    this.isMobile = window.innerWidth < 767;
   }
   getBanner(){
     setTimeout(() => {

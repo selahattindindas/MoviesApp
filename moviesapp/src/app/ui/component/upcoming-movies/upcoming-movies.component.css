@@ -141,7 +141,7 @@ i {
   font-size: 16px;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:767px) {
   section {
     margin: 90px 20px;
   }
@@ -191,5 +191,10 @@ i {
 
   p {
     padding-top: 5px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1265px) {
+  section{
+    margin: 50px 20px;
   }
 }

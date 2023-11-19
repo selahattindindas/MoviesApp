@@ -13,7 +13,7 @@ section{
   .disney-movie{
     margin-top: 3rem;
   }
-  @media screen and (max-width:768px) {
+  @media screen and (max-width:767px) {
     section{
       margin: 90px 20px;
     }
@@ -32,4 +32,8 @@ section{
       padding-top: 35px;
     }
   }
-  
+  @media screen and (min-width: 768px) and (max-width: 1265px) {
+    section{
+      margin: 50px 20px;
+    }
+  }
