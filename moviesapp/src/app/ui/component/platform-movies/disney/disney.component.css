@@ -34,7 +34,6 @@ li:first-child{
 .movie-elements {
     display: flex;
     justify-content: center;
-
 }
 
 .movies-img {
@@ -69,7 +68,7 @@ li:first-child{
     border-radius: 25px;
     color: #f9f9f9;
     font-weight: bold;
-    background: #d00049;
+    background: #ffc303;
     transition: all 0.6s;
     z-index: 1;
     position: relative;
@@ -94,7 +93,7 @@ li:first-child{
 }
 
 .movie-link button:hover {
-    color: #d00049;
+    color: #ffc303;
     background: #f9f9f9;
 }
 

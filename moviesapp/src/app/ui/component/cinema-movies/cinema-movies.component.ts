@@ -14,7 +14,7 @@ import { SpinnerType } from 'src/app/enums/spinner-enum';
   styleUrls: ['./cinema-movies.component.css']
 })
 export class CinemaMoviesComponent extends BaseComponent implements OnInit {
-  movie: List_Movie[];
+  movies: List_Movie[];
   filterText: string;
   filterName: keyof List_Movie = 'name';
   selectedCategory = CategoryEnum.Seciniz;
@@ -29,7 +29,7 @@ export class CinemaMoviesComponent extends BaseComponent implements OnInit {
   }
 
   async getMovies() {
-    this.movie = await this.movieService.getAllMovies(PlatformEnum.Sinema, DateEnum.Vizyonda) as List_Movie[];
+    this.movies = await this.movieService.getAllMovies(PlatformEnum.Sinema, DateEnum.Vizyonda) as List_Movie[];
   }
 
   async onCategorySelected(category: CategoryEnum) {

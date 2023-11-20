@@ -1,6 +1,6 @@
 section {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1300px;
 }
 
 .popular-name {
@@ -19,12 +19,12 @@ ul {
   padding: 0;
   margin: 0;
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
 li {
   display: block;
-  padding: 0 14px 0 0;
 }
 
 .popular-img {
@@ -82,7 +82,7 @@ li {
   padding-top: 20px;
 }
 
-.popular-name {
+span {
   font-size: 20px;
   font-weight: 800;
 }
