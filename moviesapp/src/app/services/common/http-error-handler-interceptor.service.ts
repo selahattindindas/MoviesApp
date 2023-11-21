@@ -11,31 +11,28 @@ export class HttpErrorHandlerInterceptorService {
 
   constructor(private sweetAlertService:SweetalertService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
-    return next.handle(req).pipe(catchError(error => {
-      if (error.status === 500) {
-        this.sweetAlertService.showAlert(SweetHttpError.serverError);
-      }else{
+    return next.handle(req).pipe(
+      catchError(error => {
+        let sweetError = SweetHttpError.serverError;
         switch (error.status) {
           case HttpStatusCode.InternalServerError:
-            this.sweetAlertService.showAlert(SweetHttpError.serverError);
+            sweetError = SweetHttpError.serverError;
             break;
           case HttpStatusCode.BadRequest:
-            this.sweetAlertService.showAlert(SweetHttpError.serverError);
+            sweetError = SweetHttpError.serverError;
             break;
           case HttpStatusCode.NotFound:
-            this.sweetAlertService.showAlert(SweetHttpError.serverError);
+            sweetError = SweetHttpError.serverError;
             break;
           default:
-            this.sweetAlertService.showAlert(SweetHttpError.serverError);
+            sweetError = SweetHttpError.serverError;
             break;
         }
-      }
-  
+        this.sweetAlertService.showAlert(sweetError);
       return of(error);
     }
     ));
   }
 }
 
-//Intercept'in mantığını araştır kodu kısalt Medium yazısı yaz. 
 

@@ -29,3 +29,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .modal-body{
   background-color: #ccc;
 }
+.no-filter {
+  font-size: 27px;
+  font-weight: bold;
+  width: 100%;
+  color: white;
+  text-align: center;
+  padding: 70px 0px;
+}

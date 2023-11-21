@@ -24,6 +24,8 @@
           <button [routerLink]="['Create-Movie']">+ Film Ekle</button>
         </div>
       </div>
+      <ng-container
+    *ngIf="(movie | filter: filterText: filterName).length > 0; else noResults">
       <div class="table-wrapper">
         <table class="lg-table">
           <thead>
@@ -61,13 +63,13 @@
           <tbody>
             
         </table>
-        <ng-template #noResults>
-          <div class="error">
-            <p>Aranılan Film Bulunamadı: "{{filterText}}".</p>
-          </div>
-        </ng-template>
       </div>
+      </ng-container>
     </div>
-
+    <ng-template #noResults>
+      <div class="no-filter">
+        Ne yazık ki arama kriterine uygun film bulunmuyor.
+      </div>
+    </ng-template>
   </div>
 </section>

@@ -29,6 +29,7 @@ body {
     position: sticky;
     top: 100%;
   }
+  
   @media screen and (max-width:767px) {
     main{
       background-color: #272832;

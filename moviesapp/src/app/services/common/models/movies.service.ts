@@ -82,7 +82,7 @@ export class MoviesService {
         return response;
       })
       .catch(errorResponse => {
-        errorCallBack(errorResponse);
+        errorCallBack(errorResponse.error.message);
       });
   }
 

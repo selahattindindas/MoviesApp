@@ -12,6 +12,8 @@
     <div class="movie-category">
         <category-filter (categorySelected)="onCategorySelected($event)"></category-filter>
       </div>
+      <ng-container
+      *ngIf="(movies | filter: filterText: filterName | categoryFilter:selectedCategory).length > 0; else noResults">
     <ul>
         <li *ngFor="let movie of movies | filter: filterText: filterName | categoryFilter:selectedCategory">
             <div class="soon-img">
@@ -29,4 +31,10 @@
             </div>
         </li>
     </ul>
+      </ng-container>
+    <ng-template #noResults>
+        <div class="no-filter">
+          Ne yazık ki arama kriterine uygun film bulunmuyor.
+        </div>
+      </ng-template>
 </section>

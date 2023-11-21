@@ -40,7 +40,7 @@
         background-color: #1e1e1e;
         height: 100%;
         z-index: 1000;
-        transition: .5s;
+        transition: 0.5s;
         overflow: hidden;
         overflow-y: auto;
     }
