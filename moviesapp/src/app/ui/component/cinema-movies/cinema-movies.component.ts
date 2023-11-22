@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
-import { CategoryDescription, CategoryEnum } from 'src/app/enums/category-enum';
+import { CategoryEnum } from 'src/app/enums/category-enum';
 import { PlatformEnum } from 'src/app/enums/platform-enum';
 import { DateEnum } from 'src/app/enums/date-enum';
 import { NgxSpinnerService } from 'ngx-spinner';

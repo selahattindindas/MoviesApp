@@ -1,0 +1,28 @@
+@media screen and (max-width:767px) {
+  section {
+    margin: 90px 20px;
+  }
+
+  ul {
+    margin-top: 40px;
+  }
+
+  li {
+    margin: 0 auto;
+    padding-bottom: 45px;
+  }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1300px) {
+  section {
+    margin: 50px 20px;
+  }
+
+  li {
+    display: block;
+    margin: 0 20px 20px 0;
+    color: #fff;
+
+  }
+}

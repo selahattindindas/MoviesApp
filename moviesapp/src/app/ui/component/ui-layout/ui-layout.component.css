@@ -1,3 +1,4 @@
+
 body {
     margin: 0;
     padding: 0;
@@ -17,7 +18,6 @@ body {
   .header{
     width: 100%;
     background-color: #231f20;
-    /* background: linear-gradient(to bottom right,#00c4cc,#8b3dff) border-box; */
   }
   .sidebar{
     display: none;
@@ -26,6 +26,8 @@ body {
     margin-bottom: 4rem;
   }
   .footer{
+    background-color: #231f20;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
     position: sticky;
     top: 100%;
   }

@@ -1,40 +1,52 @@
 <section>
     <div class="spinner">
-        <ngx-spinner size="large">Sayfa Yükleniyor</ngx-spinner>
-      </div>
-    <div class="soon-header">
-        <h2>Yaklaşan Filmler</h2>
-        <div class="soon-search">
-            <input type="text" placeholder="Film ara..." [(ngModel)]="filterText" />
-            <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-        </div>
+      <ngx-spinner size="large">Sayfa Yükleniyor</ngx-spinner>
     </div>
-    <div class="movie-category">
-        <category-filter (categorySelected)="onCategorySelected($event)"></category-filter>
+    <div class="movies-header">
+      <h2>Vizyondaki Filmler</h2>
+      <div class="movies-search">
+        <input type="text" placeholder="Film ara..." [(ngModel)]="filterText" />
+        <i class="fa-solid fa-magnifying-glass fa-lg"></i>
       </div>
-      <ng-container
+    </div>
+    <div class="movies-category">
+      <category-filter (categorySelected)="onCategorySelected($event)"></category-filter>
+    </div>
+    <ng-container
       *ngIf="(movies | filter: filterText: filterName | categoryFilter:selectedCategory).length > 0; else noResults">
-    <ul>
-        <li *ngFor="let movie of movies | filter: filterText: filterName | categoryFilter:selectedCategory">
-            <div class="soon-img">
-                <img [src]="movie.movieImages | imageArray:0">
-                <div class="overlay">
-                    <button class="detail-button" [routerLink]="'/Filmler/Detay/' + movie.id">Film Detayı</button>
+        <ul>
+          <li *ngFor="let movie of movies | filter: filterText: filterName | categoryFilter:selectedCategory">
+            <div class="movies-img">
+              <img [src]="movie.movieImages | imageArray:0">
+              <div class="movies-details">
+                <div class="movies-contents-one">
+                  <span class="movies-name">{{movie.name}}</span>
+                  <p class="class-directors">
+                    <span>{{movie.directors | joinArray:', ' : 'name'}}</span>
+                  </p>
+                  <p class="class-category">
+                    <span class="movie-category">{{movie.categoryName}}</span>
+                    <span class="movie-platform">{{movie.platformName}}</span>
+                  </p>
                 </div>
+                <div class="movies-contents-two">
+                  <p class="class-details">
+                    <span>{{movie.description}}</span>
+                  </p>
+                  <a [routerLink]="'/Filmler/Detay/' + movie.id" class="button">
+                    <span>
+                      Daha fazlası →
+                    </span>
+                  </a>
+                </div>
+              </div>
             </div>
-            <div class="soon-details">
-                <span class="soon-name">{{movie.name}}</span>
-                <p>
-                    <i class="fa-regular fa-calendar-days"></i>
-                    <span class="soon-date">{{movie.releaseDate | date:'dd/MM/yyyy'}}</span>
-                <p>
-            </div>
-        </li>
-    </ul>
-      </ng-container>
+          </li>
+        </ul>
+    </ng-container>
     <ng-template #noResults>
-        <div class="no-filter">
-          Ne yazık ki arama kriterine uygun film bulunmuyor.
-        </div>
-      </ng-template>
-</section>
+      <div class="no-filter">
+        Ne yazık ki arama kriterine uygun film bulunmuyor.
+      </div>
+    </ng-template>
+  </section>

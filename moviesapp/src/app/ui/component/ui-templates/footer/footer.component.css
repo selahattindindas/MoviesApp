@@ -1,10 +1,8 @@
 section{
-  background-color: #231f20;
-}
-.footer{
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .footer-container{
   padding: 3rem 0;
   display: flex;
@@ -104,6 +102,13 @@ li:last-child{
   color: #fff;
   font-size: 16px;
   font-weight: 600;
+}
+a span{
+  transition: all 0.6s; 
+}
+a span:hover{
+  color: #505050;
+  transition: all 0.6s;
 }
 @media screen and (max-width:767px) {
   .footer-container{

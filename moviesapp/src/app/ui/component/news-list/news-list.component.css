@@ -68,7 +68,7 @@ span {
 }
 
 .news-button button {
-  border: 1px solid #000;
+  border: 2px solid #272832;
   color: #272832;
   background-color: #fff;
   font-size: 15px;
@@ -79,9 +79,9 @@ span {
 }
 
 .news-button button:hover {
-  border-color: #ffc303;
+  border-color: #505050;
   color: #fff;
-  background-color: #ffc303;
+  background-color: #505050;
   transition: all 0.4s;
 }
 

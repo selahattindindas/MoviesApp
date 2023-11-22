@@ -30,7 +30,7 @@
   .select-category::after {
     border-left: var(--size) solid transparent;
     border-right: var(--size) solid transparent;
-    border-top: var(--size) solid #ffc303;
+    border-top: var(--size) solid #a0a0a0;
     top: 50%;
     transform: translateY(-50%);
   }

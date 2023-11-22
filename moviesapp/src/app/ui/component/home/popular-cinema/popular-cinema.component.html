@@ -1,24 +1,32 @@
 <section>
-    <div class="popular-name">
+    <div class="popular-header">
         <h2>Popüler Sinema Filmleri</h2>
     </div>
     <ul>
         <li *ngFor="let movie of movies">
-            <div class="popular-img">
+            <div class="movies-img">
                 <img [src]="movie.movieImages | imageArray:0">
-                <div class="overlay">
-                    <button class="detail-button" [routerLink]="'/Filmler/Detay/' + movie.id">Film Detayı</button>
+                <div class="movies-details">
+                    <div class="movies-contents-one">
+                        <span class="movies-name">{{movie.name}}</span>
+                        <p class="class-directors">
+                            <span>{{movie.directors | joinArray:', ' : 'name'}}</span>
+                        </p>
+                        <p class="class-category">
+                            <span class="movie-category">{{movie.categoryName}}</span>
+                        </p>
+                    </div>
+                    <div class="movies-contents-two">
+                        <p class="class-details">
+                            <span>{{movie.description}}</span>
+                        </p>
+                        <a [routerLink]="'/Filmler/Detay/' + movie.id" class="button">
+                            <span>
+                                Daha fazlası →
+                            </span>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="popular-details">
-                <span>{{movie.name}}</span>
-                <p class="class-category">
-                    <span class="popular-category">{{movie.categoryName}}</span>
-                </p>
-                <p class="class-date">
-                    <i class="fa-regular fa-calendar-days"></i>
-                    <span class="popular-date">{{movie.releaseDate}}</span>
-                <p>
             </div>
         </li>
     </ul>

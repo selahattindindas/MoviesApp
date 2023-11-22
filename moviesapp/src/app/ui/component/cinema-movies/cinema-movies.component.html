@@ -2,34 +2,33 @@
   <div class="spinner">
     <ngx-spinner size="large">Sayfa Yükleniyor</ngx-spinner>
   </div>
-  <div class="movie-header">
+  <div class="movies-header">
     <h2>Vizyondaki Filmler</h2>
-    <div class="movie-search">
+    <div class="movies-search">
       <input type="text" placeholder="Film ara..." [(ngModel)]="filterText" />
       <i class="fa-solid fa-magnifying-glass fa-lg"></i>
     </div>
   </div>
-  <div class="movie-category">
+  <div class="movies-category">
     <category-filter (categorySelected)="onCategorySelected($event)"></category-filter>
   </div>
   <ng-container
     *ngIf="(movies | filter: filterText: filterName | categoryFilter:selectedCategory).length > 0; else noResults">
-    <div class="movie-main">
       <ul>
         <li *ngFor="let movie of movies | filter: filterText: filterName | categoryFilter:selectedCategory">
           <div class="movies-img">
             <img [src]="movie.movieImages | imageArray:0">
             <div class="movies-details">
-              <div class="movies-info">
+              <div class="movies-contents-one">
                 <span class="movies-name">{{movie.name}}</span>
                 <p class="class-directors">
                   <span>{{movie.directors | joinArray:', ' : 'name'}}</span>
                 </p>
                 <p class="class-category">
-                  <span class="movies-category">{{movie.categoryName}}</span>
+                  <span class="movie-category">{{movie.categoryName}}</span>
                 </p>
               </div>
-              <div class="movie-hover">
+              <div class="movies-contents-two">
                 <p class="class-details">
                   <span>{{movie.description}}</span>
                 </p>
@@ -43,8 +42,6 @@
           </div>
         </li>
       </ul>
-
-    </div>
   </ng-container>
   <ng-template #noResults>
     <div class="no-filter">
