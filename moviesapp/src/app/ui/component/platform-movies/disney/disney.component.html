@@ -9,7 +9,9 @@
           <ng-container *ngFor="let movie of movies">
             <li class="keen-slider__slide">
             <div class="movie-elements" >
-                <img class="movies-img" [src]="movie.movieImages | imageArray:0" />
+              <div class="movies-img">
+                <img [src]="movie.movieImages | imageArray:0" />
+              </div>
                 <div class="movie-details">
                     <span class="movie-name">{{movie.name}}</span>
                     <span class="movie-content">

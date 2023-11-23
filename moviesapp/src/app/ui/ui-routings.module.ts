@@ -12,6 +12,7 @@ import { NetflixComponent } from './component/platform-movies/netflix/netflix.co
 import { FooterComponent } from './component/ui-templates/footer/footer.component';
 import { NavbarComponent } from './component/ui-templates/navbar/navbar.component';
 import { SidebarComponent } from './component/ui-templates/sidebar/sidebar.component';
+import { AboutComponent } from './component/about/about.component';
 
 const routes: Route[] = [
     {
@@ -28,6 +29,7 @@ const routes: Route[] = [
             { path: 'Platformdakiler', component: PlatformMoviesComponent },
             { path: 'Yaklasanlar', component: UpcomingMoviesComponent },
             { path: 'Haberler', component: NewsListComponent },
+            {path: 'Hakkımızda', component: AboutComponent},
             { path: 'Detay/:id', component: MovieDetailsComponent },
             { path: 'Giriş', component: LoginComponent },
         ],
@@ -35,6 +37,6 @@ const routes: Route[] = [
 ];
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+    exports: [RouterModule]
 })
 export class UiRoutingModule { }

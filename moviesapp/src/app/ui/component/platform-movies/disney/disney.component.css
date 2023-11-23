@@ -37,9 +37,19 @@ li:first-child{
 }
 
 .movies-img {
-    border-radius: 15px;
     width: 175px;
     height: 245px;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+.movies-img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+.movies-img img:hover{
+    transform: scale(1.4);
+    transition: all 0.5s ease;
 }
 
 .movie-details {
@@ -65,10 +75,10 @@ li:first-child{
 
 .movie-link button {
     padding: 8px 15px;
-    border-radius: 25px;
+    border-radius: 10px;
     color: #f9f9f9;
     font-weight: bold;
-    background: linear-gradient(to bottom right,#252053,#232596) border-box;
+    background-color: #424242;
     transition: all 0.6s;
     z-index: 1;
     position: relative;
@@ -93,7 +103,7 @@ li:first-child{
 }
 
 .movie-link button:hover {
-    color: #232596;
+    color: #424242;
     background: #f9f9f9;
 }
 

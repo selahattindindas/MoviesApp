@@ -23,6 +23,7 @@ import { UpcomingMoviesComponent } from './component/upcoming-movies/upcoming-mo
 import { DisneyComponent } from './component/platform-movies/disney/disney.component';
 import { SidebarComponent } from './component/ui-templates/sidebar/sidebar.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AboutComponent } from './component/about/about.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
         MovieDetailsComponent,
         FooterComponent,
         NavbarComponent,
-        SidebarComponent
+        SidebarComponent,
+        AboutComponent
     ],
     imports: [
         CommonModule,

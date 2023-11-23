@@ -7,7 +7,7 @@ section {
 }
 
 .popular-header {
-  padding: 1rem 0 2rem;
+  padding: 3rem 0 2rem;
 }
 
 .popular-header h2 {
@@ -24,8 +24,19 @@ ul {
   justify-content: center;
   flex-wrap: wrap;
 }
+
 @media screen and (max-width:767px) {
-  .popular-header h2{
+  .popular-header {
+    padding: 1rem 20px;
+  }
+
+  .popular-header h2 {
     font-size: 25px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1300px) {
+  .popular-header {
+    padding: 2rem 20px 1rem;
   }
 }

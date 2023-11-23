@@ -16,8 +16,8 @@
     *ngIf="(movies | filter: filterText: filterName | categoryFilter:selectedCategory).length > 0; else noResults">
       <ul>
         <li *ngFor="let movie of movies | filter: filterText: filterName | categoryFilter:selectedCategory">
-          <div class="movies-img">
-            <img [src]="movie.movieImages | imageArray:0">
+          <div class="movies-img" [routerLink]="'/Filmler/Detay/' + movie.id">
+            <img [src]="movie.movieImages | imageArray:0" >
             <div class="movies-details">
               <div class="movies-contents-one">
                 <span class="movies-name">{{movie.name}}</span>

@@ -4,7 +4,7 @@
     </div>
     <ul>
         <li *ngFor="let movie of movies">
-            <div class="movies-img">
+            <div class="movies-img" [routerLink]="'/Filmler/Detay/' + movie.id">
                 <img [src]="movie.movieImages | imageArray:0">
                 <div class="movies-details">
                     <div class="movies-contents-one">
