@@ -24,46 +24,46 @@
           <button [routerLink]="['Create-Movie']">+ Film Ekle</button>
         </div>
       </div>
-      <ng-container
-    *ngIf="(movie | filter: filterText: filterName).length > 0; else noResults">
-      <div class="table-wrapper">
-        <table class="lg-table">
-          <thead>
-            <tr>
-              <th>Film Adı</th>
-              <th>Film Kategori</th>
-              <th>Film Platform</th>
-              <th>Vizyon Tarihi</th>
-              <th>Kadro İşlemleri</th>
-              <th>Fotoğraf İşlemleri</th>
-              <th>Film İşlemleri</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let movie of movie | filter: filterText: filterName">
-              <td>{{ movie.name | limitTo:15}}</td>
-              <td>{{ movie.categoryName }}</td>
-              <td>{{ movie.platformName }}</td>
-              <td>{{ movie.releaseDate }}</td>
-              <td>
-                <i class="fa-solid fa-users fa-ml actor" title="Oyuncu Ekle"
-                  [routerLink]="['Create-Players', movie.id]"></i>
-                <i class="fa-solid fa-user fa-ml director" title="Yönetmen Ekle"
-                  [routerLink]="['Create-Director', movie.id]"></i>
-              </td>
-              <td>
-                <i class="fa-solid fa-image fa-lg" title="Fotoğraf Ekle" 
-                [routerLink]="['Create-Photos', movie.id]"></i>
-              </td>
-              <td>
-                <i class="fa-solid fa-pen-to-square fa-lg update" title="Düzenle" [routerLink]="['Edit', movie.id]"></i>
-                <i class="fa-solid fa-trash fa-lg delete" title="Sil" (click)="deleteMovie(movie.id)"></i>
-              </td>
-            </tr>
-          <tbody>
-            
-        </table>
-      </div>
+      <ng-container *ngIf="(movie | filter: filterText: filterName).length > 0; else noResults">
+        <div class="table-wrapper">
+          <table class="lg-table">
+            <thead>
+              <tr>
+                <th>Film Adı</th>
+                <th>Film Kategori</th>
+                <th>Film Platform</th>
+                <th>Vizyon Tarihi</th>
+                <th>Kadro İşlemleri</th>
+                <th>Fotoğraf İşlemleri</th>
+                <th>Film İşlemleri</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let movie of movie | filter: filterText: filterName">
+                <td>{{ movie.name | limitTo:15}}</td>
+                <td>{{ movie.categoryName }}</td>
+                <td>{{ movie.platformName }}</td>
+                <td>{{ movie.releaseDate }}</td>
+                <td>
+                  <i class="fa-solid fa-users fa-ml actor" title="Oyuncu Ekle"
+                    [routerLink]="['Create-Players', movie.id]"></i>
+                  <i class="fa-solid fa-user fa-ml director" title="Yönetmen Ekle"
+                    [routerLink]="['Create-Director', movie.id]"></i>
+                </td>
+                <td>
+                  <i class="fa-solid fa-image fa-lg" title="Fotoğraf Ekle"
+                    [routerLink]="['Create-Photos', movie.id]"></i>
+                </td>
+                <td>
+                  <i class="fa-solid fa-pen-to-square fa-lg update" title="Düzenle"
+                    [routerLink]="['Edit', movie.id]"></i>
+                  <i class="fa-solid fa-trash fa-lg delete" title="Sil" (click)="deleteMovie(movie.id)"></i>
+                </td>
+              </tr>
+            <tbody>
+
+          </table>
+        </div>
       </ng-container>
     </div>
     <ng-template #noResults>

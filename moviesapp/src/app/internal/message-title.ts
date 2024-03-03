@@ -20,6 +20,7 @@ export class MessageText {
     static readonly DirectorDelete = "Yönetmen Başarıyla Kaldırıldı"
     static readonly PhotoCreate = "Fotoğraf Başarıyla Eklendi"
     static readonly PhotoDelete = "Fotoğraf Başarıyla Kaldırıldı"
+    static readonly UserRegister = "Başarıyla Kayıt Oldunuz"
     static readonly ServerError = "Sunucu Hatası Lütfen Daha Sonra Tekrar Deneyin!"
 }
 export class ConfirmButtonText{

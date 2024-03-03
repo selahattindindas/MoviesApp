@@ -15,7 +15,7 @@ import { SpinnerType } from 'src/app/enums/spinner-enum';
 })
 export class CinemaMoviesComponent extends BaseComponent implements OnInit {
   movies: List_Movie[];
-  filterText: string;
+  filterText: string = "";
   filterName: keyof List_Movie = 'name';
   selectedCategory = CategoryEnum.Seciniz;
 

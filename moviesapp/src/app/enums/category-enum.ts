@@ -3,7 +3,7 @@ export enum CategoryEnum {
   Aksiyon = 1,
   Macera =2,
   BilimKurgu = 3,
-  Romantik = 113,
+  Romantik = 4,
 }
 
 export const CategoryDescription: { [key in CategoryEnum]: string } = 
