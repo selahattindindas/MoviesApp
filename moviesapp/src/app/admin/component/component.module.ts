@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { UserComponent } from './user/user.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,7 +38,6 @@ import { SharedModule } from 'src/app/shared/pipes/pipe-module';
     NavbarComponent,
     FooterComponent,
     SidebarComponent,
-    
   ],
   imports: [
     CommonModule,
@@ -47,8 +46,8 @@ import { SharedModule } from 'src/app/shared/pipes/pipe-module';
     ReactiveFormsModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
   ],
-  providers: [AdminlayoutComponent],
+  providers: [AdminlayoutComponent, DatePipe],
 })
 export class AdminModule { }

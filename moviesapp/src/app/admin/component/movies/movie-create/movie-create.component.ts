@@ -33,10 +33,10 @@ export class MovieCreateComponent extends BaseComponent implements OnInit {
     this.platform = new ListPlatformEnum();
 
     this.createForm = this.fb.group({
-      name: new FormControl(null, [Validators.required, Validators.minLength(5)]),
+      name: new FormControl(null, [Validators.required, Validators.minLength(4)]),
       categoryId: new FormControl('0', categoryValidator()),
       platformId: new FormControl('0', categoryValidator()),
-      date: new FormControl(null, [Validators.required,dateFormatValidator]),
+      date: new FormControl(null, [Validators.required, dateFormatValidator]),
       time: new FormControl(null, [Validators.required, Validators.max(300), Validators.min(1)]),
       detail: new FormControl(null, [Validators.required, Validators.maxLength(520), Validators.minLength(30)]),
     });

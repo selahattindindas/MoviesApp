@@ -53,7 +53,7 @@
           <div class="update-contents">
             <div class="label-input">
               <label for="date">Film Vizyon Tarihi</label>
-              <input class="update-input custom-input" type="date" formControlName="date" [ngModel]="movies.releaseDate | customDate | date:'dd.MM.yyyy'" />
+              <input class="update-input custom-input" type="date" formControlName="date" [ngModel]="movies.releaseDate" />
               <div class="text-danger">
                 <small *ngIf="updateForm.get('date').hasError('required') && updateForm.get('date').touched">
                   Lütfen boş bırakmayınız.

@@ -1,7 +1,7 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
-export function dateFormatValidator(control: AbstractControl){
-    const inputValue = control.value;
+export function dateFormatValidator(control: AbstractControl) {
+  const inputValue = control.value;
 
   // Tarih formatını kontrol etmek için uygun bir mantık geliştirin
   // Örnek: YYYY-MM-DD formatını kontrol edelim
@@ -11,6 +11,6 @@ export function dateFormatValidator(control: AbstractControl){
     return { customDateFormat: true };
   }
 
-  return null; 
-  }
-  
+  return null;
+}
+

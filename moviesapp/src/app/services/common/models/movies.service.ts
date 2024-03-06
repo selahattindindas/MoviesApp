@@ -8,6 +8,7 @@ import { JsonResponse } from 'src/app/contracts/response/response';
 import { PlatformDescription, PlatformEnum } from 'src/app/enums/platform-enum';
 import { CategoryEnum } from 'src/app/enums/category-enum';
 import { DateEnum } from 'src/app/enums/date-enum';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Injectable({
@@ -81,8 +82,15 @@ export class MoviesService {
         successCallBack();
         return response;
       })
-      .catch(errorResponse => {
-        errorCallBack(errorResponse.error.message);
+      .catch( (errorResponse: HttpErrorResponse) => {
+        const _error: Array<{ key: string, value: Array<string> }> = errorResponse.error;
+        let message = "";
+        _error.forEach((v, index) => {
+          v.value.forEach((_v, _index) => {
+            message += `${_v}<br>`;
+          });
+        });
+        errorCallBack(message);
       });
   }
 
