@@ -1,0 +1,8 @@
+<div class="popular-vision">
+    <div *ngFor="let platform of platforms" class="movie">
+        <div class="popular-header">
+            <h2>{{ platform.name }} Filmleri</h2>
+        </div>
+        <app-card [movies]="platform.movies"></app-card>
+    </div>
+</div>

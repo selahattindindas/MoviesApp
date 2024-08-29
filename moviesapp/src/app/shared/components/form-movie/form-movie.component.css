@@ -1,0 +1,221 @@
+    .card {
+        width: 120%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    input::placeholder {
+        color: #ccc;
+        font-weight: 600;
+    }
+
+    .movie-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .movie-header h2 {
+        font-size: 40px;
+        font-weight: 800;
+        color: #333;
+    }
+
+    .movie-contents {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .label-input {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .label-input label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #5643CC;
+    }
+
+    .movie-input,
+    .movie-select {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: none;
+        border-bottom: 2px solid #ccc;
+        background-color: transparent;
+        transition: border-color 0.3s;
+        outline: none;
+        font-weight: 600;
+        color: #000;
+    }
+
+    .movie-input:focus,
+    .movie-select:focus {
+        border-bottom: 2px solid #000;
+    }
+
+    .invalidRed {
+        border-bottom: 2px solid rgba(255, 0, 0, 0.5);
+    }
+
+    .time-input {
+        display: flex;
+        align-items: center;
+    }
+
+    .time-input input[type="number"] {
+        width: 45%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .time-input span {
+        margin: 0 5px;
+    }
+
+    .movie-button {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .movie-button button {
+        display: block;
+        padding: 15px;
+        font-size: 16px;
+        background-color: #5643CC;
+        color: #ffffff;
+        border: none;
+        border-radius: 2rem;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .movie-button button:hover {
+        background-color: #4d32ff;
+    }
+
+    .actors-list ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .actors-list li {
+        border-radius: 20px;
+        border: 2px solid #ccc;
+        margin: 5px;
+        font-size: 12px;
+        padding: 5px;
+        white-space: nowrap;
+        color: #000;
+    }
+
+    .label-input ul {
+        width: 100%;
+    }
+
+    li i {
+        padding-right: 5px;
+    }
+
+    .close {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .close button {
+        width: 40px;
+        height: 40px;
+        background: transparent;
+        border: 4px solid #5643CC;
+        border-radius: 10px;
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+        margin: 10px 20px;
+        font-size: 20px;
+        font-weight: 800;
+        color: #5643CC;
+    }
+
+    @media screen and (max-width: 768px) {
+        .card {
+            width: 100%;
+            max-width: 100%;
+            padding: 1rem;
+        }
+
+        .movie-header h2 {
+            font-size: 30px;
+        }
+
+        .movie-contents {
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+        .custom-select {
+            margin-bottom: 10px;
+        }
+
+        .custom-input {
+            margin-bottom: 10px;
+        }
+
+        .label-input {
+            margin-right: 0;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        textarea,
+        select {
+            padding: 5px;
+            font-size: 12px;
+        }
+
+        .time-input input[type="number"] {
+            width: 100%;
+        }
+
+        .movie-button {
+            justify-content: center;
+        }
+
+        .movie-button button {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .actors-list li {
+            font-size: 10px;
+        }
+    }
+
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+        .card {
+            width: 100%;
+            max-width: 100%;
+            padding: 1rem;
+        }
+
+        .movie-header h2 {
+            font-size: 30px;
+        }
+
+        .movie-contents {
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+    }

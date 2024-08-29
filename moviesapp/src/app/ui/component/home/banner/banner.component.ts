@@ -1,8 +1,11 @@
 import { Component, ElementRef, AfterViewInit, OnDestroy, ViewChild, OnInit, HostListener} from '@angular/core';
 import KeenSlider, { KeenSliderInstance } from 'keen-slider';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BaseComponent } from 'src/app/base/base.component';
+import { DateEnum } from 'src/app/constacts/date-enum';
+import { PlatformEnum } from 'src/app/constacts/platform-enum';
+import { SpinnerType } from 'src/app/constacts/spinner-enum';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
-import { DateEnum } from 'src/app/enums/date-enum';
-import { PlatformEnum } from 'src/app/enums/platform-enum';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
 
 @Component({
@@ -10,14 +13,18 @@ import { MoviesService } from 'src/app/services/common/models/movies.service';
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.css']
 })
-export class BannerComponent implements  OnInit, OnDestroy  {
+export class BannerComponent extends BaseComponent implements  OnInit, OnDestroy  {
   @ViewChild("sliderRef") sliderRef: ElementRef<HTMLElement>;
-
   currentSlide: number = 0;
   slider: KeenSliderInstance ;
   movies: List_Movie[];
   isMobile: boolean = false;
-  constructor(private movieService: MoviesService) {}
+
+  constructor(
+    private movieService: MoviesService,
+    spinner: NgxSpinnerService) {
+      super(spinner);
+    }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
@@ -31,11 +38,21 @@ export class BannerComponent implements  OnInit, OnDestroy  {
   }
 
   async getMovies() {
-    this.movies = await this.movieService.getAllMovies(PlatformEnum.Sinema, DateEnum.Vizyonda) as List_Movie[];
+    this.componentSpinner(SpinnerType.JellyBox); 
+
+    this.movieService.getAllMovies(PlatformEnum.Sinema, DateEnum.Vision)
+      .then(movieData => {
+        this.movies = movieData as List_Movie[];
+      })
+      .finally(() => {
+        this.spinner.hide(); 
+      });
   }
+  
   private checkWindowSize(): void {
     this.isMobile = window.innerWidth < 610;
   }
+
   getBanner(){
     setTimeout(() => {
       this.slider = new KeenSlider(this.sliderRef.nativeElement, {

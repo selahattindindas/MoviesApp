@@ -1,18 +1,10 @@
 <section>
-  <div class="spinner">
-    <ngx-spinner size="large">Sayfa Yükleniyor</ngx-spinner>
-  </div>
   <div class="movie-details" *ngIf="movies">
     <div class="movie-image">
-      <img 
-      *ngIf="isMobile; else desktopImage" 
-      [src]="movies.movieImages | imageArray:0" 
-    />
-    <ng-template #desktopImage>
-      <img 
-        [src]="movies.movieImages | imageArray:1" 
-      />
-    </ng-template>
+      <img *ngIf="isMobile; else desktopImage" [src]="movies.movieImages | imageArray:0" />
+      <ng-template #desktopImage>
+        <img [src]="movies.movieImages | imageArray:1" />
+      </ng-template>
     </div>
     <div class="movie-content">
       <div class="movie-header">
@@ -32,8 +24,7 @@
           <span>{{movies.description}}</span>
         </div>
       </div>
-      
+
     </div>
-   </div>
+  </div>
 </section>
-  

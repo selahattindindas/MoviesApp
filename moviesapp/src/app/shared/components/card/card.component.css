@@ -1,0 +1,161 @@
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  
+  li {
+    display: block;
+    margin: 0 30px 30px 0;
+    color: #fff;
+  
+  }
+  
+  .movies-img {
+    width: 285px;
+    height: 380px;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  
+  .movies-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    filter: brightness(90%) contrast(110%);
+    transition: all 1s ease;
+  }
+  
+  .movies-details {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 65%;
+    padding-left: 15px;
+    background: linear-gradient(transparent, #000);
+    background-size: contain;
+    background-size: cover;
+    border-radius: 14px;
+    transition: opacity 0.5s ease;
+  }
+  
+  .movies-contents-one,
+  .movies-contents-two {
+    width: 90%;
+    position: absolute;
+    bottom: 10px;
+  }
+  
+  .movies-contents-one {
+    transition: transform 1s ease;
+  }
+  
+  .movies-contents-two {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  .movies-img:hover img {
+    filter: blur(2px);
+    transform: scale(1.4);
+    transition: all 1s ease;
+  }
+  
+  .movies-img:hover .movies-contents-one {
+    transform: translateY(-120%);
+    transition: transform 0.5s ease;
+  }
+  
+  .movies-img:hover .movies-contents-two {
+    opacity: 1;
+    transition: opacity 1s ease;
+  }
+  
+  
+  .movies-name {
+    font-size: 20px;
+    font-weight: 800;
+  }
+  
+  .class-directors span {
+    color: rgb(235, 170, 30);
+    display: inline-block;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 24px;
+  }
+  
+  .class-category span {
+    border-radius: 5px;
+    font-weight: 600;
+    padding: 5px;
+    margin-right: 10px;
+  }
+  
+  .movie-category {
+    background: linear-gradient(to bottom right, #252053, #232596) border-box;
+  }
+  
+  .movie-platform {
+    background: linear-gradient(to bottom right, #532020, #962323) border-box;
+  }
+  
+  .class-details span {
+    font-size: 14px;
+    height: 84px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .button span {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  p {
+    margin: 0;
+    padding-bottom: 1rem;
+  }
+
+  @media screen and (max-width:767px) {
+    section {
+      margin: 90px 20px;
+    }
+  
+    ul {
+      margin-top: 40px;
+    }
+  
+    li {
+      margin: 0 auto;
+      padding-bottom: 45px;
+    }
+  
+  }
+  
+  @media screen and (min-width: 768px) and (max-width: 1300px) {
+    section {
+      margin: 50px 20px;
+    }
+  
+    li {
+      display: block;
+      margin: 0 20px 20px 0;
+      color: #fff;
+  
+    }
+  }

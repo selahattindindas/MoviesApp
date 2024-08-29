@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
-import { CategoryEnum } from 'src/app/enums/category-enum';
-import { PlatformEnum } from 'src/app/enums/platform-enum';
-import { DateEnum } from 'src/app/enums/date-enum';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
-import { SpinnerType } from 'src/app/enums/spinner-enum';
+import { CategoryEnum } from 'src/app/constacts/category-enum';
+import { DateEnum } from 'src/app/constacts/date-enum';
+import { PlatformEnum } from 'src/app/constacts/platform-enum';
+import { SpinnerType } from 'src/app/constacts/spinner-enum';
 
 @Component({
   selector: 'app-cinema-movies',
@@ -25,14 +25,24 @@ export class CinemaMoviesComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovies();
-    this.componentSpinner(SpinnerType.JellyBox);
   }
 
+  
+
   async getMovies() {
-    this.movies = await this.movieService.getAllMovies(PlatformEnum.Sinema, DateEnum.Vizyonda) as List_Movie[];
+    this.componentSpinner(SpinnerType.JellyBox); 
+
+    this.movieService.getAllMovies(PlatformEnum.Sinema, DateEnum.Vision)
+      .then(movieData => {
+        this.movies = movieData as List_Movie[];
+      })
+      .finally(() => {
+        this.spinner.hide(); 
+      });
   }
 
   async onCategorySelected(category: CategoryEnum) {
     this.selectedCategory = category;
   }
+
 }

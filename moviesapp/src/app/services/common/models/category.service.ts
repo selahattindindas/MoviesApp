@@ -14,9 +14,10 @@ export class CategoryService {
   constructor(private httpClientService: HttpClientService) { }
 
   async getAllCategories() {
-    //Promise'teki stringler kalkacak. // YAPILDI
     const observable: Observable<JsonResponse<List_Category[]>> = this.httpClientService.get(
-      { controller: 'Category', action: 'GetAllCategories' });
+      { controller: 'Category', 
+        action: 'GetAllCategories' 
+      });
 
     const response = await firstValueFrom(observable);
 
@@ -27,7 +28,9 @@ export class CategoryService {
 
   async getCategoryById(id: number) {
     const observable: Observable<JsonResponse<List_Category>> = this.httpClientService.get(
-      { controller: 'Category', action: 'GetByCategoryId' }, id);
+      { controller: 'Category', 
+        action: 'GetByCategoryId' 
+      }, id);
 
     const response = await firstValueFrom(observable);
 
@@ -40,8 +43,9 @@ export class CategoryService {
     const observable = this.httpClientService.post(
       {
         controller: 'Category',
-        action: `CreateCategory?categoryName=${name}`
-      }, name);
+        action: 'CreateCategory',
+        queryString: `categoryName=${name}`
+      }, {name});
 
     await firstValueFrom(observable)
       .then(response => {

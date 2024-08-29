@@ -1,0 +1,17 @@
+<section>
+  <div class="modal-header">
+    <h5 class="modal-title">Yönetmen İşlemleri</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+  </div>
+  <div class="modal-body">
+    <app-form-item
+    [headerTitle]="'Yönetmen Ekleme'"
+    [label]="'Yönetmen Adı'"
+    [itemProperty]="'directorNames'"
+    [items]="directors"
+    (itemRemoved)="removeDirector($event)"
+    (itemCreated)="onSubmit($event)">
+  </app-form-item>
+  </div>
+</section>
+  

@@ -1,0 +1,38 @@
+.admin-page {
+  display: flex;
+  min-height: 100vh;
+  background-color: #eff1f7;
+}
+
+.content-wrapper {
+  width: 100%;
+}
+
+.component-content {
+  margin-bottom: 4rem;
+}
+
+.footer {
+  position: sticky;
+  top: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .admin-page {
+    display: block;
+  }
+
+  .footer {
+    position: static;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .admin-page {
+    display: block;
+  }
+
+  .footer {
+    position: static;
+  }
+}

@@ -1,0 +1,9 @@
+<section>
+  <app-table
+  [title]="'Platform'"
+  [items]="platforms"
+  (itemCreate)="createPlatform($event)"
+  (itemUpdate)="updatePlatform($event)"
+  (itemDelete)="deletePlatform($event)"
+  ></app-table>
+</section>

@@ -1,0 +1,9 @@
+<section>
+  <app-table
+  [title]="'Kategori'"
+  [items]="categories"
+  (itemCreate)="createCategory($event)"
+  (itemUpdate)="updateCategory($event)"
+  (itemDelete)="deleteCategory($event)"
+  ></app-table>
+</section>

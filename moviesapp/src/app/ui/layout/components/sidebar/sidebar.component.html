@@ -1,0 +1,72 @@
+<nav class="navbar">
+    <div class="header-content">
+        <div class="menu-toggle" (click)="toggleMenu()">
+            <i *ngIf="isMenuOpen" class="fa-solid fa-bars fa-xl"></i>
+            <i *ngIf="!isMenuOpen" class="fa-solid fa-xmark fa-xl"></i>
+          </div>
+      <div class="header-logo">
+        <img src="assets/img/common/filmverse.png" />
+      </div>
+    </div>
+    <ul class="nav-links sidebar" [ngClass]="{'sidebar': isMenuOpen}">
+      <li>
+        <a routerLink="/filmler">
+          <i class="fa-solid fa-film fa-xl"></i>
+          <span>Anasayfa</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="vizyondakiler">
+          <i class="fa-solid fa-film fa-xl"></i>
+          <span>Vizyondakiler</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="platformdakiler">
+          <i class="fa-solid fa-clapperboard fa-xl"></i>
+          <span>Platformdakiler</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="yaklasanlar">
+            <i class="fa-solid fa-calendar fa-xl"></i>
+          <span>Yaklaşanlar</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="haberler">
+          <i class="fa-regular fa-newspaper fa-xl"></i>
+          <span>Haberler</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="hakkımızda">
+          <i class="fa-solid fa-circle-info fa-xl"></i>
+          <span>Hakkımızda</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="iletisim">
+          <i class="fa-solid fa-phone-volume fa-xl"></i>
+          <span>İletişim</span>
+        </a>
+      </li>
+      <li class="user">
+        <a routerLink="giris">
+          <i class="fa-solid fa-house-user fa-xl"></i>
+          <span>Giriş Yap</span>
+        </a>
+      </li>
+        <div class="info">
+            <span>Ulaşım Adresleri</span>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin fa-2xl"></i>
+                <i class="fa-brands fa-github fa-2xl"></i>
+                <i class="fa-brands fa-instagram fa-2xl"></i>
+            </div>
+            <div class="logo">
+                <img src="assets/img/ui/sidebar/sidebar_logo.png">
+            </div>
+          </div>
+    </ul>
+  </nav>

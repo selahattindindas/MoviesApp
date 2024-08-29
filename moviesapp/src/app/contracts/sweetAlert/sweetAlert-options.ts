@@ -1,4 +1,4 @@
-import { MessageType, Position } from "src/app/enums/sweetalert-enum";
+import { MessageType, Position } from "src/app/constacts/sweetalert-enum";
 
 export class SweetAlert_Options{
     position: Position;

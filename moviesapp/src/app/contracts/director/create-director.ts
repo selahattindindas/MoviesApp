@@ -1,8 +1,8 @@
-export class Create_Director {
-    movieId: string;
+export class  Create_Director {
+    movieId: number;
     directorNames: string;
   
-    constructor(movieId: string, directorNames: string) { 
+    constructor(movieId: number, directorNames: string) { 
       this.movieId = movieId;
       this.directorNames = directorNames;
     }

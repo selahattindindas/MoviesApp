@@ -1,4 +1,19 @@
-@import url("src/app/global/ui/header.css");
-@import url("src/app/global/ui/movies-main.css");
-@import url("src/app/global/ui/header-responsive.css");
-@import url("src/app/global/ui/movies-main-responsive.css");
+@import url("src/assets/css/ui/header.css");
+@import url("src/assets/css/ui/header-responsive.css");
+
+section {
+    max-width: 1300px;
+    margin: auto;
+}
+
+@media screen and (max-width:767px) {
+    section {
+        margin: 0;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1300px) {
+    section {
+        margin: 50px 20px;
+    }
+}

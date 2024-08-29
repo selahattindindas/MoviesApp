@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
+import { CategoryEnum } from 'src/app/constacts/category-enum';
+import { DateEnum } from 'src/app/constacts/date-enum';
+import { SpinnerType } from 'src/app/constacts/spinner-enum';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
-import { CategoryEnum } from 'src/app/enums/category-enum';
-import { DateEnum } from 'src/app/enums/date-enum';
-import { SpinnerType } from 'src/app/enums/spinner-enum';
 import { MoviesService } from 'src/app/services/common/models/movies.service';
 
 @Component({
@@ -24,10 +24,17 @@ export class UpcomingMoviesComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
       this.getMovies();
-      this.componentSpinner(SpinnerType.JellyBox);
   }
   async getMovies(){
-    this.movies = await this.movieService.getAllMovies(undefined,DateEnum.Yakinda) as List_Movie[];
+    this.componentSpinner(SpinnerType.JellyBox); 
+
+    this.movieService.getAllMovies(undefined, DateEnum.Soon)
+      .then(movieData => {
+        this.movies = movieData as List_Movie[];
+      })
+      .finally(() => {
+        this.spinner.hide(); 
+      });
 
   } 
   async onCategorySelected(category: CategoryEnum) {

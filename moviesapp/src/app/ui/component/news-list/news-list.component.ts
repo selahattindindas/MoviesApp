@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
-import { SpinnerType } from 'src/app/enums/spinner-enum';
+import { SpinnerType } from 'src/app/constacts/spinner-enum';
 
 @Component({
   selector: 'app-news-list',

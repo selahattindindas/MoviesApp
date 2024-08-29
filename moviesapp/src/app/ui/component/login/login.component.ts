@@ -3,10 +3,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
+import { SpinnerType } from 'src/app/constacts/spinner-enum';
+import { UserLogin } from 'src/app/contracts/user/login';
 import { UserRegister } from 'src/app/contracts/user/register';
-import { SpinnerType } from 'src/app/enums/spinner-enum';
-import { SweetHttpError } from 'src/app/internal/sweet-message/http-error';
-import { SweetUser } from 'src/app/internal/sweet-message/user';
+import { SweetStatus } from 'src/app/internal/sweet-alert/sweet-alert.status';
 import { SweetalertService } from 'src/app/services/admin/sweetalert.service';
 import { UserService } from 'src/app/services/common/models/user.service';
 import { phoneNumberValidator } from 'src/app/shared/validators/phone.validator';
@@ -19,12 +19,12 @@ import { phoneNumberValidator } from 'src/app/shared/validators/phone.validator'
 export class LoginComponent extends BaseComponent implements OnInit {
   isForm: boolean = false;
   hide: boolean = true;
-  isRegister: FormGroup;
+  isRegisterorLogin: FormGroup;
 
   constructor(spinner: NgxSpinnerService, private fb: FormBuilder, private userService: UserService, private sweetAlertService: SweetalertService,
     private router: Router) {
     super(spinner);
-    this.isRegister = this.fb.group({
+    this.isRegisterorLogin = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.minLength(5)]),
       userName: new FormControl('', [Validators.required, Validators.minLength(5)]),
       password: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -40,18 +40,18 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.hide = !this.hide;
   }
   isPhoneNumberRequired() {
-    return this.isRegister.get('phoneNumber').hasError('required') && this.isRegister.get('phoneNumber').touched && !this.isPhoneNumberInvalid();
+    return this.isRegisterorLogin.get('phoneNumber').hasError('required') && this.isRegisterorLogin.get('phoneNumber').touched && !this.isPhoneNumberInvalid();
   }
 
   isPhoneNumberInvalid() {
-    return !this.isRegister.get('phoneNumber').hasError('required') && this.isRegister.get('phoneNumber').invalid && this.isRegister.get('phoneNumber').touched;
+    return !this.isRegisterorLogin.get('phoneNumber').hasError('required') && this.isRegisterorLogin.get('phoneNumber').invalid && this.isRegisterorLogin.get('phoneNumber').touched;
   }
   toForm() {
     this.isForm = !this.isForm;
   }
   onRegister() {
-    if (this.isRegister.valid) {
-      const formData = this.isRegister.value;
+    if (this.isRegisterorLogin.valid) {
+      const formData = this.isRegisterorLogin.value;
       const register: UserRegister = {
         email: formData.email,
         userName: formData.userName,
@@ -60,14 +60,28 @@ export class LoginComponent extends BaseComponent implements OnInit {
       };
       this.userService.userRegister(register, async () => {
 
-        const result = await this.sweetAlertService.showAlert(SweetUser.userRegister);
+        const result = await this.sweetAlertService.showAlert(SweetStatus.sweetSuccess);
         if (result.dismiss) {
           this.router.navigate(['/']);
         }
       }, error => {
-        this.sweetAlertService.showAlert(SweetHttpError.serverError);
       });
     }
   }
 
+  onLogin(){
+    if(this.isRegisterorLogin.valid){
+      const formData = this.isRegisterorLogin.value;
+      const login: UserLogin = {
+        userNameOrEmail: formData.email,
+        password: formData.password 
+      };
+      this.userService.userLogin(login, async () => {
+        const result = await this.sweetAlertService.showAlert(SweetStatus.sweetSuccess);
+        if (result.dismiss) {
+          this.router.navigate(['/']);
+        }
+      });
+    }
+  }
 }

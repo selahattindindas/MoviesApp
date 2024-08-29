@@ -8,7 +8,16 @@
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+main {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  line-height: 1.5; 
+}
 
 .error-message {
   color: red;

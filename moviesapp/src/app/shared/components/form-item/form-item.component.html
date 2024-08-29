@@ -1,0 +1,29 @@
+<form #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="create">
+        <div class="card">
+            <div class="create-header">
+                <h2>{{ headerTitle }}</h2>
+            </div>
+            <div class="create-main">
+                <div class="create-contents">
+                    <div class="label-input">
+                        <label for="itemInput">{{ label }}</label>
+                        <input type="text" [(ngModel)]="createItem[itemProperty]" name="itemInput" #itemInput="ngModel"
+                            placeholder="Adını yazınız" required minlength="5" />
+                        <div class="text-danger" *ngIf="itemInput.invalid && (itemInput.touched)">
+                            <small *ngIf="itemInput.errors?.['required']">Boş bırakılamaz.</small>
+                            <small *ngIf="itemInput.errors?.['minlength']">En az 5 karakter olmalıdır.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-list">
+                    <ul>
+                        <li *ngFor="let item of items">
+                            {{ item['name']}} <i class="fa-solid fa-xmark fa-lg" (click)="removeItem(item['id'])"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

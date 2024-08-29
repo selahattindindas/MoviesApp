@@ -1,19 +1,22 @@
 import { NgxSpinnerService } from "ngx-spinner";
-import { SpinnerType } from "../enums/spinner-enum";
+import { SpinnerType } from "../constacts/spinner-enum";
 
 export class BaseComponent {
-  constructor(private spinner: NgxSpinnerService) {
+
+  protected spinner: NgxSpinnerService;
+
+  constructor(spinner: NgxSpinnerService) {
+    this.spinner = spinner;
   }
 
-  componentSpinner(spinnerNameType: SpinnerType): void {
+  componentSpinner(spinnerNameType: SpinnerType, timeout: number = 750): void {
     this.spinner.show(undefined, {
       type: spinnerNameType,
       color: '#fff',
-    });
+    }); 
 
     setTimeout(() => {
       this.spinner.hide();
-    }, 750);
+    }, timeout);
   }
-
 }

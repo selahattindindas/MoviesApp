@@ -1,0 +1,21 @@
+@media screen and (max-width:767px) {
+    .movies-header {
+        display: block;
+        text-align: center;
+        padding: 0;
+        margin-top: 90px;
+    }
+
+    .movies-header h2 {
+        font-size: 25px;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+
+    .movies-category {
+        display: inline-flexbox;
+        justify-content: center;
+        padding: 0;
+        margin-bottom: 35px;
+    }
+}

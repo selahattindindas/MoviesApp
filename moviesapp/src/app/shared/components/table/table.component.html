@@ -1,0 +1,74 @@
+<form #form="ngForm">
+  <div class="item-list">
+    <h2>{{ title }} Listesi</h2>
+    <div class="card-body">
+      <div class="card-container card-flex">
+        <div class="icon">
+          <img src="assets/img/admin/table/table_img.png" alt="">
+        </div>
+        <div class="count_content">
+          <h3><span class="counter">{{ items.length }}</span></h3>
+          <p>{{ title }} Bulunuyor</p>
+        </div>
+      </div>
+    </div>
+    <div class="item-tables">
+      <div class="item-button-container">
+        <div class="item-create-button">
+          <button (click)="showCreateForm()">+ {{ title }} Ekle</button>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table class="lg-table">
+          <thead>
+            <tr>
+              <th>{{ title }} Adı</th>
+              <th>{{ title }} İşlemleri</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items">
+              <td>
+                <ng-container *ngIf="item.id === itemBeingUpdatedId; else defaultMode">
+                  <input name="name" type="text" #name="ngModel" [(ngModel)]="updateItem!.name"
+                    (keydown.enter)="$event.preventDefault()" required minlength="5" />
+                  <div class="text-danger" *ngIf="name.invalid && (name.touched)">
+                    <small *ngIf="name.errors?.['required']">Boş bırakılamaz.</small>
+                    <small *ngIf="name.errors?.['minlength']">En az 5 karakter olmalıdır.</small>
+                  </div>
+                </ng-container>
+                <ng-template #defaultMode>
+                  {{ item.name }}
+                </ng-template>
+              </td>
+              <td class="movie-icon">
+                <ng-container *ngIf="item.id === itemBeingUpdatedId; else editIcons">
+                  <i class="fa-solid fa-check fa-lg" (click)="update('submit')"></i>
+                  <i class="fa-solid fa-xmark fa-lg" (click)="update('cancel')"></i>
+                </ng-container>
+                <ng-template #editIcons>
+                  <i class="fa-solid fa-pen-to-square fa-lg" (click)="showUpdateForm(item)"></i>
+                  <i class="fa-solid fa-trash fa-lg" (click)="deleteItem(item.id)"></i>
+                </ng-template>
+              </td>
+            </tr>
+            <tr *ngIf="showCreateFormFlag">
+              <td>
+                <input [(ngModel)]="createItem.name" name="name" #name="ngModel" placeholder="Kategori Adı"
+                  (keydown.enter)="$event.preventDefault()" required minlength="5">
+                <div class="text-danger" *ngIf="name.invalid && (name.touched)">
+                  <small *ngIf="name.errors?.['required']">Boş bırakılamaz.</small>
+                  <small *ngIf="name.errors?.['minlength']">En az 5 karakter olmalıdır.</small>
+                </div>
+              </td>
+              <td>
+                <i class="fa-solid fa-check fa-lg" (click)="create()"></i>
+                <i class="fa-solid fa-xmark fa-lg" (click)="showCreateForm()"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>

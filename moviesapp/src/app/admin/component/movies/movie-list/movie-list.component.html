@@ -1,7 +1,4 @@
 <section>
-  <div class="spinner">
-    <ngx-spinner size="large">Sayfa Yükleniyor</ngx-spinner>
-  </div>
   <div class="movie-list">
     <h2>Film Listesi</h2>
     <div class="card-body">
@@ -21,7 +18,7 @@
           <input placeholder="Film Ara" [(ngModel)]="filterText" />
         </div>
         <div class="movie-create-button">
-          <button [routerLink]="['Create-Movie']">+ Film Ekle</button>
+          <button [routerLink]="['create']">+ Film Ekle</button>
         </div>
       </div>
       <ng-container *ngIf="(movie | filter: filterText: filterName).length > 0; else noResults">
@@ -46,17 +43,17 @@
                 <td>{{ movie.releaseDate }}</td>
                 <td>
                   <i class="fa-solid fa-users fa-ml actor" title="Oyuncu Ekle"
-                    [routerLink]="['Create-Players', movie.id]"></i>
+                    (click)="showPlayers(movie.id)"></i>
                   <i class="fa-solid fa-user fa-ml director" title="Yönetmen Ekle"
-                    [routerLink]="['Create-Director', movie.id]"></i>
+                  (click)="showDirectors(movie.id)"></i>
                 </td>
                 <td>
                   <i class="fa-solid fa-image fa-lg" title="Fotoğraf Ekle"
-                    [routerLink]="['Create-Photos', movie.id]"></i>
+                  (click)="showPhoto(movie.id)"></i>
                 </td>
                 <td>
                   <i class="fa-solid fa-pen-to-square fa-lg update" title="Düzenle"
-                    [routerLink]="['Edit', movie.id]"></i>
+                    [routerLink]="['edit', movie.id]"></i>
                   <i class="fa-solid fa-trash fa-lg delete" title="Sil" (click)="deleteMovie(movie.id)"></i>
                 </td>
               </tr>

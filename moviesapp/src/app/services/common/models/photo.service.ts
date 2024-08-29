@@ -4,7 +4,7 @@ import { Create_Photo } from 'src/app/contracts/photo/add-photo';
 import { Observable, firstValueFrom } from 'rxjs';
 import { List_Photo } from 'src/app/contracts/photo/list-photo';
 import { JsonResponse } from 'src/app/contracts/response/response';
-import { environment } from 'src/app/environments/environment';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({

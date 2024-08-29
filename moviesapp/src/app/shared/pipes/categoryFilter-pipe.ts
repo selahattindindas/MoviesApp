@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { CategoryDescription, CategoryEnum } from 'src/app/constacts/category-enum';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
-import { CategoryEnum, CategoryDescription } from 'src/app/enums/category-enum';
 
 @Pipe({
   name: 'categoryFilter'

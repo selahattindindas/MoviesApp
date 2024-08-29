@@ -4,5 +4,5 @@ export class Create_Movie {
   releaseDate: Date;
   categoryId: number;
   platformId: number;
-  movieTime: number;
+  movieTime: string;
 }

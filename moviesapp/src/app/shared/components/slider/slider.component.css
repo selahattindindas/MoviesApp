@@ -1,0 +1,150 @@
+.new-movie {
+    position: relative;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+li:first-child{
+    margin-left: 25px;
+}
+.movie-elements {
+    display: flex;
+    justify-content: center;
+}
+
+.movies-img {
+    width: 175px;
+    height: 245px;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+.movies-img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+.movies-img img:hover{
+    transform: scale(1.4);
+    transition: all 0.5s ease;
+}
+
+.movie-details {
+    display: grid;
+    padding: 15px 0 15px 25px;
+    width: 50%;
+    color: #fff;
+    background-color: transparent;
+}
+
+.movie-name {
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.movie-link {
+    margin-left: 7px;
+}
+
+.slider-container {
+    width: 100%;
+}
+
+.movie-link button {
+    padding: 8px 15px;
+    border-radius: 10px;
+    color: #f9f9f9;
+    font-weight: bold;
+    background-color: #424242;
+    transition: all 0.6s;
+    z-index: 1;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 15px;
+}
+
+.movie-link button:before {
+    content: "";
+    position: absolute;
+    left: -25px;
+    top: -25px;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    background: #f9f9f9;
+    z-index: -1;
+    transition: all 0.6s;
+}
+
+.movie-link button:hover {
+    color: #424242;
+    background: #f9f9f9;
+}
+
+.movie-link button:hover:before {
+    width: 155%;
+    height: 185%;
+}
+
+.arrow {
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    position: absolute;
+    transform: translateY(-50%);
+    fill: #fff;
+    cursor: pointer;
+}
+
+.arrow--left {
+    left: 0;
+}
+
+.arrow--right {
+    right: 0;
+}
+
+.arrow--disabled {
+    display: none;
+}
+
+@media screen and (max-width:767px) {
+
+    .movie-img{
+        position: relative;
+    }
+    .arrow {
+        top: 25%;
+        position: absolute;
+    }
+    .movie-elements{
+        display: grid;
+        margin: 0 auto;
+    }
+    .arrow--left {
+        left: 20px;
+    }
+
+    .arrow--right {
+        right:  20px;
+    }
+    li:first-child{
+        margin: 0;
+    }
+    .movie-details {
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+    span{
+        padding: 5px;
+    }
+    .movie-link {
+        margin: 10px 0;
+    }
+}

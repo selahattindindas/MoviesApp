@@ -1,0 +1,102 @@
+<div class="card">
+    <div class="close">
+        <button routerLink="/admin/movie-list">X</button>
+    </div>
+    <div class="movie-header">
+        <h2>{{ headerTitle }}</h2>
+    </div>
+    <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+        <div class="movie-main">
+            <div class="movie-contents">
+                <div class="label-input">
+                    <label for="filmAdi">Film Adı</label>
+                    <input class="movie-input" type="text" placeholder="Filmin adını yazınız" formControlName="name"
+                        [ngClass]="{invalidRed: isValidTemplate('name')}" />
+                    <div class="text-danger" *ngIf="isValid('name')">
+                        <small *ngIf="movieForm.get('name')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
+                        <small *ngIf="movieForm.get('name')?.errors?.['minlength']">Lütfen minimum 5 karakter
+                            giriniz.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-contents">
+                <div class="label-input">
+                    <label for="movie-category">Film Kategorisi</label>
+                    <div class="custom-select">
+                        <select class="form-control movie-select" formControlName="categoryId">
+                            <option *ngFor="let category of categoryEnum" [value]="category.value">{{
+                                category.description
+                                }}
+                            </option>
+                        </select>
+                        <div class="text-danger" *ngIf="isValid('categoryId')">
+                            <small>
+                                {{ movieForm.get('categoryId').getError('categorySelected') }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="label-input">
+                    <label for="movie-platform">Film Platformu</label>
+                    <div class="custom-select">
+                        <select class="form-control movie-select" formControlName="platformId">
+                            <option *ngFor="let platform of platformEnum" [value]="platform.value">{{
+                                platform.description
+                                }}
+                            </option>
+                        </select>
+                        <div class="text-danger" *ngIf="isValid('platformId')">
+                            <small>
+                                {{ movieForm.get('platformId').getError('platformSelected') }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-contents">
+                <div class="label-input">
+                    <label for="releaseDate">Film Vizyon Tarihi</label>
+                    <input class="movie-input custom-input" type="date" formControlName="releaseDate" />
+                    <div class="text-danger">
+                        <small *ngIf="movieForm.get('releaseDate').hasError('required') && movieForm.get('releaseDate').touched">
+                            Lütfen boş bırakmayınız.
+                        </small>
+                        <small
+                            *ngIf="movieForm.get('releaseDate').hasError('customDateFormat') && 
+                            !movieForm.get('releaseDate').hasError('required') && movieForm.get('releaseDate').touched">
+                            Hatalı tarih. Lütfen geçerli bir tarih girin.
+                        </small>
+                    </div>
+                </div>
+                <div class="label-input">
+                    <label for="movieTime">Film Süresi</label>
+                    <input class="movie-input custom-input" type="number" formControlName="movieTime"
+                        [ngClass]="{invalidRed: isValidTemplate('movieTime')}" />
+                    <div class="text-danger" *ngIf="isValid('movieTime')">
+                        <small *ngIf="movieForm.get('movieTime')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
+                        <small *ngIf="movieForm.get('movieTime')?.errors?.['min']">Lütfen minimum 1 dakika giriniz.</small>
+                        <small *ngIf="movieForm.get('movieTime')?.errors?.['max']">Lütfen maksimum 300 dakika
+                            giriniz.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-contents">
+                <div class="label-input">
+                    <label for="yil">Film Açıklaması</label>
+                    <textarea class="movie-input" placeholder="Film açıklamasını yazınız" formControlName="description"
+                        tabindex="5" [ngClass]="{invalidRed: isValidTemplate('description')}"></textarea>
+                    <div class="text-danger" *ngIf="isValid('description')">
+                        <small *ngIf="movieForm.get('description')?.errors?.['required']">Lütfen boş bırakmayınız.</small>
+                        <small *ngIf="movieForm.get('description')?.errors?.['minlength']">Lütfen minimum 30 karakter
+                            giriniz.</small>
+                        <small *ngIf="movieForm.get('description')?.errors?.['maxlength']">Lütfen maksimum 520 karakter
+                            giriniz.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-button">
+                <button type="submit" class="btn btn-primary" [disabled]="!movieForm.valid">Filmi Güncelle</button>
+            </div>
+        </div>
+    </form>
+</div>

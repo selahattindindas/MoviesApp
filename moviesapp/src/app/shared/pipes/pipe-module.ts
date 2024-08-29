@@ -10,4 +10,4 @@ import { CategoryFilterPipe } from './categoryFilter-pipe';
   declarations: [TextFilterPipe, CustomDatePipe, imageArrayPipe, JoinArrayPipe, LimitPipe,CategoryFilterPipe ],
   exports: [TextFilterPipe, CustomDatePipe, imageArrayPipe, JoinArrayPipe, LimitPipe,CategoryFilterPipe ]
 })
-export class SharedModule {}
+export class PipeModule {}

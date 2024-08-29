@@ -1,16 +1,16 @@
 <section>
-  <div class="spinner">
-    <ngx-spinner size="large">Sayfa Yükleniyor</ngx-spinner>
+  <div class="platform-name">
+    <h2>Platformdaki Filmler</h2>
   </div>
-    <div class="platform-name">
-        <h2>Platformdaki Filmler</h2>
-    </div>
-    <div class="all-movies">
-      <div class="netflix-movie">
-        <netflix-movie></netflix-movie>
+  <div class="all-movies">
+    <div *ngFor="let platform of platforms" class="movie">
+      <div class="platform-company">
+        <div class="platform-header">
+          <img [src]="platform.logo" [alt]="platform.name + ' Logo'" />
+          <h2>{{ platform.name }} Filmleri</h2>
+        </div>
+        <app-slider [movies]="platform.movies"></app-slider>
       </div>
-      <div class="disney-movie">
-        <disney-movie></disney-movie>
-      </div>
     </div>
-  </section>
+  </div>
+</section>

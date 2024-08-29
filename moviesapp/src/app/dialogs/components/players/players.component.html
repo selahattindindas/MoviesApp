@@ -1,0 +1,17 @@
+<section>
+  <div class="modal-header">
+    <h5 class="modal-title">Oyuncu İşlemleri</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+  </div>
+  <div class="modal-body">
+    <app-form-item
+    [headerTitle]="'Oyuncu Ekleme'"
+    [label]="'Oyuncu Adı'"
+    [itemProperty]="'playerNames'"
+    [items]="players"
+    (itemRemoved)="removePlayer($event)"
+    (itemCreated)="onSubmit($event)">
+  </app-form-item>
+  </div>
+</section>
+  

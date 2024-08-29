@@ -5,10 +5,8 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { List_Movie } from 'src/app/contracts/movie/list-movie';
 import { Update_Movie } from 'src/app/contracts/movie/update-movie';
 import { JsonResponse } from 'src/app/contracts/response/response';
-import { PlatformDescription, PlatformEnum } from 'src/app/enums/platform-enum';
-import { CategoryEnum } from 'src/app/enums/category-enum';
-import { DateEnum } from 'src/app/enums/date-enum';
-import { HttpErrorResponse } from '@angular/common/http';
+import { DateEnum } from 'src/app/constacts/date-enum';
+import { PlatformEnum, PlatformDescription } from 'src/app/constacts/platform-enum';
 
 
 @Injectable({
@@ -18,6 +16,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class MoviesService {
 
   constructor(private httpClientService: HttpClientService) { }
+
+
   async getAllMovies(platform?: PlatformEnum, date?: DateEnum) {
     const observable: Observable<JsonResponse<List_Movie[]>> = this.httpClientService.get({
       controller: 'Movie',
@@ -36,15 +36,16 @@ export class MoviesService {
           return false;
         }
   
-        const [day, month, year] = movie.releaseDate.split('.').map(Number);
-        const movieDate = new Date(year, month - 1, day);
+        const [day, month, yearTime] = movie.releaseDate.split(' ')[0].split('.');
+        const [year] = yearTime.split(' ');
+        const movieDate = new Date(Number(year), Number(month) - 1, Number(day));
   
         switch (date) {
-          case DateEnum.VizyondanKalkan:
+          case DateEnum.Past:
             return movieDate < currentDate;
-          case DateEnum.Yakinda:
+          case DateEnum.Soon:
             return movieDate > movieVisionDate;
-          case DateEnum.Vizyonda:
+          case DateEnum.Vision:
             return movieDate >= currentDate && movieDate <= movieVisionDate;
           default:
             return true;
@@ -53,10 +54,10 @@ export class MoviesService {
   
       return filteredMovies;
     } else {
-      console.error('Error fetching movies:', response.statusMessage);
       return response.statusMessage;
     }
   }
+  
   
   async getMovieById(id: number) {
     const observable: Observable<JsonResponse<List_Movie>> = this.httpClientService.get({
@@ -82,16 +83,9 @@ export class MoviesService {
         successCallBack();
         return response;
       })
-      .catch( (errorResponse: HttpErrorResponse) => {
-        const _error: Array<{ key: string, value: Array<string> }> = errorResponse.error;
-        let message = "";
-        _error.forEach((v, index) => {
-          v.value.forEach((_v, _index) => {
-            message += `${_v}<br>`;
-          });
-        });
-        errorCallBack(message);
-      });
+      .catch(errorResponse =>{
+        errorCallBack(errorResponse);
+      }) 
   }
 
   async updateMovie(movie: Update_Movie, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
