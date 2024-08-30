@@ -1,8 +1,9 @@
 @media screen and (max-width: 1265px) {
-    .navbar{
+    .navbar {
         margin: 0;
         padding: 0;
     }
+
     .header-content {
         position: fixed;
         top: 0;
@@ -58,17 +59,21 @@
         list-style: none;
         margin-top: 60px;
     }
-    li:first-child{
+
+    li:first-child {
         margin-top: 10px;
     }
+
     .nav-links li {
         border-bottom: 1px solid #3f3f3f;
         margin-right: 2rem;
         padding: 15px 0;
     }
-    .nav-links li:last-child{
+
+    .nav-links li:last-child {
         border: none !important;
     }
+
     a {
         text-decoration: none;
         color: #fff;
@@ -79,39 +84,45 @@
 
     span {
         font-size: 16px;
+        color: #fff;
         font-weight: 800;
     }
 
     li i {
         margin-right: 20px;
+        color: #fff;
     }
+
     .info {
         display: grid;
         align-items: center;
         text-align: center;
         color: #fff;
         margin-top: 3rem;
-      }
-      
-      .info span {
-        align-self: center; 
+    }
+
+    .info span {
+        align-self: center;
         margin-bottom: 2rem;
-      }
-      
-      .icons {
+    }
+
+    .icons {
         display: flex;
         align-items: center;
-        justify-content: center; 
+        justify-content: center;
         text-align: center;
-      }
-      .icons i {
+    }
+
+    .icons i {
         padding: 0 15px;
-      }
-      .logo{
+    }
+
+    .logo {
         margin-top: 3rem;
         margin-bottom: 1rem;
-      }
-    .logo img{
+    }
+
+    .logo img {
         width: 200px;
         height: 150px;
     }

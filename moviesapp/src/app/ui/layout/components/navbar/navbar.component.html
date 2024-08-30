@@ -42,10 +42,16 @@
           <span>İletişim</span>
         </a>
       </li>
-      <li>
+      <li *ngIf="!authService.isAuthenticated()">
         <a routerLink="giris">
           <i class="fa-solid fa-house-user fa-lg"></i>
           <span>Giriş Yap</span>
+        </a>
+      </li>
+      <li *ngIf="authService.isAuthenticated()">
+        <a (click)="logout()">
+          <i class="fa-solid fa-sign-out-alt fa-lg"></i>
+          <span>Çıkış Yap</span>
         </a>
       </li>
     </ul>

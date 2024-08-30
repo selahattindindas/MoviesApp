@@ -12,11 +12,11 @@
         <img src="assets/img/admin/navbar/man-user.png">
         <div class="dropdown">
           <button class="btn dropdown-toggle btn-design" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Selahattin DİNDAŞ
+            {{loggedInUsername}}
           </button>
           <ul class="dropdown-menu">
             <li>
-              <button class="dropdown-item" type="button">
+              <button class="dropdown-item" type="button" (click)="logout()">
                 <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
                 Oturum Kapat
               </button>

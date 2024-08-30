@@ -3,7 +3,6 @@ import { HttpClientService } from '../http-client.service';
 import { UserRegister } from 'src/app/contracts/user/register';
 import { Observable, firstValueFrom } from 'rxjs';
 import { UserLogin } from 'src/app/contracts/user/login';
-import { JsonResponse } from 'src/app/contracts/response/response';
 import { Token } from 'src/app/contracts/token/token';
 
 @Injectable({

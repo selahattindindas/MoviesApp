@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/common/auth.service';
 
 @Component({
   selector: 'ui-sidebar',
@@ -7,7 +9,14 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
   isMenuOpen : boolean = true ;
+  
+  constructor(public authService: AuthService, private router:Router) { }
 
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/filmler/giris']);
+  }
+  
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }

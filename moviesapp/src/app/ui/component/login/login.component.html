@@ -16,23 +16,24 @@
         </div>
         <div class="form-group">
           <label class="input-icon" for="email">
-            <i class="fa-solid fa-envelope"></i>
+            <i class="fa-solid fa-user"></i>
           </label>
-          <input type="text" [(ngModel)]="login.userNameOrEmail" name="userNameOrEmail" placeholder="Email" #userNameOrEmail="ngModel" required />
+          <input type="text" [(ngModel)]="login.userNameOrEmail" name="userNameOrEmail" placeholder="Kullanıcı Adı"
+            #userNameOrEmail="ngModel" required />
         </div>
         <div class="text-danger" *ngIf="userNameOrEmail.invalid && (userNameOrEmail.touched)">
           <small *ngIf="userNameOrEmail.errors?.['required']">Boş bırakılamaz.</small>
         </div>
         <div class="form-group">
-          <label class="input-icon" for="password" >
+          <label class="input-icon" for="password">
             <i class="fa-solid fa-lock"></i>
           </label>
           <label class="password-eyes" for="password">
             <i class="fa-solid fa-eye-slash fa-xs" *ngIf="hide" (click)="toPassword()"></i>
             <i class="fa-solid fa-eye fa-xs" *ngIf="!hide" (click)="toPassword()"></i>
           </label>
-          <input type="password" [(ngModel)]="login.password" name="password" placeholder="Şifre" #password="ngModel" 
-          [type]="hide ? 'password' : 'text'" placeholder="Şifre" required/>
+          <input type="password" [(ngModel)]="login.password" name="password" placeholder="Şifre" #password="ngModel"
+            [type]="hide ? 'password' : 'text'" placeholder="Şifre" required />
         </div>
         <div class="text-danger" *ngIf="password.invalid && (password.touched)">
           <small *ngIf="password.errors?.['required']">Boş bırakılamaz.</small>
@@ -63,7 +64,7 @@
           <label class="input-icon" for="email">
             <i class="fa-solid fa-envelope"></i>
           </label>
-          <input type="text" [(ngModel)]="register.email" name="email" placeholder="Email" #email="ngModel" required/>
+          <input type="text" [(ngModel)]="register.email" name="email" placeholder="Email" #email="ngModel" required />
         </div>
         <div class="text-danger" *ngIf="email.invalid && (email.touched)">
           <small *ngIf="email.errors?.['required']">Boş bırakılamaz.</small>
@@ -72,7 +73,8 @@
           <label class="input-icon" for="userName">
             <i class="fa-solid fa-user"></i>
           </label>
-          <input type="text" [(ngModel)]="register.userName" name="userName" #userName="ngModel" placeholder="Kullanıcı Adı" required/>
+          <input type="text" [(ngModel)]="register.userName" name="userName" #userName="ngModel"
+            placeholder="Kullanıcı Adı" required />
         </div>
         <div class="text-danger" *ngIf="userName.invalid && (userName.touched)">
           <small *ngIf="userName.errors?.['required']">Boş bırakılamaz.</small>
@@ -85,8 +87,8 @@
             <i class="fa-solid fa-eye-slash fa-xs" *ngIf="hide" (click)="toPassword()"></i>
             <i class="fa-solid fa-eye fa-xs" *ngIf="!hide" (click)="toPassword()"></i>
           </label>
-          <input type="password" [(ngModel)]="register.password" name="password" #password="ngModel" 
-          [type]="hide ? 'password' : 'text'" placeholder="Şifre" required/>
+          <input type="password" [(ngModel)]="register.password" name="password" #password="ngModel"
+            [type]="hide ? 'password' : 'text'" placeholder="Şifre" required />
         </div>
         <div class="text-danger" *ngIf="password.invalid && (password.touched)">
           <small *ngIf="password.errors?.['required']">Boş bırakılamaz.</small>
@@ -95,16 +97,9 @@
           <label class="input-icon" for="phone">
             <i class="fa-solid fa-phone"></i>
           </label>
-          <input
-          type="text"
-          [(ngModel)]="register.phoneNumber"
-          name="phoneNumber"
-          #phoneNumber="ngModel"
-          placeholder="Telefon Numarası"
-          required
-          pattern="\d{10}"
-          title="Telefon numarası 10 rakamdan oluşmalıdır."
-        />
+          <input type="text" [(ngModel)]="register.phoneNumber" name="phoneNumber" #phoneNumber="ngModel"
+            placeholder="Telefon Numarası" required pattern="\d{10}"
+            title="Telefon numarası 10 rakamdan oluşmalıdır." />
         </div>
         <div class="text-danger" *ngIf="phoneNumber.invalid && (phoneNumber.touched)">
           <small *ngIf="phoneNumber.errors?.['required']">Boş bırakılamaz.</small>

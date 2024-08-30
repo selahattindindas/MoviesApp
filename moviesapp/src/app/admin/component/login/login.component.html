@@ -1,1 +1,35 @@
-<p>login works!</p>
+<section>
+    <div class="login-page">
+        <div class="login-card">
+            <div class="image">
+                <img src="assets/img/admin/login/login.png">
+            </div>
+            <form #loginForm="ngForm" class="login-form" (ngSubmit)="onSubmit()">
+                <h2 class="form-title">Giriş Yap</h2>
+                <div class="validate-input">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" placeholder="Kullanıcı Adı" required name="userNameOrEmail"
+                        #userNameOrEmail="ngModel" [(ngModel)]="login.userNameOrEmail" />
+                </div>
+                <div class="text-danger" *ngIf="userNameOrEmail.invalid && (userNameOrEmail.touched)">
+                    <small *ngIf="userNameOrEmail.errors?.['required']">Boş bırakılamaz.</small>
+                </div>
+                <div class="validate-input">
+                    <i class="fa-solid fa-eye-slash fa-xs" *ngIf="hide" (click)="toPassword()"></i>
+                    <i class="fa-solid fa-eye fa-xs" *ngIf="!hide" (click)="toPassword()"></i>
+                    <input type="password" placeholder="Şifre" [type]="hide ? 'password' : 'text'" required
+                        name="password" #password="ngModel" [(ngModel)]="login.password" />
+                </div>
+                <div class="text-danger" *ngIf="password.invalid && (password.touched)">
+                    <small *ngIf="password.errors?.['required']">Boş bırakılamaz.</small>
+                </div>
+                <div class="form-button">
+                    <button class="button">Giriş Yap</button>
+                </div>
+                <div class="password-info">
+                    <a class="forget" href="/">Şifreni mi Unuttun?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { LayoutModule } from './layout/layout.module';
+import { LoginGuard } from '../guards/common/login.guard';
 
 const routes: Route[] = [
     {
@@ -29,7 +30,7 @@ const routes: Route[] = [
                     import('./component/news-list/news-list.module').then(m => m.NewListModule)
             },
             {
-                path: 'hakkımızda', loadChildren: () =>
+                path: 'hakkimizda', loadChildren: () =>
                     import('./component/about/about.module').then(m => m.AboutModule)
             },
             {
@@ -38,7 +39,8 @@ const routes: Route[] = [
             },
             {
                 path: 'giris', loadChildren: () =>
-                    import('./component/login/login.module').then(m => m.LoginModule)
+                    import('./component/login/login.module').then(m => m.LoginModule),
+                canActivate: [LoginGuard]
             },
         ],
     }
