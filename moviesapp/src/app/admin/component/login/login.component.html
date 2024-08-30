@@ -11,7 +11,7 @@
                     <input type="text" placeholder="Kullanıcı Adı" required name="userNameOrEmail"
                         #userNameOrEmail="ngModel" [(ngModel)]="login.userNameOrEmail" />
                 </div>
-                <div class="text-danger" *ngIf="userNameOrEmail.invalid && (userNameOrEmail.touched)">
+                <div class="text-danger text-position" *ngIf="userNameOrEmail.invalid && (userNameOrEmail.touched)">
                     <small *ngIf="userNameOrEmail.errors?.['required']">Boş bırakılamaz.</small>
                 </div>
                 <div class="validate-input">
@@ -20,7 +20,7 @@
                     <input type="password" placeholder="Şifre" [type]="hide ? 'password' : 'text'" required
                         name="password" #password="ngModel" [(ngModel)]="login.password" />
                 </div>
-                <div class="text-danger" *ngIf="password.invalid && (password.touched)">
+                <div class="text-danger text-position" *ngIf="password.invalid && (password.touched)">
                     <small *ngIf="password.errors?.['required']">Boş bırakılamaz.</small>
                 </div>
                 <div class="form-button">
