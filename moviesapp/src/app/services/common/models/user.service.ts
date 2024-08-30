@@ -3,7 +3,8 @@ import { HttpClientService } from '../http-client.service';
 import { UserRegister } from 'src/app/contracts/user/register';
 import { Observable, firstValueFrom } from 'rxjs';
 import { UserLogin } from 'src/app/contracts/user/login';
-import { TokenResponse } from 'src/app/contracts/token/tokenResponse';
+import { JsonResponse } from 'src/app/contracts/response/response';
+import { Token } from 'src/app/contracts/token/token';
 
 @Injectable({
   providedIn: 'root'
@@ -26,16 +27,19 @@ export class UserService {
         errorCallBack(errorResponse.error.message);
       });
   }
+
   async userLogin(login: UserLogin, successCallBack?: () => void) {
-    const observable: Observable<UserLogin | TokenResponse> = this.httpClientService.post({
+    const observable: Observable< any | Token> = this.httpClientService.post({
       controller: 'v1/Auth',
       action: 'Login'
     }, login);
-    const tokenResponse: TokenResponse = await firstValueFrom(observable) as TokenResponse;
-    if (tokenResponse) {
-      localStorage.setItem("accessToken", tokenResponse.token.accessToken);
-      localStorage.setItem("refreshToken", tokenResponse.token.refreshToken);
-      successCallBack();
+
+   const tokenResponse = await firstValueFrom(observable)
+      if (tokenResponse.result.accessToken) {
+        localStorage.setItem("accessToken", tokenResponse.result.accessToken);
+        localStorage.setItem("refreshToken", tokenResponse.result.refreshToken);
+        successCallBack();
+      }
     }
   }
-}
+

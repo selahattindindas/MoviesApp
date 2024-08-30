@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CategoryModule } from "src/app/shared/components/category/category.module";
 import { LoginComponent } from "./login.component";
 
@@ -14,7 +14,7 @@ import { LoginComponent } from "./login.component";
         RouterModule.forChild([
             {path: '', component: LoginComponent}
         ]),
-        ReactiveFormsModule,
+        FormsModule,
         CategoryModule
     ],
     exports:[]

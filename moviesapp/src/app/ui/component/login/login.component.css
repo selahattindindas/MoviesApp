@@ -23,6 +23,7 @@ input {
   padding-left: 30px;
   width: 250px;
 }
+
 .signin-form, .signup-form{
   padding: 3rem 1.5rem;
   width: 50%;
@@ -62,7 +63,7 @@ input {
   justify-content: center;
 }
 .form-group{
-  margin-bottom: 20px;
+  margin-top: 20px;
   position: relative;
 }
 .input-icon {

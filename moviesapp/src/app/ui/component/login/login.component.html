@@ -1,7 +1,7 @@
 <section>
   <div class="login-card">
     <div class="form-container signin-form">
-      <form  [formGroup]="isRegisterorLogin" class="login-form" (ngSubmit)="onLogin()">
+      <form #loginForm="ngForm" class="login-form" (ngSubmit)="onLogin()">
         <h2 class="form-title">Giriş Yap</h2>
         <div class="social-container">
           <a href="#" class="social">
@@ -18,17 +18,24 @@
           <label class="input-icon" for="email">
             <i class="fa-solid fa-envelope"></i>
           </label>
-          <input type="text" name="email" placeholder="Email" formControlName="email"/>
+          <input type="text" [(ngModel)]="login.userNameOrEmail" name="userNameOrEmail" placeholder="Email" #userNameOrEmail="ngModel" required />
+        </div>
+        <div class="text-danger" *ngIf="userNameOrEmail.invalid && (userNameOrEmail.touched)">
+          <small *ngIf="userNameOrEmail.errors?.['required']">Boş bırakılamaz.</small>
         </div>
         <div class="form-group">
-          <label class="input-icon" for="password" formControlName="password">
+          <label class="input-icon" for="password" >
             <i class="fa-solid fa-lock"></i>
           </label>
           <label class="password-eyes" for="password">
             <i class="fa-solid fa-eye-slash fa-xs" *ngIf="hide" (click)="toPassword()"></i>
             <i class="fa-solid fa-eye fa-xs" *ngIf="!hide" (click)="toPassword()"></i>
           </label>
-          <input type="password" name="password" [type]="hide ? 'password' : 'text'" placeholder="Şifre" />
+          <input type="password" [(ngModel)]="login.password" name="password" placeholder="Şifre" #password="ngModel" 
+          [type]="hide ? 'password' : 'text'" placeholder="Şifre" required/>
+        </div>
+        <div class="text-danger" *ngIf="password.invalid && (password.touched)">
+          <small *ngIf="password.errors?.['required']">Boş bırakılamaz.</small>
         </div>
         <div class="password-info">
           <a class="signin-forget" href="#">Şifreni mi Unuttun?</a>
@@ -39,7 +46,7 @@
       </form>
     </div>
     <div class="form-container signup-form">
-      <form [formGroup]="isRegisterorLogin" class="register-form" (ngSubmit)="onRegister()">
+      <form #registerForm="ngForm" class="register-form" (ngSubmit)="onRegister()">
         <h2 class="form-title">Kayıt Ol</h2>
         <div class="social-container">
           <a href="#" class="social">
@@ -56,13 +63,19 @@
           <label class="input-icon" for="email">
             <i class="fa-solid fa-envelope"></i>
           </label>
-          <input type="text" name="email" placeholder="Email" formControlName="email" />
+          <input type="text" [(ngModel)]="register.email" name="email" placeholder="Email" #email="ngModel" required/>
+        </div>
+        <div class="text-danger" *ngIf="email.invalid && (email.touched)">
+          <small *ngIf="email.errors?.['required']">Boş bırakılamaz.</small>
         </div>
         <div class="form-group">
           <label class="input-icon" for="userName">
             <i class="fa-solid fa-user"></i>
           </label>
-          <input type="text" name="userName" placeholder="Kullanıcı Adı" formControlName="userName" />
+          <input type="text" [(ngModel)]="register.userName" name="userName" #userName="ngModel" placeholder="Kullanıcı Adı" required/>
+        </div>
+        <div class="text-danger" *ngIf="userName.invalid && (userName.touched)">
+          <small *ngIf="userName.errors?.['required']">Boş bırakılamaz.</small>
         </div>
         <div class="form-group">
           <label class="input-icon" for="password">
@@ -72,24 +85,31 @@
             <i class="fa-solid fa-eye-slash fa-xs" *ngIf="hide" (click)="toPassword()"></i>
             <i class="fa-solid fa-eye fa-xs" *ngIf="!hide" (click)="toPassword()"></i>
           </label>
-          <input type="password" name="password" [type]="hide ? 'password' : 'text'" placeholder="Şifre"
-            formControlName="password" />
+          <input type="password" [(ngModel)]="register.password" name="password" #password="ngModel" 
+          [type]="hide ? 'password' : 'text'" placeholder="Şifre" required/>
+        </div>
+        <div class="text-danger" *ngIf="password.invalid && (password.touched)">
+          <small *ngIf="password.errors?.['required']">Boş bırakılamaz.</small>
         </div>
         <div class="form-group">
           <label class="input-icon" for="phone">
             <i class="fa-solid fa-phone"></i>
           </label>
-          <input type="text" name="phone" placeholder="Telefon Numarası" formControlName="phoneNumber" />
+          <input
+          type="text"
+          [(ngModel)]="register.phoneNumber"
+          name="phoneNumber"
+          #phoneNumber="ngModel"
+          placeholder="Telefon Numarası"
+          required
+          pattern="\d{10}"
+          title="Telefon numarası 10 rakamdan oluşmalıdır."
+        />
         </div>
-        <div *ngIf="isRegisterorLogin.get('phoneNumber').invalid && isRegisterorLogin.get('phoneNumber').touched" class="text-danger">
-          <div *ngIf="isPhoneNumberRequired()">
-            Telefon numarası gerekli.
-          </div>
-          <div *ngIf="isPhoneNumberInvalid()">
-            Geçersiz telefon numarası. Başına 0 koymadan giriniz.
-          </div>
+        <div class="text-danger" *ngIf="phoneNumber.invalid && (phoneNumber.touched)">
+          <small *ngIf="phoneNumber.errors?.['required']">Boş bırakılamaz.</small>
+          <small *ngIf="phoneNumber.errors?.['pattern']">Telefon numarası 10 rakamdan oluşmalıdır.</small>
         </div>
-        
         <div class="form-group form-button">
           <button type="submit" class="button">Kayıt Ol</button>
         </div>
