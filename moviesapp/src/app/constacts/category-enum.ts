@@ -11,7 +11,7 @@ export const CategoryDescription: { [key in CategoryEnum]: string } =
   [CategoryEnum.Seciniz]: 'Tüm Kategoriler',
   [CategoryEnum.Aksiyon]: 'Aksiyon',
   [CategoryEnum.BilimKurgu]: 'Bilim Kurgu',
-  [CategoryEnum.Romantik]: 'Romantik',
+  [CategoryEnum.Romantik]: 'Romantik',  
   [CategoryEnum.Macera]: 'Macera',
 };
 export class ListCategoryEnum{

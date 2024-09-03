@@ -4,35 +4,13 @@
             <h2>Haberler</h2>
         </div>
         <div class="news-container">
-            <div class="news-card">
+            <div class="news-card" *ngFor="let news of newsList">
                 <div class="news-image">
-                    <img src="assets/img/news.jpg">
+                    <img [src]="news.imageUrl" alt="news image">
                 </div>
                 <div class="news-details">
-                    <h3>Almanlar şokta! Fenerbahçe'nin yıldızından inanılmaz gol</h3>
-                    <span>İsrail'in, işgal altındaki Gazze'ye yönelik katliamı 43 gündür devam ediyor. Hamas'ın elinde
-                        bulunan İsrailli esirlerin aileleri de sık sık Netanyahu hükümetini protesto ederek esirlerin
-                        kurtarılmasını istiyor. Tel Aviv yönetiminden umudunu kesen İsrailli aileler, bu kez
-                        Cumhurbaşkanı Erdoğan'a mektup yazdı. Erdoğan o mektuba ilişkin "Bu konuyla ilgili İstihbarat
-                        Teşkilatımızı devreye soktuk, şimdi onlar bu konuyu araştırıyorlar. Bir netice alabilmek için
-                        çalışıyoruz." dedi.</span>
-                    <div class="news-button">
-                        <button>Devamı</button>
-                    </div>
-                </div>
-            </div>
-            <div class="news-card">
-                <div class="news-image">
-                    <img src="assets/img/news.jpg">
-                </div>
-                <div class="news-details">
-                    <h3>Almanlar şokta! Fenerbahçe'nin yıldızından inanılmaz gol</h3>
-                    <span>İsrail'in, işgal altındaki Gazze'ye yönelik katliamı 43 gündür devam ediyor. Hamas'ın elinde
-                        bulunan İsrailli esirlerin aileleri de sık sık Netanyahu hükümetini protesto ederek esirlerin
-                        kurtarılmasını istiyor. Tel Aviv yönetiminden umudunu kesen İsrailli aileler, bu kez
-                        Cumhurbaşkanı Erdoğan'a mektup yazdı. Erdoğan o mektuba ilişkin "Bu konuyla ilgili İstihbarat
-                        Teşkilatımızı devreye soktuk, şimdi onlar bu konuyu araştırıyorlar. Bir netice alabilmek için
-                        çalışıyoruz." dedi.</span>
+                    <h3>{{ news.title }}</h3>
+                    <span>{{ news.description }}</span>
                     <div class="news-button">
                         <button>Devamı</button>
                     </div>

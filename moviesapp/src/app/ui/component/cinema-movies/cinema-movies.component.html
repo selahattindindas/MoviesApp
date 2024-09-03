@@ -8,9 +8,7 @@
   </div>
   <ng-container
     *ngIf="(movies | filter: filterText: filterName | categoryFilter:selectedCategory).length > 0; else noResults">
-    <ul>
       <app-card [movies]="movies | filter: filterText: filterName | categoryFilter:selectedCategory"></app-card>
-    </ul>
   </ng-container>
   <ng-template #noResults>
     <div class="no-filter">

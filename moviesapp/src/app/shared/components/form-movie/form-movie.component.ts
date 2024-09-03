@@ -13,6 +13,7 @@ import { List_Movie } from 'src/app/contracts/movie/list-movie';
 })
 export class FormMovieComponent<T> implements OnInit, OnChanges {
   @Input() headerTitle: string = '';
+  @Input() buttonTitle: string = '';
   @Output() itemSubmit = new EventEmitter<T>();
   @Input() movies: List_Movie;
   movieForm: FormGroup;
@@ -29,7 +30,7 @@ export class FormMovieComponent<T> implements OnInit, OnChanges {
       platformId: new FormControl('0', categoryValidator()),
       releaseDate: new FormControl(null, [Validators.required, dateFormatValidator]),
       movieTime: new FormControl(null, [Validators.required, Validators.max(300), Validators.min(1)]),
-      description: new FormControl(null, [Validators.required, Validators.maxLength(520), Validators.minLength(30)]),
+      description: new FormControl(null, [Validators.required, Validators.maxLength(4096), Validators.minLength(30)]),
     });
 
     this.categories = new ListCategoryEnum();
