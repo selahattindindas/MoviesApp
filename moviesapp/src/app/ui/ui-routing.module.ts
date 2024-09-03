@@ -30,7 +30,7 @@ const routes: Route[] = [
                     import('./component/news-list/news-list.module').then(m => m.NewListModule)
             },
             {
-                path: 'hakkimizda', loadChildren: () =>
+                path: 'hakkımızda', loadChildren: () =>
                     import('./component/about/about.module').then(m => m.AboutModule)
             },
             {
