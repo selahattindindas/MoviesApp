@@ -12,41 +12,41 @@ MovieApp is an application that allows users to manage movie categories and plat
 
 ### Admin Panel: 
 
-- Dashboard: Statistical information about movies and users is provided using the AmCharts 5 library.
+- **Dashboard:** Statistical information about movies and users is provided using the AmCharts 5 library.
 
-- Movie Management: Includes functionality for adding, updating, deleting, and listing movies, as well as searching and filtering movies by categories.
+- **Movie Management:** Includes functionality for adding, updating, deleting, and listing movies, as well as searching and filtering movies by categories.
 
-- Category and Platform Management: Similar to movie management, categories and platforms can be added, updated, deleted, and listed.
+- **Category and Platform Management:** Similar to movie management, categories and platforms can be added, updated, deleted, and listed.
 
-- User Management: Only login functionality is available in the admin panel.
+- **User Management:** Only login functionality is available in the admin panel.
 
 ### User Interface (UI):
 
-- Banner: A visually appealing slider component is used for movie photos, implemented with the Keen-Slider library.
+- **Banner:** A visually appealing slider component is used for movie photos, implemented with the Keen-Slider library.
 
-- Movie List: Movies are listed in the user interface, and their details can be viewed.
+- **Movie List:** Movies are listed in the user interface, and their details can be viewed.
 
-- Login and Register: Users can perform login and register operations.
+- **Login and Register:** Users can perform login and register operations.
 
-- Search and Filtering: Search and filtering functionality is provided based on categories.
+- **Search and Filtering:** Search and filtering functionality is provided based on categories.
 
 ### Shared Components and Guard Structure: 
 
-- Shared Module: Commonly used components have been created in the shared module and are reused throughout the project.
+- **Shared Module:** Commonly used components have been created in the shared module and are reused throughout the project.
 
-- Guard Structure: A guard structure has been implemented to control user access.
+- **Guard Structure:** A guard structure has been implemented to control user access.
 
 ### Other Commonly Used Services:: 
 
-- SweetAlertService: Used for custom alerts and notifications.
+- **SweetAlertService:** Used for custom alerts and notifications.
 
-- HttpClientService: HttpClientService: Custom HTTP client service is used for API calls.
+- **HttpClientService:** HttpClientService: Custom HTTP client service is used for API calls.
 
-- DialogService: Modal and dialog management is handled using ngx-bootstrap.
+- **DialogService:** Modal and dialog management is handled using ngx-bootstrap.
 
 ### Responsive Design:
 
-- Both the admin panel and the user interface (UI) are designed to be responsive and work properly across various devices.
+Both the admin panel and the user interface (UI) are designed to be responsive and work properly across various devices.
 
 ## Technologies Used
 
