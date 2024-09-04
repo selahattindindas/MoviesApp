@@ -36,7 +36,7 @@ MovieApp is an application that allows users to manage movie categories and plat
 
 - **Guard Structure:** A guard structure has been implemented to control user access.
 
-### Other Commonly Used Services:: 
+### Other Commonly Used Services:
 
 - **SweetAlertService:** Used for custom alerts and notifications.
 
