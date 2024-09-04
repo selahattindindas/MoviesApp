@@ -95,7 +95,7 @@ ng serve
 ```
 ## Backend Setup 
 
-1-) Clone the project and navigate to the directory:
+**1-)** Clone the project and navigate to the directory:
 
 ```bash 
   git clone https://github.com/EnesCanYilmaz/MovieAPI.git
@@ -103,11 +103,11 @@ ng serve
 
 ```
 
-2-) Install the necessary dependencies:
+**2-)** Install the necessary dependencies:
 
 Since the project is based on .NET 7, the .NET 7 SDK must be installed. No additional commands are needed to install dependencies as all required packages are defined in the project files.
 
-3-) Create the migration:
+**3-)** Create the migration:
 
 If there are no existing migrations or if you need to create a new database schema, you can perform the migration process using the following command:
 
@@ -115,7 +115,7 @@ If there are no existing migrations or if you need to create a new database sche
 dotnet ef migrations add InitialCreate
 ```
 
-4-) Update the database:
+**4-)** Update the database:
 
 After creating the migration, run the following command to update your database:
 
@@ -123,7 +123,7 @@ After creating the migration, run the following command to update your database:
 dotnet ef database update
 ```
 
-5-) Run the API:
+**5-)** Run the API:
 
 ```bash 
 dotnet run
